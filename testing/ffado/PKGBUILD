@@ -1,0 +1,37 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+# Contributor: Jon Kristian Nilsen <jokr.nilsen@gmail.com>
+
+pkgname=ffado
+_pkgname=libffado
+pkgver=2.0_rc2
+pkgrel=1
+pkgdesc="Driver for FireWire audio devices"
+arch=(i686 x86_64)
+url="http://www.ffado.org/"
+license=('GPL')
+depends=('libiec61883' 'libavc1394' 'libxml++' 'dbus')
+makedepends=('scons' 'pyqt')
+optdepends=('pyqt: FFADO Mixer applet')
+source=(http://www.ffado.org/files/$_pkgname-2.0-rc2.tar.gz
+	gcc44-rc1.patch)
+
+build() {
+  cd "$srcdir/$_pkgname-2.0-rc2"
+
+  # Fix building with GCC 4.4
+  patch -Np0 -i ../gcc44-rc1.patch
+
+  sed -i "s:/-march=i686/$CFLAGS/" SConstruct
+
+  scons PREFIX=/usr \
+  	ENABLE_OPTIMIZATIONS=true || return 1
+  scons DESTDIR="$pkgdir/" install
+  	
+  install -Dm644 support/xdg/hi64-apps-ffado.png \
+    "$pkgdir/usr/share/pixmaps/$pkgname.png"
+  install -Dm644 support/xdg/ffado.org-ffadomixer.desktop \
+    "$pkgdir/usr/share/applications/ffadomixer.desktop"
+}
+md5sums=('64ce6d34f3ae01d946f44d7d57da88c9'
+         'bb6c6a01502536d30a231816e6a016ed')

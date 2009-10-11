@@ -1,0 +1,33 @@
+Index: externals/pdvjtools/videogrid/videogrid.cc
+===================================================================
+--- externals/pdvjtools/videogrid/videogrid.cc	(Revision 12071)
++++ externals/pdvjtools/videogrid/videogrid.cc	(Arbeitskopie)
+@@ -44,10 +44,10 @@
+     #define __STDC_CONSTANT_MACROS 1
+ 
+     /* ffmpeg includes */
+-    #include <ffmpeg/avcodec.h>
+-    #include <ffmpeg/avformat.h>
+-    #include <ffmpeg/avutil.h>
+-    #include <ffmpeg/swscale.h>
++    #include <libavcodec/avcodec.h>
++    #include <libavformat/avformat.h>
++    #include <libavutil/avutil.h>
++    #include <libswscale/swscale.h>
+ 
+     /* libquicktime includes */
+     // #include <quicktime/lqt.h>
+ 
+Index: externals/Makefile
+===================================================================
+--- externals/Makefile	(Revision 12071)
++++ externals/Makefile	(Arbeitskopie)
+@@ -2101,7 +2101,7 @@
+ PDVJTOOLS_NAME=pdvjtools
+ PDVJTOOLS_OBJECTS := $(wildcard $(externals_src)/pdvjtools/*/*.c)
+ # exclude videogrid for now since it doesn't build with ffmpeg from Debian/stable
+-PDVJTOOLS_CPP_OBJECTS := $(wildcard $(externals_src)/pdvjtools/[^v]*/*.cc)
++PDVJTOOLS_CPP_OBJECTS := $(wildcard $(externals_src)/pdvjtools/*/*.cc)
+ pdvjtools: $(externals_src)/pdp/Makefile.config $(PDVJTOOLS_OBJECTS:.c=.$(EXTENSION)) \
+ $(PDVJTOOLS_CPP_OBJECTS:.cc=.$(EXTENSION))
+ 

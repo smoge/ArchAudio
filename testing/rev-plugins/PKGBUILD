@@ -1,0 +1,20 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
+pkgname=rev-plugins
+_pkgname=REV-plugins
+pkgver=0.3.1
+pkgrel=2
+pkgdesc="LADSPA plugins based on gverb stereo reverb"
+arch=('i686' 'x86_64')
+url="http://www.kokkinizita.net/linuxaudio/ladspa/index.html"
+license=('GPL')
+depends=('gcc-libs')
+source=(http://www.kokkinizita.net/linuxaudio/downloads/${_pkgname}-${pkgver}.tar.bz2)
+md5sums=('bca920c2cbf5e33989e7cafab6fbaee4')
+
+build() {
+  cd ${startdir}/src/${_pkgname}-${pkgver}
+  make || return 1
+  mkdir -p ${startdir}/pkg/usr/lib/ladspa/
+  install -m755 *.so ${startdir}/pkg/usr/lib/ladspa/ || return 1
+}

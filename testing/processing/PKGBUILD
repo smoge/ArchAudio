@@ -1,0 +1,36 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: thelucster
+# Contributor: hm_b <holger <at> music-nerds.net>
+pkgname=processing
+pkgver=1.0.6
+pkgrel=1
+pkgdesc="programming language and environment for images, animation, and interactions"
+arch=('i686' 'x86_64')
+url="http://www.processing.org/"
+license=('GPL' 'LGPL')
+depends=('jdk' 'sh')
+makedepends=('gif2png')
+source=(http://www.processing.org/download/processing-$pkgver.tgz processing processing.desktop)
+md5sums=('874c076c152e1f9bb955ba8382a2734d' '1e15ff79862c35d94a858887c4237e1d'\
+         '78ef1b1a9917343467f4c0cdf4568267')
+
+build() {
+
+	cd $srcdir/processing-$pkgver
+	# create directories
+  	mkdir -p $pkgdir/usr/{share/{pixmaps,applications,java/processing},bin} || return 1
+  
+  	# install main stuff
+	cp -R {examples,lib,libraries,reference,tools} $pkgdir/usr/share/java/processing || return 1
+	
+	# install launcher
+	cp $startdir/processing $pkgdir/usr/bin/processing || return 1
+  	chmod +x $pkgdir/usr/bin/processing || return 1
+  	
+  	# icon
+	gif2png -O lib/export/loading.gif || return 1
+	cp lib/export/loading.png $pkgdir/usr/share/pixmaps/processing.png || return 1
+	
+	# desktop entry
+	cp ${startdir}/processing.desktop $pkgdir/usr/share/applications || return 1
+}

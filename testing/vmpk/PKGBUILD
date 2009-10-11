@@ -1,0 +1,23 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: svoufff <svoufff at gmail dot com>
+#Contributor: farid abdelnour <farid at atelier-labs.org>
+
+pkgname=vmpk
+pkgver=0.3.0
+pkgrel=1
+pkgdesc="MIDI event generator and receiver"
+arch=('i686' 'x86_64')
+url="http://vmpk.sourceforge.net/"
+depends=('qt>=4.4' 'alsa-lib')
+makedepends=('cmake' 'docbook-xsl')
+optdepends=('timidity')
+license=('GPL')
+source=(http://downloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.bz2)
+md5sums=('401f90f94883358430abbf8986ea9822')
+
+build() {
+	cd ${startdir}/src/${pkgname}-${pkgver}	
+	cmake . -DCMAKE_INSTALL_PREFIX=/usr
+	make || return 1
+	make DESTDIR=$startdir/pkg install
+}

@@ -1,0 +1,23 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Philipp Überbacher <hollunder at gmx dot at>
+
+pkgname=ll-plugins
+pkgver=0.2.1
+pkgrel=3
+pkgdesc="A lv2 host and a collection of lv2 plugins by Lars Luthman"
+arch=('i686' 'x86_64')
+url="http://ll-plugins.nongnu.org/index.html"
+license=('GPL3')
+depends=('lash' 'gtkmm' 'lv2-c++-tools' 'libsamplerate')
+source=(http://download.savannah.nongnu.org/releases/ll-plugins/${pkgname}-${pkgver}.tar.bz2 gcc4.4.patch)
+md5sums=('1b321d6eb7874bd3fe8b2b95642d5d3f'
+         '163d1ea7dab2afdaf6a58e28e5d1167b')
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}/plugins/sineshaper/"
+  patch -u -i ${startdir}/gcc4.4.patch || return 1
+
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  ./configure --prefix="/usr" || return 1
+  make || return 1
+  make DESTDIR="${pkgdir}" install || return 1
+}

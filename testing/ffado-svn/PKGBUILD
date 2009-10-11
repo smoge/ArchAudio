@@ -1,0 +1,54 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+# Contributor: Jon Kristian Nilsen <jokr.nilsen@gmail.com>
+
+pkgname=ffado-svn
+_pkgname=libffado
+pkgver=1649
+pkgrel=1
+pkgdesc="Driver for FireWire audio devices (development version)"
+arch=(i686 x86_64)
+url="http://www.ffado.org/"
+license=('GPL')
+depends=('libiec61883' 'libavc1394' 'libxml++' 'dbus')
+makedepends=('scons' 'pyqt')
+optdepends=('pyqt: FFADO Mixer applet')
+provides=('ffado')
+conflicts=('ffado')
+source=()
+md5sums=()
+
+_svntrunk=http://subversion.ffado.org/ffado/trunk/libffado
+_svnmod=ffado
+
+build() {
+  cd "$srcdir"
+
+  if [ -d $_svnmod/.svn ]; then
+    (cd $_svnmod && svn up -r $pkgver)
+  else
+    svn co $_svntrunk --config-dir ./ -r $pkgver $_svnmod
+  fi
+
+  msg "SVN checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "srcdir/$_svnmod-build"
+  cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
+  cd "$srcdir/$_svnmod-build"
+
+  #
+  # BUILD
+  #
+
+  sed -i "s/-march=i686/$CFLAGS/" SConstruct || return 1
+
+  scons PREFIX=/usr \
+  	ENABLE_OPTIMIZATIONS=yes || return 1
+  scons DESTDIR="$pkgdir/" install
+  	
+  install -Dm644 support/xdg/hi64-apps-ffado.png \
+    "$pkgdir/usr/share/pixmaps/$pkgname.png"
+  install -Dm644 support/xdg/ffado.org-ffadomixer.desktop \
+    "$pkgdir/usr/share/applications/ffadomixer.desktop"
+}

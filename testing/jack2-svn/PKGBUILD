@@ -1,0 +1,53 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+
+pkgname=jack2-svn
+_pkgname=jack
+pkgver=3565
+pkgrel=1
+pkgdesc="Jack Audio Connection Kit MP: A low-latency audio server for SMP machines (development version)"
+arch=(i686 x86_64)
+url="http://jackaudio.org/"
+license=('GPL')
+depends=('libsamplerate')
+makedepends=('subversion' 'ffado')
+optdepends=('ffado: FireWire audio device support')
+provides=("jack-audio-connection-kit=0.116.2")
+conflicts=('jack2' 'jack-audio-connection-kit' 'jack' 'jack-svn')
+backup=(etc/conf.d/$_pkgname)
+install=$pkgname.install
+source=(jackconf
+	jackinit)
+
+_svntrunk=http://subversion.jackaudio.org/jack/jack2/trunk/jackmp
+_svnmod=jackmp
+
+build() {
+  cd "$srcdir"
+
+  if [ -d $_svnmod/.svn ]; then
+    (cd $_svnmod && svn up -r $pkgver)
+  else
+    svn co $_svntrunk --config-dir ./ -r $pkgver $_svnmod
+  fi
+
+  msg "SVN checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "$srcdir/$_svnmod-build"
+  cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
+  cd "$srcdir/$_svnmod-build"
+
+  #
+  # BUILD
+  #
+
+  ./waf configure --prefix=/usr
+  ./waf $MAKEFLAGS || return 1
+  ./waf --destdir="$pkgdir/" install
+
+  install -Dm755 ../jackinit "$pkgdir/etc/rc.d/$_pkgname"
+  install -Dm644 ../jackconf "$pkgdir/etc/conf.d/$_pkgname"
+}
+md5sums=('12b1017f6f06248e2ddd4a28dfae87d4'
+         '6cd8a8a42a756d3ba0d4842bba171ca3')

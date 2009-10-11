@@ -1,0 +1,24 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+
+pkgname=celt
+pkgver=0.5.2
+pkgrel=1
+pkgdesc="Low-latency audio communication codec"
+arch=(i686 x86_64)
+url="http://www.celt-codec.org/"
+license=('BSD')
+depends=('libogg')
+options=('!libtool')
+source=(http://downloads.us.xiph.org/releases/$pkgname/$pkgname-$pkgver.tar.gz)
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr
+  make || return 1
+  make DESTDIR="$pkgdir/" install
+
+  install -Dm644 COPYING "$pkgdir/usr/share/licenses/$pkgname/BSD"
+}
+md5sums=('6672ce9c8ef6d2879a9b1dc9fed1fb70')

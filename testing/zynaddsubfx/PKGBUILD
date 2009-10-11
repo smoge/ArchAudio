@@ -1,0 +1,46 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: DonVla <donvla@users.sourceforge.net>
+
+pkgname=zynaddsubfx
+pkgver=2.4.0
+pkgrel=2
+pkgdesc="An opensource software synthesizer capable of making a countless number of instruments"
+arch=('i686' 'x86_64')
+url="http://zynaddsubfx.sourceforge.net"
+license=('GPL')
+depends=('fltk' 'fftw' 'jack-audio-connection-kit')
+makedepends=('mxml')
+options=('!makeflags')
+source=(http://downloads.sourceforge.net/sourceforge/${pkgname}/ZynAddSubFX-${pkgver}.tar.bz2 \
+        zynaddsubfx.desktop Makefile.inc.patch)
+md5sums=('b60b3c8a61c91e1aca54866d23c69f90' 'eebb1b252bb1997a037d241a61f00d4c'\
+         '654fc59abdfeac7fd39673fa87093fe5')
+sha256sums=('7675a7ac7741dcfce0bed197e2190f2e21b5b0a072458bcb605184b7be246c63'
+            '3a0faa14091a6719150749c0c50b3683169df7d177fc385e6a878a799ee83018'
+            '2a264cea5f9096fbaddbaec61ce1af94933533da9ae51492a73abe1eac344f29')
+
+build() {
+  cd ${srcdir}/ZynAddSubFX-${pkgver}/src
+  
+  patch -p0 < ${srcdir}/Makefile.inc.patch
+
+  make -j1 || return 1
+  install -v -D -m 0755 zynaddsubfx $pkgdir/usr/bin/zynaddsubfx
+  
+  cd ${srcdir}/ZynAddSubFX-${pkgver}/ExternalPrograms/Spliter
+  make -j1 || return 1
+  install -v -m 0755 spliter ${pkgdir}/usr/bin/spliter 
+  install -v -D -m 0644 readme.txt ${pkgdir}/usr/share/${pkgname}/spliter-readme.txt
+  
+  cd ${srcdir}/ZynAddSubFX-${pkgver}/ExternalPrograms/Controller
+  make -j1 || return 1
+  install -v -m 0755 controller ${pkgdir}/usr/bin/controller
+
+  cd ${srcdir}/ZynAddSubFX-${pkgver}
+  cp -r banks ${pkgdir}/usr/share/${pkgname}/
+  cp -r examples ${pkgdir}/usr/share/${pkgname}/
+  install -v -m 0644 *.txt ${pkgdir}/usr/share/${pkgname}/
+  
+  install -v -D -m 0644 src/zynaddsubfx_icon.svg ${pkgdir}/usr/share/pixmaps/zynaddsubfx.svg
+  install -v -D -m 0644 ${startdir}/zynaddsubfx.desktop ${pkgdir}/usr/share/applications/zynaddsubfx.desktop
+}

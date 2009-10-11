@@ -1,0 +1,24 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: DonVla <donvla@users.sourceforge.net>
+
+pkgname=caps
+pkgver=0.4.2
+pkgrel=4
+pkgdesc="The C* Audio Plugin Suite"
+arch=('i686' 'x86_64')
+url="http://quitte.de/dsp/caps.html"
+license=('GPL')
+depends=('gcc')
+optdepends=('python: optional CFLAGS check')
+source=(http://quitte.de/dsp/${pkgname}_${pkgver}.tar.gz Makefile.patch)
+md5sums=('041f3a6934ed34f7073117e34f78a5e9' '23aab5d19c6e7cf1d0ac6c403e052741')
+
+build() {
+  unset CFLAGS
+
+  cd "${srcdir}/${pkgname}-${pkgver}"
+
+  patch -p0 < ../Makefile.patch
+  make || return 1
+  make PREFIX=${pkgdir}/usr install || return 1
+}

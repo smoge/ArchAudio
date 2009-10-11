@@ -1,0 +1,22 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Orivej Desh <smpuj@bk.ru>
+pkgname=vamp-plugin-sdk
+pkgver=2.0
+pkgrel=1
+pkgdesc="An audio processing plugin system for plugins that extract descriptive information from audio data"
+arch=("i686" "x86_64")
+url="http://www.vamp-plugins.org/"
+license=("BSD")
+depends=("gcc-libs" "libsndfile")
+source=("http://downloads.sourceforge.net/vamp/$pkgname-$pkgver.tar.gz" "gcc43.patch")
+md5sums=('6f52328254330389d130a61f8def8afc' 'e71d400a0d1831c5ff6347f06d86eaa8')
+options=("!libtool")
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  patch -Np1 -i ../gcc43.patch
+  ./configure --prefix=/usr
+  make || return 1
+  make DESTDIR="$pkgdir" install
+  install -Dm644 COPYING "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+}

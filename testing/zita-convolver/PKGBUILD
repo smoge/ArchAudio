@@ -1,0 +1,21 @@
+# Contributor: Stefan Husmann <stefan-husmann@t-online.de>
+# Contributor: Philipp Überbacher <hollunder at gmx dot at>
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+pkgname=zita-convolver
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Convolution library for Aeolus and jconv."
+arch=('i686' 'x86_64')
+url="http://www.kokkinizita.net/linuxaudio"
+license=('LGPL')
+depends=('gcc-libs' 'fftw')
+source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
+md5sums=('892ef99cf39b6a8e87639efdcd96dbd5')
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}/libs"
+  sed -i 's+/usr/bin/install+install+' Makefile || return 1
+  sed -i 's/usr\/local/usr/' Makefile || return 1
+  install -d ${pkgdir}/usr/{include,lib} || return 1
+  make SUFFIX="" PREFIX="${pkgdir}/usr" install || return 1
+}

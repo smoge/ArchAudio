@@ -1,0 +1,10 @@
+--- SuperCollider/SCClassLibrary/SwingOSC/SwingOSC.sc	2009-04-19 21:03:08.000000000 +0200
++++ SuperCollider/SCClassLibrary/SwingOSC/SwingOSC.sc	2009-05-19 18:18:20.578239388 +0200
+@@ -358,6 +358,7 @@
+ //			dispCond.test = true;
+ //			dispCond.signal;
+ //		}, {
++			msgs = msgs.asArray;
+ 			addr.sendBundle( time, *msgs )
+ //		});
+ 	}

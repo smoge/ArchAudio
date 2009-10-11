@@ -1,0 +1,60 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+
+pkgname=jack-svn
+_pkgname=jack
+pkgver=3547
+pkgrel=1
+pkgdesc="Jack Audio Connection Kit: A low-latency audio server (development version)"
+arch=(i686 x86_64)
+url="http://jackaudio.org/"
+license=('GPL' 'LGPL')
+groups=('archaudio-bleeding')
+depends=('libsndfile')
+makedepends=('subversion' 'doxygen' 'ffado' 'libsamplerate' 'celt')
+optdepends=('ffado: FireWire audio device support'
+	    'libsamplerate, celt: NetJACK driver')
+provides=("jack-audio-connection-kit=0.116.2")
+conflicts=('jack-audio-connection-kit' 'jack' 'jack2')
+backup=(etc/conf.d/$_pkgname)
+options=('!libtool')
+install=$pkgname.install
+source=(jackconf
+	jackinit)
+
+_svntrunk=http://subversion.jackaudio.org/jack/trunk/jack
+_svnmod=jack
+
+build() {
+  cd "$srcdir"
+
+  if [ -d $_svnmod/.svn ]; then
+    (cd $_svnmod && svn up -r $pkgver)
+  else
+    svn co $_svntrunk --config-dir ./ -r $pkgver $_svnmod
+  fi
+
+  msg "SVN checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "$srcdir/$_svnmod-build"
+  cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
+  cd "$srcdir/$_svnmod-build"
+
+  #
+  # BUILD
+  #
+
+  ./autogen.sh
+  ./configure --prefix=/usr
+  make || return 1
+  make DESTDIR="$pkgdir/" install
+
+  mv "$pkgdir/usr/share/jack-audio-connection-kit" \
+    "$pkgdir/usr/share/$_pkgname"
+
+  install -Dm755 ../jackinit "$pkgdir/etc/rc.d/$_pkgname"
+  install -Dm644 ../jackconf "$pkgdir/etc/conf.d/$_pkgname"
+}
+md5sums=('12b1017f6f06248e2ddd4a28dfae87d4'
+         '6cd8a8a42a756d3ba0d4842bba171ca3')

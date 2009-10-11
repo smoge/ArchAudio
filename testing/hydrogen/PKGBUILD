@@ -1,0 +1,26 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: hm_b <holger@music-nerds.net>
+# Contributor: tobias <tobias@archlinux.org>
+# Contributor: K. Piche <kpiche@rogers.com>
+
+pkgname=hydrogen
+pkgver=0.9.4rc1
+_pkgver=0.9.4-rc1
+pkgrel=1
+pkgdesc="an advanced drum machine/pattern editor with midi support for GNU/Linux"
+arch=("i686" "x86_64")
+license=('GPL')
+url="http://www.hydrogen-music.org/"
+depends=('liblrdf' 'qt' 'lash' 'libarchive')
+#options=('!makeflags')
+install=
+source=(http://heanet.dl.sourceforge.net/sourceforge/${pkgname}/${pkgname}-${_pkgver}.tar.gz)
+md5sums=('6cd8cfca7e448df37ce5eaae18c610b5')
+
+build() {
+  export QTDIR=/usr
+  cd $srcdir/${_pkgver}
+ # build
+  scons prefix=/usr lash=1 libarchive=1 || return 1
+  scons DESTDIR=$pkgdir install || return 1
+}

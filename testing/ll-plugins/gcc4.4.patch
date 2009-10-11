@@ -1,0 +1,10 @@
+--- ll-plugins-0.2.1/plugins/sineshaper/sineshaperwidget.cpp	2008-05-21 02:57:56.000000000 +0200
++++ ../sineshaperwidget.cpp	2009-06-29 01:31:53.000000000 +0200
+@@ -23,6 +23,7 @@
+ 
+ #include <iostream>
+ #include <limits>
++#include <stdint.h>
+ 
+ #include "sineshaperwidget.hpp"
+ #include "skindial_gtkmm.hpp"

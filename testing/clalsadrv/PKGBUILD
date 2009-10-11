@@ -1,0 +1,26 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Christoph Zeiler <rabyte*gmail>
+# Contributor: Tom K <tomk@runbox.com>
+# Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
+# Contributor: Philipp Überbacher <hollunder at gmx dot at>
+pkgname=clalsadrv
+pkgver=1.2.2
+pkgrel=4
+pkgdesc="Audio library for aeolus, aliki, jaaa and japa."
+arch=('i686' 'x86_64')
+url="http://www.kokkinizita.net/linuxaudio/downloads/index.html"
+license=('GPL')
+depends=('gcc-libs' 'alsa-lib')
+source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
+md5sums=('7865b6c175e457ea9cb0148ce8baa746')
+
+build() {
+  cd "${pkgname}"
+
+  sed 's|usr/bin|bin|g' -i Makefile || return 1
+
+  #what was this good for?
+  #make CPPFLAGS="-I. -fpic -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS" || return 1
+  mkdir -p $pkgdir/usr/{include,lib} || return 1
+  make PREFIX=$pkgdir/usr LIBDIR=lib install || return 1
+}

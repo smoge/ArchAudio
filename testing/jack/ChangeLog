@@ -1,0 +1,10 @@
+19 June 2009 (GMT +8) Ray Rashif <schivmeister@gmail.com>
+
+	* Initial commit
+	* jack-audio-connection-kit 0.116.2-1
+
+	List of differences from archlinux/extra:
+
+		- NetJACK (optional) support
+		- FFADO (optional) support
+		- CELT (optional) support

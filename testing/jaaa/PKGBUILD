@@ -1,0 +1,21 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
+# Contributor: Philipp Überbacher <hollunder at gmx dot at>
+pkgname=jaaa
+pkgver=0.4.2
+pkgrel=2
+pkgdesc="JACK and ALSA Audio Analyser."
+arch=('i686' 'x86_64')
+url="http://www.kokkinizita.net/linuxaudio/"
+license=('GPL')
+depends=('clalsadrv>=1.2.2' 'clthreads>=2.2.1' 'clxclient>=3.3.2' 'fftw' \
+'jack-audio-connection-kit')
+source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
+md5sums=('e3013bb1e287b495b0668f4b6e2887c7')
+
+build() {
+  cd "${srcdir}/${pkgname}"
+  sed -i "s|usr/bin|bin|" Makefile || return 1
+  mkdir -p "${pkgdir}/usr/bin" || return 1
+  make PREFIX="${pkgdir}/usr" install || return 1
+}

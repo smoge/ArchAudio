@@ -1,0 +1,23 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: christhemonkey <christhemonkey at gmail dot com>
+# Contributor: Max a.k.a. Synthead <synthead@gmail.com>
+
+pkgname=raul
+pkgver=0.5.1
+pkgrel=1
+pkgdesc="C++ utility library primarily aimed at audio/music applications"
+url="http://drobilla.net/software/raul/"
+depends=('jack-audio-connection-kit' 'gtkmm' 'libglademm' 'lash' 'libgnomecanvasmm' 'boost')
+makedepends=('pkgconfig')
+license=("GPL")
+source=(http://download.drobilla.net/$pkgname-$pkgver.tar.gz gcc44.patch)
+md5sums=('509e5bb44fa3750920964357528451c4' 'b94a80e912350ceca92a4c4fc43753c1')
+arch=('i686' 'x86_64')
+
+build() {
+cd $srcdir/$pkgname-${pkgver}
+patch -p0 < $srcdir/gcc44.patch || return 1
+./configure --prefix=/usr
+make || return 1
+make DESTDIR=$pkgdir install || return 1
+} 

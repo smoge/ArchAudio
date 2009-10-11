@@ -1,0 +1,23 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+# Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
+
+pkgname=libgig
+pkgver=3.3.0
+pkgrel=1
+pkgdesc="C++ library for loading Gigasampler and DLS files"
+arch=(i686 x86_64)
+url="http://www.linuxsampler.org/libgig/"
+license=('GPL')
+depends=('libsndfile' 'audiofile')
+options=('!libtool')
+source=(http://download.linuxsampler.org/packages/$pkgname-$pkgver.tar.bz2)
+md5sums=('fc33e8e948ed2db9b7003a3ecdb78549')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  
+  ./configure --prefix=/usr
+  make -j1 || return 1
+  make DESTDIR="$pkgdir" install
+}

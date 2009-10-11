@@ -1,0 +1,24 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+
+pkgname=calf
+pkgver=0.0.18.5
+pkgrel=1
+pkgdesc="LV2/DSSI/JACK/LADSPA audio plug-ins for musicians"
+arch=(i686 x86_64)
+url="http://calf.sf.net/"
+license=('LGPL')
+depends=('libglade' 'lash' 'ladspa' 'dssi' 'lv2')
+source=(http://downloads.sf.net/$pkgname/$pkgname-$pkgver.tar.gz)
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure	--prefix=/usr \
+  		--enable-experimental
+  make || return 1
+  make DESTDIR="$pkgdir" install
+
+  rm -f $pkgdir/usr/share/icons/hicolor/icon-theme.cache
+}
+md5sums=('b844eac59bb16354b8dc25a15a0576f6')

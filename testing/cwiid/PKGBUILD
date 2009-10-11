@@ -1,0 +1,27 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: hm_b < holger <at> music-nerds.net >
+# Contributor: Birger Moellering <bmoellering@googlemail.com>
+
+pkgname=cwiid
+pkgver=0.6.00
+pkgrel=6
+pkgdesc="Development version of wiimote's driver and utility tools" 
+arch=(i686 x86_64)
+url="http://abstrakraft.org/cwiid/wiki" 
+depends=('flex' 'bison' 'bluez>=4' 'gtk2' 'python')
+conflicts=('cwiid-svn')
+provides=('cwiid-svn')
+license=("GPL2")
+install=cwiid.install
+source=(http://abstrakraft.org/cwiid/downloads/$pkgname-$pkgver.tgz
+	http://abstrakraft.org/cwiid/raw-attachment/ticket/70/bluez_4_api_changes.patch)
+md5sums=('8d574afdeedc5e5309c87a72d744316a' '19b288723d1f2b97a3e5288ab9de3313')
+
+build() {
+  cd $srcdir/$pkgname-$pkgver
+  patch -p1 < ../../bluez_4_api_changes.patch libcwiid/bluetooth.c
+  ./configure --prefix=/usr --sysconfdir=/etc --disable-ldconfig
+  make || return 1
+  make DESTDIR=$pkgdir install
+}
+

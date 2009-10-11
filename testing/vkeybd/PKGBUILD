@@ -1,0 +1,24 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: DonVla <donvla@users.sourceforge.net>
+
+pkgname=vkeybd
+pkgver=0.1.18c
+pkgrel=2
+pkgdesc="A virtual MIDI keyboard for X"
+arch=(i686 x86_64)
+url="http://www.alsa-project.org/~iwai/alsa.html#vkeybd"
+license=('GPL')
+depends=('alsa-lib' 'tk')
+source=(ftp://ftp.suse.com/pub/people/tiwai/vkeybd/${pkgname}-${pkgver}.tar.bz2)
+md5sums=('31ec6512386ee554a30f4801652fb179')
+sha256sums=('ba7206c3ab0ed9f455572eb41a375e82ac39416a69eca82ac395398b4934e9b1')
+
+build() {
+  cd ${srcdir}/${pkgname}
+
+  # we have tcl version 8.5 
+  sed -i -e "s;8.4;8.5;" -e "s;usr\/local;usr;" ${srcdir}/$pkgname/Makefile
+
+  make PREFIX=/usr || return 1
+  make PREFIX=/usr DESTDIR=${pkgdir} install-all || return 1
+}

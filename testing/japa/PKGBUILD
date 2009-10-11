@@ -1,0 +1,20 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Philipp Überbacher <hollunder at gmx dot at>
+pkgname=japa
+pkgver=0.4.0
+pkgrel=2
+pkgdesc="JACK and ALSA Perceptual Analyser."
+arch=('i686' 'x86_64')
+url="http://www.kokkinizita.net/linuxaudio/"
+license=('GPL')
+depends=('clalsadrv>=1.2.1' 'clthreads>=2.2.1' 'clxclient>=3.3.2' 'fftw' \
+'jack-audio-connection-kit')
+source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
+md5sums=('b3a22f1bd94a235682ade3e932ae0769')
+
+build() {
+cd "${srcdir}/${pkgname}"
+sed -i "s|usr/bin|bin|" Makefile || return 1
+mkdir -p "${pkgdir}/usr/bin" || return 1
+make PREFIX="${pkgdir}/usr" install || return 1
+}

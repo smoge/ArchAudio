@@ -1,0 +1,21 @@
+diff -Naur linux-2.6.29.old/kernel/rcupreempt.c linux-2.6.29/kernel/rcupreempt.c
+--- linux-2.6.29.old/kernel/rcupreempt.c	2009-05-21 18:34:33.868213824 +0800
++++ linux-2.6.29/kernel/rcupreempt.c	2009-05-21 18:37:28.894059283 +0800
+@@ -341,7 +341,7 @@
+ 		local_irq_restore(flags);
+ 	}
+ }
+-EXPORT_SYMBOL_GPL(__rcu_read_lock);
++EXPORT_SYMBOL(__rcu_read_lock);
+ 
+ void __rcu_read_unlock(void)
+ {
+@@ -411,7 +411,7 @@
+ 		local_irq_restore(flags);
+ 	}
+ }
+-EXPORT_SYMBOL_GPL(__rcu_read_unlock);
++EXPORT_SYMBOL(__rcu_read_unlock);
+ 
+ /*
+  * If a global counter flip has occurred since the last time that we

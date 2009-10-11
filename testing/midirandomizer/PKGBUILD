@@ -1,0 +1,29 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+
+pkgname=midirandomizer
+_pkgname=MidiRandomizer
+pkgver=0.8
+pkgrel=1
+pkgdesc="Generate randomized MIDI SMF and PAT files"
+arch=(any)
+url="http://midirandomizer.sourceforge.net/"
+license=('GPL')
+depends=('java-runtime')
+source=(http://downloads.sourceforge.net/midirandomizer/$_pkgname.$pkgver.bin.zip)
+
+build() {
+  cd "$srcdir"
+
+  install -Dm644 $_pkgname.jar "$pkgdir/usr/share/$pkgname/$_pkgname.jar"
+
+  # create bin script (assume java-runtime sets proper PATH)
+  install -d "$pkgdir/usr/bin"
+  echo "#!/bin/bash" > "$pkgdir/usr/bin/$pkgname"
+  echo "java -jar /usr/share/$pkgname/$_pkgname.jar" > \
+    "$pkgdir/usr/bin/$pkgname"
+  chmod 755 "$pkgdir/usr/bin/$pkgname"
+
+  # freedesktop.org compatibility - nothing to use for pixmap =/
+}
+md5sums=('2a4e7dbc44445aa8498ab7dddeba5b76')

@@ -1,0 +1,25 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Philipp Überbacher <hollunder at gmx dot at>
+pkgname=guitarix
+pkgver=0.05.0_1
+_pkgver=0.05.0-1
+pkgrel=1
+pkgdesc="Simple mono guitar amplifier for jack."
+arch=('i686' 'x86_64')
+url="http://guitarix.sourceforge.net/"
+license=('GPL')
+depends=('jack-audio-connection-kit' 'gtk2' 'boost')
+makedepends=('ladspa' 'python')
+optdepends=('jack_capture' 'jconv')
+source=(http://downloads.sourceforge.net/sourceforge/guitarix/${pkgname}-${_pkgver}.tar.bz2)
+md5sums=('9f2543abbaca3af59bde0ec0ade15658')
+
+build() {
+  cd "${srcdir}/${pkgname}-${_pkgver}"
+
+  ./waf configure --prefix="/usr" || return 1
+  ./waf build || return 1
+  ./waf install --destdir="${pkgdir}" || return 1
+}
+
+# vim:set ts=2 sw=2 et:

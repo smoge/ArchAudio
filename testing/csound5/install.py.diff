@@ -1,0 +1,17 @@
+259c259
+< libList += findFiles('.', 'libcsnd\\.so')
+---
+> libList += findFiles('.', 'libcsnd\\.so\\..+')
+272,274c272,273
+<         elif i == 'libcsnd.so':
+<             err = installLink(concatPath([libDir, i]),
+<                               concatPath([pythonDir2, '_csnd.so']))
+---
+>         elif i[:11] == 'libcsnd.so.':
+>             err = installLink(i, concatPath([libDir, 'libcsnd.so']))
+309a309
+>                ['_csnd\\.so', '1', pythonDir2],
+336c336
+<     fileName = concatPath([xmgDir, i, 'LC_MESSAGES/csound5.mo'])
+---
+>     fileName = concatPath([instDir, xmgDir, i, 'LC_MESSAGES/csound5.mo'])

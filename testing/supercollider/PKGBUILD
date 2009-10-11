@@ -1,0 +1,31 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: hm_b < holger <at> music-nerds.net >
+
+pkgname=supercollider
+pkgver=3.3.1
+pkgrel=2
+pkgdesc="An environment and programming language for real time audio synthesis and algorithmic composition"
+arch=(i686)
+url="http://supercollider.sourceforge.net/"
+license=('GPL')
+depends=('jack-audio-connection-kit' 'avahi' 'fftw')
+makedepends=('subversion' 'libsndfile>=1.0' 'gcc>=3.0' 'pkgconfig>=0.14.0' 'scons>=0.96' 'alsa-lib')
+optdepends=('cwiid: Wii Controller Support' 
+  'emacs: Emacs Interface' 
+  'vim: Vim Interface'
+  'gedit: GEdit Interface'
+  'supercollider-with-extras: replace supercollider by this package for all the extra goodies'
+)
+source=(http://downloads.sourceforge.net/supercollider/SuperCollider-$pkgver-Source-linux.tar.gz)
+md5sums=('bde5a25727ab854cc6a4f12a2691ac7b')
+
+
+build() {
+  cd $srcdir/SuperCollider-Source
+
+  scons PREFIX=/usr DEVELOPMENT=yes X11=yes SCEL=yes SCVIM=yes SCED=yes LID=yes WII=yes || return 1
+  scons DESTDIR=$pkgdir/ install || return 1
+  scons --install-sandbox=$pkgdir/ --directory=editors/scvim PREFIX=/usr VIMFILE_DIR=/usr/share/vim/addons CACHE_DIR=/usr/share/SuperCollider/Extensions/scvim  install-all
+  scons --install-sandbox=$pkgdir/ --directory=editors/sced PREFIX=/usr install
+
+}

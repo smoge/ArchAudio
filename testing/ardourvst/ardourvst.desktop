@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Ardour
+Comment=Digital Audio Workstation with Windows VST Support
+Exec=ardourvst
+Icon=/usr/share/ardour2/icons/ardour_icon_48px.png
+Terminal=false
+Type=Application
+X-MultipleArgs=false
+Categories=GTK;Audio;AudioVideoEditing;Multimedia

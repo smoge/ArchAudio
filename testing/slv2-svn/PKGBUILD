@@ -1,0 +1,47 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+
+pkgname=slv2-svn
+pkgver=2122
+pkgrel=1
+pkgdesc="Library for LV2 hosts (development version)"
+arch=(i686 x86_64)
+url="http://drobilla.net/software/slv2/"
+license=('GPL')
+groups=('archaudio-bleeding')
+depends=('redland')
+makedepends=('subversion' 'lv2' 'jack-audio-connection-kit')
+optdepends=('jack: LV2 JACK host')
+provides=('slv2')
+conflicts=('slv2')
+install=$pkgname.install
+source=()
+md5sums=()
+
+_svntrunk=http://svn.drobilla.net/lad/trunk
+_svnmod=lad
+
+build() {
+  cd "$srcdir"
+
+  if [ -d $_svnmod/.svn ]; then
+    (cd $_svnmod && svn up -r $pkgver)
+  else
+    svn co $_svntrunk --config-dir ./ -r $pkgver $_svnmod
+  fi
+
+  msg "SVN checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "$srcdir/$_svnmod-build"
+  cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
+  cd "$srcdir/$_svnmod-build/slv2"
+
+  #
+  # BUILD
+  #
+
+  ./waf configure --prefix=/usr
+  ./waf build $MAKEFLAGS || return 1
+  ./waf install --destdir="$pkgdir/"
+}

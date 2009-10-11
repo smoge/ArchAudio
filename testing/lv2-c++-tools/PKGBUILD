@@ -1,0 +1,22 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Philipp Überbacher <hollunder at gmx dot at>
+
+pkgname=lv2-c++-tools
+pkgver=1.0.2
+pkgrel=1
+pkgdesc="Utilities needed for ll-plugins."
+arch=('i686' 'x86_64')
+url="http://ll-plugins.nongnu.org/hacking.html"
+license=('GPL3')
+depends=('gcc-libs' 'bash')
+source=(http://download.savannah.nongnu.org/releases/ll-plugins/${pkgname}-${pkgver}.tar.bz2)
+md5sums=('03547cc1c36b3ccb607ea9f1005365a1')
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+
+  ./configure --prefix="/usr" || return 1
+  make || return 1
+  make DESTDIR="${pkgdir}" install || return 1
+}
+

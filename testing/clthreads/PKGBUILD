@@ -1,0 +1,26 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Christoph Zeiler <rabyte*gmail>
+# Contributor: Tom K <tomk@runbox.com>
+# Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
+# Contributor: Philipp Überbacher <hollunder at gmx dot at>
+pkgname=clthreads
+pkgver=2.4.0
+pkgrel=4
+pkgdesc="Thread library for aeolus, aliki, jaaa and japa."
+arch=('i686' 'x86_64')
+url="http://www.kokkinizita.net/linuxaudio/downloads/index.html"
+license=('LGPL')
+depends=('gcc-libs')
+source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
+md5sums=('90b650f1f5c9f39f4d77f73aca3c53be')
+
+build() {
+  cd "${pkgname}-${pkgver}"
+
+  sed 's|usr/bin|bin|g' -i Makefile || return 1
+
+  #What was this good for?
+  #make CPPFLAGS="-I. -fpic -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS" || return 1
+  mkdir -p ${pkgdir}/usr/include || return 1
+  make PREFIX=${pkgdir}/usr LIBDIR=lib install || return 1
+}

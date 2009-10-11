@@ -1,0 +1,20 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
+pkgname=amb-plugins
+_pkgname=AMB-plugins
+pkgver=0.4.0
+pkgrel=1
+pkgdesc="LADSPA plugins of various improved decoders"
+arch=(i686 x86_64)
+url="http://kokkinizita.net/linuxaudio/index.html"
+license=('GPL')
+depends=('gcc-libs')
+source=(http://kokkinizita.net/linuxaudio/downloads/${_pkgname}-${pkgver}.tar.bz2)
+md5sums=('4afc9196bd5f2f4939668fda3923e79e')
+
+build() {
+cd ${startdir}/src/${_pkgname}-${pkgver}
+make || return 1
+mkdir -p ${startdir}/pkg/usr/lib/ladspa/
+install -m755 *.so ${startdir}/pkg/usr/lib/ladspa/ || return 1
+}

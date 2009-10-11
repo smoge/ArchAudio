@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Timemachine
+Comment=A quick one-click audio file recorder for JACK audio applications
+Exec=timemachine
+Icon=/usr/share/timemachine/pixmaps/timemachine-icon.png
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Categories=Application;AudioVideo;Multimedia;

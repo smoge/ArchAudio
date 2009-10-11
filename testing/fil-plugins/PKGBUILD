@@ -1,0 +1,20 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
+pkgname=fil-plugins
+_pkgname=FIL-plugins
+pkgver=0.3.0
+pkgrel=3
+pkgdesc="LADSPA four-band parametric equaliser plugins"
+arch=('i686' 'x86_64')
+url="http://www.kokkinizita.net/linuxaudio/"
+license=('GPL')
+depends=('gcc-libs')
+source=(http://www.kokkinizita.net/linuxaudio/downloads/${_pkgname}-${pkgver}.tar.bz2)
+md5sums=('39f34be516752a9740a65547e1128124')
+
+build() {
+cd "${srcdir}/${_pkgname}-${pkgver}"
+make || return 1
+mkdir -p ${pkgdir}/usr/lib/ladspa/ || return 1
+install -m755 *.so ${pkgdir}/usr/lib/ladspa/ || return 1
+} 

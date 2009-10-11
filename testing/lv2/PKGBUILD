@@ -1,0 +1,23 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+
+pkgname=lv2
+_pkgname=lv2core
+pkgver=3.0
+pkgrel=1
+pkgdesc="Successor to the LADSPA plug-in standard"
+url="http://lv2plug.in/"
+license=('LGPL' 'BSD')
+arch=(i686 x86_64)
+source=(http://lv2plug.in/spec/$_pkgname-$pkgver.tar.bz2)
+
+build() {
+  cd "$srcdir/$_pkgname-$pkgver"
+ 
+  ./waf configure --prefix=/usr
+  ./waf build $MAKEFLAGS || return 1
+  ./waf install --destdir="$pkgdir/"
+
+  install -Dm644 COPYING "$pkgdir/usr/share/licenses/lv2/LGPL-BSD"
+}
+md5sums=('382f7d96ff0374c0c495336e1c8bb999')
