@@ -2,7 +2,7 @@
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 
 pkgname=slv2-svn
-pkgver=2122
+pkgver=2189
 pkgrel=1
 pkgdesc="Library for LV2 hosts (development version)"
 arch=(i686 x86_64)
