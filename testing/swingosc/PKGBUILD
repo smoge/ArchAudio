@@ -1,9 +1,9 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-# Contributor: hm_b < holger @ music-nerds.net >
+# Contributor: hm_b <holger@music-nerds.net>
 pkgname=swingosc
 _pkgname=SwingOSC
-pkgver=0.62_SVN189
-_pkgver=0.62_SVN189_090708
+pkgver=0.63
+_pkgver=0.63
 pkgrel=1
 pkgdesc="An OpenSoundControl (OSC) server intended for scripting Java(tm), such as to create graphical user interfaces with AWT or Swing classes."
 arch=('i686')
@@ -13,7 +13,7 @@ depends=('jre')
 makedepends=()
 install=SwingOSC.install
 source=(http://downloads.sourceforge.net/swingosc/$_pkgname-$_pkgver.zip gcc44.diff)
-md5sums=('1cf1e7959316b2d7f61ce03f5f5803ab' 'b4112f807a7481f2984e06ed28b2520d')
+md5sums=('02794a440320236e936442a605a639cc' 'b4112f807a7481f2984e06ed28b2520d')
 
 build() {
   cd $startdir/pkg/
