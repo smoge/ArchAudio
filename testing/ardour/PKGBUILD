@@ -1,8 +1,9 @@
+# Contributor: svoufff <svoufff at gmail dot com>
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
 # Contributor: Alessandro Mariotti <mari8i86 at gmail dot com>
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 pkgname=ardour
-pkgver=2.8.2
+pkgver=2.8.3
 pkgrel=1
 pkgdesc="A professional grade digital audio workstation with LADSPA and LV2 plugin support."
 arch=('i686' 'x86_64')
@@ -11,9 +12,8 @@ license=('GPL')
 depends=('rubberband' 'liblrdf' 'libgnomecanvas' 'liblo' 'libusb' 'aubio' 'slv2')
 makedepends=('lv2' 'svn' 'boost' 'ladspa' 'scons' 'gettext' 'libtool' 'unzip')
 options=('!libtool')
-source=('move-all-snap-to-bar.patch' 'ardour2-r5126-lv2_external_ui.patch')
-md5sums=('2e5b4aaa9343afc83cfc444487cacf9b'
-         '6a36bb0196854dc1c9988be58d6c6a5e')
+source=('move-all-snap-to-bar.patch')
+md5sums=('2e5b4aaa9343afc83cfc444487cacf9b')
 
 build() {
 
@@ -21,6 +21,7 @@ build() {
     #since automatic download of release tarballs is no longer possible
 
     svn co http://subversion.ardour.org/svn/ardour2/tags/${pkgver}
+
     msg "SVN checkout done or server timeout"
     msg "Starting build process..."
 
@@ -28,9 +29,6 @@ build() {
 
     #see http://tracker.ardour.org/view.php?id=2377
     patch -Np0 -i ../move-all-snap-to-bar.patch || return 1
-
-    #allows usage of external lv2 GUIs, so far only relevant for lv2fil
-    patch -Np1 -i ../ardour2-r5126-lv2_external_ui.patch || return 1
 
     scons   PREFIX="/usr" \
             FREESOUND=1 \
