@@ -2,8 +2,8 @@
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 
 pkgname=lv2-svn
-_pkgname=lv2core
-pkgver=2128
+_pkgname=lv2core.lv2
+pkgver=2198
 pkgrel=1
 pkgdesc="Successor to the LADSPA plug-in standard (development version)"
 arch=(i686 x86_64)
