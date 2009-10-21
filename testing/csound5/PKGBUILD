@@ -1,8 +1,8 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-# Contributor: hm_b <holger@music-nerds.net>
+# Contributor: hm_b < holger <at> music-nerds.net >
 
 pkgname=csound5
-pkgver=5.11.1
+pkgver=5.10.1
 pkgrel=1
 pkgdesc="A programming language designed and optimized for sound rendering and signal processing"
 url="http://sourceforge.net/project/showfiles.php?group_id=81968"
@@ -14,16 +14,16 @@ makedepends=('scons' 'swig')
 provides=('csound5')
 conflicts=('csound')
 source=("http://downloads.sourceforge.net/csound/Csound$pkgver.tar.gz")
-md5sums=('12d56dcead29004b4d0d052c2a1fbdb8')
+md5sums=('7b2f4b4eb6ccab66e06625cb5377d4f7')
 #_gccOptions="-O3 -march=pentium4"
 # useDouble is a requirement for using with blue via csound api
 _csOptions="usePortAudio=1 usePortMIDI=0 buildCsound5GUI=1 useOSC=1 buildPythonOpcodes=1 buildInterfaces=1 buildVirtual=1 dynamicCsoundLibrary=1 buildJavaWrapper=1 useDouble=1"
 
 build() {
   cd $srcdir/Csound$pkgver
- # patch -p1 SConstruct < ../../SConstruct.diff  
+  patch -p1 SConstruct < ../../SConstruct.diff  
   scons customCFLAGS="$_gccOptions" $_csOptions || return 1
-#  patch -p1 install.py < ../../install.py.diff  
+  patch -p1 install.py < ../../install.py.diff  
   ./install.py --prefix=/usr --instdir=$startdir/pkg
   cd $startdir
   # if useDouble=0 install csound.sh instead of csound64.sh
