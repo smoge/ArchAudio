@@ -1,18 +1,19 @@
 # $Id: pkgbuild-mode.el,v 1.23 2007/10/20 16:02:14 juergen Exp $
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: hm_b < holger at music-nerds dot net >
+# Contributor: svoufff <svoufff at gmail dot com>
 
 pkgname=rtirq  
-pkgver=20090810
-pkgrel=1 
+pkgver=20090920
+pkgrel=1
 pkgdesc="Realtime IRQ thread system tunning"
 url="http://alsa.opensrc.org/Rtirq"
-arch=('i686')
+arch=('i686' 'x86_64')
 license=('GPL')
 depends=('util-linux-ng' 'bash')
 install=rtirq.install
 source=(http://www.rncbc.org/jack/$pkgname-$pkgver.tar.gz)
-md5sums=('96b1d9f97d578bfc238bc6fd92ce8ce1')
+md5sums=('ac97ca69233cdbdf806fbd3ae75199e7')
 build() {
   cd $startdir/src/$pkgname-$pkgver
   sed -e "s|etc/sysconfig/rtirq|etc/conf.d/rtirq|" -i rtirq.sh || return 1
