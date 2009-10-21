@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # path to java binary
-JAVA_PATH="/opt/java"
+ JAVA_PATH="/opt/java"
+# JAVA_PATH=$JAVA_HOME
 
 # processing install path
 PROCESSING_PATH="/usr/share/java/processing"

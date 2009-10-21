@@ -2,7 +2,7 @@
 # Contributor: thelucster
 # Contributor: hm_b <holger <at> music-nerds.net>
 pkgname=processing
-pkgver=1.0.6
+pkgver=1.0.9
 pkgrel=1
 pkgdesc="programming language and environment for images, animation, and interactions"
 arch=('i686' 'x86_64')
@@ -11,7 +11,7 @@ license=('GPL' 'LGPL')
 depends=('jdk' 'sh')
 makedepends=('gif2png')
 source=(http://www.processing.org/download/processing-$pkgver.tgz processing processing.desktop)
-md5sums=('874c076c152e1f9bb955ba8382a2734d' '1e15ff79862c35d94a858887c4237e1d'\
+md5sums=('468bf107d388cc5fc6c62da3ddff16a1' '34160604caa718e84d51bfdc56d40556'\
          '78ef1b1a9917343467f4c0cdf4568267')
 
 build() {
