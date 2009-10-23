@@ -1,0 +1,33 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+
+pkgname=jost-bin
+_pkgname=jost
+pkgver=0.5.4
+pkgrel=1
+pkgdesc="JACK host for native VST, DSSI and LADSPA plug-ins (upstream binary)"
+arch=(i686)
+url="http://www.anticore.org/jucetice/?page_id=4"
+license=('LGPL')
+depends=('dssi' 'lash' 'freetype2' 'libxinerama' 'libgl')
+conflicts=('jost')
+provides=('jost')
+options=(!strip)
+source=(http://www.anticore.org/jucetice/wp-content/uploads/$_pkgname-v$pkgver.tar.bz2
+	$_pkgname.desktop
+	$_pkgname.png)
+
+build() {
+  cd "$srcdir/$_pkgname-v$pkgver"
+
+  install -Dm755 $_pkgname "$pkgdir/usr/bin/$_pkgname"
+  install -Dm755 ${_pkgname}vst.so "$pkgdir/usr/lib/vst/$_pkgname.so"
+
+  install -Dm644 "$srcdir/$_pkgname.png" \
+    "$pkgdir/usr/share/pixmaps/$_pkgname.png"
+  install -Dm644 "$srcdir/$_pkgname.desktop" \
+    "$pkgdir/usr/share/applications/$_pkgname.desktop"
+}
+md5sums=('b1e1efe941d157d0f89e29bc0c5f07a7'
+         '9b669a96925c9a7b8d62ea6e88c06216'
+         '52010fec161e0224c5f84ffdf067cec1')
