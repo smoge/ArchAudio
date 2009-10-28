@@ -11,7 +11,7 @@ _realkernel=2.6.31	# actual basekernel eg. for rc builds
 _kernelpatch=
 _rtpatch=-rt11
 pkgver=2.6.31_rt11
-pkgrel=1
+pkgrel=2
 
 # If sources are rc, old rc, old rt, rc & old rt, old rc & old rt:
 # rc, rc-old, rt-old, rc-rt-old, all-old or blank for default
@@ -45,7 +45,8 @@ source=(ftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-$_realkernel.tar.bz2
 	logo_linux_clut224.ppm
 	aufs2-base-20090910.patch
 	aufs2-standalone-20090910.patch
-	mbox2.patch)
+	#mbox2.patch
+)
 
 build() {
   KARCH=x86
@@ -69,7 +70,7 @@ build() {
 
   # Add Mbox 2 unofficial patch
   # http://www.zamaudio.com/?p=97
-  patch -Np1 -i ../mbox2.patch || return 1
+  #patch -Np1 -i ../mbox2.patch || return 1
   
   # Add our custom logo
   cp ../logo_linux_clut224.ppm drivers/video/logo/
@@ -218,10 +219,9 @@ build() {
 md5sums=('84c077a37684e4cbfa67b18154390d8a'
          '7be575537db7ff654f8e53d4e17d1954'
          '2a493d1ed820300460abb592b8408ac9'
-         '18da80ac1d41cba0f74cace471862bba'
-         'a98d4c728a5d2e1f4f194f0dc8e64ad6'
+         'a9e02bca7e4560d07ecb332c4984c72e'
+         '6d559e619092f2c980a872bc38f1902d'
          'd1b1dc82ba8d2ffc2d64ee597a7f7de4'
          '6a5a1925501fe20fafd04fdb3cb4f6ed'
          '1bc4ac3b07e1aa8ef5ee65156b27aa50'
-         '79f7c17c3732f4d18a00eafc010396b3'
-         '22cda0dacb365cc1c2ed90e4b9fca10a')
+         '79f7c17c3732f4d18a00eafc010396b3')
