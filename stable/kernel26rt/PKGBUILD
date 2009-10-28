@@ -11,7 +11,7 @@ _realkernel=2.6.31	# actual basekernel eg. for rc builds
 _kernelpatch=
 _rtpatch=-rt11
 pkgver=2.6.31_rt11
-pkgrel=2
+pkgrel=3
 
 # If sources are rc, old rc, old rt, rc & old rt, old rc & old rt:
 # rc, rc-old, rt-old, rc-rt-old, all-old or blank for default
