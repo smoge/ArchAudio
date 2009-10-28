@@ -1,0 +1,36 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+# Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
+
+# Remember that it is literally against the law to
+# put up the SDK on the repos, so get it from AUR
+# if you want to build this.
+
+pkgname=wineasio
+pkgver=0.7.4
+pkgrel=1
+pkgdesc="Steinberg's Windows ASIO driver for Wine"
+arch=(i686)
+url="http://sourceforge.net/projects/wineasio/"
+license=('LGPL')
+depends=('wine' 'jack-audio-connection-kit')
+makedepends=('steinberg-asio')
+install=$pkgname.install
+source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.bz2
+	asio.c.patch)
+
+build() {
+  cd "$srcdir/$pkgname"
+
+  # add patch by Joakim "JackWinter" Hernberg
+  patch -Np1 -i ../asio.c.patch || return 1
+
+  ln -s /usr/include/steinberg-asio/asio.h
+
+  make || return 1
+
+  install -Dm755 wineasio.dll.so \
+    "$pkgdir/usr/lib/wine/wineasio.dll.so"
+}
+md5sums=('fcd4d4b4a1a2ab59733bf09bdb9152d0'
+         'c1070e44ca8ed4eec56f5b932e49aea2')

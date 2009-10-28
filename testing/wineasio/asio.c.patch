@@ -1,0 +1,165 @@
+From 769cfa3db645ace82441f9ba6da09c37f851770e Mon Sep 17 00:00:00 2001
+From: Ray Rashif <schivmeister@gmail.com>
+Date: Thu, 29 Oct 2009 03:19:46 +0800
+Subject: [PATCH] Add Third-Party Changes
+
+This one fixes a couple of things and adds nifty usability enhancements,
+like the call to qjackctl by the ASIO control panel. Latency reporting
+is not "fixed" per se, but is edited to be more in line with what jackd
+reports.
+
+From [http://linuxaudio.org/mailarchive/lau/2009/8/11/158202]:
+
+1. Fixes wrongly reported ASIO output latency
+2. Changes the SCHED_FIFO priority of the win32 callback thread
+    * Calls jack_client_real_time_priority() to get recommended priority
+    * Removes hard coded SCHED_FIFO priority of 86 for the entire
+    * process
+    * Sets win32 callback thread to SCHED_FIFO priority suggested by
+    * JACK
+3. Adds a fork with call to qjackctl from the ASIOControlPanel()
+
+Original-work-by: Joakim Hernberg <jbh@alchemy.lu>
+Signed-off-by: Ray Rashif <schivmeister@gmail.com>
+---
+ asio.c |   59 +++++++++++++++++++++++++++++++++++++++++------------------
+ 1 files changed, 41 insertions(+), 18 deletions(-)
+
+diff --git a/asio.c b/asio.c
+index a172969..5b5cde2 100644
+--- a/asio.c
++++ b/asio.c
+@@ -42,6 +42,7 @@
+ #include "wine/debug.h"
+ 
+ #include <jack/jack.h>
++#include <jack/thread.h>
+ 
+ #define IEEE754_64FLOAT 1
+ #include "asio.h"
+@@ -139,6 +140,8 @@ typedef struct _Channel {
+    jack_port_t *port;
+ } Channel;
+ 
++typedef struct sched_param SCHED_PARAM;
++
+ struct IWineASIOImpl
+ {
+     /* COM stuff */
+@@ -181,6 +184,7 @@ struct IWineASIOImpl
+     jack_client_t       *client;
+     long                client_state;
+     long                toggle;
++    SCHED_PARAM		jack_client_priority;
+ 
+     /* callback stuff */
+     HANDLE              thread;
+@@ -381,7 +385,7 @@ WRAP_THISCALL( ASIOBool __stdcall, IWineASIOImpl_init, (LPWINEASIO iface, void *
+     This->sample_rate = 48000.0;
+     This->block_frames = 1024;
+     This->input_latency = This->block_frames;
+-    This->output_latency = This->block_frames * 2;
++    This->output_latency = This->block_frames;
+     This->miliseconds = (long)((double)(This->block_frames * 1000) / This->sample_rate);
+     This->callbacks = NULL;
+     This->sample_position = 0;
+@@ -396,24 +400,13 @@ WRAP_THISCALL( ASIOBool __stdcall, IWineASIOImpl_init, (LPWINEASIO iface, void *
+     This->tc_read = FALSE;
+     This->terminate = FALSE;
+     This->state = Init;
++    This->jack_client_priority.sched_priority = -1;
+ 
+     sem_init(&This->semaphore1, 0, 0);
+     sem_init(&This->semaphore2, 0, 0);
+ 
+     This->start_event = CreateEventW(NULL, FALSE, FALSE, NULL);
+     This->stop_event = CreateEventW(NULL, FALSE, FALSE, NULL);
+-    This->thread = CreateThread(NULL, 0, win32_callback, (LPVOID)This, 0, &This->thread_id);
+-    if (This->thread)
+-    {
+-        WaitForSingleObject(This->start_event, INFINITE);
+-        CloseHandle(This->start_event);
+-        This->start_event = INVALID_HANDLE_VALUE;
+-    }
+-    else
+-    {
+-        WARN("(%p) Couldn't create thread\n", This);
+-        return ASIOFalse;
+-    }
+ 
+     set_clientname(This);
+ 
+@@ -437,6 +430,21 @@ WRAP_THISCALL( ASIOBool __stdcall, IWineASIOImpl_init, (LPWINEASIO iface, void *
+ 
+     if (status & JackServerStarted)
+         TRACE("(%p) JACK server started\n", This);
++    // get maximum reccomended client priority from JACK
++    This->jack_client_priority.sched_priority = jack_client_real_time_priority (This->client);
++
++    This->thread = CreateThread(NULL, 0, win32_callback, (LPVOID)This, 0, &This->thread_id);
++    if (This->thread)
++    {
++        WaitForSingleObject(This->start_event, INFINITE);
++        CloseHandle(This->start_event);
++        This->start_event = INVALID_HANDLE_VALUE;
++    }
++    else
++    {
++        WARN("(%p) Couldn't create thread\n", This);
++        return ASIOFalse;
++    }
+ 
+ //  if (status & JackNameNotUnique)
+ //  {
+@@ -451,7 +459,7 @@ WRAP_THISCALL( ASIOBool __stdcall, IWineASIOImpl_init, (LPWINEASIO iface, void *
+ 
+     This->miliseconds = (long)((double)(This->block_frames * 1000) / This->sample_rate);
+     This->input_latency = This->block_frames;
+-    This->output_latency = This->block_frames * 2;
++    This->output_latency = This->block_frames;
+ 
+ //  TRACE("sample rate: %f\n", This->sample_rate);
+ //  TRACE("buffer size: %ld\n", This->block_frames);
+@@ -1024,8 +1032,16 @@ ERROR_PARAM:
+ 
+ WRAP_THISCALL( ASIOError __stdcall, IWineASIOImpl_controlPanel, (LPWINEASIO iface))
+ {
+-    TRACE("(%p) stub!\n", iface);
++    char* arg_list[] = { "qjackctl", NULL };
+ 
++    TRACE ("Opening ASIO control panel\n");
++
++    if (fork() == 0)
++    {                                                                   /* Code only executed by child process */
++        TRACE ("Calling qjackctl\n");
++        execvp (arg_list[0], arg_list);
++        return ASE_OK;
++    }
+     return ASE_OK;
+ }
+ 
+@@ -1189,11 +1205,18 @@ static int jack_process(jack_nframes_t nframes, void * arg)
+ static DWORD CALLBACK win32_callback(LPVOID arg)
+ {
+     IWineASIOImpl * This = (IWineASIOImpl*)arg;
+-    struct sched_param attr;
++
+     //TRACE("(%p)\n", arg);
++    TRACE ("win32 callback thread started\n");
+ 
+-    attr.sched_priority = 86;
+-    sched_setscheduler(0, SCHED_FIFO, &attr);
++    /* set the priority of the win32 callback thread as suggested by JACK */
++    if (This->jack_client_priority.sched_priority != -1)	/* skip if not running realtime */
++        if (pthread_setschedparam(pthread_self(), SCHED_FIFO, &This->jack_client_priority) == 0)
++            TRACE ("win32 callback set to SCHED_FIFO priority %d\n", This->jack_client_priority.sched_priority);
++        else
++            TRACE ("Error trying to set realtime priority of win32 callback\n");
++    else
++            TRACE ("Unable to set realtime priority of win32 callback, not running with realtime priority\n");
+ 
+     /* let IWineASIO_Init know we are alive */
+     SetEvent(This->start_event);
+-- 
+1.6.5.1
+
