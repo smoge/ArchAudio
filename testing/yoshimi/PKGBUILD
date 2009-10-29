@@ -1,0 +1,22 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: David Adler <david dot jo dot adler at gmail dot com>
+pkgname=yoshimi
+pkgver=0.031
+pkgrel=3
+pkgdesc="Experimental ZynAddSubFX with improved Jack audio & midi IO"
+arch=('i686' 'x86_64')
+url="http://www.graggrag.com/?q=node/19"
+license=('GPL')
+depends=(mxml fltk fftw jack-audio-connection-kit)
+makedepends=(cmake)
+source=(http://www.graggrag.com/yoshimi/$pkgname-$pkgver.tar.bz2)
+md5sums=('b39dd25da6fd7e3cdcadf19c4ecb1e02')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver/src" 
+  mkdir -p "${pkgdir}/usr/bin"
+  cmake -D CMAKE_INSTALL_PREFIX="$pkgdir/usr" . 	|| return 1
+  make		|| return 1
+  make install	|| return 1
+}
+
