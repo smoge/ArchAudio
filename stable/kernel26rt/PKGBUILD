@@ -11,7 +11,7 @@ _realkernel=2.6.31	# actual basekernel eg. for rc builds
 _kernelpatch=
 _rtpatch=-rt10
 pkgver=2.6.31_rt10
-pkgrel=1
+pkgrel=2
 
 # If sources are rc, old rc, old rt, rc & old rt, old rc & old rt:
 # rc, rc-old, rt-old, rc-rt-old, all-old or blank for default
@@ -25,7 +25,6 @@ url="http://rt.wiki.kernel.org"
 backup=(etc/mkinitcpio.d/$pkgname.preset)
 depends=('kernel26-firmware>=2.6.29' 'module-init-tools' 'mkinitcpio>=0.5.20')
 optdepends=('crda: to set the correct wireless channels of your country')
-options=('force')
 install=$pkgname.install
 
 [ "$_source" = "rc" ] && _rc=testing/
