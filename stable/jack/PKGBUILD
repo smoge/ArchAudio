@@ -3,7 +3,7 @@
 
 pkgname=jack
 _pkgname=jack-audio-connection-kit
-pkgver=0.117.0
+pkgver=0.116.2
 pkgrel=1
 pkgdesc="Jack Audio Connection Kit: A low-latency audio server"
 arch=(i686 x86_64)
@@ -11,9 +11,9 @@ url="http://jackaudio.org/"
 license=('GPL' 'LGPL')
 groups=('archaudio-minimal' 'archaudio-suite')
 depends=('libsamplerate')
-makedepends=('doxygen' 'ffado' 'celt>=0.7.0')
+makedepends=('doxygen' 'ffado' 'celt<0.7.0')
 optdepends=('ffado: FireWire audio device support'
-	    'celt>=0.7.0: NetJACK driver CELT codec')
+	    'celt<0.7.0: NetJACK driver CELT codec')
 provides=("jack-audio-connection-kit=$pkgver")
 conflicts=('jack-audio-connection-kit')
 backup=(etc/conf.d/$pkgname)
@@ -35,6 +35,6 @@ build() {
   install -Dm755 ../jackinit "$pkgdir/etc/rc.d/$pkgname"
   install -Dm644 ../jackconf "$pkgdir/etc/conf.d/$pkgname"
 }
-md5sums=('462d19dcec70b9a4b5a395d37e03e2af'
-         '898f6540902c262ca1aa364c57f284f3'
+md5sums=('9c0ae9880e9b6e081f1a238fe6a28bd5'
+         '12b1017f6f06248e2ddd4a28dfae87d4'
          '6cd8a8a42a756d3ba0d4842bba171ca3')

@@ -4,4 +4,4 @@
 #JACKUSER="johndoe"
 
 # Uncomment this to not source ~/.jackdrc
-#JACK_PARAMS="-P89 -dalsa -dhw:0 -r48000 -p512 -n3"
+#JACK_PARAMS="-R -P89 -dalsa -dhw:0 -r48000 -p512 -n3"

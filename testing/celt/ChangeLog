@@ -1,4 +1,10 @@
-17 June 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
+15 Nov 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
+
+	* Updated to 0.7.0 from 0.5.2
+	* Major API change
+	* Moved 0.5.2 to [stable]
+
+17 Jun 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
 
 	* Initial commit
 	* celt 0.5.2-1

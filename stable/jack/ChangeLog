@@ -1,18 +1,13 @@
 15 Nov 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
 
-	* Updated to 0.117.0 from 0.116.2
-	* Moved 0.116.2 to [stable]
-
-19 Jun 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
-
-	* Initial commit
 	* jack 0.116.2-1
+	* Moved to [stable] from [testing]
 
 ###############################
 # General Package Information #
 ###############################
 
-Differences from archlinux/extra/jack-audi-connection-kit:
+Differences from archlinux/extra/jack-audio-connection-kit:
 
 	* Proper NetJACK support
 		- w/ libsamplerate (allows for alsa_io and useful stuff)
