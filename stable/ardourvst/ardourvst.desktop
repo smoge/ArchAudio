@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=ArdourVST
+GenericName=Digital Audio Workstation
+Comment=Professional-grade Digital Audio Workstation (DAW)
+Exec=ardourvst
+Icon=ardour
+Terminal=false
+MimeType=application/x-ardour;
+Type=Application
+Categories=Multimedia;

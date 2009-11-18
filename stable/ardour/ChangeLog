@@ -1,0 +1,20 @@
+18 Nov 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
+
+	* Moved from [testing] 2.8.3-1 to [stable] 2.8.4-1
+	* New buildscripts
+
+###############################
+# General Package Information #
+###############################
+
+Differences from archlinux/extra/ardour:
+
+	* LV2 support
+	* Use included libs instead of syslibs
+		- system libs break upstream support
+	* Wiimote support; WIIMOTE=1
+		- cwiid: buildtime mandatory, runtime optional
+	* Freesound support; FREESOUND=1
+	* PKGBUILD; build options; deps cleanup
+		- clarified a few things with Paul Davis, upstream
+	* Other minor ammendments

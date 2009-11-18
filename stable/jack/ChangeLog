@@ -1,7 +1,17 @@
+18 Nov 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
+
+	* Updated to latest upstream release
+	* Moved from [testing] 0.117.0-1 to [stable] 0.118.0-1
+
 15 Nov 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
 
 	* jack 0.116.2-1
 	* Moved to [stable] from [testing]
+
+19 Jun 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
+
+	* Initial commit to [testing]
+	* jack 0.116.2-1
 
 ###############################
 # General Package Information #
@@ -11,5 +21,7 @@ Differences from archlinux/extra/jack-audio-connection-kit:
 
 	* Proper NetJACK support
 		- w/ libsamplerate (allows for alsa_io and useful stuff)
-	* FFADO (optional) support
-	* CELT (optional) support
+	* FFADO support
+		- ffado: buildtime mandatory, runtime optional
+	* CELT codec for NetJACK
+		- celt: buildtime mandatory, runtime optional

@@ -11,6 +11,11 @@ post_install() {
 
 session         required        pam_limits.so
 
+==> From 0.117.0 the "-R" flag is obsolete; realtime is
+==> used by default. You can disable realtime with "-r".
+==> There have also been other internal changes, so
+==> front-ends may not work as expected.
+
 MSG
 }
 

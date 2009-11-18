@@ -2,7 +2,7 @@
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 
 pkgname=celt
-pkgver=0.5.2
+pkgver=0.7.0
 pkgrel=1
 pkgdesc="Low-latency audio communication codec"
 arch=(i686 x86_64)
@@ -21,4 +21,4 @@ build() {
 
   install -Dm644 COPYING "$pkgdir/usr/share/licenses/$pkgname/BSD"
 }
-md5sums=('6672ce9c8ef6d2879a9b1dc9fed1fb70')
+md5sums=('0bb72abec367f4ef12551f79dda11b23')
