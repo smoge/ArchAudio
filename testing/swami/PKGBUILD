@@ -1,0 +1,23 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
+# Contributor: Christoph Zeiler <rabyte*gmail>
+# Contributor: Philipp Überbacher <hollunder at gmx dot at>
+
+pkgname=swami
+pkgver=0.9.4
+pkgrel=2
+pkgdesc="A collection of free software for editing and sharing MIDI instruments and sounds"
+arch=('i686' 'x86_64')
+url="http://swami.resonance.org/trac"
+license=('GPL')
+depends=('gtk' 'audiofile' 'fluidsynth' 'popt' 'libsndfile')
+options=('!libtool')
+source=(http://downloads.sourceforge.net/sourceforge/${pkgname}/${pkgname}-${pkgver}.tar.bz2)
+md5sums=('83da8e71ce1e6cda0f41d9f5e0ed3fdf')
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  ./configure --prefix="/usr" --disable-splash || return 1
+  make || return 1
+  make DESTDIR="${pkgdir}" install || return 1
+}
