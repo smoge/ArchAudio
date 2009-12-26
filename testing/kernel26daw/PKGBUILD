@@ -14,7 +14,7 @@ pkgrel=1
 
 # If sources are rc, old rc, old bfs, rc & old bfs, old rc & old bfs:
 # rc, rc-old, bfs-old, rc-bfs-old, all-old or blank for default
-_source=
+_source=bfs-old
 
 pkgdesc="The Linux Kernel and modules with BFS patch for low-latency workloads"
 arch=(i686 x86_64)
