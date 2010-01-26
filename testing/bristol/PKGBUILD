@@ -2,7 +2,7 @@
 # Contributor: DonVla <donvla@users.sourceforge.net>
 
 pkgname=bristol
-pkgver=0.40.4
+pkgver=0.40.8
 pkgrel=1
 pkgdesc="Vintage synthesizers emulator"
 arch=(i686 x86_64)
@@ -12,8 +12,7 @@ makedepends=('gcc')
 depends=('jack-audio-connection-kit' 'libx11')
 options=(!libtool)
 source=(http://downloads.sourceforge.net/sourceforge/${pkgname}/${pkgname}-${pkgver}.tar.gz)
-md5sums=('7fab778f829d15c068a1d6e60f4a1ded')
-sha256sums=('bb196f0d615b0f42883a3e8f31a8d0751415f18f288871374d3d5b95de2f19f0')
+md5sums=('793f37923f2f1e5000389add6b8fa836')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
