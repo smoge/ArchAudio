@@ -1,10 +1,11 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: svoufff <svoufff at gmail dot com>
 # Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
 pkgname=phat
 pkgver=0.4.1
 pkgrel=1
 pkgdesc="A collection of GTK+ widgets geared toward pro-audio apps"
-arch=(i686)
+arch=(i686 x86_64)
 url="http://phat.berlios.de/"
 license=('GPL')
 depends=('libgnomecanvas')
