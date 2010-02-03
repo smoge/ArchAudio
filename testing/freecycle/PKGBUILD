@@ -2,12 +2,12 @@
 # Contributor: Maciej Ciemborowicz <moonkey (at) op (dot) pl>
 pkgname=freecycle
 pkgver=0.6.1.1alpha
-pkgrel=1
+pkgrel=2
 pkgdesc="A beat slicer running on GNU/Linux platform using the QT toolkit"
-arch=(i686, x86_64)
+arch=('i686' 'x86_64')
 url="http://freecycle.redsteamrecords.com/"
 license=('GPL')
-depends=('qt' 'jack-audio-connection-kit' 'fftw')
+depends=('qt' 'jack-audio-connection-kit' 'fftw' 'ladspa')
 makedepends=('soundtouch>=1.3.0')
 source=(http://download.savannah.gnu.org/releases/${pkgname}/${pkgname}-${pkgver}.tar.bz2)
 md5sums=('14e2318ce870ab6d9384feda32b6703d')
