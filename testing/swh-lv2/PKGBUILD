@@ -3,13 +3,13 @@
 
 pkgname=swh-lv2
 pkgver=1.0.15
-pkgrel=1
+pkgrel=2
 pkgdesc="SWH LADSPA plug-ins collection ported to LV2"
 url="http://plugin.org.uk/"
 license=('GPL')
 arch=(i686 x86_64)
 depends=('fftw')
-makedepends=('libxslt' 'lv2')
+makedepends=('libxslt' 'lv2core')
 source=(http://plugin.org.uk/lv2/$pkgname-$pkgver.tar.gz)
 
 build() {

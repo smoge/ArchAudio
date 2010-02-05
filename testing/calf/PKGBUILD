@@ -3,12 +3,13 @@
 
 pkgname=calf
 pkgver=0.0.18.5
-pkgrel=1
-pkgdesc="LV2/DSSI/JACK/LADSPA audio plug-ins for musicians"
+pkgrel=2
+pkgdesc="LV2/DSSI/LADSPA plug-ins suite and standalone JACK host"
 arch=(i686 x86_64)
 url="http://calf.sf.net/"
 license=('LGPL')
-depends=('libglade' 'lash' 'ladspa' 'dssi' 'lv2')
+depends=('libglade' 'lash')
+makedepends=('ladspa' 'dssi' 'lv2core')
 source=(http://downloads.sf.net/$pkgname/$pkgname-$pkgver.tar.gz)
 
 build() {
@@ -17,8 +18,8 @@ build() {
   ./configure	--prefix=/usr \
   		--enable-experimental
   make || return 1
-  make DESTDIR="$pkgdir" install
+  make DESTDIR="$pkgdir/" install
 
-  rm -f $pkgdir/usr/share/icons/hicolor/icon-theme.cache
+  rm "$pkgdir/usr/share/icons/hicolor/icon-theme.cache"
 }
 md5sums=('b844eac59bb16354b8dc25a15a0576f6')

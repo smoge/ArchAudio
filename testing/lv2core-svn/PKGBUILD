@@ -1,17 +1,16 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 
-pkgname=lv2-svn
-_pkgname=lv2core.lv2
-pkgver=2198
+pkgname=lv2core-svn
+pkgver=2430
 pkgrel=1
-pkgdesc="Successor to the LADSPA plug-in standard (development version)"
+pkgdesc="LV2: Successor to the LADSPA audio plug-in standard (development version)"
 arch=(i686 x86_64)
 url="http://lv2plug.in/"
 license=('LGPL')
-makedepends=('subversion')
-provides=('lv2')
-conflicts=('lv2')
+makedepends=('subversion' 'python')
+provides=('lv2core')
+conflicts=('lv2core')
 source=()
 md5sums=()
 
@@ -32,9 +31,9 @@ build() {
 
   rm -rf "$srcdir/$_svnmod-build"
   cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
-  cd "$srcdir/$_svnmod-build/$_pkgname"
+  cd "$srcdir/$_svnmod-build/lv2/core.lv2"
 
   ./waf configure --prefix=/usr
   ./waf build $MAKEFLAGS || return 1
-  ./waf install --destdir="$pkgdir/"
+  ./waf install --destdir="$pkgdir"
 }

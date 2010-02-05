@@ -1,9 +1,0 @@
-23 Nov 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
-
-	* Moved from [testing] 0.6.6-1 to [stable] 0.6.6-2
-	* Added python makedepend for build tool (waf)
-
-17 June 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
-
-	* Initial commit
-	* slv2 0.6.6-1

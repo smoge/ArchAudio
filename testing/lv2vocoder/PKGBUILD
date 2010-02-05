@@ -4,13 +4,13 @@
 
 pkgname=lv2vocoder
 pkgver=1
-pkgrel=2
+pkgrel=3
 pkgdesc="LV2 Vocoder Plugin."
 arch=('i686' 'x86_64')
 url="http://home.gna.org/lv2vocoder/"
 license=('GPL')
 depends=('gcc-libs')
-makedepends=('lv2')
+makedepends=('lv2core')
 source=(http://download.gna.org/lv2vocoder/${pkgname}-${pkgver}.tar.bz2)
 md5sums=('8c0096978e9c58a252f247e1f7f7ed63')
 
