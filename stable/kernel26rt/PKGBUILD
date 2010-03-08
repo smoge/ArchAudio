@@ -11,7 +11,7 @@ _realkernel=2.6.31	# actual basekernel eg. for rc builds
 _kernelpatch=
 _rtpatch=-rt10
 pkgver=2.6.31_rt10
-pkgrel=3
+pkgrel=4
 
 # If sources are rc, old rc, old rt, rc & old rt, old rc & old rt:
 # rc, rc-old, rt-old, rc-rt-old, all-old or blank for default
@@ -203,6 +203,6 @@ md5sums=('84c077a37684e4cbfa67b18154390d8a'
          '7c7710926214e4eae34c8466b5298129'
          '2a493d1ed820300460abb592b8408ac9'
          'c0461009ebb34a9a7b6a18928a0817bb'
-         'aa5cf9c4ef8f11dd15c5cedafec4070b'
+         'd962a39940f92fdd402dabfadf3b624d'
          'a0921a7e563e7ae2d14c3a0603fa16ad'
          '6a5a1925501fe20fafd04fdb3cb4f6ed')
