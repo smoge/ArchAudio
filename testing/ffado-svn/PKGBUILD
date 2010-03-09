@@ -1,10 +1,10 @@
+# $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 # Contributor: Jon Kristian Nilsen <jokr.nilsen@gmail.com>
 
 pkgname=ffado-svn
-_pkgname=libffado
-pkgver=1649
+pkgver=1805
 pkgrel=1
 pkgdesc="Driver for FireWire audio devices (development version)"
 arch=(i686 x86_64)
@@ -41,12 +41,18 @@ build() {
   # BUILD
   #
 
-  sed -i "s/-march=i686/$CFLAGS/" SConstruct || return 1
+  # Doesn't build with any kind of LDFLAGS
+  unset LDFLAGS
 
+  # this is needed when not using optimizations
+  #sed -i "s/-march=i686/$CFLAGS/" SConstruct
+
+  # not sure if sse(2) does anything harmful
+  # to non-sse(2) machines at runtime
   scons PREFIX=/usr \
   	ENABLE_OPTIMIZATIONS=yes || return 1
   scons DESTDIR="$pkgdir/" install
-  	
+
   install -Dm644 support/xdg/hi64-apps-ffado.png \
     "$pkgdir/usr/share/pixmaps/$pkgname.png"
   install -Dm644 support/xdg/ffado.org-ffadomixer.desktop \

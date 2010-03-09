@@ -1,10 +1,11 @@
+# $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 
 pkgname=jack
-_pkgname=jack-audio-connection-kit
+_tarname=jack-audio-connection-kit
 pkgver=0.118.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Jack Audio Connection Kit: A low-latency audio server"
 arch=(i686 x86_64)
 url="http://jackaudio.org/"
@@ -14,27 +15,15 @@ depends=('libsamplerate')
 makedepends=('doxygen' 'ffado' 'celt')
 optdepends=('ffado: FireWire audio device support'
 	    'celt: NetJACK driver CELT codec')
-provides=("jack-audio-connection-kit=$pkgver")
-conflicts=('jack-audio-connection-kit')
-backup=(etc/conf.d/$pkgname)
+provides=("jack-audio-connection-kit=$pkgver" 'jackd')
 options=('!libtool')
-install=$pkgname.install
-source=(http://jackaudio.org/downloads/$_pkgname-$pkgver.tar.gz
-	jackconf
-	jackinit)
+source=(http://jackaudio.org/downloads/$_tarname-$pkgver.tar.gz)
 
 build() {
-  cd "$srcdir/$_pkgname-$pkgver"
+  cd "$srcdir/$_tarname-$pkgver"
 
   ./configure --prefix=/usr
   make || return 1
   make DESTDIR="$pkgdir/" install
-
-  mv "$pkgdir/usr/share/$_pkgname" "$pkgdir/usr/share/$pkgname"
-
-  install -Dm755 ../jackinit "$pkgdir/etc/rc.d/$pkgname"
-  install -Dm644 ../jackconf "$pkgdir/etc/conf.d/$pkgname"
 }
-md5sums=('d58e29a55f285d54e75134cec8e02a10'
-         '898f6540902c262ca1aa364c57f284f3'
-         '6cd8a8a42a756d3ba0d4842bba171ca3')
+md5sums=('d58e29a55f285d54e75134cec8e02a10')

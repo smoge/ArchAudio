@@ -1,23 +1,19 @@
+# $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 
 pkgname=jack2-svn
-_pkgname=jack
-pkgver=3565
+pkgver=3948
 pkgrel=1
-pkgdesc="Jack Audio Connection Kit MP: A low-latency audio server for SMP machines (development version)"
+pkgdesc="Jack Audio Connection Kit MP: The next-generation JACK (development version)"
 arch=(i686 x86_64)
 url="http://jackaudio.org/"
 license=('GPL')
 depends=('libsamplerate')
 makedepends=('subversion' 'ffado')
 optdepends=('ffado: FireWire audio device support')
-provides=("jack-audio-connection-kit=0.116.2")
-conflicts=('jack2' 'jack-audio-connection-kit' 'jack' 'jack-svn')
-backup=(etc/conf.d/$_pkgname)
-install=$pkgname.install
-source=(jackconf
-	jackinit)
+provides=("jack-audio-connection-kit=0.118.0" "jack=0.118.0")
+conflicts=('jack2' 'jack' 'jack-svn')
 
 _svntrunk=http://subversion.jackaudio.org/jack/jack2/trunk/jackmp
 _svnmod=jackmp
@@ -42,12 +38,10 @@ build() {
   # BUILD
   #
 
-  ./waf configure --prefix=/usr
+  ./waf configure --prefix=/usr \
+                  --alsa \
+                  --firewire
+
   ./waf $MAKEFLAGS || return 1
   ./waf --destdir="$pkgdir/" install
-
-  install -Dm755 ../jackinit "$pkgdir/etc/rc.d/$_pkgname"
-  install -Dm644 ../jackconf "$pkgdir/etc/conf.d/$_pkgname"
 }
-md5sums=('12b1017f6f06248e2ddd4a28dfae87d4'
-         '6cd8a8a42a756d3ba0d4842bba171ca3')

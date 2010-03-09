@@ -1,10 +1,10 @@
-# $Id: pkgbuild-mode.el,v 1.23 2007/10/20 16:02:14 juergen Exp $
+# $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: hm_b <holger at music-nerds.net>
 
-pkgname=qutecsound  
+pkgname=qutecsound
 pkgver=0.4.1
-pkgrel=2
+pkgrel=3
 pkgdesc="a simple frontend for Csound featuring a highlighting editor with autocomplete, interactive widgets and integrated help"
 url="http://qutecsound.sourceforge.net/"
 arch=('i686')
@@ -27,5 +27,5 @@ build() {
   make DESTDIR=$pkgdir/usr/bin TARGET=$pkgdir/usr/bin/qutecsound || return 1
   install -p $startdir/qutecsound.desktop $pkgdir/usr/share/applications/
   install -p images/qtcs.svg $pkgdir/usr/share/pixmaps/
-  cp -R examples $pkgdir/usr/share/qutecsound/  
+  cp -R examples $pkgdir/usr/share/qutecsound/
 }
