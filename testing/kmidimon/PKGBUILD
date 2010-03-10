@@ -1,0 +1,24 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev.archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+# Contributor: Johannes Schriewer <jschriewer@arcor.de>
+
+pkgname=kmidimon
+pkgver=0.7.3
+pkgrel=1
+pkgdesc="KDE MIDI Metronome using the ALSA Sequencer"
+arch=(i686 x86_64)
+url="http://kmidimon.sourceforge.net/"
+license=('GPL')
+depends=('kdelibs')
+makedepends=('cmake' 'automoc4')
+source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.bz2)
+
+build() {
+cd "$srcdir/$pkgname-$pkgver"
+
+cmake . -DCMAKE_INSTALL_PREFIX=/usr
+make || return 1
+make DESTDIR="$pkgdir/" install
+}
+md5sums=('552d84352dc458704bbfc8854d8c598e')
