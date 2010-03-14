@@ -1,0 +1,37 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Philipp Überbacher <hollunder at gmx dot at>
+pkgname=jconvolver
+pkgver=0.8.6
+pkgrel=1
+pkgdesc="Convolution Engine for JACK, including example config and reverbs files."
+url="http://www.kokkinizita.net/linuxaudio/"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('clthreads>=2.4.0' 'zita-convolver>=2.0.0' 'jack')
+replaces=('jconv')
+install=${pkgname}.install
+source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2 \
+http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-reverbs.tar.bz2)
+md5sums=('8e754ed391c1f1f79f7cf0612c7eff77'
+         'a33ec6a97fac039400f7674f3bde4ca9')
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}/source"
+  sed -i 's|/usr/local|/usr|' Makefile || return 1
+
+  make PREFIX="/usr" || return 1
+}
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}/source"
+  make DESTDIR=${pkgdir} install || return 1
+
+  #this installs the configuration readme
+  install -Dm 644 ../README.CONFIG "${pkgdir}/usr/share/jconvolver/README.CONFIG" || return 1
+
+  #this installs the example config files and reverbs that come with jconv
+  cp -r ../config-files/ "${pkgdir}/usr/share/jconvolver/" || return 1
+
+  #this installs additional reverbs
+  cp -r ${srcdir}/reverbs/* "${pkgdir}/usr/share/jconvolver/config-files/" || return 1
+}

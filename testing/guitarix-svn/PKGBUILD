@@ -1,0 +1,41 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: svoufff <svoufff at gmail dot com>
+pkgname=guitarix-svn
+pkgver=606
+pkgrel=1
+pkgdesc="Simple mono guitar amplifier for jack."
+arch=('i686' 'x86_64')
+url="http://guitarix.sourceforge.net/"
+license=('GPL')
+depends=('jack' 'gtk2')
+makedepends=('ladspa' 'python')
+optdepends=('jack_capture' 'jconvolver')
+provides=('guitarix')
+conflicts=('guitarix')
+
+_svntrunk=http://guitarix.svn.sourceforge.net/svnroot/guitarix/trunk
+_svnmod=guitarix
+
+build() {
+  cd "$srcdir"
+
+  if [ -d $_svnmod/.svn ]; then
+    (cd $_svnmod && svn up -r $pkgver)
+  else
+    svn co $_svntrunk --config-dir ./ -r $pkgver $_svnmod
+  fi
+
+  msg "SVN checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "srcdir/$_svnmod-build"
+  cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
+  cd "$srcdir/$_svnmod-build"
+
+  #
+  # BUILD
+  #
+  ./waf configure --prefix="/usr" || return 1
+  ./waf build || return 1
+  ./waf install --destdir="${pkgdir}" || return 1
+}
