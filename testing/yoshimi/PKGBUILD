@@ -3,20 +3,20 @@
 # Contributor: David Adler <david dot jo dot adler at gmail dot com>
 pkgname=yoshimi
 pkgver=0.055.3
-pkgrel=1
+pkgrel=2
 pkgdesc="Experimental ZynAddSubFX with improved Jack audio & midi IO"
 arch=('i686' 'x86_64')
 url="http://yoshimi.sourceforge.net/"
 license=('GPL')
-depends=('fltk' 'mxml' 'fftw-threads' 'jack-audio-connection-kit')
+depends=('fltk' 'mxml' 'fftw-threads' 'jack')
 makedepends=(cmake)
 source=(http://downloads.sourceforge.net/project/yoshimi/$pkgname-$pkgver.tar.bz2)
 md5sums=('3549c53fe8b405a85bd369f2ba173a93')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver/src" 
-  mkdir -p "${pkgdir}/usr/bin"
-  cmake -D CMAKE_INSTALL_PREFIX="$pkgdir/usr" . 	|| return 1
-  make		|| return 1
-  make install
+  ccmake            || return 1
+  cmake -D CMAKE_INSTALL_PREFIX="$pkgdir/usr" .  || return 1
+  make              || return 1
+  make install      || return 1
 }

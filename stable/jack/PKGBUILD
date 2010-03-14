@@ -1,11 +1,12 @@
 # $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: svoufff <svoufff at gmail dot com>
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 
 pkgname=jack
 _tarname=jack-audio-connection-kit
 pkgver=0.118.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Jack Audio Connection Kit: A low-latency audio server"
 arch=(i686 x86_64)
 url="http://jackaudio.org/"
@@ -22,7 +23,7 @@ source=(http://jackaudio.org/downloads/$_tarname-$pkgver.tar.gz)
 build() {
   cd "$srcdir/$_tarname-$pkgver"
 
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr --libdir=/usr/lib
   make || return 1
   make DESTDIR="$pkgdir/" install
 }
