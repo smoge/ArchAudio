@@ -1,4 +1,5 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: svoufff <svoufff at gmail dot com>
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
 pkgname=jconvolver
 pkgver=0.8.6
@@ -9,6 +10,7 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('clthreads>=2.4.0' 'zita-convolver>=2.0.0' 'jack')
 replaces=('jconv')
+conflicts=('jconv')
 install=${pkgname}.install
 source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2 \
 http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-reverbs.tar.bz2)
