@@ -1,0 +1,13 @@
+post_install() {
+  echo ""
+  echo ":: include this line in your .bashrc:"
+  echo ":: export OPCODEDIR64=/usr/lib/csound/plugins64"
+  echo ":: export CSSTRNGS=/usr/share/locale"
+}
+
+post_upgrade() {
+        post_install
+}
+
+# vim:set ts=2 sw=2 et:
+

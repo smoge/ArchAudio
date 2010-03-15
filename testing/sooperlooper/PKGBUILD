@@ -5,23 +5,22 @@
 # G.R.E.A - Grupo Recifense de Estudos do Archlinux (recife's group of archlinux research)
 
 pkgname=sooperlooper
-pkgver=1.6.13
-_pkgver=1.6.13-2
-pkgrel=2
+pkgver=1.6.14
+pkgrel=1
 pkgdesc="A live looping sampler intended for use with midi pedals."
 url="http://essej.net/sooperlooper/"
 depends=('jack-audio-connection-kit' 'liblo' 'wxgtk' 'libsigcpp1.2' 'rubberband')
-source=(http://essej.net/sooperlooper/$pkgname-$_pkgver.tar.gz)
-md5sums=('60eb9f2d5ddb652c9b57e2a5295a3db5')
+source=(http://essej.net/sooperlooper/$pkgname-$pkgver.tar.gz)
+md5sums=('6faace751e59347afd45e3bc5ad6904f')
 arch=('i686' 'x86_64')
 license=('GPL')
 
 build() {
 cd $srcdir/$pkgname-$pkgver
 
-sed -e "s/char \*slash/const char \*slash/g" -i libs/pbd/basename.cc || return 1
-sed -e "s/char \*slash/const char \*slash/g" -i libs/pbd/dirname.cc || return 1
-sed -e "s/char \*lparen/const char \*lparen/g" -i libs/midi++/midi.cc || return 1
+#sed -e "s/char \*slash/const char \*slash/g" -i libs/pbd/basename.cc || return 1
+#sed -e "s/char \*slash/const char \*slash/g" -i libs/pbd/dirname.cc || return 1
+#sed -e "s/char \*lparen/const char \*lparen/g" -i libs/midi++/midi.cc || return 1
 
 ./configure --prefix=/usr
 make || return 1

@@ -2,7 +2,7 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: hm_b <holger@music-nerds.net>
 pkgname=pd-extended-svn
-pkgver=12177
+pkgver=13084
 pkgrel=1
 pkgdesc="Pure Data Extended SVN version"
 url="http://puredata.info/"
@@ -56,12 +56,12 @@ cd $srcdir
   cd $startdir/src/$_svnmod-build
 
 # fix videogrid
- patch -p0 < $startdir/videogrid.diff || return 1
+# patch -p0 < $startdir/videogrid.diff || return 1
 
 
 # hdspm_mixer disabled for now - doesn`t build
- sed -e "s|gem2pdp hdspm_mixer iem16|gem2pdp iem16|g" \
-   -i externals/Makefile || return 1
+# sed -e "s|gem2pdp hdspm_mixer iem16|gem2pdp iem16|g" \
+ #  -i externals/Makefile || return 1
 
 # build gem with v4l2-support
   sed -e "s|--disable-NV|--disable-NV --with-v4l2|g" \
@@ -84,7 +84,7 @@ if [ "$CARCH" = "x86_64" ]; then
 fi
 
 # minor issue with gem
-sed -e "96 s|char|const char|" -i Gem/src/Pixes/recordQT4L.cpp || return 1
+# sed -e "96 s|char|const char|" -i Gem/src/Pixes/recordQT4L.cpp || return 1
 
 # build and install
   cd packages/linux_make || return 1
