@@ -1,0 +1,22 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schivmeister@gmail.com>
+
+pkgname=stretchplayer
+pkgver=0.500
+pkgrel=1
+pkgdesc="Time-stretching and pitch-shifting audio player"
+arch=(i686 x86_64)
+url="http://www.teuton.org/~gabriel/stretchplayer/"
+license=('GPL')
+depends=('qt' 'rubberband' 'jack')
+makedepends=('cmake')
+source=(http://www.teuton.org/~gabriel/$pkgname/$pkgname-$pkgver.tar.bz2)
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr
+  make || return 1
+  make DESTDIR="$pkgdir" install
+}
+md5sums=('33baf4c8677665fae88f23e292660f95')
