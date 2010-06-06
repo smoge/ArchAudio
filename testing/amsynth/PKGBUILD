@@ -2,7 +2,7 @@
 # Contributor: Alessio Biancalana <dottorblaster@gmail.com>
 
 pkgname=amsynth
-pkgver=1.2.2
+pkgver=1.2.3
 pkgrel=1
 pkgdesc="Analogue Modeling SYNTHesizer"
 arch=('i686' 'x86_64')
@@ -10,7 +10,7 @@ url="http://amsynthe.sourceforge.net/amSynth/"
 license=('GPL')
 depends=('gtkmm' 'libsndfile' 'jack-audio-connection-kit')
 source=(http://downloads.sourceforge.net/sourceforge/amsynthe/amSynth-$pkgver.tar.gz)
-md5sums=('5f86c903ce21368b1e54c31cbc2b041d')
+md5sums=('bd92761b29161d9f748d6909e1bf14ce')
 
 build() {
   cd ${srcdir}/amSynth-${pkgver}
