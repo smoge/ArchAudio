@@ -2,14 +2,14 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: hm_b <holger@music-nerds.net>
 pkgname=pd-extended-svn
-pkgver=13084
+pkgver=13105
 pkgrel=1
 pkgdesc="Pure Data Extended SVN version"
 url="http://puredata.info/"
-arch=('i686' 'x86_64')
+arch=('i686' 'x86_64' 'ppc')
 license=('BSD')
 depends=('libv4l' 'fftw' 'jack-audio-connection-kit' 'tk' 'freeglut' \
-  'libquicktime' 'libdv' 'gsl' 'imagemagick' 'gmerlin-avdecoder' \
+  'libquicktime' 'libdv' 'gsl' 'imagemagick' \
   'ftgl' 'libgl' 'dssi')
 makedepends=('subversion' 'swig' 'automake')
 conflicts=('pd' 'pd-gem' 'pdp' 'zexy')
@@ -25,18 +25,25 @@ md5sums=('3166852bfd22a374700608e74cf9febb')
 _svntrunk=https://pure-data.svn.sourceforge.net/svnroot/pure-data/trunk/
 _svnmod=pd-extended
 
+_svnpdvanilla=https://pure-data.svn.sourceforge.net/svnroot/pure-data/trunk/pd/
+
 _svnextendedbranch=https://pure-data.svn.sourceforge.net/svnroot/pure-data/branches/pd-extended/0.42/pd/
+
+_svnguirewritebranch=https://pure-data.svn.sourceforge.net/svnroot/pure-data/branches/pd-gui-rewrite/0.43/
 
 _svntrunkgem=https://pd-gem.svn.sourceforge.net/svnroot/pd-gem/trunk/Gem
 _svnmodgem=pd-gem
 
 build() {
+  unset CFLAGS
+  unset LDFLAGS
+  unset INCLUDES
   cd $srcdir
 
   if [ -d $_svnmod/.svn ]; then
     (cd $_svnmod && svn up && svn switch $_svnextendedbranch pd)
   else
-    (svn co $_svntrunk --config-dir ./ -r $pkgver $_svnmod && cd $_svnmod && svn switch $_svnextendedbranch pd && cd ..)
+    (svn co $_svntrunk --config-dir ./ -r $pkgver $_svnmod && cd $_svnmod && svn switch $_svnextendedbranch  pd && cd ..)
   fi
 
 cd $srcdir
@@ -57,11 +64,12 @@ cd $srcdir
 
 # fix videogrid
 # patch -p0 < $startdir/videogrid.diff || return 1
-
+# fix big-endian support
+# patch -p0 < $startdir/big-end-pd-0.42-5.patch || return 1
 
 # hdspm_mixer disabled for now - doesn`t build
-# sed -e "s|gem2pdp hdspm_mixer iem16|gem2pdp iem16|g" \
- #  -i externals/Makefile || return 1
+ sed -e "s|gem2pdp hdspm_mixer iem16|gem2pdp iem16|g" \
+   -i externals/Makefile || return 1
 
 # build gem with v4l2-support
   sed -e "s|--disable-NV|--disable-NV --with-v4l2|g" \
@@ -84,7 +92,7 @@ if [ "$CARCH" = "x86_64" ]; then
 fi
 
 # minor issue with gem
-# sed -e "96 s|char|const char|" -i Gem/src/Pixes/recordQT4L.cpp || return 1
+#sed -e "96 s|char|const char|" -i Gem/src/Pixes/recordQT4L.cpp || return 1
 
 # build and install
   cd packages/linux_make || return 1
@@ -128,3 +136,4 @@ fi
 
   rm -rf $srcdir/$_svnmod-build
 }
+

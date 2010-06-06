@@ -6,28 +6,27 @@
 pkgname=linuxsampler
 pkgver=1.0.0
 pkgrel=3
-pkgdesc="Professional-grade audio sampler"
+pkgdesc="Professional-grade audio sampler for Gigasamples and other formats"
 arch=(i686 x86_64)
 url="http://www.linuxsampler.org/"
 license=('GPL' 'custom')
-depends=('libgig>=3.3.0' 'jack-audio-connection-kit' 'sqlite3')
-options=('emptydirs')
+depends=('libgig' 'jack' 'sqlite3')
+options=('!libtool' 'emptydirs')
 source=(http://download.linuxsampler.org/packages/$pkgname-$pkgver.tar.bz2
 	license.txt)
-md5sums=('a97136791a3228d840b006e5481fc39d' '746c1421eb9f6812b5fa411bfb923c75')
+md5sums=('a97136791a3228d840b006e5481fc39d'
+         '746c1421eb9f6812b5fa411bfb923c75')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-  
-  ./configure \
-    --prefix=/usr \
-    --disable-arts-driver \
-    --disable-midishare-driver
 
-  make -j1 || return 1
-  make DESTDIR="$pkgdir" install
-  
+  ./configure	--prefix=/usr \
+  		--disable-arts-driver
+  make || return 1
+  make DESTDIR="$pkgdir/" install
+
   # install GPL exception statement
   install -Dm0644 ../license.txt \
     "$pkgdir/usr/share/licenses/linuxsampler/GPL-EXCEPTION"
 }
+
