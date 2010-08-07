@@ -1,3 +1,8 @@
+6 Aug 2010 (GMT+8) Ray Rashif <schivmeister@gmail.com>
+
+	* kernel26rt 2.6.33.7_rt29-1
+	* long overdue update to latest upstream release
+
 7 Oct 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
 
 	* kernel26rt 2.6.31.2_rt13-1
@@ -9,8 +14,7 @@
 
 Hacks & Patches:
 
-	* Proprietary ATI driver compatibility
-	* Unofficial Digidesign Mbox 2 support
+	* None
 
 Differences from archlinux/core/kernel26:
 
@@ -27,6 +31,6 @@ Differences from archlinux/core/kernel26:
 	[3] http://bugs.archaudio.org/task/5
 
 For x86_64 packagers:
-	
+
 	* Ensure IA32 Emulation is <ENABLED>
 	* Ensure IA32_AOUT is <MODULE>

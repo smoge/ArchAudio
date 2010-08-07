@@ -2,12 +2,12 @@
 # arg 2:  the old package version
 
 KERNEL_NAME=rt
-KERNEL_VERSION=2.6.31-rt
+KERNEL_VERSION=2.6.33-rt
 
 post_install () {
   # updating module dependencies
   echo ">>> Updating module dependencies. Please wait ..."
-  depmod $KERNEL_VERSION 
+  depmod $KERNEL_VERSION
   # generate init ramdisks
   echo ">>> MKINITCPIO SETUP"
   echo ">>> ----------------"
@@ -39,7 +39,7 @@ post_upgrade() {
     echo ">>>"
   fi
 
-  if grep "/boot" /etc/fstab 2>&1 >/dev/null; then
+  if grep "^[^#]*/boot" /etc/fstab 2>&1 >/dev/null; then
     if ! grep "/boot" /etc/mtab 2>&1 >/dev/null; then
       echo "WARNING: /boot appears to be a seperate partition but is not mounted"
       echo "         This is most likely not what you want.  Please mount your /boot"
@@ -108,7 +108,7 @@ post_upgrade() {
     echo ""
     echo ">>> piix/ata_piix (Intel chipsets) - IMPORTANT"
     echo "----------"
-    echo ">>> If you have enabled ide/pata/sata HOOKs in /etc/mkinitcpio.conf" 
+    echo ">>> If you have enabled ide/pata/sata HOOKs in /etc/mkinitcpio.conf"
     echo ">>> the 'ata_piix' module will be used."
     echo ">>> This may cause your devices to shift names, eg:"
     echo ">>> - IDE: devices from hd? to sd?"
@@ -141,7 +141,7 @@ if [ "`vercmp $2 2.6.21`" -lt 0 ]; then
 fi
 }
 
-op=$1
-shift
-
-$op $*
+post_remove() {
+  rm -f /boot/kernel26${KERNEL_NAME}.img
+  rm -f /boot/kernel26${KERNEL_NAME}-fallback.img
+}
