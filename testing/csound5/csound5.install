@@ -1,8 +1,8 @@
 post_install() {
   echo ""
-  echo ":: include this line in your .bashrc:"
-  echo ":: export OPCODEDIR64=/usr/lib/csound/plugins64"
-  echo ":: export CSSTRNGS=/usr/share/locale"
+  echo ":: The extract utility is installed as csound_extract to avoid"
+  echo ":: conflicting with the libextractor package."
+
 }
 
 post_upgrade() {
