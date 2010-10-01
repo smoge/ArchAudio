@@ -1,4 +1,4 @@
-# $Id: PKGBUILD 34513 2009-04-09 21:32:12Z ronald $
+# $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Ronald van Haren <ronald.archlinux.org>
 # Contributor: damir <damir@archlinux.org>
@@ -27,14 +27,14 @@ provides=("$_pkgname=$pkgver")
 
 build() {
   cd ${srcdir}/${_pkgname}-${pkgver}
-  
+
  # build & install double precision
   ./configure F77=gfortran --prefix=/usr \
    --enable-double --enable-shared --enable-threads \
    || return 1
   make || return 1
   make DESTDIR=${pkgdir} install || return 1
-  make clean 
+  make clean
 
   # build & install long double precission
   ./configure F77=gfortran --prefix=/usr \

@@ -3,7 +3,7 @@
 # Contributor: hm_b < holger at music-nerds dot net >
 # Contributor: svoufff <svoufff at gmail dot com>
 
-pkgname=rtirq  
+pkgname=rtirq
 pkgver=20090920
 pkgrel=1
 pkgdesc="Realtime IRQ thread system tunning"

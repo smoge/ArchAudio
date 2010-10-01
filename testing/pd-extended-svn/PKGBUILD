@@ -120,7 +120,7 @@ fi
  install -d $pkgdir/usr/share/icons/hicolor/48x48/apps
  install -p -m0644 linux_make/pd-48x48.png \
    $pkgdir/usr/share/icons/hicolor/48x48/apps/pd.png
- install -d $pkgdir/usr/share/applications/ 
+ install -d $pkgdir/usr/share/applications/
  install -p linux_make/pd-extended.desktop \
    $pkgdir/usr/share/applications/
 # files for /etc
