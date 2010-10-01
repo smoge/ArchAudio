@@ -4,14 +4,14 @@
 # Contributor: Dr.Egg <rwhite @ archlinux . us>
 
 pkgname=musescore
-pkgver=0.9.6.1
-pkgrel=2
+pkgver=0.9.6.3
+pkgrel=1
 pkgdesc="A music score editor written in Qt4"
 arch=('i686' 'x86_64')
 url="http://www.musescore.org/en/"
 license=('GPL')
 depends=('libsndfile' 'openssl' 'qt>=4.5.0')
-makedepends=('cmake' 'doxygen')
+makedepends=('cmake' 'doxygen' 'jack-audio-connection-kit')
 optdepends=('jack-audio-connection-kit' 'portaudio')
 conflicts=('musescore-svn' 'mscore')
 source=(http://downloads.sourceforge.net/project/mscore/mscore/mscore-${pkgver}/mscore-${pkgver}.tar.bz2 paths.patch)
