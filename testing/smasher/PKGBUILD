@@ -1,4 +1,5 @@
 # $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Maciej Ciemborowicz <moonkey[at]op[dot]pl>
 
 pkgname=smasher

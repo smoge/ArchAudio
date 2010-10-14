@@ -9,7 +9,7 @@ arch=('i686' 'x86_64')
 url="http://www.kokkinizita.net/linuxaudio/"
 license=('GPL')
 depends=('clalsadrv>=1.2.1' 'clthreads>=2.2.1' 'clxclient>=3.3.2' 'fftw' \
-'jack-audio-connection-kit')
+'jack')
 source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
 md5sums=('b3a22f1bd94a235682ade3e932ae0769')
 

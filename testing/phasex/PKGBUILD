@@ -8,7 +8,7 @@ pkgdesc="Powerful audio synthesizer using phase offset modulation."
 arch=('i686' 'x86_64')
 url="http://www.sysex.net/phasex/"
 license=('GPL2')
-depends=('jack-audio-connection-kit' 'gtk2' 'libsamplerate')
+depends=('jack' 'gtk2')
 source=(http://sysex.net/phasex/${pkgname}-${pkgver}-pre1.tar.gz)
 md5sums=('990d1ccad21afcc00f41d8c2f2874b3c')
 

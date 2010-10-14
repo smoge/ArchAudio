@@ -13,10 +13,10 @@ url="http://jackaudio.org/"
 license=('GPL' 'LGPL')
 groups=('archaudio-bleeding')
 depends=('libsamplerate')
-makedepends=('subversion' 'doxygen' 'ffado' 'celt')
-optdepends=('ffado: FireWire audio device support'
+makedepends=('subversion' 'doxygen' 'libffado' 'celt')
+optdepends=('libffado: FireWire audio device support'
 	    'celt: NetJACK driver')
-provides=("jack-audio-connection-kit=0.118.0" "jack=0.118.0")
+provides=("jack=0.118.0" 'jackd-svn')
 conflicts=('jack' 'jack2')
 options=('!libtool')
 

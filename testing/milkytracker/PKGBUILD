@@ -9,7 +9,7 @@ arch=('i686' 'x86_64')
 url="http://www.milkytracker.org/"
 license=('GPL3')
 depends=('sdl>=1.2.0' 'alsa-lib' 'zlib')
-optdepends=('jack-audio-connection-kit: JACK audio support')
+optdepends=('jack: JACK audio support')
 options=(docs)
 source=("http://milkytracker.org/files/$pkgname-$pkgver.tar.bz2" "milkytracker.desktop" "64bit_freebsd_fix.patch" "doc_fix.patch" "jack_autoconnect.patch" "no_zziplib_dep.patch")
 md5sums=('2e6795b0bff18b087bd7e4c658f512f3'

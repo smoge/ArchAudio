@@ -11,9 +11,9 @@ arch=(i686 x86_64)
 url="http://www.grame.fr/~letz/jackdmp.html"
 license=('GPL')
 depends=('libsamplerate')
-makedepends=('ffado')
-optdepends=('ffado: FireWire audio device support')
-provides=("jack-audio-connection-kit=0.118.0" "jack=0.118.0" 'jackmp' 'jackdmp')
+makedepends=('libffado')
+optdepends=('libffado: FireWire audio device support')
+provides=("jack=0.118.0" 'jackmp' 'jackdmp')
 conflicts=('jack')
 source=(http://www.grame.fr/~letz/$_tarname-$pkgver.tar.bz2)
 

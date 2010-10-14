@@ -8,7 +8,7 @@ pkgdesc="Pure Data Extended SVN version"
 url="http://puredata.info/"
 arch=('i686' 'x86_64' 'ppc')
 license=('BSD')
-depends=('libv4l' 'fftw' 'jack-audio-connection-kit' 'tk' 'freeglut' \
+depends=('libv4l' 'fftw' 'jack' 'tk' 'freeglut' \
   'libquicktime' 'libdv' 'gsl' 'imagemagick' \
   'ftgl' 'libgl' 'dssi')
 makedepends=('subversion' 'swig' 'automake')

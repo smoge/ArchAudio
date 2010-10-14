@@ -10,7 +10,7 @@ pkgdesc="The Pure Data real-time music and multimedia environment"
 arch=('i686' 'x86_64')
 url="http://crca.ucsd.edu/~msp/software.html"
 license=('BSD')
-depends=('jack-audio-connection-kit' 'tk')
+depends=('jack' 'tk')
 source=(http://crca.ucsd.edu/~msp/Software/pd-${pkgver/_/-}.src.tar.gz)
 md5sums=('a079816e3894642f81dc2a44ada4c3e0')
 

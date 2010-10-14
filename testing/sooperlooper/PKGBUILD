@@ -7,10 +7,10 @@
 
 pkgname=sooperlooper
 pkgver=1.6.14
-pkgrel=1
+pkgrel=2
 pkgdesc="A live looping sampler intended for use with midi pedals."
 url="http://essej.net/sooperlooper/"
-depends=('jack-audio-connection-kit' 'liblo' 'wxgtk' 'libsigcpp1.2' 'rubberband')
+depends=('jack' 'liblo' 'wxgtk' 'libsigc++1.2' 'rubberband')
 source=(http://essej.net/sooperlooper/$pkgname-$pkgver.tar.gz)
 md5sums=('6faace751e59347afd45e3bc5ad6904f')
 arch=('i686' 'x86_64')

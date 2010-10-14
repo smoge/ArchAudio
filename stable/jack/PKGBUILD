@@ -13,10 +13,10 @@ url="http://jackaudio.org/"
 license=('GPL' 'LGPL')
 groups=('archaudio-minimal' 'archaudio-suite')
 depends=('libsamplerate')
-makedepends=('doxygen' 'ffado' 'celt')
-optdepends=('ffado: FireWire audio device support'
+makedepends=('doxygen' 'libffado' 'celt')
+optdepends=('libffado: FireWire audio device support'
 	    'celt: NetJACK driver CELT codec')
-provides=("jack-audio-connection-kit=$pkgver" 'jackd')
+provides=('jackd')
 options=('!libtool')
 source=(http://jackaudio.org/downloads/$_tarname-$pkgver.tar.gz)
 

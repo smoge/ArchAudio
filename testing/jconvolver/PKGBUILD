@@ -9,7 +9,7 @@ pkgdesc="Convolution Engine for JACK, including example config and reverbs files
 url="http://www.kokkinizita.net/linuxaudio/"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('zita-convolver' 'jack-audio-connection-kit' 'clthreads>=2.4.0')
+depends=('zita-convolver' 'jack' 'clthreads>=2.4.0')
 install=${pkgname}.install
 source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2 \
 http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-reverbs.tar.bz2)

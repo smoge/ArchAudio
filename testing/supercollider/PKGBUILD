@@ -9,7 +9,7 @@ pkgdesc="An environment and programming language for real time audio synthesis a
 arch=(i686)
 url="http://supercollider.sourceforge.net/"
 license=('GPL')
-depends=('jack-audio-connection-kit' 'avahi' 'fftw')
+depends=('jack' 'avahi' 'fftw')
 makedepends=('subversion' 'libsndfile>=1.0' 'gcc>=3.0' 'pkgconfig>=0.14.0' 'scons>=0.96' 'alsa-lib')
 optdepends=('cwiid: Wii Controller Support' 
   'emacs: Emacs Interface' 

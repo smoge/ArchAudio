@@ -10,9 +10,9 @@ arch=(i686 x86_64)
 url="http://jackaudio.org/"
 license=('GPL')
 depends=('libsamplerate')
-makedepends=('subversion' 'ffado')
-optdepends=('ffado: FireWire audio device support')
-provides=("jack-audio-connection-kit=0.118.0" "jack=0.118.0")
+makedepends=('subversion' 'libffado')
+optdepends=('libffado: FireWire audio device support')
+provides=("jack2=1.9.5" "jack=0.118.0" 'jackmp-svn' 'jackdmp-svn')
 conflicts=('jack2' 'jack' 'jack-svn')
 
 _svntrunk=http://subversion.jackaudio.org/jack/jack2/trunk/jackmp

@@ -2,9 +2,9 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Alexander Rødseth <rodseth@gmail.com>
 # Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
-pkgname=libsigcpp1.2
+pkgname=libsigc++1.2
 pkgver=1.2.7
-pkgrel=2
+pkgrel=3
 pkgdesc="A typesafe callback system for standard C++"
 arch=('i686' 'x86_64')
 url="http://libsigc.sourceforge.net/"
