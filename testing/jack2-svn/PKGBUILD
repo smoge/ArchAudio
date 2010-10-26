@@ -2,25 +2,35 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 
-pkgname=jack2-svn
-pkgver=3948
+pkgbase=jack2-svn
+pkgname=('jack2-svn' 'jack2-dbus-svn')
+pkgver=4067
 pkgrel=1
-pkgdesc="Jack Audio Connection Kit MP: The next-generation JACK (development version)"
+pkgdesc="The next-generation JACK with SMP support (development version)"
 arch=(i686 x86_64)
 url="http://jackaudio.org/"
 license=('GPL')
 depends=('libsamplerate')
-makedepends=('subversion' 'libffado')
-optdepends=('libffado: FireWire audio device support')
-provides=("jack2=1.9.5" "jack=0.118.0" 'jackmp-svn' 'jackdmp-svn')
+makedepends=('subversion' 'python2' 'doxygen'
+             'libffado' 'celt-0.7' 'dbus-core')
+optdepends=('libffado: FireWire support'
+            'celt-0.7: NetJACK2 driver'
+            'python2: jack_control')
+provides=("jack2=1.9.6" "jack=0.118.0" 'jackmp-svn' 'jackdmp-svn')
 conflicts=('jack2' 'jack' 'jack-svn')
 
 _svntrunk=http://subversion.jackaudio.org/jack/jack2/trunk/jackmp
 _svnmod=jackmp
 
+_pyfix() {
+  sed -i 's:bin/env python:bin/env python2:' \
+    "$pkgdir/usr/bin/jack_control"
+}
+
 build() {
   cd "$srcdir"
 
+  # SVN stuff
   if [ -d $_svnmod/.svn ]; then
     (cd $_svnmod && svn up -r $pkgver)
   else
@@ -30,18 +40,67 @@ build() {
   msg "SVN checkout done or server timeout"
   msg "Starting make..."
 
-  rm -rf "$srcdir/$_svnmod-build"
-  cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
-  cd "$srcdir/$_svnmod-build"
+  rm -rf $_svnmod-build $_svnmod-dbus-build
+  cp -r $_svnmod $_svnmod-build
 
   #
   # BUILD
   #
 
-  ./waf configure --prefix=/usr \
-                  --alsa \
-                  --firewire
+  # we're going to do 2 different builds
+  cp -r $_svnmod-build $_svnmod-dbus-build
 
-  ./waf $MAKEFLAGS || return 1
-  ./waf --destdir="$pkgdir/" install
+  # mixed dbus/classic build
+  cd $_svnmod-build
+  msg2 "Running Mixed D-Bus/Classic build"
+
+  python2 waf configure --prefix=/usr \
+                        --alsa \
+                        --dbus \
+                        --classic \
+                        --firewire \
+                        --doxygen
+
+  python2 waf build $MAKEFLAGS
+
+  # dbus-ONLY build
+  cd ../$_svnmod-dbus-build
+  msg2 "Running D-Bus-only build"
+
+  python2 waf configure --prefix=/usr \
+                        --alsa \
+                        --dbus \
+                        --firewire \
+                        --doxygen
+
+  python2 waf build $MAKEFLAGS
 }
+
+package_jack2-svn() {
+  optdepends=('libffado: FireWire support'
+              'celt-0.7: NetJACK2 driver'
+              'dbus-core: jackdbus'
+              'python2: jack_control')
+
+  cd "$srcdir/$_svnmod-build"
+
+  python2 waf install --destdir="$pkgdir/"
+
+  # python2 fix
+  _pyfix
+}
+
+package_jack2-dbus-svn() {
+  pkgdesc="The next-generation JACK with SMP support (for D-Bus interaction only) (development version)"
+  depends+=('dbus-core')
+  provides=("jack2-dbus=1.9.6" 'jackdbus')
+  conflicts+=('jack2-dbus')
+
+  cd "$srcdir/$_svnmod-dbus-build"
+
+  python2 waf install --destdir="$pkgdir/"
+
+  _pyfix
+}
+
+# vim:set ts=2 sw=2 et:
