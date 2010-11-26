@@ -1,10 +1,12 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schiv@archlinux.org>
+# Contributor: damian01w
 # Contributor: Jochen Immendörfer <jochen.immendoerfer@gmail.com>
 
 pkgname=rezound
 pkgver=0.12.3beta
-pkgrel=6
-pkgdesc="Digital audio editor"
+pkgrel=1
+pkgdesc="A powerful graphical digital audio editor"
 url="http://rezound.sourceforge.net/"
 license=('GPL')
 arch=('i686')
@@ -15,6 +17,11 @@ source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz
         gcc43.patch
         gcc44.patch
         flac.patch)
+md5sums=('df109c9d9ad6d27214a7417df583115d'
+         'ade5c08c569dc4ea8e0cc721ebfcca46'
+         '86f767e03b8b9fdb1e69ff415eaeb840'
+         '4bf5b59410eccef8c14e19f813a10126'
+         '48cae917b83a9e9077a96b8c1fbf483c')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
@@ -37,8 +44,3 @@ package() {
 }
 
 # vim:set ts=2 sw=2 et:
-md5sums=('df109c9d9ad6d27214a7417df583115d'
-         'ade5c08c569dc4ea8e0cc721ebfcca46'
-         '86f767e03b8b9fdb1e69ff415eaeb840'
-         '4bf5b59410eccef8c14e19f813a10126'
-         '48cae917b83a9e9077a96b8c1fbf483c')
