@@ -8,9 +8,11 @@ pkgdesc="Tools for ArchAudio package maintainers"
 url="http://archaudio.org/"
 license=('GPL3')
 arch=('any')
+backup=(etc/archaudio.conf)
 depends=('subversion' 'devtools')
+install=$pkgname.install
 source=($pkgname-$pkgver.tar.gz)
-md5sums=('ab21d99c3efc4485c76d427e1bc04f52')
+md5sums=('bf001ac8003c18b1411867c3a9f2f0c5')
 
 package() {
   cd "$srcdir/$pkgname-$pkgver"
