@@ -11,7 +11,7 @@ pkgdesc="A powerful graphical digital audio editor"
 url="http://rezound.sourceforge.net/"
 license=('GPL')
 arch=('i686' 'x86_64')
-depends=('jack' 'fox' 'libvorbis' 'audiofile' 'soundtouch' 'fftw2-threads')
+depends=('jack' 'fox' 'audiofile' 'soundtouch' 'fftw2-threads')
 makedepends=('flex' 'bison')
 source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz
         undefined-functions.patch
@@ -55,6 +55,11 @@ package() {
   cd "$srcdir/$pkgname-$pkgver"
 
   make DESTDIR="$pkgdir/" install
+
+  # fix non-standard dirs
+  cd "$pkgdir"
+
+  mv usr/doc usr/share/
 }
 
 # vim:set ts=2 sw=2 et:
