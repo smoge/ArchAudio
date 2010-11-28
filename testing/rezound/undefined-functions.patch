@@ -1,5 +1,6 @@
---- rezound-0.12.3beta.orig/config/common.h.orig	2004-12-23 20:00:50.710795840 +0100
-+++ rezound-0.12.3beta/config/common.h	2004-12-23 20:39:40.271648760 +0100
+diff -aur rezound-0.12.3beta.orig//config/common.h rezound-0.12.3beta/config/common.h
+--- rezound-0.12.3beta.orig//config/common.h	2010-11-28 16:23:11.110000013 +0800
++++ rezound-0.12.3beta/config/common.h	2010-11-28 16:23:59.363333347 +0800
 @@ -21,6 +21,23 @@
  #ifndef COMMON_H
  #define COMMON_H
@@ -24,8 +25,9 @@
  /* common.h -- This file will deal with low-level portability problems. It
   * should be includede at the top of every package file. */
  
---- rezound-0.12.3beta/src/frontend_fox/FXWaveCanvas.cpp.orig	2004-12-23 20:18:55.790838600 +0100
-+++ rezound-0.12.3beta/src/frontend_fox/FXWaveCanvas.cpp	2004-12-23 20:39:37.568059768 +0100
+diff -aur rezound-0.12.3beta.orig//src/frontend_fox/FXWaveCanvas.cpp rezound-0.12.3beta/src/frontend_fox/FXWaveCanvas.cpp
+--- rezound-0.12.3beta.orig//src/frontend_fox/FXWaveCanvas.cpp	2010-11-28 16:23:11.120000014 +0800
++++ rezound-0.12.3beta/src/frontend_fox/FXWaveCanvas.cpp	2010-11-28 16:23:59.363333347 +0800
 @@ -56,6 +56,9 @@
  #include "../backend/CSoundPlayerChannel.h"
  #include "drawPortion.h"
@@ -36,3 +38,4 @@
  static FXColor playStatusColor=FXRGB(255,0,0);
  
  #define RIGHT_MARGIN 10
+Only in rezound-0.12.3beta/src/frontend_fox: FXWaveCanvas.cpp.orig

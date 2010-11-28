@@ -1,6 +1,7 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Ray Rashif <schiv@archlinux.org>
 # Contributor: damian01w
+# Contributor: Corali Signs Co. <coralisigns[at]gmail[dot]com>
 # Contributor: Jochen Immendörfer <jochen.immendoerfer@gmail.com>
 
 pkgname=rezound
@@ -9,27 +10,40 @@ pkgrel=1
 pkgdesc="A powerful graphical digital audio editor"
 url="http://rezound.sourceforge.net/"
 license=('GPL')
-arch=('i686')
-depends=('jack' 'fox' 'libvorbis' 'audiofile' 'soundtouch' 'fftw2double')
+arch=('i686' 'x86_64')
+depends=('jack' 'fox' 'libvorbis' 'audiofile' 'soundtouch' 'fftw2-threads')
 makedepends=('flex' 'bison')
 source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.gz
         undefined-functions.patch
-        gcc43.patch
         gcc44.patch
-        flac.patch)
+        flac.patch
+        kyr-01.patch
+        kyr-02.patch
+        kyr-03.patch
+        kyr-x64.patch)
 md5sums=('df109c9d9ad6d27214a7417df583115d'
-         'ade5c08c569dc4ea8e0cc721ebfcca46'
-         '86f767e03b8b9fdb1e69ff415eaeb840'
-         '4bf5b59410eccef8c14e19f813a10126'
-         '48cae917b83a9e9077a96b8c1fbf483c')
+         'ca8ba8359a614c997b7ebb8a2d52851c'
+         '9a91dce4372d686f5b70e23d3683b621'
+         '6671360e70d6ec5af874bba5a0ea0208'
+         '0c3f98e38378e46ec0b0f0d94d466d41'
+         'ea15ede8787039765c69255220c2b0ce'
+         '415ca1ca0bb9ab1c135df9b0493fc0f3'
+         '35b81106b6b04fbf4af763e84f0f5429')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
 
+
 	patch -Np1 -i ../undefined-functions.patch
 	patch -Np1 -i ../flac.patch
-	patch -Np1 -i ../gcc43.patch
 	patch -Np1 -i ../gcc44.patch
+
+  if [ "$CARCH" = "x86_64" ]; then
+    patch -Np1 -i ../kyr-01.patch
+    patch -Np1 -i ../kyr-02.patch
+    patch -Np1 -i ../kyr-03.patch
+    patch -Np1 -i ../kyr-x64.patch
+  fi
 
   ./configure --prefix=/usr \
               --disable-portaudio
