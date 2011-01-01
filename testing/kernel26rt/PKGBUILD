@@ -11,8 +11,8 @@ _kernelname=rt
 _basekernel=2.6.33
 _realkernel=2.6.33 # for rc builds, else same as _basekernel
 _kernelpatch=.7 # leave blank if no upstream patch
-_rtpatch=-rt29
-pkgver=2.6.33.7_rt29
+_rtpatch=.2-rt30
+pkgver=2.6.33.7.2_rt30
 pkgrel=1
 
 # If sources are rc, old rc, old rt, rc & old rt, old rc & old rt:
@@ -21,9 +21,16 @@ _source=
 
 # -- nothing to change below this line -- #
 
+pkgdesc="The Linux Kernel and modules - with realtime preemption"
 arch=('i686' 'x86_64')
 license=('GPL2')
 url="http://rt.wiki.kernel.org"
+backup=(etc/mkinitcpio.d/$pkgname.preset)
+depends=('coreutils' 'linux-firmware' 'module-init-tools' 'mkinitcpio')
+optdepends=('crda: to set the correct wireless channels of your country')
+provides=('kernel26rt-headers')
+install=$pkgname.install
+changelog=$pkgname.changelog
 
 [ "$_source" = "rc" ] && _rc=testing/
 [ "$_source" = "rc-old" ] && _rc=testing/v$_realkernel/
@@ -41,15 +48,6 @@ source=(ftp://ftp.kernel.org/pub/linux/kernel/v2.6/linux-$_realkernel.tar.bz2
         logo_linux_clut224.ppm
         aufs2-base.patch
         aufs2-standalone.patch)
-md5sums=('c3883760b18d50e8d78819c54d579b00'
-         '04b3affb4f7fb3035303a32bd6080baf'
-         'b59bd4ce52c54e639f9fd2d85c7cc951'
-         '18da80ac1d41cba0f74cace471862bba'
-         'bcfba8783fd7d0db1261de2f002ad717'
-         'a0921a7e563e7ae2d14c3a0603fa16ad'
-         '6a5a1925501fe20fafd04fdb3cb4f6ed'
-         'edb62063ec2a61fc82cc00b89920f729'
-         'e924c5a340f2731c245e6bff8002be13')
 
 build() {
   cd "$srcdir/linux-$_realkernel"
@@ -86,26 +84,17 @@ build() {
 
   # load configuration
   _kernver=$_basekernel-$_kernelname
-  #make localmodconfig
-  #make oldconfig
   yes "" | make config
   make menuconfig && cat ./.config > "$startdir/config.save"
-  #make xconfig && cat ./.config > "$startdir/config.save"
-  #make gconfig && cat ./.config > "$startdir/config.save"
+  #make xconfig
+  #make gconfig
+  #make oldconfig
 
   # build!
   make bzImage modules
 }
 
-package_kernel26rt() {
-  pkgdesc="The Linux Kernel and modules - with realtime preemption"
-  groups=('archaudio-kernels' 'archaudio-minimal' 'archaudio-suite')
-  backup=(etc/mkinitcpio.d/$pkgname.preset)
-  depends=('coreutils' 'linux-firmware' 'module-init-tools' 'mkinitcpio')
-  optdepends=('crda: to set the correct wireless channels of your country')
-  install=$pkgname.install
-  changelog=$pkgname.changelog
-
+package() {
   cd "$srcdir/linux-$_realkernel"
 
   KARCH=x86
@@ -140,10 +129,8 @@ package_kernel26rt() {
 
   # remove the firmware
   rm -rf "$pkgdir/lib/firmware"
-}
 
-package_kernel26rt-headers() {
-  pkgdesc="Header files and scripts for building modules for kernel26rt"
+  # -- package the headers --#
 
   mkdir -p "$pkgdir/lib/modules/$_kernver"
   cd "$pkgdir/lib/modules/$_kernver"
@@ -192,6 +179,10 @@ package_kernel26rt-headers() {
     cp -a drivers/media/video/$i/*.h "$pkgdir/usr/src/linux-$_kernver/drivers/media/video/$i"
   done
 
+  # add docbook makefile
+  install -D -m644 Documentation/DocBook/Makefile \
+    "$pkgdir/usr/src/linux-$_kernver/Documentation/DocBook/Makefile"
+
   # add dm headers
   mkdir -p "$pkgdir/usr/src/linux-$_kernver/drivers/md"
   cp drivers/md/*.h "$pkgdir/usr/src/linux-$_kernver/drivers/md"
@@ -228,7 +219,7 @@ package_kernel26rt-headers() {
   mkdir -p "$pkgdir/usr/src/linux-$_kernver/mm"
   cp fs/xfs/xfs_sb.h "$pkgdir/usr/src/linux-$_kernver/fs/xfs/xfs_sb.h"
 
-  # add headers for virtualbox
+  # add headers vor virtualbox
   # in reference to:
   # http://bugs.archlinux.org/task/14568
   cp -a include/drm "$pkgdir/usr/src/linux-$_kernver/include/"
@@ -252,3 +243,12 @@ package_kernel26rt-headers() {
 }
 
 # vim:set ts=2 sw=2 et:
+md5sums=('c3883760b18d50e8d78819c54d579b00'
+         '04b3affb4f7fb3035303a32bd6080baf'
+         'da527aea6a4a374f963f4063e548dc74'
+         '18da80ac1d41cba0f74cace471862bba'
+         'bcfba8783fd7d0db1261de2f002ad717'
+         'a0921a7e563e7ae2d14c3a0603fa16ad'
+         '6a5a1925501fe20fafd04fdb3cb4f6ed'
+         'edb62063ec2a61fc82cc00b89920f729'
+         'e924c5a340f2731c245e6bff8002be13')

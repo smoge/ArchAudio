@@ -1,36 +1,57 @@
-6 Aug 2010 (GMT+8) Ray Rashif <schivmeister@gmail.com>
+# Only significant changes will be logged
 
-	* kernel26rt 2.6.33.7_rt29-1
-	* long overdue update to latest upstream release
+27 Sep 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
+	* Update to 2.6.31-rt11
+	* Added AUFS2 patch
+	* Added unofficial MBox-2 patch
 
-7 Oct 2009 (GMT+8) Ray Rashif <schivmeister@gmail.com>
+	Current options against kernel26:
 
-	* kernel26rt 2.6.31.2_rt13-1
-	* updated from 2.6.31_rt11-1
+		- dynticks disabled
+		- timer frequency changed to 1000HZ
+		- APM disabled (i686)
+		- HPET enabled
+		- staging drivers removed
+		- usb minor allocation disabled
+		- default I/O sched changed to Deadline
 
-###############################
-# General Package Information #
-###############################
+20 June 2009 Ray Rashif <schivmeister@gmail.com>
 
-Hacks & Patches:
+	* kernel26rt 2.6.29.5_rt21-1
+	* Upstream update
 
-	* None
+25 May 2009 Ray Rashif <schivmeister@gmail.com>
 
-Differences from archlinux/core/kernel26:
+	* kernel26rt 2.6.29.4_rt16-1
+	* Upstream update
 
-	* Dynticks <DISABLED> [1]
-	* Timer Frequency <SET TO> 1000HZ [1]
-	* APM <DISABLED> (i686)
-	* HPET <ENABLED>
-	* Staging Drivers <DISABLED> [2]
-	* Dynamic USB Minor Allocation <DISABLED> [3]
-	* Default I/O Scheduler <SET TO> Deadline
+22 May 2009 Ray Rashif <schivmeister@gmail.com>
 
-	[1] http://ck.kolivas.org/patches/bfs/bfs-faq.txt (search "LOWEST LATENCY")
-	[2] http://patchwork.kernel.org/patch/30107/
-	[3] http://bugs.archaudio.org/task/5
+	* kernel26rt 2.6.29.3_rt14-1
+	* Upstream update, initial log
 
-For x86_64 packagers:
+	List of differences from archlinux/core/kernel26:
 
-	* Ensure IA32 Emulation is <ENABLED>
-	* Ensure IA32_AOUT is <MODULE>
+		- Timer frequency set to 1000HZ
+		- Disabled APM (default in x86_64)
+		- Enabled HPET
+		- Included Sequencer dummy client module
+		- Removed staging drivers *
+
+		* The comedi drivers seem to have an issue with
+		  the rcupreempt stuff. As the staging drivers
+		  are merely development inclusions, it's better
+		  to omit them altogether. If you want to develop
+		  rather than use this kernel for realtime work,
+		  kernel26 would be a better bet.
+
+	Remarks:
+
+		Previously not all include directories were needed to
+		build external modules. Drivers like nvidia and vmware
+		seem to depend on some headers in there. Anyone
+		concerned about this can check with the kernel devs
+		upstream. All we care about is that the kernel, along
+		with external modules, build and work as expected.
+		You may also take a look at the comments in the PKGBUILD
+		for the Arch bug report link(s).
