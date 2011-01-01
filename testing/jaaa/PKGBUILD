@@ -2,21 +2,25 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
+
 pkgname=jaaa
-pkgver=0.4.2
-pkgrel=2
+pkgver=0.6.0
+pkgrel=1
 pkgdesc="JACK and ALSA Audio Analyser."
 arch=('i686' 'x86_64')
 url="http://www.kokkinizita.net/linuxaudio/"
 license=('GPL')
-depends=('clalsadrv>=1.2.2' 'clthreads>=2.2.1' 'clxclient>=3.3.2' 'fftw' \
-'jack')
+depends=('clalsadrv>=2.0.0' 'clthreads>=2.2.1' 'clxclient>=3.3.2' 'fftw' 'jack')
 source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
-md5sums=('e3013bb1e287b495b0668f4b6e2887c7')
+md5sums=('a808c579fbb5310b701d21685fc8c8fd')
 
 build() {
-  cd "${srcdir}/${pkgname}"
-  sed -i "s|usr/bin|bin|" Makefile || return 1
-  mkdir -p "${pkgdir}/usr/bin" || return 1
-  make PREFIX="${pkgdir}/usr" install || return 1
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make LIBDIR=lib DESTDIR=${pkgdir} PREFIX="/usr"
 }
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make LIBDIR=lib DESTDIR=${pkgdir} PREFIX="/usr" install
+}
+
