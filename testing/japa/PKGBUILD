@@ -1,21 +1,24 @@
 # $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
+
 pkgname=japa
-pkgver=0.4.0
-pkgrel=2
+pkgver=0.6.0
+pkgrel=1
 pkgdesc="JACK and ALSA Perceptual Analyser."
 arch=('i686' 'x86_64')
 url="http://www.kokkinizita.net/linuxaudio/"
 license=('GPL')
-depends=('clalsadrv>=1.2.1' 'clthreads>=2.2.1' 'clxclient>=3.3.2' 'fftw' \
-'jack')
+depends=('clalsadrv>=2.0.0' 'clthreads>=2.2.1' 'clxclient>=3.3.2' 'fftw' 'jack' 'gcc-libs')
 source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
-md5sums=('b3a22f1bd94a235682ade3e932ae0769')
+md5sums=('ed7d752924bfecdb76786bcbde223bc8')
 
 build() {
-cd "${srcdir}/${pkgname}"
-sed -i "s|usr/bin|bin|" Makefile || return 1
-mkdir -p "${pkgdir}/usr/bin" || return 1
-make PREFIX="${pkgdir}/usr" install || return 1
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make DESTDIR=${pkgdir} LIBDIR=lib PREFIX="/usr"
+}
+
+package(){
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make DESTDIR=${pkgdir} LIBDIR=lib PREFIX="/usr" install
 }
