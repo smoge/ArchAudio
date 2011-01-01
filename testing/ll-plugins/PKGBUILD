@@ -1,24 +1,26 @@
 # $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=ll-plugins
-pkgver=0.2.1
-pkgrel=3
+pkgver=0.2.8
+pkgrel=1
 pkgdesc="A lv2 host and a collection of lv2 plugins by Lars Luthman"
 arch=('i686' 'x86_64')
 url="http://ll-plugins.nongnu.org/index.html"
 license=('GPL3')
-depends=('lash' 'gtkmm' 'lv2-c++-tools' 'libsamplerate')
-source=(http://download.savannah.nongnu.org/releases/ll-plugins/${pkgname}-${pkgver}.tar.bz2 gcc4.4.patch)
-md5sums=('1b321d6eb7874bd3fe8b2b95642d5d3f'
-         '163d1ea7dab2afdaf6a58e28e5d1167b')
-build() {
-  cd "${srcdir}/${pkgname}-${pkgver}/plugins/sineshaper/"
-  patch -u -i ${startdir}/gcc4.4.patch || return 1
+depends=('gtkmm' 'lv2-c++-tools' 'libsigc++' 'lash' 'jack')
+source=(http://download.savannah.nongnu.org/releases/ll-plugins/${pkgname}-${pkgver}.tar.bz2)
+md5sums=('56e7f4a62fce6b22b4acdb02ba06669c')
 
+build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
-  ./configure --prefix="/usr" || return 1
-  make || return 1
-  make DESTDIR="${pkgdir}" install || return 1
+  ./configure --prefix="/usr"
+  make
+}
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
 }
