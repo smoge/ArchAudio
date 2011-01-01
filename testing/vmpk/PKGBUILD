@@ -1,24 +1,30 @@
 # $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
 # Contributor: svoufff <svoufff at gmail dot com>
 # Contributor: farid abdelnour <farid at atelier-labs.org>
 
 pkgname=vmpk
-pkgver=0.3.0
+pkgver=0.3.3
 pkgrel=1
 pkgdesc="MIDI event generator and receiver"
 arch=('i686' 'x86_64')
 url="http://vmpk.sourceforge.net/"
-depends=('qt>=4.4' 'alsa-lib')
-makedepends=('cmake' 'docbook-xsl')
+depends=('qt' 'hicolor-icon-theme')
+makedepends=('cmake')
 optdepends=('timidity')
-license=('GPL')
-source=(http://downloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.bz2)
-md5sums=('401f90f94883358430abbf8986ea9822')
+license=('GPL3')
+install="$pkgname.install"
+source=("http://downloads.sourceforge.net/project/$pkgname/$pkgname/$pkgver/$pkgname-$pkgver.tar.bz2")
+md5sums=('f3d4e86975c948afe94702964ce73a86')
 
 build() {
-	cd ${startdir}/src/${pkgname}-${pkgver}	
-	cmake . -DCMAKE_INSTALL_PREFIX=/usr
-	make || return 1
-	make DESTDIR=$startdir/pkg install
+  cd "$srcdir/$pkgname-$pkgver"
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  make DESTDIR="$pkgdir/" install
 }
