@@ -1,0 +1,27 @@
+pre_install() {
+  /bin/true
+}
+
+post_install() {
+  update-desktop-database >/dev/null 2>&1
+  /bin/true
+}
+
+pre_upgrade() {
+  /bin/true
+}
+
+post_upgrade() {
+  update-desktop-database >/dev/null 2>&1
+  /bin/true
+}
+
+pre_remove() {
+  /bin/true
+}
+
+post_remove() {
+  update-desktop-database >/dev/null 2>&1
+  /bin/true
+}
+
