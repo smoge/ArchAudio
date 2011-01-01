@@ -5,21 +5,21 @@
 
 pkgname=jamin
 pkgver=0.95.0
-pkgrel=5
+pkgrel=6
 pkgdesc="A JACK Audio Connection Kit Audio Mastering interface"
 arch=('i686' 'x86_64')
 url="http://jamin.sourceforge.net/"
 license=('GPL')
-depends=('jack' 'gtk2' 'swh-plugins' 'fftw' 'liblo' 'shared-mime-info')
+depends=('jack' 'libxml2' 'gtk2' 'swh-plugins' 'fftw' 'liblo')
 makedepends=('perlxml' 'ladspa')
 options=('!libtool')
-install=$pkgname.install
-source=(http://downloads.sourceforge.net/sourceforge/${pkgname}/${pkgname}-${pkgver}.tar.gz jamin.install)
-md5sums=('032f2a4a578a8938f76282112d56c8d6' '35847f56a9b833386246aafdb82c602a')
+install=${pkgname}.install
+source=(http://downloads.sourceforge.net/sourceforge/${pkgname}/${pkgname}-${pkgver}.tar.gz)
+md5sums=('032f2a4a578a8938f76282112d56c8d6')
 
 build() {
-	cd ${srcdir}/${pkgname}-${pkgver}
-	./configure --prefix=/usr --mandir=/usr/share || return 1
-	make || return 1
-	make DESTDIR=${pkgdir} install || return 1
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  ./configure --prefix=/usr --mandir=/usr/share
+  make
+  make DESTDIR=${pkgdir} install
 }
