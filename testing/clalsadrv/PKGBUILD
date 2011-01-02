@@ -4,6 +4,7 @@
 # Contributor: Tom K <tomk@runbox.com>
 # Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
+
 pkgname=clalsadrv
 pkgver=1.2.2
 pkgrel=4
@@ -17,11 +18,9 @@ md5sums=('7865b6c175e457ea9cb0148ce8baa746')
 
 build() {
   cd "${pkgname}"
-
-  sed 's|usr/bin|bin|g' -i Makefile || return 1
-
+  sed 's|usr/bin|bin|g' -i Makefile
   #what was this good for?
   #make CPPFLAGS="-I. -fpic -D_REENTRANT -D_POSIX_PTHREAD_SEMANTICS" || return 1
-  mkdir -p $pkgdir/usr/{include,lib} || return 1
-  make PREFIX=$pkgdir/usr LIBDIR=lib install || return 1
+  mkdir -p $pkgdir/usr/{include,lib}
+  make PREFIX=$pkgdir/usr LIBDIR=lib install
 }
