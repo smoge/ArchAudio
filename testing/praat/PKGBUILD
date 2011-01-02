@@ -1,0 +1,28 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+
+pkgname=praat
+pkgver=5.2.06
+pkgrel=1
+pkgdesc="A tool for 'Doing Phonetics by computer'"
+arch=('x86_64' 'i686')
+url="http://www.fon.hum.uva.nl/praat/"
+license=('GPL')
+depends=( 'alsa-lib' 'gtk2' )
+#depends=( 'lesstif' 'libxft' 'libxp' 'libpng' 'libx11' 'alsa-lib' 'gtk2' )
+source=("http://www.fon.hum.uva.nl/praat/praat5206_sources.tar.gz")
+md5sums=('c5af7e163f2ff798301db986d707a78a')
+
+build() {
+  cd "$srcdir/sources_5206/"
+
+  cp makefiles/makefile.defs.linux.gtk makefile.defs
+  #cp makefiles/makefile.defs.linux.dynamic makefile.defs
+  sed -i 's|-I|-I/usr/include/gdk-pixbuf-2.0 -I|' makefile.defs
+  sed -i 's|/usr/local/lib|/usr/lib|g' makefile.defs
+  sed -i 's|/usr/local/include|/usr/include|g' makefile.defs
+
+  make
+
+  install -Dm755  praat "$pkgdir/usr/bin/praat"
+}
