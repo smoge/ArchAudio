@@ -16,9 +16,9 @@ source=(http://kokkinizita.net/linuxaudio/downloads/$_pkgname-$pkgver.tar.bz2)
 md5sums=('482232250a93058a47cc85293c977e38')
 
 build() {
-  cd $srcdir/$_pkgname-$pkgver
-  
-  make || return 1
-  install -d $pkgdir/usr/lib/ladspa/
-  install -m 755 *.so $pkgdir/usr/lib/ladspa/ || return 1
+
+  cd "$srcdir/$_pkgname-$pkgver"
+  make
+  install -d "$pkgdir/usr/lib/ladspa/"
+  install -m 755 *.so "$pkgdir/usr/lib/ladspa/"
 }
