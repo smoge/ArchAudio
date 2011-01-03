@@ -18,8 +18,7 @@ md5sums=('931944999b7def5140c2397c228a4983'
 
 # Maintainer: you have to look here to find the lastest release:
 # http://www.smbolton.com/whysynth/
-# Then just change the "pkgver" and "md5sums" (the first element) variables
-
+# Then just change the "pkgver" and "md5sums" (the first element)
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
