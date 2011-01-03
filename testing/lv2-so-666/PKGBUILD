@@ -1,0 +1,23 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Bernardo  Barros <bernardobarros@gmail.com>
+
+pkgname=lv2-so-666
+pkgver=1.01
+pkgrel=1
+pkgdesc="SO-666 is a feedback based drone synthesizer building upon the SO-KL5 synth"
+arch=('i686' 'x86_64')
+url="https://github.com/jeremysalwen/So-synth-LV2"
+license=('GPL2')
+depends=('libsigc++' 'gtkmm')
+makedepends=('lv2-c++-tools')
+provides=('lv2-so-666')
+conflicts=('lv2-so-666')
+source=(http://d00m.org/~someone/so666/so-666.tar.gz)
+md5sums=('ea885d764c3bf2a127e0426b8e666a7d')
+
+
+build() {
+  cd "$srcdir/SO-666"
+  make
+}
