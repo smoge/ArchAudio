@@ -1,0 +1,23 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Bernardo  Barros <bernardobarros@gmail.com>
+
+pkgname=lv2-so-kl5
+pkgver=1.1
+pkgrel=1
+pkgdesc="SO-KL5 is a string based 'piano' synthezizer. The strings are modeled using the Karplus-Strong String simulation method."
+arch=('i686' 'x86_64')
+url="https://github.com/jeremysalwen/So-synth-LV2"
+license=('GPL2')
+depends=('libsigc++' 'gtkmm')
+makedepends=('lv2-c++-tools')
+provides=('lv2-so-kl5')
+conflicts=('lv2-so-kl5')
+source=(http://d00m.org/~someone/sokl5/so-kl5.tar.gz)
+md5sums=('25ad375706ad441f68c4082f4bb625eb')
+
+
+build() {
+  cd "$srcdir/SO-KL5"
+  make
+}
