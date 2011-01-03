@@ -14,14 +14,11 @@ source=(http://downloads.sourceforge.net/sourceforge/amsynthe/amSynth-$pkgver.ta
 md5sums=('bd92761b29161d9f748d6909e1bf14ce')
 
 build() {
-  cd ${srcdir}/amSynth-${pkgver}
-
-  sed -i -e 's|/amSynth|/amsynth|' src/main.cc || return 1
-
-  ./configure --prefix=/usr || return 1
-  make || return 1
-
+  cd "${srcdir}/amSynth-${pkgver}"
+  sed -i -e 's|/amSynth|/amsynth|' src/main.cc 
+  ./configure --prefix=/usr 
+  make 
   install -Dm755 src/amSynth ${pkgdir}/usr/bin/amSynth
   mkdir -p ${pkgdir}/usr/share/${pkgname}
-  install -m644 skel/{Controllersrc,presets} ${pkgdir}/usr/share/${pkgname}/
+  install -m644 skel/{Controllersrc,presets} "${pkgdir}/usr/share/${pkgname}/"
 }
