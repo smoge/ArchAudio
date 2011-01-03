@@ -1,10 +1,11 @@
 # $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
 # Contributor: svoufff <svoufff at gmail dot com>
 # Contributor: Sean Bolton <smbolton at jps dot net>
 pkgname=whysynth
-pkgver=20090608
-pkgrel=2
+pkgver=20100922
+pkgrel=1
 pkgdesc="A versatile softsynth plugin for the DSSI Soft Synth Interface"
 arch=('i686' 'x86_64')
 url="http://www.smbolton.com/whysynth.html"
@@ -12,13 +13,18 @@ depends=('dssi' 'liblo' 'gtk2' 'fftw')
 options=('!libtool')
 license="GPL"
 source=(http://www.smbolton.com/whysynth/$pkgname-$pkgver.tar.bz2 whysynth)
-md5sums=('f9d725a11da7e386f2cbd919c38f6476'
+md5sums=('931944999b7def5140c2397c228a4983'
          '5ab0d97abe67bcbf6a5cb4c5678c9fce')
 
+# Maintainer: you have to look here to find the lastest release:
+# http://www.smbolton.com/whysynth/
+# Then just change the "pkgver" and "md5sums" (the first element) variables
+
+
 build() {
-  cd $srcdir/$pkgname-$pkgver
-  ./configure --prefix=/usr || return 1
-  make || return 1
-  make DESTDIR=$pkgdir install || return 1
+  cd "$srcdir/$pkgname-$pkgver"
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$pkgdir install
   install -D -m755 $srcdir/whysynth $pkgdir/usr/bin/whysynth
 }
