@@ -22,16 +22,16 @@ build() {
 #  cd doc/usersguide
 #  make
 #  cd ../..
+
   export QTDIR=/usr
 
-  cmake . -DCMAKE_INSTALL_PREFIX=$pkgdir/usr \
- 	-DDEFAULT_DATA_DIR="/usr/share/canorus" || return 1
+  cmake . -DCMAKE_INSTALL_PREFIX=$pkgdir/usr -DDEFAULT_DATA_DIR="/usr/share/canorus"
 
-  make install || return 1
+  make install
   
 # install menu-entry and icon
-  install -d $pkgdir/usr/share/{applications,pixmaps} || return 1
-  cp canorus.desktop $pkgdir/usr/share/applications || return 1
-  cp $pkgdir/usr/share/{canorus/images/clogosm.png,pixmaps/canorus.png} \
-    || return 1
+
+  install -d "$pkgdir/usr/share/{applications,pixmaps}"
+  cp canorus.desktop "$pkgdir/usr/share/applications" 
+  cp "$pkgdir/usr/share/{canorus/images/clogosm.png,pixmaps/canorus.png}"
 }

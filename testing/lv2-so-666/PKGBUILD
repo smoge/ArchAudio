@@ -20,4 +20,5 @@ md5sums=('ea885d764c3bf2a127e0426b8e666a7d')
 build() {
   cd "$srcdir/SO-666"
   make
+  cp $srcdir/*.so $pkgdir/usr/lib/lv2
 }

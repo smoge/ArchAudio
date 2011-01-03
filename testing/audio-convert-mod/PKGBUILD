@@ -19,7 +19,7 @@ source=(http://www.diffingo.com/downloads/audio-convert-mod/${pkgname}-${pkgver}
 md5sums=('ee500c8cdee8923df6cc15d2ea5e137c')
 
 build() {
-  cd ${startdir}/src/${pkgname}-${pkgver}
+  cd "${startdir}/src/${pkgname}-${pkgver}"
   ./configure --prefix=/usr
   cd bin
   sed -i '18c\prefix="/usr"' audio-convert-mod

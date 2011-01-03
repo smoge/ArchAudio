@@ -22,6 +22,5 @@ build() {
 
 package() {
   cd "${srcdir}/${pkgname}-${pkgver}"
-
-  python2 ./waf install --destdir="${pkgdir}"
+  python2 waf install --destdir="${pkgdir}"
 }

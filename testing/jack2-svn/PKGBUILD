@@ -4,10 +4,10 @@
 
 pkgbase=jack2-svn
 pkgname=('jack2-svn' 'jack2-dbus-svn')
-pkgver=4067
+pkgver=svn
 pkgrel=1
 pkgdesc="The next-generation JACK with SMP support (development version)"
-arch=(i686 x86_64)
+arch=('i686' 'x86_64')
 url="http://jackaudio.org/"
 license=('GPL')
 depends=('libsamplerate')
@@ -42,10 +42,6 @@ build() {
 
   rm -rf $_svnmod-build $_svnmod-dbus-build
   cp -r $_svnmod $_svnmod-build
-
-  #
-  # BUILD
-  #
 
   # we're going to do 2 different builds
   cp -r $_svnmod-build $_svnmod-dbus-build
@@ -102,5 +98,3 @@ package_jack2-dbus-svn() {
 
   _pyfix
 }
-
-# vim:set ts=2 sw=2 et:
