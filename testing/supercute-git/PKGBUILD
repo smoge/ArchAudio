@@ -1,0 +1,48 @@
+# Maintainer: Bernardo Barros <bernardobarros@gmail.com>
+# Contributor: Arch Linux Pro Audio <archaudio-devel@archaudio.org>
+
+pkgname=supercute-git
+pkgver=20101217
+pkgrel=1
+pkgdesc="Special version of SuperCollider that includes a new cross-platform GUI implementation using Qt framework. It also enables WiiMote support."
+url="http://supercollider.sourceforge.net/"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=('jack' 'fftw' 'avahi')
+makedepends=('git' 'libsndfile>=1.0' 'qt' 'cwiid' 'emacs' 'vim' 'gedit' 'icu' 'gcc>=3.0' 'pkgconfig>=0.14.0' 'scons>=0.96' 'alsa-lib')
+conflicts=('supercollider')
+provides=('supercollider')
+
+source=()
+md5sums=()
+
+#_gitroot="git://supercollider.git.sourceforge.net/gitroot/supercollider/supercollider"
+_gitroot="git://github.com/jleben/SuperCute.git"
+_gitname="SuperCute"
+
+build() {
+  cd $srcdir
+  msg "Connecting to GIT server...."
+  
+  if [ -d $_gitname ] ; then
+    (cd $_gitname && git pull origin)
+    msg "The local files are updated."
+  else
+    git clone $_gitroot
+  fi
+  
+  msg "GIT checkout done or server timeout"
+  msg "Starting make..."
+  
+  cp -r $_gitname $_gitname-build
+  cd $_gitname-build/
+  
+  mkdir build
+  cd build
+  cmake -DCMAKE_INSTALL_PREFIX=/usr .. -DSC_QT=1 -DWII=1 -DSC_ED=1 -DSC_EL=1 -DSC_VIM=1 -DNOVA_SIMD=1 || return 1
+  
+  make
+  make DESTDIR=$pkgdir/ install || return 1
+  
+  rm -rf $srcdir/$_gitname-build
+}
