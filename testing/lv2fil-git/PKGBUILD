@@ -1,3 +1,5 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 
 pkgname=lv2fil-git
@@ -34,12 +36,12 @@ build() {
   git clone "${srcdir}/${_gitname}" "${srcdir}/${_gitname}-build"
   cd "${srcdir}/${_gitname}-build"
 
-  python2 ./waf configure --lv2-dir=/usr/lib/lv2
-  python2 ./waf
+  python2 waf configure --lv2-dir=/usr/lib/lv2
+  python2 waf
 }
 
 package(){
   cd "${srcdir}/${_gitname}-build"
 
-  python2 ./waf install --destdir="${pkgdir}"
+  python2 waf install --destdir="${pkgdir}"
 }

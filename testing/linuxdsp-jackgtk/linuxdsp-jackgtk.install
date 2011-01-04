@@ -1,14 +1,14 @@
 post_upgrade()
 {
-	_warning
+  _warning
 }
 
 post_install() {
-	_warning
+  _warning
 }
 
 _warning() {
-	cat <<'MSG'
+  cat <<'MSG'
 >>  The following Jack/GTK applications have been installed/updated:
       sr-2a   SR2A Stereo Reverb
       ch-eq2  CH-EQ2 Stereo Parametric EQ:

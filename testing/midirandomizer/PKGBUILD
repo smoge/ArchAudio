@@ -12,6 +12,7 @@ url="http://midirandomizer.sourceforge.net/"
 license=('GPL')
 depends=('java-runtime')
 source=(http://downloads.sourceforge.net/midirandomizer/$_pkgname.$pkgver.bin.zip)
+md5sums=('2a4e7dbc44445aa8498ab7dddeba5b76')
 
 build() {
   cd "$srcdir"
@@ -21,10 +22,9 @@ build() {
   # create bin script (assume java-runtime sets proper PATH)
   install -d "$pkgdir/usr/bin"
   echo "#!/bin/bash" > "$pkgdir/usr/bin/$pkgname"
-  echo "java -jar /usr/share/$pkgname/$_pkgname.jar" > \
-    "$pkgdir/usr/bin/$pkgname"
+  echo "java -jar /usr/share/$pkgname/$_pkgname.jar" > "$pkgdir/usr/bin/$pkgname"
   chmod 755 "$pkgdir/usr/bin/$pkgname"
 
   # freedesktop.org compatibility - nothing to use for pixmap =/
+
 }
-md5sums=('2a4e7dbc44445aa8498ab7dddeba5b76')

@@ -13,10 +13,12 @@ source=(http://download.savannah.nongnu.org/releases-noredirect/ll-plugins/lv2-c
 md5sums=('8db2c4124af6ef932002bba9d99ba09f')
 
 build() {
+
   cd "${srcdir}/${pkgname}-${pkgver}"
 
-  ./configure --prefix="/usr" || return 1
-  make || return 1
-  make DESTDIR="${pkgdir}" install || return 1
+  ./configure --prefix="/usr"
+  make
+  make DESTDIR="${pkgdir}" install
+
 }
 
