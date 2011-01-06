@@ -4,7 +4,7 @@
 # Contributor: Stefan Husmann <stefan-husmann@t-online.de>
 
 pkgname=musescore-svn
-pkgver=svn
+pkgver=3845
 pkgrel=1
 pkgdesc="A music score editor written in Qt4"
 arch=('i686' 'x86_64')
@@ -45,8 +45,10 @@ cd $srcdir
 }
 
 package() {
+
   cd "$srcdir/${_svnmod}-build"
   make DESTDIR="$pkgdir" install
+
   # avoid file conflict with "qtscriptgenerator"
   for _i in gui network core uitools xml; do
     rm $pkgdir/usr/lib/qt/plugins/script/libqtscript_${_i}.so

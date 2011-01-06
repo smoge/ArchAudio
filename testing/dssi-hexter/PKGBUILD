@@ -1,0 +1,27 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Sean Bolton musound at jps dot net
+# Contributor: Jochen Immendörfer <jochen dot immendoerfer at gmail dot com>
+
+pkgname=dssi-hexter
+pkgver=0.6.2
+pkgrel=1
+pkgdesc="A DSSI software synthesizer that models the sound generation of a Yamaha DX7"
+arch=('i686' 'x86_64')
+url="http://dssi.sourceforge.net/hexter.html"
+license=('GPL')
+depends=('alsa-lib' 'liblo' 'gtk2' 'dssi')
+provides=('hexter')
+makedepends=('ladspa')
+options=('!libtool')
+source=(http://downloads.sourceforge.net/sourceforge/dssi/hexter-${pkgver}.tar.gz hexter)
+md5sums=('d4f9e7218f658423fedfba340a0f1550' 'ce72d4f996c17ffd72eb02af76c4dd9b')
+
+build() {
+
+  cd "$srcdir/hexter-${pkgver}"
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=$pkgdir install
+  install -D -m755 "$srcdir/hexter" "$pkgdir/usr/bin/hexter"
+}

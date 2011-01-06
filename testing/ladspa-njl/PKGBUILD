@@ -1,0 +1,28 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Philipp Überbacher <murks at lavabit dot com>
+
+pkgname=ladspa-njl
+pkgver=0.2.1
+pkgrel=3
+pkgdesc="LADSPA plugins for noise and experimental effects."
+arch=('i686' 'x86_64')
+url="http://devel.tlrmx.org/audio/"
+license=('GPL')
+depends=('glibc')
+provides=('njl-plugins')
+groups=('ladspa-plugins')
+
+source=(http://devel.tlrmx.org/audio/source/njl-plugins-${pkgver}.tar.gz)
+md5sums=('1a5da22b6c2a3f82171cbdd0714b09ab')
+
+build() {
+  cd "${srcdir}/njl-plugins"
+  make
+}
+
+package(){
+  cd "${srcdir}/njl-plugins"
+  mkdir -p "${pkgdir}/usr/lib/ladspa/"
+  install -m755 *.so "${pkgdir}/usr/lib/ladspa/"
+}

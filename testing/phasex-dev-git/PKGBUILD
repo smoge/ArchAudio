@@ -4,7 +4,7 @@
 # Contributor: David Adler <david dot jo dot adler at gmail dot com>
 
 pkgname=phasex-dev-git
-pkgver=git
+pkgver=20110106
 pkgrel=1
 pkgdesc="Synthesizer using phase offset modulation. 3rd party development version"
 arch=('i686' 'x86_64')
@@ -42,6 +42,6 @@ build() {
   automake
   autoheader
   ./configure --prefix="/usr" --enable-arch="native"
-  make || return 1
+  make
   make DESTDIR="${pkgdir}/" install
 }

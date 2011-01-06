@@ -19,7 +19,7 @@ source=(http://processing.googlecode.com/files/processing-$pkgver.tgz
         processing.desktop)
 md5sums=('2f7f966b6a80290fa45074f65bb8b283'
          '1807b17245cf9b82867e0b285a0c4b9c'
-         '120270aecd8996edf6a3f878877bbf35')
+         '78ef1b1a9917343467f4c0cdf4568267')
 
 build() {
     cd $srcdir/$pkgname-$pkgver

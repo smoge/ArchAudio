@@ -1,7 +1,9 @@
-# Maintainer: Patrick McCarty <pnorcks at gmail dot com>
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Patrick McCarty <pnorcks at gmail dot com>
 
 pkgname=lilypond-git
-pkgver=20101231
+pkgver=20110105
 pkgrel=1
 pkgdesc="An automated music engraving system (Git snapshot)"
 arch=('i686' 'x86_64')
@@ -60,5 +62,3 @@ package() {
   cd "$srcdir/$_gitname-build"
   make DESTDIR="$pkgdir/" install
 }
-
-# vim:set ts=2 sw=2 et:

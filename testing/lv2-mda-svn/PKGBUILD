@@ -1,7 +1,9 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 
 pkgname=lv2-mda-svn
-pkgver=svn
+pkgver=2677
 pkgrel=1
 pkgdesc="A lv2 port by Dave Robillard of the mda VST plugins by Paul Kellett"
 arch=('i686' 'x86_64')
@@ -9,6 +11,10 @@ url="http://svn.drobilla.net/lad/trunk/mda-lv2/"
 license=('GPL')
 depends=('gcc-libs')
 makedepends=('subversion' 'lv2core')
+provides=('lv2-mda')
+conflicts=('lv2-mda' 'mda-lv2' 'mda-lv2-svn')
+groups=('lv2-plugins')
+
 source=()
 md5sums=()
 

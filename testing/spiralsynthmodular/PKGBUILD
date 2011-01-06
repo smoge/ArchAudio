@@ -1,0 +1,25 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Flemming Madsen (arch at themadsens dot dk)
+
+pkgname=spiralsynthmodular
+pkgver=0.2.2a
+pkgrel=1
+arch=('i686' 'x86_64')
+pkgdesc="An object orientated music studio with an emphasis on live use. Comes with lots of native plugins and support for ladspa"
+url="http://www.pawfal.org/Software/SSM"
+license="GPL"
+builddepends=('ladspa')
+depends=('fltk' 'liblrdf' 'jack-audio-connection-kit')
+source=(http://dl.sourceforge.net/sourceforge/spiralmodular/spiralmodular-${pkgver}.tar.bz2)
+md5sums=('6f25036856d5d550f3d4ac67fcb10a56')
+
+build() {
+  cd "$startdir/src/spiralmodular-0.2.2"
+  [ "$NOEXTRACT" == 1 ] || ./configure --prefix=/usr
+  make
+  install -d $startdir/pkg/usr/bin
+  make prefix=$startdir/pkg/usr install
+  install -d $startdir/pkg/usr/share/SpiralSynth
+  (umask 022 ; cp -r Examples $startdir/pkg/usr/share/SpiralSynth)
+}

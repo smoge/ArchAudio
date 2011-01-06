@@ -1,0 +1,26 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Renato Budinich <rennabh at gmail dot com>
+
+pkgname=ladspa-wah
+pkgver=0.0.2
+pkgrel=3
+pkgdesc="wah ladspa plugins"
+arch=('i686' 'x86_64')
+url="http://www.kokkinizita.net/linuxaudio/"
+license=('GPL')
+depends=('ladspa' 'gcc-libs')
+provides=('wah-plugins')
+makedepends=('ladspa')
+provides=()
+source=(http://www.kokkinizita.net/linuxaudio/downloads/WAH-plugins-$pkgver.tar.bz2 Makefile.patch)
+md5sums=('e203e3458a4cd75cc442d70b8f124db9' 'd246c93568b5989997e9c5c7b1912f4e ')
+
+build() {
+
+  cd "$srcdir/WAH-plugins-$pkgver"
+
+  patch Makefile "$startdir/Makefile.patch"
+  make
+  make DESTDIR="$pkgdir" install
+}

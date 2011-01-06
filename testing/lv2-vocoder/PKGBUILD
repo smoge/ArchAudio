@@ -1,0 +1,27 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Nate Slottow (m00tp01nt) <nslottow AT gmail DOT com>
+# Contributor: Philipp Überbacher <hollunder at gmx dot at>
+
+pkgname=lv2-vocoder
+pkgver=1
+pkgrel=4
+pkgdesc="LV2 Vocoder Plugin."
+arch=('i686' 'x86_64')
+url="http://home.gna.org/lv2vocoder/"
+license=('GPL')
+depends=('glibc')
+provides=('lv2vocoder')
+groups=('lv2-plugins')
+makedepends=('lv2core')
+source=(http://download.gna.org/lv2vocoder/lv2vocoder-1.tar.bz2)
+md5sums=('8c0096978e9c58a252f247e1f7f7ed63')
+
+
+build() {
+
+  cd "${srcdir}/lv2vocoder-${pkgver}"
+  make
+  mkdir -p "${pkgdir}/usr/lib/lv2"
+  make LV2_INSTALL_PATH="${pkgdir}/usr/lib/lv2" install
+}

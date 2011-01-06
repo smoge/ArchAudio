@@ -1,0 +1,25 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
+# Contributor: Philipp Überbacher <murks at lavabit dot com>
+
+pkgname=ladspa-vco
+_pkgname=VCO-plugins
+pkgver=0.3.0
+pkgrel=3
+pkgdesc="LADSPA anti-aliased oscillator plugins"
+arch=('i686' 'x86_64')
+url="http://www.kokkinizita.net/linuxaudio/"
+license=('GPL')
+provides=('vco-plugins')
+depends=('gcc-libs')
+source=(http://www.kokkinizita.net/linuxaudio/downloads/${_pkgname}-${pkgver}.tar.bz2)
+md5sums=('6fdf4a7e3c716abbb89721645427cd52')
+
+build() {
+
+  cd "${srcdir}/${_pkgname}-${pkgver}"
+  make
+  mkdir -p "${pkgdir}/usr/lib/ladspa/"
+  install -m755 *.so "${pkgdir}/usr/lib/ladspa/"
+}

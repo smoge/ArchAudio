@@ -4,7 +4,7 @@
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 
 pkgname=lv2core-svn
-pkgver=svn
+pkgver=2787
 pkgrel=1
 pkgdesc="LV2: Successor to the LADSPA audio plug-in standard (development version)"
 arch=('i686' 'x86_64')
@@ -36,6 +36,6 @@ build() {
   cd "$srcdir/$_svnmod-build/lv2/core.lv2"
 
   python2 waf configure --prefix=/usr
-  python2 waf build $MAKEFLAGS 
+  python2 waf build $MAKEFLAGS
   python2 waf install --destdir="$pkgdir"
 }

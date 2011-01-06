@@ -10,12 +10,14 @@ arch=('i686' 'x86_64')
 url=http://bs2b.sourceforge.net
 license=('GPL')
 depends=('libbs2b' 'ladspa')
+provides=('bs2b')
+groups=('ladspa-plugins')
 makedepends=()
-source=("http://downloads.sourceforge.net/project/bs2b/plugins/LADSPA plugin/$pkgver/$pkgname-$pkgver.tar.gz")
+source=("http://downloads.sourceforge.net/project/bs2b/plugins/LADSPA plugin/$pkgver/bs2b-$pkgver.tar.gz")
 md5sums=('f3926a6d5effb7c70a4b69db30c186d5')
 
 build() {
-  cd ${srcdir}/$pkgname-${pkgver}
+  cd ${srcdir}/bs2b-${pkgver}
   ./configure --prefix=/usr
   make
   make DESTDIR=${pkgdir} install

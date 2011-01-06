@@ -1,0 +1,32 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=rakarrack-git
+pkgver=gitcd
+pkgrel=1
+pkgdesc="Versatile guitar multi-effects processor"
+arch=('i686' 'x86_64')
+license=('GPL')
+url="http://rakarrack.sourceforge.net"
+depends=('alsa-utils' 'jack' 'fltk' 'libxpm')
+source=()
+md5sums=()
+
+_gitroot="git://rakarrack.git.sourceforge.net/gitroot/rakarrack/rakarrack"
+
+build() {
+  msg "Connecting to GIT server..."
+  if [[ -d $srcdir/$pkgname ]]; then
+    cd $srcdir/$pkgname && git pull origin
+  else
+    git clone $_gitroot $srcdir/$pkgname
+    cd $srcdir/$pkgname
+  fi
+  msg "GIT checkout done or server timeout"
+
+  ./autogen.sh
+  ./configure --enable-optimizations=yes --enable-see2
+  make
+  make DESTDIR=$pkgdir install
+}

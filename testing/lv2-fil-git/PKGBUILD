@@ -1,0 +1,49 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Philipp Überbacher <murks at lavabit dot com>
+
+pkgname=lv2-fil-git
+pkgver=20110105
+pkgrel=1
+pkgdesc="Four-band parametric equalisers with visualisation."
+arch=('i686' 'x86_64')
+url="http://nedko.arnaudov.name/soft/lv2fil/"
+license=('GPL')
+depends=('pygtk' 'pycairo')
+makedepends=('lv2core')
+provides=('lv2fil')
+conflicts=('lv2fil-git' 'lv2fil' 'lv2-fil-git')
+groups=('lv2-plugins')
+
+md5sums=()
+
+_gitroot="http://nedko.arnaudov.name/git/lv2fil.git"
+_gitname="lv2fil"
+
+build() {
+  cd "${srcdir}"
+  msg "Connecting to GIT server...."
+
+  if [ -d ${_gitname} ] ; then
+    cd ${_gitname} && git pull origin
+    msg "The local files are updated."
+  else
+    git clone ${_gitroot}
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "${srcdir}/${_gitname}-build"
+  git clone "${srcdir}/${_gitname}" "${srcdir}/${_gitname}-build"
+  cd "${srcdir}/${_gitname}-build"
+
+  python2 waf configure --lv2-dir=/usr/lib/lv2
+  python2 waf
+}
+
+package(){
+  cd "${srcdir}/${_gitname}-build"
+
+  python2 waf install --destdir="${pkgdir}"
+}

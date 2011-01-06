@@ -1,10 +1,9 @@
-
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: dmotd <inaudible@simplesuperlativ.es>
 
 pkgname=pd-extended-svn
-pkgver=14664
-pkgrel=2
+pkgver=14691
+pkgrel=1
 pkgdesc="Pure Data Extended SVN version"
 url="http://puredata.info/"
 arch=('i686' 'x86_64' 'ppc')
@@ -53,7 +52,7 @@ build() {
   cd $startdir/src/$_svnmod-build
 
 # hdspm_mixer disabled for now - doesn`t build
-  sed -e "s|gem2pdp hdspm_mixer iem16|gem2pdp iem16|g" -i externals/Makefile 
+  sed -e "s|gem2pdp hdspm_mixer iem16|gem2pdp iem16|g" -i externals/Makefile
 # build gem with v4l2-support
 
   sed -e "s|--disable-NV|--disable-NV --with-v4l2|g" -i packages/Makefile
@@ -67,7 +66,7 @@ if [ "$CARCH" = "x86_64" ]; then
   sed -e "s|CFLAGS =|CFLAGS = -fPIC|" -i externals/pdp/opengl/Makefile.config
 
 # fix -fPIC issue in pddp
-  sed -e "s|DEFINES =|DEFINES = -fPIC|" -i externals/miXed/Makefile.common 
+  sed -e "s|DEFINES =|DEFINES = -fPIC|" -i externals/miXed/Makefile.common
 
 # setting additional variable
   FPIC_FLAG="-fPIC"

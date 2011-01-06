@@ -15,10 +15,8 @@ md5sums=('8db2c4124af6ef932002bba9d99ba09f')
 build() {
 
   cd "${srcdir}/${pkgname}-${pkgver}"
-
   ./configure --prefix="/usr"
   make
   make DESTDIR="${pkgdir}" install
-
 }
 

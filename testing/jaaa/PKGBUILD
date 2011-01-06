@@ -14,6 +14,8 @@ depends=('clalsadrv>=2.0.0' 'clthreads>=2.2.1' 'clxclient>=3.3.2' 'fftw' 'jack')
 source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
 md5sums=('a808c579fbb5310b701d21685fc8c8fd')
 
+#http://www.kokkinizita.net/linuxaudio/downloads/
+
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
   make LIBDIR=lib DESTDIR=${pkgdir} PREFIX="/usr"

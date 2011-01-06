@@ -6,17 +6,17 @@ pkgname=rakarrack
 pkgver=0.4.2
 pkgrel=1
 pkgdesc="Versatile guitar multi-effects processor"
-arch=(i686 x86_64)
+arch=('i686' 'x86_64')
 license=('GPL')
 url="http://rakarrack.sourceforge.net"
 depends=('alsa-utils' 'jack' 'fltk' 'libxpm')
 source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.bz2)
+md5sums=('094221f96b4812bf975e15d5044eaccc')
 
 build() {
-cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgname-$pkgver"
 
-./configure --prefix=/usr
-make || return 1
-make DESTDIR="$pkgdir" install
+  ./configure --prefix=/usr
+  make
+  make DESTDIR="$pkgdir" install
 }
-md5sums=('094221f96b4812bf975e15d5044eaccc') 

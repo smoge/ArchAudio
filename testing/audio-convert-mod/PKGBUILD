@@ -8,7 +8,7 @@
 pkgname=audio-convert-mod
 pkgver="3.46.0b"
 pkgrel=2
-pkgdesc="A simple audio file converter supporting many formats."
+pkgdesc="A simple audio file converter that supporting many formats."
 arch=('i686' 'x86_64')
 url="http://www.diffingo.com/content/view/13/47/lang,en/"
 license=('GPL2')
@@ -19,6 +19,7 @@ source=(http://www.diffingo.com/downloads/audio-convert-mod/${pkgname}-${pkgver}
 md5sums=('ee500c8cdee8923df6cc15d2ea5e137c')
 
 build() {
+
   cd "${startdir}/src/${pkgname}-${pkgver}"
   ./configure --prefix=/usr
   cd bin

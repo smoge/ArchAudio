@@ -3,7 +3,7 @@
 # Contributor: agroschim <agroschim@gmx.de>
 
 pkgname=iannix-svn
-pkgver=svn
+pkgver=140
 pkgrel=1
 pkgdesc="A score editor based on the UPIC sequencer by Iannis Xenakis"
 arch=('i686' 'x86_64')

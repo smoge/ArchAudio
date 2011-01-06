@@ -29,6 +29,7 @@ _csOptions="prefix=/usr useALSA=1 useJack=1 useFLTK=1 buildCsound5GUI=1 useOSC=1
 install=('csound5.install')
 
 build() {
+
   cd $srcdir/Csound$pkgver
 
   scons customCFLAGS="$_gccOptions" $_csOptions || return 1

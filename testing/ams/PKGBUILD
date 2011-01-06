@@ -23,6 +23,6 @@ build() {
   make
   make DESTDIR=$pkgdir/ install
   mkdir -p "${startdir}/pkg/usr/share/${pkgname}"
-  cp -a "${startdir}/src/${pkgname}-${pkgver}/{demos,instruments,tutorial}" "${startdir}/pkg/usr/share/${pkgname}"
+  cp -a ${startdir}/src/${pkgname}-${pkgver}/{demos,instruments,tutorial} ${startdir}/pkg/usr/share/${pkgname}
 
 }

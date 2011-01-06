@@ -13,20 +13,21 @@ depends=('zita-convolver' 'jack' 'clthreads>=2.4.0')
 install=${pkgname}.install
 source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2 \
 http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-reverbs.tar.bz2)
-md5sums=('aec27cdd1dcda26f0d4000ccf0220251'
-         'a33ec6a97fac039400f7674f3bde4ca9')
+md5sums=('aec27cdd1dcda26f0d4000ccf0220251' 'a33ec6a97fac039400f7674f3bde4ca9')
 
 build() {
+
   cd "${srcdir}/${pkgname}-${pkgver}/source"
-  
-  make PREFIX="/usr" DESTDIR=${pkgdir} install || return 1
+
+  make PREFIX="/usr" DESTDIR=${pkgdir} install
 
   #this installs the configuration readme
-  install -Dm 644 ../README.CONFIG "${pkgdir}/usr/share/jconvolver/README.CONFIG" || return 1
+  install -Dm 644 ../README.CONFIG "${pkgdir}/usr/share/jconvolver/README.CONFIG"
 
   #this installs the example config files and reverbs that come with jconv
-  cp -r ../config-files/ "${pkgdir}/usr/share/jconvolver/" || return 1
+  cp -r ../config-files/ "${pkgdir}/usr/share/jconvolver/"
 
   #this installs additional reverbs
-  cp -r ${srcdir}/reverbs/* "${pkgdir}/usr/share/jconvolver/config-files/" || return 1
+  cp -r ${srcdir}/reverbs/* "${pkgdir}/usr/share/jconvolver/config-files/"
+
 }

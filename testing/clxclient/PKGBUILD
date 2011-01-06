@@ -4,6 +4,7 @@
 # Contributor: Tom K <tomk@runbox.com>
 # Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
+
 pkgname=clxclient
 pkgver=3.6.1
 pkgrel=3
@@ -16,12 +17,10 @@ source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar
 md5sums=('bd47f80a855d3203fcf10365e79d85e4')
 
 build() {
+
   cd "${pkgname}-${pkgver}"
-
   #Why kill the optimisation? -e 's|-O2||g'
-  sed -e 's|usr/bin|bin|g' -i Makefile || return 1
-
-  mkdir -p "${pkgdir}"/usr/{include,lib} || return 1
-  make PREFIX="${pkgdir}"/usr LIBDIR=lib install || return 1ls
-
+  sed -e 's|usr/bin|bin|g' -i Makefile
+  mkdir -p "${pkgdir}"/usr/{include,lib} 
+  make PREFIX="${pkgdir}"/usr LIBDIR=lib install
 }

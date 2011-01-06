@@ -17,9 +17,9 @@ source=(http://download.savannah.gnu.org/releases/lash/${pkgname}-${pkgver}.tar.
 md5sums=('af1dc4f4ceb284b1b0845de4f4c2fe47')
 
 build() {
-  cd "${srcdir}/${pkgname}-${_relver}"
 
+  cd "${srcdir}/${pkgname}-${_relver}"
   ./configure --prefix=/usr
-  make || return 1
+  make
   make DESTDIR=${pkgdir}/ install
 }

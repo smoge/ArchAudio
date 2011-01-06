@@ -22,6 +22,7 @@ _cvsroot=":pserver:anonymous:@csound.cvs.sourceforge.net:/cvsroot/csound"
 _cvsmod="csound5"
 
 build() {
+
   cd "$srcdir"
   msg "Connecting to csound.sourceforge.net CVS server...."
   if [ -d $_cvsmod/CVS ]; then

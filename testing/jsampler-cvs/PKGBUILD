@@ -1,8 +1,9 @@
 # $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: svoufff <svoufff at gmail dot com>
+
 pkgname=jsampler-cvs
-pkgver=20090722
+pkgver=20110105
 pkgrel=1
 pkgdesc="A java frontend to LinuxSampler."
 arch=('i686' 'x86_64')
@@ -63,19 +64,19 @@ build() {
   ant build-jsclassic
 
   # install java files
-  install -Dm0644 dist/JS_Classic-*.jar "$pkgdir/usr/share/java/jsampler/js-classic.jar" || return 1
-  install -Dm0644 dist/Fantasia-*.jar "$pkgdir/usr/share/java/jsampler/fantasia.jar" || return 1
+  install -Dm0644 dist/JS_Classic-*.jar "$pkgdir/usr/share/java/jsampler/js-classic.jar"
+  install -Dm0644 dist/Fantasia-*.jar "$pkgdir/usr/share/java/jsampler/fantasia.jar"
 
   # install shell scripts
-  install -Dm0755 ../jsampler.sh "$pkgdir/usr/bin/jsampler" || return 1
-  install -Dm0755 ../jsampler-classic.sh "$pkgdir/usr/bin/jsampler-classic" || return 1
+  install -Dm0755 ../jsampler.sh "$pkgdir/usr/bin/jsampler"
+  install -Dm0755 ../jsampler-classic.sh "$pkgdir/usr/bin/jsampler-classic"
 
   # install freedesktop.org compatibility
-  install -Dm0644 res/fantasia/icons/app_icon.png "$pkgdir/usr/share/pixmaps/jsampler.png" || return 1
-  install -Dm0644 res/js-classic/icons/app-icon.png "$pkgdir/usr/share/pixmaps/jsampler-classic.png" || return 1
+  install -Dm0644 res/fantasia/icons/app_icon.png "$pkgdir/usr/share/pixmaps/jsampler.png"
+  install -Dm0644 res/js-classic/icons/app-icon.png "$pkgdir/usr/share/pixmaps/jsampler-classic.png"
 
-  install -Dm0644 ../jsampler.desktop "$pkgdir/usr/share/applications/jsampler.desktop" || return 1
-  install -Dm0644 ../jsampler-classic.desktop "$pkgdir/usr/share/applications/jsampler-classic.desktop" || return 1
+  install -Dm0644 ../jsampler.desktop "$pkgdir/usr/share/applications/jsampler.desktop"
+  install -Dm0644 ../jsampler-classic.desktop "$pkgdir/usr/share/applications/jsampler-classic.desktop"
 
   rm -rf $srcdir/$_cvsmod-build
 }

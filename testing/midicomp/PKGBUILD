@@ -1,30 +1,28 @@
-# $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: svoufff <svoufff at gmail dot com>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=midicomp
 pkgver=0.0.4
-pkgrel=1
-pkgdesc="A program to manipulate SMF (Standard MIDI File) files"
+pkgrel=2
+pkgdesc="Midicomp is a midi-to-text converter and vice versa."
 arch=('i686' 'x86_64')
-url="http://midicomp.opensrc.org"
-license=('custom')
-depends=('glibc')
-source=(http://midicomp.opensrc.org/${pkgname}-${pkgver}.tar.gz license.txt)
-md5sums=('bdf6dd382ed99e45acefd3510c06683e'
-         '701848a73d284461097e2d3f43715611')
+url="http://midicomp.opensrc.org/"
+license=('GPL')
+depends=("glibc")
+source=("http://midicomp.opensrc.org/$pkgname-$pkgver.tar.gz")
+md5sums=('bdf6dd382ed99e45acefd3510c06683e')
+
 
 build() {
-  cd $srcdir/$pkgname-$pkgver
+
+  cd "$srcdir/$pkgname-$pkgver"
   make
+}
 
-  # Install bin
-  install -D -m755 $pkgname "$pkgdir/usr/bin/$pkgname"
+package() {
 
-  # Install doc
-  mkdir -p ${pkgdir}/usr/share/doc/$pkgname
-  install -m644 {Readme,ex1*} ${pkgdir}/usr/share/doc/$pkgname
-
-  # Install license
-  install -D -m644 $startdir/license.txt ${pkgdir}/usr/share/licenses/$pkgname/license.txt
+  cd "$srcdir/$pkgname-$pkgver"
+  mkdir -p "$pkgdir/usr/bin"
+  install -Dm 755 midicomp "$pkgdir/usr/bin"
 }

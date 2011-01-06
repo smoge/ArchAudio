@@ -15,7 +15,7 @@ provides=('lv2-so-kl5')
 conflicts=('lv2-so-kl5')
 source=(http://d00m.org/~someone/sokl5/so-kl5.tar.gz)
 md5sums=('25ad375706ad441f68c4082f4bb625eb')
-
+groups=('lv2-plugins')
 
 build() {
   cd "$srcdir/SO-KL5"

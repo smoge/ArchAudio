@@ -4,7 +4,7 @@
 
 pkgbase=jack2-svn
 pkgname=('jack2-svn' 'jack2-dbus-svn')
-pkgver=svn
+pkgver=4096
 pkgrel=1
 pkgdesc="The next-generation JACK with SMP support (development version)"
 arch=('i686' 'x86_64')

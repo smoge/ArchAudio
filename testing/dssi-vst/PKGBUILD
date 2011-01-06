@@ -24,8 +24,8 @@ build() {
   patch -Np1 -i ../winexec.patch
 
   # use CXXFLAGS in build
-  sed -i \
-    "s:-Ivestige -Wall -fPIC:$CXXFLAGS -Ivestige -Wall -fPIC:" Makefile
+   sed -i \
+     "s:-Ivestige -Wall -fPIC:$CXXFLAGS -Ivestige -Wall -fPIC:" Makefile
 
   make
 

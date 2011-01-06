@@ -1,0 +1,30 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+
+pkgname=lv2-eq10q
+pkgver=1.0
+pkgrel=1
+pkgdesc="EQ10Q is an audio plugin over the LV2 standard (http://lv2plug.in) implementing a powerfull and flexible parametric equalizer."
+arch=('i686' 'x86_64')
+url="http://eq10q.sourceforge.net/"
+license=('GPL')
+depends=('lv2core' 'gtkmm' 'lv2-c++-tools' 'pstreams' 'plotmm')
+makedepends=('pkg-config')
+provides=('eq10q')
+groups=('lv2-plugins')
+
+source=(http://download.sourceforge.net/project/eq10q/EQ10Q-LV2Plugin-source-1.0.tar.gz)
+md5sums=('6680197c8c97d65ae194ab5218dc24b5')
+
+build() {
+
+  cd $srcdir/EQ10Q
+  # fix foaf schema  
+  sed "4 i@prefix foaf: <http://xmlns.com/foaf/0.1/>." -i parameq.ttl 
+  # fix resource path
+  sed "s_/local__g" -i main_window.cpp pixmapcombo.h 
+  make 
+  mkdir -p $pkgdir/usr/lib/lv2 
+  make INSTALL_DIR=$pkgdir/usr/lib/lv2 install
+}

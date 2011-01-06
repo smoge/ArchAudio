@@ -1,0 +1,21 @@
+# Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
+# Contributor: Philipp Überbacher <murks at lavabit dot com>
+pkgname=tapiir
+pkgver=0.7.2
+pkgrel=3
+pkgdesc="A simple and flexible audio effects processor, inspired by the classical magnetic tape delay systems"
+arch=('i686' 'x86_64')
+url="http://www.resorama.com/maarten/projects/tapiir"
+license=('GPL')
+depends=('jack' 'fltk')
+source=(${pkgname}-${pkgver}.tar.gz)
+md5sums=('db3059abc56a59e9beaed4a8ea693e6b')
+
+build() {
+  cd ${srcdir}/${pkgname}-${pkgver}
+
+  unset LDFLAGS
+  ./configure --prefix=/usr
+  make
+  make DESTDIR=${pkgdir} install
+}

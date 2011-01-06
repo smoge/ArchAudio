@@ -1,0 +1,25 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Philipp Überbacher <murks at lavabit dot com>
+
+pkgname=lv2-vocproc
+pkgver=0.2
+pkgrel=1
+pkgdesc="A vocal processing lv2 plugin, pitch shifting with or without formant correction, automatic pitch correction, vocoder effect and harmonizer"
+arch=('i686' 'x86_64')
+url="http://hyperglitch.com/dev/VocProc/"
+license=('GPL2')
+depends=('gtkmm' 'fftw')
+provides=('vocproc')
+groups=('lv2-plugins')
+makedepends=('lv2-c++-tools')
+source=(http://hyperglitch.com/files/vocproc/vocproc-$pkgver.tar.gz)
+md5sums=('21c9268679192f9fe095474027f74e0c')
+
+build() {
+
+  cd "${srcdir}/vocproc.lv2"
+  sed -i "s|/usr/local/lib/lv2|${pkgdir}/usr/lib/lv2|" Makefile
+  make
+  make install
+}

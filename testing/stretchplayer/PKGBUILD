@@ -12,12 +12,12 @@ license=('GPL')
 depends=('qt' 'rubberband' 'jack')
 makedepends=('cmake')
 source=(http://www.teuton.org/~gabriel/$pkgname/$pkgname-$pkgver.tar.bz2)
+md5sums=('33baf4c8677665fae88f23e292660f95')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
 
   cmake . -DCMAKE_INSTALL_PREFIX=/usr
-  make || return 1
+  make
   make DESTDIR="$pkgdir" install
 }
-md5sums=('33baf4c8677665fae88f23e292660f95')

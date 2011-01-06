@@ -14,11 +14,14 @@ makedepends=('lv2-c++-tools')
 provides=('lv2-so-404')
 conflicts=('lv2-so-404')
 source=(http://d00m.org/~someone/so404/so-404.tar.gz)
-md5sums=('e52a40ecdf80f3ba8fa73270ee89c3f0')
+md5sums=('b56f1699b7ef46f7084ef066eb083ef9')
+
+groups=('lv2-plugins')
+
 
 build() {
   cd "$srcdir/SO-404"
   make
   mkdir "${pkgdir}/usr/lib/lv2"
-  cp $srcdir/*.so $pkgdir/usr/lib/lv2
+  cp $srcdir/so* $pkgdir/usr/lib/lv2
 }

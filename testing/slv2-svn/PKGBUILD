@@ -3,10 +3,10 @@
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 
 pkgname=slv2-svn
-pkgver=2198
+pkgver=2787
 pkgrel=1
 pkgdesc="Library for LV2 hosts (development version)"
-arch=(i686 x86_64)
+arch=('i686' 'x86_64')
 url="http://drobilla.net/software/slv2/"
 license=('GPL')
 groups=('archaudio-bleeding')
@@ -38,11 +38,8 @@ build() {
   cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
   cd "$srcdir/$_svnmod-build/slv2"
 
-  #
-  # BUILD
-  #
 
-  ./waf configure --prefix=/usr
-  ./waf build $MAKEFLAGS || return 1
-  ./waf install --destdir="$pkgdir/"
+  python2 ./waf configure --prefix=/usr
+  python2 ./waf build $MAKEFLAGS
+  python2 ./waf install --destdir="$pkgdir/"
 }

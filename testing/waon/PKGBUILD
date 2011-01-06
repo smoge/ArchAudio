@@ -14,13 +14,13 @@ source=(http://downloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}.tar.gz)
 md5sums=('b31538d1b38f5234a922001c08037c18')
 
 build() {
-  cd $"srcdir/${pkgname}-${pkgver}"
-  
+  cd $srcdir/${pkgname}-${pkgver}
+
   sed -i 's:usr/local:usr:g' Makefile
   make
-  
-  install -Dm755 pv "$pkgdir/usr/bin/waon-pv"
-  install -m755 waon gwaon "$pkgdir/usr/bin/"
-  install -Dm644 pv.1 "$pkgdir/usr/share/man/man1/waon-pv.1"
-  install -m644 {waon,gwaon}.1 "$pkgdir/usr/share/man/man1/"
+
+  install -Dm755 pv $pkgdir/usr/bin/waon-pv
+  install -m755 waon gwaon $pkgdir/usr/bin/
+  install -Dm644 pv.1 $pkgdir/usr/share/man/man1/waon-pv.1
+  install -m644 {waon,gwaon}.1 $pkgdir/usr/share/man/man1/
 }

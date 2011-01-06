@@ -28,6 +28,7 @@ build() {
 }
 
 package() {
+
   cd "$srcdir"
 
   mkdir -p "$pkgdir"/usr/{bin,share/{applications,pixmaps}}

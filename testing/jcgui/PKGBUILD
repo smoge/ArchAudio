@@ -13,11 +13,9 @@ source=(http://downloads.sourceforge.net/project/jcgui/jcgui/$pkgname-$pkgver.ta
 md5sums=('0d41a034cd247c470f982011b926afda')
 
 build() {
+
   cd "$srcdir/$pkgname-$pkgver"
-
-  ./waf configure --prefix=/usr
-  ./waf build
-  ./waf --destdir=${pkgdir} install
+  python2 waf configure --prefix=/usr
+  python2 waf build
+  python2 waf --destdir=${pkgdir} install
 }
-
-# vim:set ts=2 sw=2 et:

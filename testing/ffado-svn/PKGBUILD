@@ -4,10 +4,10 @@
 # Contributor: Jon Kristian Nilsen <jokr.nilsen@gmail.com>
 
 pkgname=ffado-svn
-pkgver=1805
+pkgver=1944
 pkgrel=1
 pkgdesc="Driver for FireWire audio devices (development version)"
-arch=(i686 x86_64)
+arch=('i686' 'x86_64')
 url="http://www.ffado.org/"
 license=('GPL')
 depends=('libiec61883' 'libavc1394' 'libxml++' 'dbus')
@@ -37,10 +37,6 @@ build() {
   cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
   cd "$srcdir/$_svnmod-build"
 
-  #
-  # BUILD
-  #
-
   # Doesn't build with any kind of LDFLAGS
   unset LDFLAGS
 
@@ -49,12 +45,9 @@ build() {
 
   # not sure if sse(2) does anything harmful
   # to non-sse(2) machines at runtime
-  scons PREFIX=/usr \
-  	ENABLE_OPTIMIZATIONS=yes || return 1
+  scons PREFIX=/usr LIBDIR=/usr/lib INCLUDEDIR=/usr/include ENABLE_ALL=yes ENABLE_OPTIMIZATIONS=yes
   scons DESTDIR="$pkgdir/" install
 
-  install -Dm644 support/xdg/hi64-apps-ffado.png \
-    "$pkgdir/usr/share/pixmaps/$pkgname.png"
-  install -Dm644 support/xdg/ffado.org-ffadomixer.desktop \
-    "$pkgdir/usr/share/applications/ffadomixer.desktop"
+  install -Dm644 support/xdg/hi64-apps-ffado.png "$pkgdir/usr/share/pixmaps/$pkgname.png"
+  install -Dm644 support/xdg/ffado.org-ffadomixer.desktop "$pkgdir/usr/share/applications/ffadomixer.desktop"
 }
