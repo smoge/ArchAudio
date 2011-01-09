@@ -1,13 +1,13 @@
 post_install() {
-  echo ""
-  echo ":: The extract utility is installed as csound_extract to avoid"
-  echo ":: conflicting with the libextractor package."
-
+  cat <<'MSG'
+=>  The extract utility is installed as csound_extract to avoid
+    conflicting with the libextractor package.
+MSG
 }
 
 post_upgrade() {
-        post_install
+  if [ "$1" == "x" ]; then
+    post_install $1
+  fi
 }
-
-# vim:set ts=2 sw=2 et:
 

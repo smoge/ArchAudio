@@ -3,7 +3,6 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 # Contributor: Bjoern Lindig <bjoern.lindig at googlemail dot com>
 
-
 pkgname=aliki
 pkgver=0.0.3
 pkgrel=0

@@ -1,0 +1,13 @@
+post_install() {
+    cat <<'MSG'
+==>     The CSound 5 documentation is installed/updated.
+        It can be found in /usr/share/doc/csound
+MSG
+}
+
+post_upgrade() {
+    if [ "$1" == "x" ]; then
+        post_install $1
+    fi
+}
+

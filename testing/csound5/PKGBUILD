@@ -25,11 +25,7 @@ md5sums=('70b0c4a159c4960a09719674657949c9'
 
 _gccOptions="-I/opt/java/include -I/opt/java/include/linux -O2 -march=native"
 
-# useDouble is a requirement for using with blue via csound api
-#_csOptions="usePortAudio=1 usePortMIDI=0 buildCsound5GUI=1 useOSC=1 buildPythonOpcodes=1 buildInterfaces=1 buildVirtual=1 dynamicCsoundLibrary=1 buildJavaWrapper=1 useDouble=1"
-
 _csOptions="prefix=/usr useALSA=1 useJack=1 useFLTK=1 buildCsound5GUI=1 useOSC=1 buildPythonOpcodes=1 buildJavaWrapper=1 buildPythonWrapper=1 buildInterfaces=1 buildVirtual=1 buildUtilities=1 buildStkOpcodes=0 dynamicCsoundLibrary=1 useDouble=1"
-
 
 install=('csound5.install')
 
