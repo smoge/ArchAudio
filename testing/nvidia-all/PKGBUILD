@@ -1,0 +1,74 @@
+# Contributor: Dan Vratil <vratil@progdansoft.com>
+# Contributor: Ng Oon-Ee <n g o o n e e AT g mail dot com>
+# Contributor: Amaury Couste <amaury.couste@gmail.com>
+# Contributor: Nuno Aniceto aka quarkup <nuno.aja@gmail.com>
+
+# Maintainer: Nuno Aniceto aka quarkup <nuno.aja@gmail.com>
+
+
+
+pkgname='nvidia-all'
+pkgver='260.19.29'
+pkgrel=1
+pkgdesc='NVIDIA drivers. Builds modules for all kernels detected on system.'
+url='http://www.nvidia.com/'
+arch=('i686' 'x86_64')
+provides=('nvidia')
+replaces=('nvidia')
+conflicts=('nvidia-71xx' 'nvidia-96xx' 'nvidia-173xx' 'nvidia-legacy' 'nvidia-beta' 'nvidia' 'nvidia-beta-all')
+depends=("nvidia-utils=${pkgver}")
+license=('custom')
+
+install='nvidia.install'
+
+_arch='x86'
+_pkg="NVIDIA-Linux-${_arch}-${pkgver}"
+md5sums=('e982a05a85c68130acfe1d48086250e3')
+
+if [ "$CARCH" = "x86_64" ]; then
+	_arch='x86_64'
+	_pkg="NVIDIA-Linux-${_arch}-${pkgver}-no-compat32"
+	md5sums=('0583668d86f7318d99def3ed3e1cc4bc')
+fi
+
+source=("http://us.download.nvidia.com/XFree86/Linux-${_arch}/${pkgver}/${_pkg}.run")
+
+_kernver="$(uname -r)"
+build() {
+  cd "${srcdir}"
+
+  if [ -d "${_pkg}" ]; then
+	  rm -rf "${_pkg}"
+  fi
+ 
+  # Extract the nvidia drivers
+  sh "${_pkg}.run" --extract-only
+  cd "${_pkg}/kernel"
+
+  ln -s 'Makefile.kbuild' Makefile
+
+  # Loop through all detected kernels and build modules
+  msg 'Installing drivers...'
+  for _kernver in `file /boot/* | grep 'Linux kernel.*boot executable' | grep 'vmlinuz' | sed 's|.*version \([^ ]\+\).*|\1|'`;
+  do
+    cd "${srcdir}/${_pkg}"
+    cp -a kernel kernel-${_kernver}
+    cd kernel-${_kernver}
+    msg2 "Building module for $_kernver..."
+    make SYSSRC=/usr/src/linux-${_kernver} module
+  done
+}
+package() {
+  for _kernver in `file /boot/* | grep 'Linux kernel.*boot executable' | grep 'vmlinuz' | sed 's|.*version \([^ ]\+\).*|\1|'`;
+  do
+    # install the modules..
+    cd "${srcdir}/${_pkg}/kernel-${_kernver}"
+    msg2 "Installing module for ${_kernver}..."
+    install -D -m644 nvidia.ko "${pkgdir}/lib/modules/${_kernver}/kernel/drivers/video/nvidia.ko"
+  done
+
+  # Blacklist the Nouveau driver (avoiding possible conflicts by appending the -all suffix)
+  install -d -m755 "${pkgdir}/etc/modprobe.d"
+  echo "blacklist nouveau" > "${pkgdir}/etc/modprobe.d/nouveau_blacklist-all.conf"
+}
+

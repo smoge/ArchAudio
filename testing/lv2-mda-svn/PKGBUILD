@@ -4,7 +4,7 @@
 
 pkgname=lv2-mda-svn
 pkgver=2677
-pkgrel=1
+pkgrel=2
 pkgdesc="A lv2 port by Dave Robillard of the mda VST plugins by Paul Kellett"
 arch=('i686' 'x86_64')
 url="http://svn.drobilla.net/lad/trunk/mda-lv2/"

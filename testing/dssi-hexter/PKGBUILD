@@ -5,13 +5,14 @@
 
 pkgname=dssi-hexter
 pkgver=0.6.2
-pkgrel=1
+pkgrel=2
 pkgdesc="A DSSI software synthesizer that models the sound generation of a Yamaha DX7"
 arch=('i686' 'x86_64')
 url="http://dssi.sourceforge.net/hexter.html"
 license=('GPL')
 depends=('alsa-lib' 'liblo' 'gtk2' 'dssi')
 provides=('hexter')
+conflicts=('hexter')
 makedepends=('ladspa')
 options=('!libtool')
 source=(http://downloads.sourceforge.net/sourceforge/dssi/hexter-${pkgver}.tar.gz hexter)

@@ -2,7 +2,7 @@
 # Contributor: dmotd <inaudible@simplesuperlativ.es>
 
 pkgname=pd-extended-svn
-pkgver=14691
+pkgver=14692
 pkgrel=1
 pkgdesc="Pure Data Extended SVN version"
 url="http://puredata.info/"

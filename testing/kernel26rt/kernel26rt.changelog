@@ -16,12 +16,12 @@
 		- default I/O sched changed to Deadline
 
 20 June 2009 Ray Rashif <schivmeister@gmail.com>
-
+	
 	* kernel26rt 2.6.29.5_rt21-1
 	* Upstream update
 
 25 May 2009 Ray Rashif <schivmeister@gmail.com>
-
+	
 	* kernel26rt 2.6.29.4_rt16-1
 	* Upstream update
 

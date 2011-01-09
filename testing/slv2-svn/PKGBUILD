@@ -3,7 +3,7 @@
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 
 pkgname=slv2-svn
-pkgver=2787
+pkgver=2789
 pkgrel=1
 pkgdesc="Library for LV2 hosts (development version)"
 arch=('i686' 'x86_64')
@@ -39,7 +39,7 @@ build() {
   cd "$srcdir/$_svnmod-build/slv2"
 
 
-  python2 ./waf configure --prefix=/usr
-  python2 ./waf build $MAKEFLAGS
-  python2 ./waf install --destdir="$pkgdir/"
+  python2 waf configure --prefix=/usr
+  python2 waf build $MAKEFLAGS
+  python2 waf install --destdir="$pkgdir/"
 }

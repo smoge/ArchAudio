@@ -5,13 +5,14 @@
 pkgname=ladspa-invada
 _srcdirname=invada-studio-plugins
 pkgver=0.3.1
-pkgrel=1
+pkgrel=2
 pkgdesc="A set of LADSPA audio effect plugins, ported from VST."
 arch=('i686' 'x86_64')
 url="http://www.invadarecords.com/Downloads.php?ID=00000263"
 license=('GPL2')
 depends=('glibc')
 provides=('invada-studio-plugins')
+conflicts=('invada-studio-plugins')
 groups=('ladspa-plugins')
 makedepends=('ladspa')
 source=(http://www.invadarecords.com/downloads/invada-studio-plugins_0.3.1-1.tar.gz)

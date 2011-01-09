@@ -4,7 +4,7 @@
 # Contributor: Eduardo Pérez <eduardoperezval@gmail.com>
 
 pkgname=frescobaldi-devel
-pkgver=1.1.8
+pkgver=1.2.0
 pkgrel=2
 pkgdesc="A LilyPond sheet music editor for KDE4. It aims to be powerful, yet lightweight and easy to use. Development release."
 arch=('i686' 'x86_64')
@@ -12,11 +12,11 @@ url="http://www.frescobaldi.org/"
 license="GPL"
 depends=('kdebase-kwrite' 'lilypond' 'python>=2.4.0' 'pyqt' 'kdebindings-python')
 conflicts=('frescobaldi')
+provides=('frescobaldi')
 optdepends=('rumor')
-install=
 makedepends=('automoc4' 'cmake' 'docbook-xml')
 source=(http://lilykde.googlecode.com/files/frescobaldi-$pkgver.tar.gz)
-md5sums=('3d2f38083ceb22458ed9b8dd26185b9a')
+md5sums=('e5dbc9425e3aae9890d54649b3d60166')
 
 build() {
   cd "$startdir/src/frescobaldi-$pkgver"

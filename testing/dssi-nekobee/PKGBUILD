@@ -5,11 +5,12 @@
 
 pkgname=dssi-nekobee
 pkgver=0.1.7
-pkgrel=2
+pkgrel=3
 pkgdesc="A TB303-style synthesizer for DSSI"
 url="http://www.nekosynth.co.uk/wiki/nekobee"
 depends=('liblo' 'gtk2' 'dssi')
 provides=('nekobee')
+conflicts=('nekobee')
 options=('!libtool')
 arch=('i686' 'x86_64')
 license=('GPL')

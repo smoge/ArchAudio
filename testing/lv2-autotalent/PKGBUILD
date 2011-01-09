@@ -4,12 +4,13 @@
 pkgname=lv2-autotalent
 _dlname=talentedhack
 pkgver=1.85
-pkgrel=1
+pkgrel=2
 pkgdesc="Talentedhack is an LV2 port of Tom Baran's Autotalent, with added features and improved performance."
 arch=('i686' 'x86_64')
 url="http://code.google.com/p/talentledhack/"
 license=('GPL')
 provides=('talentedhack')
+conflicts=('talentedhack')
 depends=('lv2core' 'fftw')
 source=(http://talentledhack.googlecode.com/files/${_dlname}${pkgver}_source.tar.gz)
 md5sums=('f581d5a87f130431ab4b3d194fdad194 ')

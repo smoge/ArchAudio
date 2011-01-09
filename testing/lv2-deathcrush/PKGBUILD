@@ -2,15 +2,18 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: SpepS <dreamspepser at yahoo dot it>
 
-pkgname=deathcrush-lv2
+pkgname=lv2-deathcrush
+_othername="deathcrush-lv2"
 pkgver=04.10
-pkgrel=1
+pkgrel=3
 pkgdesc="An lv2 plugin that ruins your sounds, part of the Russolo Suite."
-arch=(i686 x86_64)
+arch=('i686' 'x86_64')
 url="http://intonarumori.sourceforge.net/"
 license=('GPL')
+provides=('deathcrush-lv2')
+conflicts=('deathcrush-lv2')
 depends=('glibc' 'lv2core')
-source=("http://downloads.sourceforge.net/project/intonarumori/Deathcrush/DeathcrushLV2-$pkgver.tar.bz2")
+source=("http://sourceforge.net/projects/intonarumori/files/Deathcrush/DeathcrushLV2-04.10.tar.bz2")
 md5sums=('83908d0f7226a59f5f27772b4d1dc775')
 
 build() {
@@ -21,6 +24,6 @@ build() {
 package() {
   cd "$srcdir/DeathcrushLV2-$pkgver/src"
   mkdir -p "$pkgdir/usr/lib/lv2"
-  cp -a "${pkgname/-/.}" "$pkgdir/usr/lib/lv2"
+  cp -a "${_othername/-/.}" "$pkgdir/usr/lib/lv2"
 }
 

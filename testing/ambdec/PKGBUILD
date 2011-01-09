@@ -1,6 +1,6 @@
 # $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-#Contributor: masutu <masutu dot arch at googlemail dot com>
+# Contributor: masutu <masutu dot arch at googlemail dot com>
 
 pkgname=ambdec
 pkgver=0.4.2

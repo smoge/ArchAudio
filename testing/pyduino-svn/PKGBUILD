@@ -38,5 +38,5 @@ build() {
   patch -p0 -i $srcdir/firmata-2.1.patch
 
   msg "Starting make..."
-  python setup.py install --root=$startdir/pkg
+  python2 setup.py install --root=$startdir/pkg
 }

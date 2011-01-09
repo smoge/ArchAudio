@@ -1,6 +1,7 @@
 # $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: hm_b < holger <at> music-nerds.net >
+
 pkgname=csound5
 pkgver=5.12.1
 pkgrel=2
@@ -13,16 +14,20 @@ optdepends=('java-environment: java wrapper' 'fltk: GUI-opcodes')
 makedepends=('scons' 'swig')
 provides=('csound5')
 conflicts=('csound')
-source=("http://downloads.sourceforge.net/csound/Csound$pkgver.tar.gz" 
-        'csound.sh' 
+source=("http://downloads.sourceforge.net/csound/Csound$pkgver.tar.gz"
+        'csound.sh'
         'install.py.diff')
+
 md5sums=('70b0c4a159c4960a09719674657949c9'
          '47d94412d167f95fe6917c9c2126dd81'
          '8cff1398ea0bd519b63dc71108c0de2e')
-_gccOptions="-I/opt/java/include -I/opt/java/include/linux -O3"
+
+
+_gccOptions="-I/opt/java/include -I/opt/java/include/linux -O2 -march=native"
 
 # useDouble is a requirement for using with blue via csound api
 #_csOptions="usePortAudio=1 usePortMIDI=0 buildCsound5GUI=1 useOSC=1 buildPythonOpcodes=1 buildInterfaces=1 buildVirtual=1 dynamicCsoundLibrary=1 buildJavaWrapper=1 useDouble=1"
+
 _csOptions="prefix=/usr useALSA=1 useJack=1 useFLTK=1 buildCsound5GUI=1 useOSC=1 buildPythonOpcodes=1 buildJavaWrapper=1 buildPythonWrapper=1 buildInterfaces=1 buildVirtual=1 buildUtilities=1 buildStkOpcodes=0 dynamicCsoundLibrary=1 useDouble=1"
 
 
@@ -32,21 +37,21 @@ build() {
 
   cd $srcdir/Csound$pkgver
 
-  scons customCFLAGS="$_gccOptions" $_csOptions || return 1
+  scons customCFLAGS="$_gccOptions" $_csOptions
   patch -p1 install.py < ../../install.py.diff
 
-  ./install.py --instdir=$pkgdir --prefix=/usr
-  
+  python2 install.py --instdir=$pkgdir --prefix=/usr
+
   # avoid conflict with libextractor
   mv $pkgdir/usr/bin/{,csound_}extract
 
   # remove other cruft
   rm $pkgdir/usr/*.md5sums
   rm $pkgdir/usr/bin/uninstall-csound5
-  
+
   install -Dm 755 $srcdir/csound.sh $pkgdir/etc/profile.d/csound.sh
 
-  #--instdir=$pkgdir 
+  #--instdir=$pkgdir
   #cd $startdir
   # if useDouble=0 install csound.sh instead of csound64.sh
   #install -Dm 755 csound64.sh pkg/etc/profile.d/csound.sh

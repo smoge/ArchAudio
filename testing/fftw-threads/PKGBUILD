@@ -7,7 +7,7 @@
 pkgname=fftw-threads
 _pkgname=fftw
 pkgver=3.2.2
-pkgrel=1
+pkgrel=2
 pkgdesc="A library for computing the discrete Fourier transform (DFT)"
 arch=('i686' 'x86_64')
 license=('GPL2')

@@ -1,13 +1,10 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-# Contributor: Ray Rashif <schivmeister@gmail.com>
+# Contributor: Ray Rashif <schiv@archlinux.org>
 # Contributor: timbosa <tinny_tim@dodo.com.au>
 # Contributor: Tobias Powalowski <tpowa@archlinux.org>
 # Contributor: Thomas Baechler <thomas@archlinux.org>
 
-pkgbase=kernel26rt
-pkgname=('kernel26rt' 'kernel26rt-headers')
-_kernelname=rt
+pkgname=kernel26rt
+_kernelname=${pkgname#kernel26}
 _basekernel=2.6.33
 _realkernel=2.6.33 # for rc builds, else same as _basekernel
 _kernelpatch=.7 # leave blank if no upstream patch

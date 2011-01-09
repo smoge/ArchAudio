@@ -1,13 +1,15 @@
 # Contributor: Tom Vincent <http://www.tlvince.com/contact/>
 # Contributor: SpepS <dreamspepser at yahoo dot it>
 
-pkgname=jack_mixer
+pkgname=jack-mixer
 pkgver=9
-pkgrel=2
+pkgrel=3
 pkgdesc="A GTK based Jack audio mixer"
 url="http://home.gna.org/jackmixer/"
 arch=('i686' 'x86_64')
 license=('GPL2')
+provides=('jack_mixer')
+conflicts=('jack_mixer')
 depends=('python2' 'python-fpconst' 'pygtk' 'jack' 'hicolor-icon-theme')
 optdepends=('lash: session support'
             'python-gconf: gconf support')
@@ -28,12 +30,12 @@ build() {
     --prefix=/usr \
     --sysconfdir=/usr/share \
     --disable-schemas-install
-  
+
   make
 }
 
 package() {
-  
+
   cd "$srcdir/$pkgname-$pkgver"
   make DESTDIR="$pkgdir/" install
 }

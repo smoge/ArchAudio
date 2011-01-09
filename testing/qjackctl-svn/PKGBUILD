@@ -3,7 +3,7 @@
 
 pkgname=qjackctl-svn
 pkgver=673
-pkgrel=1
+pkgrel=2
 pkgdesc="A qt based frontend to the jack server (jack-audio-connection-kit)"
 arch=('i686' 'x86_64')
 license=('GPL' 'openssl')

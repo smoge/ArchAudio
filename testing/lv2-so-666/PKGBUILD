@@ -16,13 +16,10 @@ md5sums=('6d85e98562b838e26dcabe88adeb3d5e')
 groups=('lv2-plugins')
 
 build() {
-  rm -f "$srcdir/SO-666/so-666"
+
   cd "$srcdir/SO-666"
   make
+  mkdir -p $pkgdir/usr/lib/lv2/
+  install -Dm755 so-666 $pkgdir/usr/lib/lv2/
 
-}
-
-package() {
-  mkdir "$pkgdir/usr/lib/lv2/"
-  cp "$srcdir/SO-666/so-666" "$pkgdir/usr/lib/lv2/"
 }

@@ -4,7 +4,7 @@
 
 pkgname=lv2-so-404
 pkgver=1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="SO-404 is a simple bass synthesizer using 1 oscillator and 1 filter."
 arch=('i686' 'x86_64')
 url="https://github.com/jeremysalwen/So-synth-LV2"
@@ -13,15 +13,15 @@ depends=('libsigc++' 'gtkmm')
 makedepends=('lv2-c++-tools')
 provides=('lv2-so-404')
 conflicts=('lv2-so-404')
+groups=('lv2-plugins')
 source=(http://d00m.org/~someone/so404/so-404.tar.gz)
 md5sums=('b56f1699b7ef46f7084ef066eb083ef9')
 
-groups=('lv2-plugins')
-
 
 build() {
+
   cd "$srcdir/SO-404"
   make
-  mkdir "${pkgdir}/usr/lib/lv2"
-  cp $srcdir/so* $pkgdir/usr/lib/lv2
+  mkdir -p $pkgdir/usr/lib/lv2/
+  install -Dm755 so-404 $pkgdir/usr/lib/lv2/
 }

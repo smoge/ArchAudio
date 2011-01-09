@@ -1,31 +1,31 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-# Contributor: hm_b <holger at music-nerds.net>
+# Contributors: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=qutecsound
-pkgver=0.4.1
-pkgrel=3
-pkgdesc="a simple frontend for Csound featuring a highlighting editor with autocomplete, interactive widgets and integrated help"
+pkgver=0.6.0
+pkgrel=2
+pkgdesc="QuteCsound is a cross platform editor and front-end for Csound with syntax highlighting"
+arch=('i686' 'x86_64')
 url="http://qutecsound.sourceforge.net/"
-arch=('i686')
 license=('GPL')
-depends=('csound5' 'qt')
-makedepends=()
-conflicts=()
-replaces=()
-backup=()
-install=
-source=(http://downloads.sourceforge.net/qutecsound/$pkgname-$pkgver-src.tar.gz qutecsound.desktop gcc44.diff)
-md5sums=('fab67133d73e413a8984242339c6a01f' '9265277b5002e7ff12e89214d03d6f8d'\
-         'bd96b9d8ae4a6013f3d43f47748f725d')
+depends=('csound' 'qt')
+source=("http://downloads.sourceforge.net/project/$pkgname/QuteCsound/0.6.0/$pkgname-$pkgver-src.tar.gz")
+md5sums=('73a87ef1b293819ec0975973143ac4aa')
+
 build() {
-  cd $startdir/src/$pkgname-$pkgver
-  patch -p0 < $startdir/gcc44.diff || return 1
-  qmake "CONFIG += build64" || return 1
-  install -d $pkgdir/usr/share/{qutecsound,pixmaps,applications}
-  install -d $pkgdir/usr/bin
-  make DESTDIR=$pkgdir/usr/bin TARGET=$pkgdir/usr/bin/qutecsound || return 1
-  install -p $startdir/qutecsound.desktop $pkgdir/usr/share/applications/
-  install -p images/qtcs.svg $pkgdir/usr/share/pixmaps/
-  cp -R examples $pkgdir/usr/share/qutecsound/
+  cd "$srcdir/$pkgname-$pkgver"
+
+  qmake qcs.pro
+  make
 }
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  mkdir -p "$pkgdir"/usr/{bin,share/{$pkgname,doc/$pkgname}}
+
+  install -Dm 755 bin/qutecsound-f "$pkgdir/usr/bin/$pkgname"
+
+  cp -a {examples,images} "$pkgdir/usr/share/$pkgname"
+  cp doc/* "$pkgdir/usr/share/doc/$pkgname"
+}
+

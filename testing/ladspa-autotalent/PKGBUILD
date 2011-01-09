@@ -4,13 +4,14 @@
 
 pkgname=ladspa-autotalent
 pkgver=0.2
-pkgrel=1
+pkgrel=2
 pkgdesc="An autotune-ish LADSPA effect."
 arch=('i686' 'x86_64')
 url="http://web.mit.edu/tbaran/www/autotalent.html"
 license=('GPL')
 depends=('glibc')
 provides=('autotalent')
+conflicts=('autotalent')
 groups=('ladspa-plugins')
 makedepends=('ladspa')
 source=(http://web.mit.edu/tbaran/www/autotalent-${pkgver}.tar.gz destdir.patch)

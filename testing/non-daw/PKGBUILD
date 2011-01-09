@@ -4,7 +4,7 @@
 # Contributor: btartsa <btartsa@gmail.com>
 
 pkgname=non-daw
-pkgver=20100403
+pkgver=20110106
 pkgrel=1
 pkgdesc="Non DAW is  a powerful, reliable and fast modular Digital Audio Workstation"
 url="http://non-daw.tuxfamily.org/"
@@ -13,8 +13,7 @@ arch=('i686' 'x86_64')
 depends=('fltk' 'jack' 'liblrdf')
 makedepends=('git')
 conflicts=()
-           
-install=()
+
 source=()
 md5sums=()
 
@@ -59,5 +58,5 @@ build() {
  sed -e "s|prefix=/usr|prefix=${pkgdir}/usr|g" \
    -i {timeline,mixer}/.config || return 1
  make install
-} 
+}
 

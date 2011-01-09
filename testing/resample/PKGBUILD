@@ -1,9 +1,10 @@
 # $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Jonathan Liu <net147@gmail.com>
+
 pkgname=resample
 pkgver=1.8.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Sampling-rate conversion and filter design utilities"
 arch=('i686' 'x86_64')
 url="http://ccrma.stanford.edu/~jos/resample/Free_Resampling_Software.html"

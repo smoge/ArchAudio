@@ -4,7 +4,7 @@
 
 pkgname=lv2-fil
 pkgver=2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Four-band parametric equalisers with visualisation."
 arch=('i686' 'x86_64')
 url="http://nedko.arnaudov.name/soft/lv2fil/"

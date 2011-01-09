@@ -4,11 +4,12 @@
 
 pkgname=vamp-qm
 pkgver=1.6.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Queen Mary Vamp Plugins"
 arch=('x86_64')
 url="http://isophonics.net/QMVampPlugins"
 provides=('qm-vamp-plugins-64bit')
+conflicts=('qm-vamp-plugins-64bit')
 license=('GPL')
 depends=('vamp-plugin-sdk')
 

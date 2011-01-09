@@ -3,7 +3,7 @@
 # Contributor: Owain Sutton < owainsutton at gmail dot com >
 
 pkgname=rumor
-pkgver=1.0.4
+pkgver=1.0.5
 pkgrel=1
 pkgdesc="A realtime monophonic (with chords) MIDI keyboard to Lilypond converter."
 arch=('i686' 'x86_64')
@@ -20,7 +20,7 @@ backup=()
 install=
 source=(http://launchpad.net/$pkgname/trunk/$pkgver/+download/$pkgname-$pkgver.tar.bz2)
 noextract=()
-md5sums=('097ca2b95e800468e4422fcd6e09667d')
+md5sums=('b4b531829e6901c958dad805cf1ab8ae')
 
 build() {
   cd $srcdir/$pkgname-$pkgver

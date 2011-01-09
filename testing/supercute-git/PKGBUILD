@@ -23,26 +23,26 @@ _gitname="SuperCute"
 build() {
   cd $srcdir
   msg "Connecting to GIT server...."
-  
+
   if [ -d $_gitname ] ; then
     (cd $_gitname && git pull origin)
     msg "The local files are updated."
   else
     git clone $_gitroot
   fi
-  
+
   msg "GIT checkout done or server timeout"
   msg "Starting make..."
-  
+
   cp -r $_gitname $_gitname-build
   cd $_gitname-build/
-  
+
   mkdir build
   cd build
-  cmake -DCMAKE_INSTALL_PREFIX=/usr .. -DSC_QT=1 -DWII=1 -DSC_ED=1 -DSC_EL=1 -DSC_VIM=1 -DNOVA_SIMD=1 || return 1
-  
+  cmake -DCMAKE_INSTALL_PREFIX=/usr .. -DSC_QT=1 -DWII=1 -DSC_ED=1 -DSC_EL=1 -DSC_VIM=1 -DNOVA_SIMD=1
+
   make
-  make DESTDIR=$pkgdir/ install || return 1
-  
+  make DESTDIR=$pkgdir/ install
+
   rm -rf $srcdir/$_gitname-build
 }

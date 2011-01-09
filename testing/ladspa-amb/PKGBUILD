@@ -7,12 +7,13 @@
 pkgname=ladspa-amb
 _pkgname=AMB-plugins
 pkgver=0.8.1
-pkgrel=1
+pkgrel=3
 pkgdesc="LADSPA plugins of various improved decoders"
 arch=('i686' 'x86_64')
 url="http://kokkinizita.net/linuxaudio/ladspa/"
 license=('GPL')
 provides=('amb-plugins')
+conflicts=('amb-plugins')
 groups=('ladspa-plugins')
 depends=('gcc-libs')
 source=(http://kokkinizita.net/linuxaudio/downloads/$_pkgname-$pkgver.tar.bz2)

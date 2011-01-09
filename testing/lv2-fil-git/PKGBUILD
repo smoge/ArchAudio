@@ -3,7 +3,7 @@
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 
 pkgname=lv2-fil-git
-pkgver=20110105
+pkgver=20110106
 pkgrel=1
 pkgdesc="Four-band parametric equalisers with visualisation."
 arch=('i686' 'x86_64')

@@ -4,13 +4,14 @@
 
 pkgname=ladspa-njl
 pkgver=0.2.1
-pkgrel=3
+pkgrel=4
 pkgdesc="LADSPA plugins for noise and experimental effects."
 arch=('i686' 'x86_64')
 url="http://devel.tlrmx.org/audio/"
 license=('GPL')
 depends=('glibc')
 provides=('njl-plugins')
+conflicts=('njl-plugins')
 groups=('ladspa-plugins')
 
 source=(http://devel.tlrmx.org/audio/source/njl-plugins-${pkgver}.tar.gz)

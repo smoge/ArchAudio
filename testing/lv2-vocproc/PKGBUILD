@@ -4,16 +4,17 @@
 
 pkgname=lv2-vocproc
 pkgver=0.2
-pkgrel=1
+pkgrel=2
 pkgdesc="A vocal processing lv2 plugin, pitch shifting with or without formant correction, automatic pitch correction, vocoder effect and harmonizer"
 arch=('i686' 'x86_64')
 url="http://hyperglitch.com/dev/VocProc/"
 license=('GPL2')
 depends=('gtkmm' 'fftw')
 provides=('vocproc')
+conflicts=('vocproc')
 groups=('lv2-plugins')
 makedepends=('lv2-c++-tools')
-source=(http://hyperglitch.com/files/vocproc/vocproc-$pkgver.tar.gz)
+source=('http://hyperglitch.com/files/vocproc/vocproc-0.2.tar.gz')
 md5sums=('21c9268679192f9fe095474027f74e0c')
 
 build() {

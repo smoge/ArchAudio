@@ -4,12 +4,14 @@
 
 pkgname=ardour2-svn
 _realname=ardour2
-pkgver=8448
+pkgver=8472
 pkgrel=1
 pkgdesc="Professional-grade Digital Audio Workstation"
 arch=('i686' 'x86_64')
 license=('GPL')
 url="http://ardour.org/"
+provides=('ardour' 'ardour2')
+conflicts=('ardour' 'ardour2')
 depends=('liblrdf>=0.4.0' 'liblrdf<0.4.1'
          'libgnomecanvasmm' 'liblo' 'libusb' 'aubio' 'flac'
          'slv2' 'rubberband')

@@ -4,7 +4,7 @@
 
 pkgname=fomus
 pkgver=0.1.14_alpha
-pkgrel=1
+pkgrel=4
 pkgdesc="Automatic music notation application for musicians and composers."
 arch=(i686 x86_64)
 url="http://fomus.sourceforge.net/"

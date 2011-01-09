@@ -4,7 +4,7 @@
 
 pkgname=lv2-so-kl5
 pkgver=1.1
-pkgrel=1
+pkgrel=2
 pkgdesc="SO-KL5 is a string based 'piano' synthezizer. The strings are modeled using the Karplus-Strong String simulation method."
 arch=('i686' 'x86_64')
 url="https://github.com/jeremysalwen/So-synth-LV2"
@@ -14,11 +14,14 @@ makedepends=('lv2-c++-tools')
 provides=('lv2-so-kl5')
 conflicts=('lv2-so-kl5')
 source=(http://d00m.org/~someone/sokl5/so-kl5.tar.gz)
-md5sums=('25ad375706ad441f68c4082f4bb625eb')
+md5sums=('c17df4aa81f46aa77dca423414d9e038')
+
 groups=('lv2-plugins')
 
 build() {
+
   cd "$srcdir/SO-KL5"
   make
-  cp $srcdir/*.so $pkgdir/usr/lib/lv2
+  mkdir -p $pkgdir/usr/lib/lv2/
+  install -Dm755 so-kl5 $pkgdir/usr/lib/lv2/
 }

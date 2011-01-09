@@ -4,7 +4,7 @@
 
 pkgname=hydrogen-svn
 pkgver=svn
-pkgrel=1
+pkgrel=2
 pkgdesc="Drum Machine and Pattern-based Sequencer"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -33,9 +33,9 @@ build() {
   cp -r "${srcdir}/${_svnmod}" "${srcdir}/${_svnmod}-build"
 }
 
-package() {  
+package() {
   cd "${srcdir}/${_svnmod}-build"
 
-  QTDIR="/usr/lib/qt4" scons prefix="/usr" oss=0 lash=1 debug=1 \
+  QTDIR="/usr/lib/qt4" scons prefix="/usr" oss=0 lash=1 debug=0 \
   jack=1 alsa=1 portaudio=0 portmidi=0 libarchive=1 DESTDIR="${pkgdir}" install
 }

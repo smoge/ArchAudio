@@ -4,7 +4,7 @@
 
 pkgname=lv2-invada
 pkgver=1.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc="A set of LV2 audio effect plugins, ported from VST."
 arch=('i686' 'x86_64')
 url="http://www.invadarecords.com/Downloads.php?ID=00000264"
@@ -12,6 +12,7 @@ license=('GPL2')
 depends=('gtk2')
 makedepends=('lv2core')
 provides=('invada-studio-plugins-lv2')
+conflicts=('invada-studio-plugins-lv2')
 groups=('lv2-plugins')
 source=(http://www.invadarecords.com/downloads/invada-studio-plugins-lv2_${pkgver}-0.tar.gz)
 md5sums=('7268424af33c65c02e73bf2b52340108')

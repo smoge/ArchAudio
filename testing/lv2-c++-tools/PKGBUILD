@@ -3,7 +3,7 @@
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 pkgname=lv2-c++-tools
 pkgver=1.0.3
-pkgrel=1
+pkgrel=4
 pkgdesc="Utilities needed for ll-plugins"
 arch=('i686' 'x86_64')
 url="http://ll-plugins.nongnu.org/hacking.html"

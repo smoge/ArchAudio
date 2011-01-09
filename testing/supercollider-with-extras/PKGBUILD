@@ -13,8 +13,8 @@ conflicts=('supercollider' 'supercollider-git')
 depends=('jack' 'avahi' 'fftw')
 arch=('i686' 'x86_64')
 makedepends=('subversion' 'libsndfile>=1.0' 'emacs' 'vim' 'gedit' 'icu' 'gcc>=3.0' 'pkgconfig>=0.14.0' 'scons>=0.96' 'alsa-lib' 'readline')
-optdepends=('cwiid: Wii Controller Support' 
-  'emacs: Emacs Interface' 
+optdepends=('cwiid: Wii Controller Support'
+  'emacs: Emacs Interface'
   'vim: Vim Interface'
   'gedit: GEdit Interface'
 )
@@ -25,8 +25,8 @@ md5sums=('20631117a7e9fb1c862833ce424ce9f4')
 build() {
   cd $srcdir/SuperCollider-Source/common
 
-  scons PREFIX=/usr DEVELOPMENT=yes X11=yes SCEL=yes SCED=yes LID=yes WII=yes READLINE=no || return 1
-  scons DESTDIR=$pkgdir/ install || return 1
-scons -C ../editors/scvim PREFIX=$pkgdir/usr VIMFILE_DIR=/usr/share/vim/addons install-system || return 1
+  scons PREFIX=/usr DEVELOPMENT=yes X11=yes SCEL=yes SCED=yes LID=yes WII=yes READLINE=no
+  scons DESTDIR=$pkgdir/ install
+scons -C ../editors/scvim PREFIX=$pkgdir/usr VIMFILE_DIR=/usr/share/vim/addons install-system
 
 }

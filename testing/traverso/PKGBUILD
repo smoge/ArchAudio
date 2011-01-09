@@ -4,7 +4,7 @@
 
 pkgname=traverso
 pkgver=0.49.2
-pkgrel=2
+pkgrel=3
 pkgdesc="Digital Audio Workstation with an innovative User Interface"
 arch=('i686' 'x86_64')
 url="http://traverso-daw.org/"
@@ -18,10 +18,7 @@ md5sums=('1acc46e2fa17e9a77f069b00307478a0')
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
 
-  cmake . -DCMAKE_INSTALL_PREFIX="/usr" \
-    -DWANT_MP3_ENCODE=1 \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DUSE_SYSTEM_SLV2_LIBRARY=1
+  cmake . -DCMAKE_INSTALL_PREFIX="/usr" -DWANT_MP3_ENCODE=1 -DCMAKE_BUILD_TYPE=Release -DUSE_SYSTEM_SLV2_LIBRARY=1
   make
 }
 
