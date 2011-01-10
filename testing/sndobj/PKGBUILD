@@ -2,7 +2,7 @@
 
 pkgname=sndobj
 _realname=SndObj
-pkgver=2.6.6
+pkgver=2.6.6.1
 pkgrel=1
 pkgdesc="The Sound Object Library is an object-oriented audio processing library. With PySndObj (python module)"
 arch=('i686' 'x86_64')

@@ -5,7 +5,7 @@
 pkgname=ardour2-svn
 _realname=ardour2
 pkgver=8472
-pkgrel=1
+pkgrel=2
 pkgdesc="Professional-grade Digital Audio Workstation"
 arch=('i686' 'x86_64')
 license=('GPL')
