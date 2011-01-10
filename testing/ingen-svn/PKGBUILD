@@ -1,0 +1,44 @@
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+
+pkgname=ingen-svn
+pkgver=2636
+pkgrel=1
+pkgdesc="A modular audio processing system for GNU/Linux audio systems using the Jack audio server and LV2 or LADSPA plugins."
+arch=('i686' 'x86_64')
+url="http://drobilla.net/software/ingen/"
+license=('GPL')
+depends=('flowcanvas' 'raul' 'redlandmm-svn' 'jack' 'libglademm')
+makedepends=('subversion' 'python2' 'doxygen' 'graphviz')
+provides=('ingen')
+conflicts=('ingen')
+install=$pkgname.install
+
+_svntrunk=http://svn.drobilla.net/lad/trunk
+_svnmod=ingen
+
+build() {
+  cd "$srcdir"
+
+  if [ -d $_svnmod/.svn ]; then
+    (cd $_svnmod && svn up -r $pkgver)
+  else
+    svn co $_svntrunk --config-dir ./ -r $pkgver $_svnmod
+  fi
+
+  msg "SVN checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "$srcdir/$_svnmod-build"
+  cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
+  cd "$srcdir/$_svnmod-build/ingen"
+
+  python2 waf configure --prefix=/usr --docs
+  python2 waf
+}
+
+package() {
+
+  cd "$srcdir/$_svnmod-build/ingen"
+
+  DESTDIR="$pkgdir/" python2 waf install
+}
