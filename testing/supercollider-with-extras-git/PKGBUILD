@@ -3,7 +3,7 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=supercollider-with-plugins-git
-pkgver=20110108
+pkgver=20110109
 pkgver_plugins=453
 pkgrel=1
 pkgdesc="An environment and programming language for real time audio synthesis and algorithmic composition. Extended package with SC3-Plugins."

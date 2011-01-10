@@ -15,16 +15,16 @@ optdepends=('lash: session support'
             'python-gconf: gconf support')
 options=('!libtool')
 install="$pkgname.install"
-source=("http://download.gna.org/jackmixer/$pkgname-$pkgver.tar.gz")
+source=("http://download.gna.org/jackmixer/jack_mixer-$pkgver.tar.gz")
 md5sums=('ee20bc3e76e20fcbb9a80ebba3d1c98c')
 
 build() {
 
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/jack_mixer-$pkgver"
 
   #Python2 fixes
   export PYTHON="python2"
-  sed -i "s_env python_&2_" $pkgname.py
+  sed -i "s_env python_&2_" jack_mixer.py
 
   ./configure \
     --prefix=/usr \
@@ -36,6 +36,6 @@ build() {
 
 package() {
 
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/jack_mixer-$pkgver"
   make DESTDIR="$pkgdir/" install
 }
