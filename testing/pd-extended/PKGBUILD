@@ -7,7 +7,7 @@ pkgver=0.42.5
 pkgrel=2
 pkgdesc="PureData: a real-time music and multimedia environment"
 url="http://puredata.info/"
-arch=('i686' 'x86_64' 'ppc')
+arch=('i686' 'x86_64')
 license=('BSD')
 depends=('libv4l' 'fftw' 'jack-audio-connection-kit' 'tk' 'freeglut' \
   'libquicktime' 'libdv' 'gsl' 'imagemagick' \
