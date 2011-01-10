@@ -1,4 +1,5 @@
-# Maintainer: Philipp Überbacher <murks at lavabit dot com>
+# Contributor: Philipp Überbacher <murks at lavabit dot com>
+
 pkgname=rhost
 pkgver=4
 pkgrel=1
@@ -14,11 +15,9 @@ md5sums=('03bf26511396f24298a2f8191b3d5988'
 
 build() {
   cd "${srcdir}/${pkgname}"
-  make config=release || return 1
+  make config=release
 
   cd "${srcdir}/${pkgname}/bin/release"
-  install -D rhost "${pkgdir}/usr/bin/rhost" || return 1
-  install -Dm644 "${srcdir}/LICENSE" "${pkgdir}/usr/share/licences/${pkgname}/LICENSE" || return 1
+  install -D rhost "${pkgdir}/usr/bin/rhost"
+  install -Dm644 "${srcdir}/LICENSE" "${pkgdir}/usr/share/licences/${pkgname}/LICENSE"
 }
-
-# vim:set ts=2 sw=2 et:
