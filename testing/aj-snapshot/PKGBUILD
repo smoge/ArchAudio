@@ -1,0 +1,25 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=aj-snapshot
+pkgver=0.9.1
+pkgrel=1
+pkgdesc="Command line utility to store/restore ALSA and/or JACK connections to/from an XML file. "
+arch=('i686' 'x86_64')
+url="http://sourceforge.net/projects/aj-snapshot/"
+license=('GPL')
+makedepends=('jack' 'mxml' 'alsa-lib')
+source=(http://sourceforge.net/projects/aj-snapshot/files/$pkgname-$pkgver.tar.bz2)
+noextract=()
+md5sums=('324681252fd761cf4b1593a9ef41929e')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

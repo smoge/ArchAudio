@@ -27,6 +27,6 @@ build() {
 
   scons PREFIX=/usr DEVELOPMENT=yes X11=yes SCEL=yes SCED=yes LID=yes WII=yes READLINE=no
   scons DESTDIR=$pkgdir/ install
-scons -C ../editors/scvim PREFIX=$pkgdir/usr VIMFILE_DIR=/usr/share/vim/addons install-system
+  scons -C ../editors/scvim PREFIX=$pkgdir/usr VIMFILE_DIR=/usr/share/vim/addons install-system
 
 }

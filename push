@@ -2,4 +2,4 @@
 
 hg rebase --svn
 hg push
-hg push https://bitbucket.org/smoge/archaudio
+hg push -f https://bitbucket.org/smoge/archaudio

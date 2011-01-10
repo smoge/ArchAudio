@@ -3,7 +3,7 @@
 # Contributor: hm_b < holger <at> music-nerds.net >
 
 pkgname=supercollider
-pkgver=3.4.2
+pkgver=3.4.2rc2
 pkgrel=1
 pkgdesc="An environment and programming language for real time audio synthesis and algorithmic composition"
 url="http://supercollider.sourceforge.net/"
@@ -11,7 +11,7 @@ license=('GPL')
 depends=('jack' 'avahi' 'fftw')
 arch=('i686' 'x86_64')
 makedepends=('subversion' 'libsndfile>=1.0' 'emacs' 'vim' 'gedit' 'icu' 'gcc>=3.0' 'pkgconfig>=0.14.0' 'scons>=0.96' 'alsa-lib' 'cwiid' 'readline')
-optdepends=('cwiid: Wii Controller Support'
+optdepends=(
   'emacs: Emacs Interface'
   'vim: Vim Interface'
   'gedit: GEdit Interface'
@@ -19,7 +19,7 @@ optdepends=('cwiid: Wii Controller Support'
 )
 
 source=(http://downloads.sourceforge.net/supercollider/$pkgver/SuperCollider-$pkgver-Source-linux.tar.gz)
-md5sums=('ea1ee180e1caa7c4cec0bc8f6664570e')
+md5sums=('ce8072fed7e4bbbd58a04f8b9829b5bd')
 
 build() {
   cd $srcdir/SuperCollider-Source/common
