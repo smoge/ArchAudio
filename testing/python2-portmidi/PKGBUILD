@@ -1,0 +1,20 @@
+# Contributor: Calimero <calimeroteknik@free.fr>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=python2-portmidi
+pkgver=0.0.7
+pkgrel=1
+pkgdesc="Python wrapper for portmidi"
+arch=('i686' 'x86_64' 'any')
+url="http://bitbucket.org/aalex/pyportmidi/"
+license=('none')
+depends=('python' 'pyrex' 'portmidi')
+provides=('pyportmidi')
+conflicts=('pyportmidi')
+source=(http://bitbucket.org/aalex/pyportmidi/downloads/python-portmidi-${pkgver}.tar.gz)
+md5sums=('f505d7e0c4abee7f7efcb3183c925ee9')
+
+build() {
+  cd "$srcdir"/python-portmidi-"$pkgver"
+  python2 setup.py install --prefix=/usr --root="${pkgdir}"
+}
