@@ -1,0 +1,30 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=sndobj
+_realname=SndObj
+pkgver=2.6.6
+pkgrel=1
+pkgdesc="The Sound Object Library is an object-oriented audio processing library. With PySndObj (python module)"
+arch=('i686' 'x86_64')
+url="http://sndobj.sourceforge.net"
+license=('GPL')
+groups=('lib')
+provides=('sndobj' 'libsndobj')
+conflicts=('sndobj' 'libsndobj' 'libsndobj-cvs')
+depends=()
+makedepends=('cvs' 'scons')
+source=(http://sourceforge.net/projects/sndobj/files/SndObj%20Library%20Sources/SndObj-2.6.6/SndObj-2.6.6.1-linux.tar.gz)
+md5sums=('3c76a4fe255e754fb50dd05b49807f68')
+
+
+build() {
+  cd "$srcdir/$_realname-$pkgver"
+
+  scons prefix=/usr pythonmodule=true instdir="$pkgdir"
+  make
+}
+
+package() {
+  cd "$srcdir/$_realname-$pkgver"
+  scons install
+}
