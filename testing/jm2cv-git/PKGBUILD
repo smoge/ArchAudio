@@ -1,0 +1,40 @@
+# Contributor: David Adler <david dot jo dot adler at gmail dot com>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=jm2cv-git
+pkgver=20110101
+pkgrel=2
+pkgdesc="converts between JACK MIDI and control voltage"
+arch=('i686' 'x86_64')
+url="http://git.fuzzle.org/cgit/jm2cv.git/"
+license=('GPL')
+depends=('jack')
+provides=('jm2cv')
+conflicts=('jm2cv')
+md5sums=()
+
+_gitroot="http://git.fuzzle.org/cgit/jm2cv.git"
+_gitname="jm2cv"
+
+build() {
+  cd "$srcdir"
+  msg "Connecting to GIT server...."
+
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull origin
+    msg "The local files are updated."
+  else
+    git clone $_gitroot
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "$srcdir/$_gitname-build"
+  cp -r "$srcdir/$_gitname" "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname-build"
+
+  cmake -DCMAKE_INSTALL_PREFIX="$pkgdir/usr" . -DCMAKE_BUILD_TYPE=Release
+  make
+  make install
+}
