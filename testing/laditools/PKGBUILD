@@ -1,0 +1,22 @@
+# Contributor: Daniele Paolella <danielepaolella@email.it>
+# Contributor: Philipp Überbacher <hollunder at gmx dot at>
+
+pkgname=laditools
+pkgver=1.0_rc2
+_pkgver=1.0-rc2
+pkgrel=2
+pkgdesc="Tools that take advantage of the DBus interfaces recently added to JACK and LASH."
+arch=('i686' 'x86_64')
+url="http://www.marcochapeau.org/files/laditools/"
+license=('GPL3')
+depends=(python2 pygtk pyxml glade)
+optdepends=(g15composer g15daemon wmdocklib)
+provides=(laditray ladilog ladiconf g15ladi wmladi)
+source=(http://www.marcochapeau.org/files/laditools/$pkgname-$_pkgver.tar.gz)
+md5sums=('1e3d63036503a039fbe07b5172e6b44b')
+
+
+build() {
+  cd "$srcdir/$pkgname-$_pkgver"
+  python2 setup.py install --prefix=/usr --root=$startdir/pkg
+}
