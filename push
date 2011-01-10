@@ -1,5 +1,0 @@
- #!/bin/bash
-
-hg rebase --svn
-hg push
-hg push https://bitbucket.org/smoge/archaudio
