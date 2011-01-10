@@ -5,5 +5,5 @@ syntax: glob
 *.kdev4
 */src/*
 */pkg/*
-push
+/push
 *.orig
