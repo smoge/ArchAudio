@@ -1,26 +1,35 @@
 # $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Jon Austin (IRC: slypheed) <jon.i.austin (gmail)>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=csound5-cvs
-pkgver=20110108
-pkgrel=2
+pkgname=csound-cvs
+pkgver=20110109
+pkgrel=1
 pkgdesc="A programming language designed and optimized for sound rendering and signal processing"
-url="http://sourceforge.net/project/showfiles.php?group_id=81968"
+url="http://csound.sourceforge.net/"
 arch=('i686' 'x86_64')
 license=('LGPL' 'GPL')
-depends=('python' 'fltk' 'portaudio' 'jdk')
+depends=('python2' 'fltk' 'portaudio' 'jdk')
 makedepends=('scons' 'swig' 'cvs')
-provides=('csound5')
-conflicts=('csound')
+provides=('csound5' 'csound')
+conflicts=('csound' 'csound5-cvs')
 install=${pkgname}.install
 
-_gccOptions="-O2 -march=native"
+case $CARCH in
+  'i686')
+    _gccOptions="-O2 -march=i686 -mtune=generic -pipe" ;;
+  'x86_64')
+    _gccOptions="-O2 -march=x86-64 -mtune=generic -pipe" ;;
+esac
 
-# useDouble is a requirement for using with blue via csound api
-_csOptions="usePortAudio=1 usePortMIDI=0 buildCsound5GUI=1 useOSC=1 buildPythonOpcodes=1 buildInterfaces=1 buildVirtual=1 dynamicCsoundLibrary=1 buildJavaWrapper=1 useDouble=1"
 _cvsroot=":pserver:anonymous:@csound.cvs.sourceforge.net:/cvsroot/csound"
 _cvsmod="csound5"
+
+# useDouble is a requirement for using with blue via csound api:
+
+_csOptions="usePortAudio=1 usePortMIDI=0 buildCsound5GUI=1 useOSC=1 buildPythonOpcodes=1 buildInterfaces=1 buildVirtual=1 dynamicCsoundLibrary=1 buildJavaWrapper=1 useDouble=1"
+
 
 build() {
 
@@ -43,4 +52,5 @@ build() {
 
   scons customCFLAGS="$_gccOptions" $_csOptions
   python2 install.py --prefix=$pkgdir
+
 }
