@@ -2,7 +2,7 @@
 Name=zynaddsubfx
 Comment=An opensource software synthesizer
 Exec=/usr/bin/zynaddsubfx
-Icon=/usr/share/pixmaps/zynaddsubfx.ico
+Icon=/usr/share/pixmaps/zynaddsubfx.svg
 Terminal=false
 Type=Application
 Categories=AudioVideo;

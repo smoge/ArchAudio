@@ -1,36 +1,48 @@
 # $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Daniele Paolella <danielepaolella@email.it>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 # Contributor: DonVla <donvla@users.sourceforge.net>
 
+# Version with lash support. Thanks: Daniele Paolella <danielepaolella@email.it>
+
 pkgname=zynaddsubfx
 pkgver=2.4.1
-pkgrel=1
-pkgdesc="An opensource software synthesizer capable of making a countless number of instruments"
+pkgrel=2
+pkgdesc="An opensource software synthesizer, built with LASH support"
 arch=('i686' 'x86_64')
 url="http://zynaddsubfx.sourceforge.net"
 license=('GPL')
-depends=('fltk' 'fftw' 'jack')
+depends=('fltk' 'fftw' 'jack' 'lash')
 makedepends=('mxml')
+provides=("zynaddsubfx=${pkgver}")
+conflicts=('zynaddsubfx')
 options=('!makeflags')
+changelog=ChangeLog
+source=(http://downloads.sourceforge.net/project/zynaddsubfx/zynaddsubfx/${pkgver}/ZynAddSubFX-${pkgver}.tar.bz2
+        zynaddsubfx.desktop Makefile.inc.patch)
 
-source=(http://downloads.sourceforge.net/sourceforge/${pkgname}/ZynAddSubFX-${pkgver}.tar.bz2 zynaddsubfx.desktop)
-md5sums=('59eb69ce24d6f8c605f8ba43958d0526' 'eebb1b252bb1997a037d241a61f00d4c')
+md5sums=('59eb69ce24d6f8c605f8ba43958d0526'
+         'e55a28aeb8047397f906ad04ef57d8ad'
+         '24eb50a0dc8805634066cd4cc556743f')
+
 
 
 build() {
   cd ${srcdir}/ZynAddSubFX-${pkgver}/src
 
-  make -j1
+  patch -p0 < ${srcdir}/Makefile.inc.patch
+
+  make
   install -v -D -m 0755 zynaddsubfx $pkgdir/usr/bin/zynaddsubfx
 
   cd ${srcdir}/ZynAddSubFX-${pkgver}/ExternalPrograms/Spliter
-  make -j1
+  make
   install -v -m 0755 spliter ${pkgdir}/usr/bin/spliter
   install -v -D -m 0644 readme.txt ${pkgdir}/usr/share/${pkgname}/spliter-readme.txt
 
   cd ${srcdir}/ZynAddSubFX-${pkgver}/ExternalPrograms/Controller
-  make -j1
+  make
   install -v -m 0755 controller ${pkgdir}/usr/bin/controller
 
   cd ${srcdir}/ZynAddSubFX-${pkgver}
@@ -39,5 +51,7 @@ build() {
   install -v -m 0644 *.txt ${pkgdir}/usr/share/${pkgname}/
 
   install -v -D -m 0644 src/zynaddsubfx_icon.svg ${pkgdir}/usr/share/pixmaps/zynaddsubfx.svg
-  install -v -D -m 0644 ${startdir}/zynaddsubfx.desktop ${pkgdir}/usr/share/applications/zynaddsubfx.desktop
+  install -v -D -m 0644 ${srcdir}/zynaddsubfx.desktop ${pkgdir}/usr/share/applications/zynaddsubfx.desktop
 }
+
+# vim:set ts=2 sw=2 et:
