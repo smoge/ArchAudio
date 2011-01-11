@@ -1,0 +1,29 @@
+# Contributor: hm_b <holger@music-nerds.net>
+# Contributor: Leslie P. Polzer <polzer@stardawn.org>
+# Contributor:  Philipp Überbacher <murks at lavabit dot com>
+
+pkgname=jack-capture
+pkgver=0.9.57
+pkgrel=1
+pkgdesc="Simple CLI recording tool for JACK (including a minimalistic GUI)"
+url="http://www.notam02.no/arkiv/src/"
+license="GPL"
+arch=('i686' 'x86_64')
+depends=('jack' 'gtk2' 'lame')
+optdepends=( 'meterbridge' )
+provides=('jack_capture')
+conflicts=('jack_capture')
+
+source=(http://archive.notam02.no/arkiv/src/jack_capture-$pkgver.tar.gz)
+md5sums=('c78ddb7d6b9f1bbef20f663d7c3f99a5')
+
+build() {
+  cd ${srcdir}/jack_capture-${pkgver}
+  make
+}
+
+package(){
+  cd ${srcdir}/jack_capture-${pkgver}
+  make install prefix=${pkgdir}/usr
+}
+
