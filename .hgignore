@@ -6,4 +6,5 @@ syntax: glob
 */src/*
 */pkg/*
 /push
+*.pkg.*
 *.orig
