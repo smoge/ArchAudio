@@ -3,15 +3,16 @@
 # Contributor: jpate <j.k.pate@sms.ed.ac.uk>
 
 pkgname=praat
-pkgver=5.2.08
+pkgver=5.2.09
 pkgrel=1
 pkgdesc="A tool for 'Doing Phonetics by computer'"
 arch=('x86_64' 'i686')
 url="http://www.fon.hum.uva.nl/praat/"
 license=('GPL')
 depends=( 'alsa-lib' 'gtk2' )
-source=("http://www.fon.hum.uva.nl/praat/praat5208_sources.tar.gz")
-md5sums=('58fbc6a25b9e326ee59b022987736abf')
+source=("http://www.fon.hum.uva.nl/praat/praat5209_sources.tar.gz")
+md5sums=('d343cb3431a17a0a9fdf5b9f29e261a9')
+
 
 build() {
   cd "$srcdir/sources_5208/"
