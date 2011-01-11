@@ -1,0 +1,29 @@
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+
+pkgname=cecilia2
+pkgver=2.0.5
+pkgrel=1
+pkgdesc="Cecilia is a graphic user interface for the sound synthesis and sound processing package Csound."
+arch=('i686' 'x86_64')
+url="http://cecilia.sourceforge.net/"
+license=('GPL')
+depends=('csound' 'tcl' 'tk')
+optdepends=('sox')
+source=(http://sourceforge.net/projects/cecilia/files/cecilia-src/2.0.5/cecilia-2.0.5.tar.gz)
+md5sums=('0544e4cb36201521469c80454999834d')
+
+build() {
+  cd $srcdir/cecilia-$pkgver
+
+ # Infinite Loop Fix
+ sed  -e "184,197d" \
+      -e "199d" \
+      -i lib/prefs.tcl
+
+  sed "s_/usr/local_$pkgdir/usr_" -i Makefile
+
+  mkdir -p $pkgdir/usr/bin
+
+  make install
+}
+
