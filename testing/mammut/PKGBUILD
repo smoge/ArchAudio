@@ -1,0 +1,25 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=mammut
+pkgver=0.60
+pkgrel=1
+pkgdesc="Mammut will FFT your sound in one single gigantic analysis (no windows). These spectral data, where the development in time is incorporated in mysterious ways, may then be transformed by different algorithms prior to resynthesis. An interesting aspect of Mammut is its completely non-intuitive sound transformation approach."
+arch=('i686' 'x86_64')
+url="http://www.notam02.no/arkiv/doc/mammut/"
+license=('GPL')
+depends=('jack' 'juce' 'libsamplerate' 'libsndfile' 'libvorbis')
+source=(http://archive.notam02.no/arkiv/src/$pkgname-$pkgver.tar.gz)
+md5sums=('d61bb191330f41016bfd52d7c995a937')
+
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}/src"
+  mv Makefile.linux Makefile
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}

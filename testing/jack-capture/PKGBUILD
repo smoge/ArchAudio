@@ -1,6 +1,6 @@
 # Contributor: hm_b <holger@music-nerds.net>
 # Contributor: Leslie P. Polzer <polzer@stardawn.org>
-# Contributor:  Philipp Überbacher <murks at lavabit dot com>
+# Contributor: Philipp Überbacher <murks at lavabit dot com>
 
 pkgname=jack-capture
 pkgver=0.9.57

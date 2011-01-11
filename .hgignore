@@ -7,4 +7,5 @@ syntax: glob
 */pkg/*
 /push
 *.pkg.*
+*.tar.*
 *.orig
