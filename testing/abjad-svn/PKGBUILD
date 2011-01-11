@@ -4,7 +4,7 @@
 
 pkgname=abjad-svn
 _realname=abjad
-pkgver=
+pkgver=svn
 pkgrel=1
 pkgdesc="Abjad: a Python API for Formalized Score Control"
 url="http://code.google.com/p/abjad/"
@@ -14,12 +14,7 @@ depends=('python2' 'lilypond')
 makedepends=()
 conflicts=('abjad')
 provides=('abjad')
-replaces=()
-backup=()
 options=(!emptydirs)
-install=
-source=()
-md5sums=()
 
 _svntrunk=http://abjad.googlecode.com/svn/abjad/trunk/
 _svnmod=${_realname}
