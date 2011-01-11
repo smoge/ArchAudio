@@ -1,0 +1,78 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+
+pkgname=csound
+pkgver=5.12.1
+pkgrel=1
+pkgdesc="A sound and music synthesis system, providing facilities for composition and performance over a wide range of platforms."
+arch=(i686 x86_64)
+url="http://csound.sourceforge.net/"
+license=('GPL')
+depends=('fltk' 'fluidsynth' 'liblo' 'perl' 'portaudio' 'portmidi' 'tk')
+makedepends=('scons')
+optdepends=('qutecsound: qt frontend'
+            'cecilia: tcl/tk frontend')
+provides=('csound5')
+conflicts=('csound5' 'csound5-cvs' 'csound5.12-cvs')
+install="$pkgname.install"
+source=("http://downloads.sourceforge.net/project/${pkgname}/${pkgname}5/${pkgname}5.12/Csound${pkgver}.tar.gz")
+md5sums=('70b0c4a159c4960a09719674657949c9')
+_csOptions="gcc4opt=native usePortAudio=1 usePortMIDI=1 buildCsound5GUI=1 useOSC=1 buildPythonOpcodes=1 buildInterfaces=1 buildVirtual=1 dynamicCsoundLibrary=1 buildJavaWrapper=1 useDouble=0"
+_csoundOptions="gcc4opt=native useCoreAudio=0 buildCsound5GUI=1 useOSC=1 dynamicCSoundLibrary=1 buildPythonOpcodes=1 buildVirtual=1 buildInterfaces=1 buildPythonWrapper=1 buildJavaWrapper=1 buildCSEditor=1 buildNewParser=0 tclversion=8.5 buildRelease=1 buildStkOpcodes=1 buildTclcsound=1 buildLuaWrapper=1 buildCsoundAC=1 useDouble=0"
+
+build() {
+  cd "$srcdir/Csound$pkgver"
+
+  # Removing ldconfig
+  sed -i "483,484d" install.py
+
+#  sed \
+#	-e "20i\ \ \ \ customCPPPATH.append('/opt/java/include')" \
+#	-e "20i\ \ \ \ customCPPPATH.append('/usr/include/stk')" \
+#	-i custom.py
+
+  sed -i "s_/fltk-1.1__" custom.py
+
+  sed -i "s_mtune_march_g;762,764d;2366,2367d" SConstruct
+
+  sed \
+	-e "s_\(env python\).*_\12_" \
+	-e "s_\(bin/python\).*_\12_" \
+	-i `grep -rlE "(env python|bin/python)" .`
+
+  scons $_csOptions
+#$_csoundOptions
+  # Build
+#  scons \
+#	customCFLAGS="-O3 -march=native" \
+#	buildCsound5GUI=1 \
+#	useOSC=1 \
+#	dynamicCSoundLibrary=1 \
+#	buildPythonOpcodes=1 \
+#	buildVirtual=1 \
+#	buildInterfaces=1 \
+#	buildPythonWrapper=1 \
+#	buildJavaWrapper=1 \
+#	buildCSEditor=1 \
+#	buildNewParser=1 \
+#	tclversion=8.5 \
+#	buildRelease=1 \
+#	buildStkOpcodes=1 \
+#	buildTclcsound=1 \
+#	buildLuaWrapper=1 \
+#	buildCsoundAC=1
+
+}
+
+package() {
+  cd "$srcdir/Csound$pkgver"
+
+  python2 install.py \
+	--prefix="$pkgdir/usr" \
+
+  # Deleting unneeded files
+  rm "$pkgdir"/usr/bin/uninstall-csound5
+  rm "$pkgdir"/usr/*.md5sums
+}
+
+# vim:set ts=2 sw=2 et:
