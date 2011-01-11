@@ -1,0 +1,22 @@
+# Contributor: DonVla <donvla@users.sourceforge.net>
+
+pkgname=jack-delay
+_pkgname=jack_delay
+pkgver=0.2.0
+pkgrel=1
+pkgdesc="A command line tool to measure JACK audio server latency"
+arch=('i686' 'x86_64')
+url="http://www.kokkinizita.net/linuxaudio/"
+license=('GPL')
+provides=('jdelay' 'jack_delay')
+replaces=('jdelay' 'jack_delay')
+depends=('jack-audio-connection-kit')
+makedepends=('gcc' )
+source=(http://www.kokkinizita.net/linuxaudio/downloads/${_pkgname}.tar.bz2)
+md5sums=('64a1d7ef7eaea035ae7c8bd88fbe3e07')
+
+build() {
+  cd ${srcdir}/${_pkgname}
+  make
+  install -v -D -m 0755 jack_delay ${pkgdir}/usr/bin/jack-delay
+}
