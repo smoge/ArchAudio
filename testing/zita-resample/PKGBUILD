@@ -12,7 +12,7 @@ url="http://www.kokkinizita.net/linuxaudio/"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('zita-resampler' 'libsndfile')
-source=(http://www.kokkinizita.net/linuxaudio/downloads/${_pkgname}-${_pkgver}.tar.bz2)libsndfile
+source=(http://www.kokkinizita.net/linuxaudio/downloads/${_pkgname}-${_pkgver}.tar.bz2)
 md5sums=('cbf0da8b7ace593082a5f01eed828109')
 
 build() {
