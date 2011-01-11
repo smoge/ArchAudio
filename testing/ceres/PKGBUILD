@@ -1,28 +1,32 @@
-# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+# Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=ceres
 pkgver=0.56
 pkgrel=1
-pkgdesc="Ceres is a large program for doing various sound effects in the frequency domain and displaying sonograms."
-arch=('i686' 'x86_64')
-url="http://www.notam02.no/arkiv/src/"
+pkgdesc="A program for doing various sound effects in the frequency domain and displaying sonograms."
+arch=(i686 x86_64)
+url="http://archive.notam02.no/arkiv/src/"
 license=('GPL')
-makedepends=('python2' 'libxml2' 'pygtk' 'glade' 'libsndfile')
-source=(http://archive.notam02.no/arkiv/src/$pkgname-$pkgver.tar.gz Makefile.patch)
-
+depends=('lesstif' 'libjpeg' 'libxmu' 'jack' 'libpng' 'libxft' 'sndlib' 'pygtk-1.2')
+source=("$url$pkgname-$pkgver.tar.gz"
+        "Makefile")
 md5sums=('b0193899890d6063f3ff3fded68cb6c9'
-         '86d25143ed536e1720d59895cbdf38cb')
-
+         '142bed70d083fd4f79c61de8ecb521f9')
 
 build() {
-  alias python='python2'
-  cd "${srcdir}/${pkgname}-${pkgver}/src"
-  patch < ${srcdir}/Makefile.patch
+  cd "$srcdir/$pkgname-$pkgver/src"
+
+  # sndlib new API fix
+  sed -i "s|MUS_COMPATIBLE_FORMAT|MUS_AUDIO_COMPATIBLE_FORMAT|" sndplay.c
+
+  cp ../../Makefile .
   make
 }
 
 package() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "$srcdir/$pkgname-$pkgver/src"
 
-  make DESTDIR="$pkgdir/" install
+  make INSTALLPATH="$pkgdir/usr" install
 }
+
+# vim:set ts=2 sw=2 et:

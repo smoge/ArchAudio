@@ -15,7 +15,7 @@ md5sums=('d343cb3431a17a0a9fdf5b9f29e261a9')
 
 
 build() {
-  cd "$srcdir/sources_5208/"
+  cd "$srcdir/sources_5209/"
 
   cp makefiles/makefile.defs.linux.gtk makefile.defs
 
