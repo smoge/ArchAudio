@@ -1,0 +1,30 @@
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+# Contributor: Prashant Vaibhav <mercurysquad@googlemail.com>
+# Original source code by Julian Storer <http://www.rawmaterialsoftware.com/juce>
+
+pkgname=juce
+pkgver=1.52
+pkgrel=1
+pkgdesc="JUCE (Jules' Utility Class Extensions) is an all-encompassing C++ class library for developing cross-platform applications."
+arch=('i686' 'x86_64')
+url="http://www.rawmaterialsoftware.com/juce/"
+license=('GPL')
+depends=('libx11' 'libxinerama' 'libgl' 'freetype2' 'pth' 'alsa-lib')
+makedepends=('unzip' 'premake')
+source=("http://switch.dl.sourceforge.net/sourceforge/juce/juce_1_52.zip")
+md5sums=('6cd492c77773f09ac4f5ab296abc011f')
+
+build() {
+
+  cd $srcdir/$pkgname/build/linux
+
+  ./runpremake
+  make CONFIG=Release
+
+  mkdir -p $pkgdir/usr/{include/juce,lib}
+
+  install -Dm 644 $srcdir/$pkgname/bin/libjuce.a $pkgdir/usr/lib
+  install -Dm 644 $srcdir/$pkgname/*.h $pkgdir/usr/include/juce
+
+}
+

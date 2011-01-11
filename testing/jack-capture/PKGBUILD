@@ -15,7 +15,7 @@ provides=('jack_capture')
 conflicts=('jack_capture')
 
 source=(http://archive.notam02.no/arkiv/src/jack_capture-$pkgver.tar.gz)
-md5sums=('c78ddb7d6b9f1bbef20f663d7c3f99a5')
+md5sums=('6b7266fa172754a3a7b6f8ec30ce4ea7')
 
 build() {
   cd ${srcdir}/jack_capture-${pkgver}
