@@ -11,8 +11,8 @@ url="http://www.pawfal.org/Software/SSM"
 license="GPL"
 builddepends=('ladspa')
 depends=('fltk' 'liblrdf' 'jack-audio-connection-kit')
-source=(http://dl.sourceforge.net/sourceforge/spiralmodular/spiralmodular-${pkgver}.tar.bz2)
-md5sums=('6f25036856d5d550f3d4ac67fcb10a56')
+source=(http://downloads.sourceforge.net/project/spiralmodular/spiralmodular/0.2.2a%20%28Latest%20Version%29/spiralmodular-${pkgver}.tar.bz2)
+md5sums=('e4f44908f72447995103009a2bbf3d56')
 
 build() {
   cd "$startdir/src/spiralmodular-0.2.2"
