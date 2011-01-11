@@ -18,7 +18,7 @@ optdepends=(
   'supercollider-with-extras: replace supercollider by this package for all the extra goodies'
 )
 
-source=(http://downloads.sourceforge.net/supercollider/$pkgver/SuperCollider-$pkgver-Source-linux.tar.gz)
+source=(http://downloads.sourceforge.net/supercollider/3.4.2/SuperCollider-$pkgver-Source-linux.tar.gz)
 md5sums=('ce8072fed7e4bbbd58a04f8b9829b5bd')
 
 build() {
