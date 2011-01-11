@@ -12,7 +12,7 @@ license=('GPL')
 groups=('lib')
 provides=('sndobj' 'libsndobj')
 conflicts=('sndobj' 'libsndobj' 'libsndobj-cvs')
-depends=()
+depends=('python2')
 makedepends=('cvs' 'scons')
 
 _cvsroot=":pserver:anonymous@sndobj.cvs.sourceforge.net:/cvsroot/sndobj"
