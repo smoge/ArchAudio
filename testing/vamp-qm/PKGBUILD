@@ -3,21 +3,33 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=vamp-qm
+_origname=qm-vamp-plugins
 pkgver=1.6.1
-pkgrel=2
+pkgrel=3
 pkgdesc="Queen Mary Vamp Plugins"
-arch=('x86_64')
+arch=('i686' 'x86_64')
 url="http://isophonics.net/QMVampPlugins"
 provides=('qm-vamp-plugins-64bit')
 conflicts=('qm-vamp-plugins-64bit')
 license=('GPL')
 depends=('vamp-plugin-sdk')
 
-source=('http://isophonics.net/files/qm-vamp-plugins-1.6.1-amd64-linux.tar.gz')
-md5sums=('7d00328f571b4fea1fda3b163e03b50a')
+case $CARCH in
+  'i686')
+    source=('http://isophonics.net/files/qm-vamp-plugins-1.6.1-i686-linux.tar.gz')
+    md5sums=('5c8759e938f7b1ab6231b1488d55f7cd')
+    _thisArch=i686 ;;
+  'x86_64')
+    source=('http://isophonics.net/files/qm-vamp-plugins-1.6.1-amd64-linux.tar.gz')
+    md5sums=('7d00328f571b4fea1fda3b163e03b50a')
+    _thisArch=amd64 ;;
+esac
+
 
 build() {
-  rm $srcdir/qm-vamp-plugins-1.6.1-amd64-linux/*.txt
+
+  rm $srcdir/$_origname-$pkgver-$_thisArch-linux/*.txt
   install -d $pkgdir/usr/lib/vamp/
-  install -p $srcdir/qm-vamp-plugins-1.6.1-amd64-linux/* $pkgdir/usr/lib/vamp/
+  install -p $srcdir/$_origname-$pkgver-$_thisArch-linux/* $pkgdir/usr/lib/vamp/
+
 }
