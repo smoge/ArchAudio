@@ -4,7 +4,7 @@
 
 pkgname=pd-extended
 pkgver=0.42.5
-pkgrel=2
+pkgrel=3
 pkgdesc="PureData: a real-time music and multimedia environment"
 url="http://puredata.info/"
 arch=('i686' 'x86_64')
@@ -13,9 +13,9 @@ depends=('libv4l' 'fftw' 'jack-audio-connection-kit' 'tk' 'freeglut' \
   'libquicktime' 'libdv' 'gsl' 'imagemagick' \
   'ftgl' 'libgl' 'dssi')
 makedepends=('swig' 'automake' 'curl')
-conflicts=('pd' 'pd-gem' 'pdp' 'zexy')
+conflicts=()
 provides=('pd' 'pd-extended' 'pd-gem=0.91.3' 'pdp' 'zexy')
-replaces=(pd-extended)
+replaces=('pd-extended' 'pd-extended-svn')
 backup=()
 options=('!makeflags')
 install=
