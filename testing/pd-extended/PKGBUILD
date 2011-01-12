@@ -4,7 +4,8 @@
 
 pkgname=pd-extended
 pkgver=0.42.5
-pkgrel=3
+pkgrel=3provides=('pd-extended')
+
 pkgdesc="PureData: a real-time music and multimedia environment"
 url="http://puredata.info/"
 arch=('i686' 'x86_64')

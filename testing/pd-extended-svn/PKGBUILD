@@ -12,7 +12,7 @@ depends=('libv4l' 'fftw' 'jack-audio-connection-kit' 'tk' 'freeglut' \
   'libquicktime' 'libdv' 'gsl' 'imagemagick' \
   'ftgl' 'libgl' 'dssi')
 makedepends=('subversion' 'swig' 'automake' 'curl')
-conflicts=('pd' 'pd-gem' 'pdp' 'zexy')
+conflicts=()
 provides=('pd' 'pd-extended' 'pd-gem=0.91.3' 'pdp' 'zexy')
 replaces=(pd-extended)
 backup=()
