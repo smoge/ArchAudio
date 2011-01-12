@@ -89,7 +89,7 @@ package_jack2-svn() {
 package_jack2-dbus-svn() {
   pkgdesc="The next-generation JACK with SMP support (for D-Bus interaction only) (development version)"
   depends+=('dbus-core')
-  provides=("jack2-dbus=1.9.6" 'jackdbus')
+  provides=("jack2-dbus=1.9.6" 'jackdbus' 'jack') 
   conflicts+=('jack2-dbus')
 
   cd "$srcdir/$_svnmod-dbus-build"
