@@ -13,8 +13,8 @@ license="GPL"
 depends=('fltk' 'liblrdf' 'jack')
 makedepends=('ladspa')
 install="$pkgname.install"
-source=("http://downloads.sourceforge.net/project/spiralmodular/spiralmodular/0.2.2a%20%28Latest%20Version%29/spiralmodular-${pkgver}.tar.bz2")
-md5sums=('e4f44908f72447995103009a2bbf3d56')
+source=("http://sourceforge.net/projects/${pkgname}/files/${pkgname}/0.2.2a%20%28Latest%20Version%29/${pkgname}-${pkgver}.tar.gz")
+md5sums=('bf1b692c378b2c7d3b9ee4905d56854f')
 
 build() {
   cd "$srcdir/spiralmodular-0.2.2"
