@@ -2,9 +2,10 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
+
 pkgname=pd-git
 pkgver=20110112
-pkgrel=1
+pkgrel=2
 pkgdesc="The Pure Data real-time music and multimedia environment"
 arch=('i686' 'x86_64')
 url="http://crca.ucsd.edu/~msp/software.html"
@@ -37,10 +38,7 @@ build() {
   cd "${srcdir}/${_gitname}-build"
 
   ./autogen.sh
-  ./configure --prefix=/usr --mandir=/usr/share/man --enable-alsa --enable-jack
-
+  ./configure --prefix=/usr --enable-alsa --enable-jack
   make
-
   make DESTDIR="$pkgdir" install
-  install -Dm644 ../LICENSE.txt "$pkgdir/usr/share/licenses/pd/LICENSE"
 }
