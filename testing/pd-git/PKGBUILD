@@ -1,0 +1,46 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=pd-git
+pkgver=20110112
+pkgrel=1
+pkgdesc="The Pure Data real-time music and multimedia environment"
+arch=('i686' 'x86_64')
+url="http://crca.ucsd.edu/~msp/software.html"
+license=('BSD' 'GPL')
+depends=('jack' 'tk')
+provides=('pd')
+conflicts=('pd')
+source=()
+md5sums=()
+
+_gitroot="git://pure-data.git.sourceforge.net/gitroot/pure-data/pure-data"
+_gitname="pure-data"
+
+build() {
+  cd "${srcdir}"
+  msg "Connecting to GIT server...."
+
+  if [ -d ${_gitname} ] ; then
+    cd ${_gitname} && git pull origin
+    msg "The local files are updated."
+  else
+    git clone ${_gitroot}
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "${srcdir}/${_gitname}-build"
+  git clone "${srcdir}/${_gitname}" "${srcdir}/${_gitname}-build"
+  cd "${srcdir}/${_gitname}-build"
+
+  ./autogen.sh
+  ./configure --prefix=/usr --mandir=/usr/share/man --enable-alsa --enable-jack
+
+  make
+
+  make DESTDIR="$pkgdir" install
+  install -Dm644 ../LICENSE.txt "$pkgdir/usr/share/licenses/pd/LICENSE"
+}
