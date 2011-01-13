@@ -4,7 +4,7 @@
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
 pkgname=jconvolver
 pkgver=0.8.7
-pkgrel=1
+pkgrel=2
 pkgdesc="Convolution Engine for JACK, including example config and reverbs files"
 url="http://www.kokkinizita.net/linuxaudio/"
 arch=('i686' 'x86_64')

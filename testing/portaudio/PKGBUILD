@@ -1,0 +1,23 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=portaudio
+pkgver=v19_20071207
+pkgrel=3
+pkgdesc="PortAudio is a free, cross platform, open-source, audio I/O library."
+arch=('i686' 'x86_64')
+url="http://www.portaudio.com"
+license="custom"
+depends=('jack')
+makedepends=('subversion')
+conflicts=('portaudio')
+provides=('portaudio')
+source=(http://www.portaudio.com/archives/pa_stable_v19_20071207.tar.gz)
+md5sums=('d2943e4469834b25afe62cc51adc025f')
+
+build() {
+  cd $startdir/src/$pkgname
+
+  ./configure --prefix=/usr --with-alsa --with-jack
+  make
+  make DESTDIR=$startdir/pkg install
+}

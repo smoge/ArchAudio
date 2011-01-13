@@ -1,12 +1,13 @@
 # Contributor: Robert Schwarz <mail@rschwarz.net>
+
 pkgname=specimen-svn
 pkgver=88
-pkgrel=2
+pkgrel=3
 pkgdesc="an open source, MIDI controllable audio sampler"
 arch=('i686' 'x86_64')
 url="http://zhevny.com/specimen/"
 license=('GPL')
-depends=('gtk2' 'libxml2' 'libsndfile' 'libsamplerate' 'alsa-lib>=0.9.0' 'jack-audio-connection-kit' 'phat')
+depends=('gtk2' 'libxml2' 'libsndfile' 'libsamplerate' 'alsa-lib>=0.9.0' 'jack' 'phat')
 conflicts=(specimen)
 provides=(specimen)
 source=()
