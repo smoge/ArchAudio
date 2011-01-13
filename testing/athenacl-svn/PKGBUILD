@@ -1,0 +1,40 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=athenacl-svn
+_realname=athenaCL
+pkgver=2.0.0a15
+pkgrel=1
+pkgdesc="The athenaCL system is an open-source, object-oriented musical composition tool written in Python."
+url="http://code.google.com/p/athenacl/"
+arch=(any)
+license=('GPL')
+depends=('python2')
+makedepends=()
+conflicts=('athenacl')
+provides=('athenacl')
+replaces=('athenacl')
+backup=()
+options=(!emptydirs)
+install=
+source=()
+md5sums=()
+
+_svntrunk=http://athenacl.googlecode.com/svn/trunk/
+_svnmod=${_realname}
+
+build() {
+
+  cd ${srcdir}
+
+  if [ -d $_svnmod ] ; then
+    (cd $_svnmod && svn update)
+    msg "The local files are updated."
+  else
+    svn co ${_svntrunk} ${_svnmod}
+  fi
+
+  cd $srcdir/$_svnmod
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}
