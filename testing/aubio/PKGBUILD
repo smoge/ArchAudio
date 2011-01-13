@@ -8,7 +8,7 @@
 
 pkgname=aubio
 pkgver=0.3.2
-pkgrel=4
+pkgrel=5
 pkgdesc="A library for audio labelling"
 arch=('i686' 'x86_64')
 url="http://aubio.piem.org/"
@@ -21,6 +21,6 @@ md5sums=('ffc3e5e4880fec67064f043252263a44')
 build() {
   cd ${startdir}/src/${pkgname}-${pkgver}
   PYTHON=python2 ./configure --prefix=/usr
-  make || return 1
+  make
   make DESTDIR=${startdir}/pkg install
 }

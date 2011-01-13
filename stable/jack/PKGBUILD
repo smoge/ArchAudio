@@ -16,7 +16,7 @@ depends=('libsamplerate')
 makedepends=('doxygen' 'libffado' 'celt')
 optdepends=('libffado: FireWire audio device support'
 	    'celt: NetJACK driver CELT codec')
-provides=('jackd')
+provides=('jackd' 'jack')
 options=('!libtool')
 source=(http://jackaudio.org/downloads/$_tarname-$pkgver.tar.gz)
 
@@ -24,7 +24,7 @@ build() {
   cd "$srcdir/$_tarname-$pkgver"
 
   ./configure --prefix=/usr --libdir=/usr/lib
-  make || return 1
+  make
   make DESTDIR="$pkgdir/" install
 }
 md5sums=('d58e29a55f285d54e75134cec8e02a10')

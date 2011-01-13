@@ -4,7 +4,7 @@
 
 pkgname=athenacl-svn
 _realname=athenaCL
-pkgver=2.0.0a15
+pkgver=96
 pkgrel=1
 pkgdesc="The athenaCL system is an open-source, object-oriented musical composition tool written in Python."
 url="http://code.google.com/p/athenacl/"
