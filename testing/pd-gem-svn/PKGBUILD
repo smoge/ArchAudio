@@ -1,24 +1,24 @@
 # Contributor: waffenladen <holger at music-nerds.net>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=pd-gem
+pkgname=pd-gem-svn
 _pkgname=gem
-pkgver=0.92.3
-_pkgver=0.92-3
+pkgver=svn
 pkgrel=1
 pkgdesc="Graphics Environment for Multimedia - an external for PureData"
 arch=('i686' 'x86_64')
 url=h"ttp://puredata.info/community/projects/software/gem"
 depends=('pd' 'libgl' 'libtiff' 'libjpeg' 'ftgl' 'mesa' 'avifile')
 license=('GPL')
-source=(http://puredata.info/community/projects/software/$_pkgname/releases/$pkgver/$_pkgname-$_pkgver.tar.gz)
-md5sums=('d1dcea1d7adeab824648d0b3e069c064')
+source=(http://pd-gem.svn.sourceforge.net/viewvc/pd-gem/trunk/Gem.tar.gz)
+md5sums=('ff4cfc9a57c9170d7dac2773386735d0')
 
 
 build() {
 
-  cd ${startdir}/src/${_pkgname}-${_pkgver}/src
-  autoconf
+  cd ${startdir}/src/Gem/src
+  #autoconf
+  ./autogen.sh
   ./configure --prefix=/usr --without-ffmpeg
   make
   make DESTDIR=$startdir/pkg install
