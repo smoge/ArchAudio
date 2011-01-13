@@ -14,7 +14,7 @@ license=('GPL')
 provides=('fil-plugins')
 conflicts=('fil-plugins')
 groups=('ladspa-plugins')
-depends=('gcc-libs')
+depends=('gcc-libs' 'ladspa')
 source=(http://www.kokkinizita.net/linuxaudio/downloads/$_pkgname-$pkgver.tar.bz2)
 md5sums=('39f34be516752a9740a65547e1128124')
 

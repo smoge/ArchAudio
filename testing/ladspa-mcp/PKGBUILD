@@ -4,14 +4,14 @@
 pkgname=ladspa-mcp
 _pkgname=MCP-plugins
 pkgver=0.4.0
-pkgrel=2
+pkgrel=3
 pkgdesc="LADSPA plugins designed for Alsa Modular Synth"
 arch=('i686' 'x86_64')
 url="http://kokkinizita.net/linuxaudio/index.html"
 provides=('mcp-plugins')
 conflicts=('mcp-plugins')
 license=('GPL')
-depends=('gcc-libs')
+depends=('gcc-libs' 'ladspa')
 source=(http://kokkinizita.net/linuxaudio/downloads/${_pkgname}-${pkgver}.tar.bz2)
 md5sums=('2a0fc50281a150eb781dbcfe2fb9c532')
 

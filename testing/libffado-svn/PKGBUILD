@@ -6,17 +6,17 @@
 
 pkgname=libffado-svn
 pkgver=1944
-pkgrel=1
+pkgrel=2
 pkgdesc="Driver for FireWire audio devices (development version)"
 arch=('i686' 'x86_64')
 url="http://www.ffado.org/"
 license=('GPL')
 depends=('libiec61883' 'libavc1394' 'libsigc++'
-         'libxml++' 'alsa-lib' 'dbus')
+         'libxml++' 'alsa-lib' 'dbus' 'jack')
 makedepends=('subversion' 'libconfig' 'scons' 'pyqt')
 optdepends=('pyqt: mixer applet'
             'libconfig: ffado-test')
-provides=('libffado')
+provides=('libffado' 'ffado')
 conflicts=('libffado' 'ffado-svn')
 replaces=('ffado-svn')
 source=()
