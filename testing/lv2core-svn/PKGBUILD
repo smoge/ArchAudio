@@ -4,7 +4,7 @@
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 
 pkgname=lv2core-svn
-pkgver=2787
+pkgver=2832
 pkgrel=1
 pkgdesc="LV2: Successor to the LADSPA audio plug-in standard (development version)"
 arch=('i686' 'x86_64')
