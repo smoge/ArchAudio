@@ -3,7 +3,7 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=fontforge-cvs
-pkgver=cvs
+pkgver=20110114
 pkgrel=1
 pkgdesc="An outline and bitmap font editor"
 arch=('i686' 'x86_64')
