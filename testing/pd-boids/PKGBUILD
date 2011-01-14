@@ -14,7 +14,7 @@ md5sums=('43f36f2f54b308f81e6bdd1d33944b66')
 
 build() {
   cd $srcdir/boids-$pkgver
-  make
+  make --prefix=/usr
 }
 
 build() {

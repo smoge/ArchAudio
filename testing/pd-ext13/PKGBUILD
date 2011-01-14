@@ -17,7 +17,8 @@ md5sums=('91b7d214a1223ed5a802efcddd88844e')
 
 build() {
   cd "${srcdir}/${_origName}"
-  make
+  make  --prefix=/usr
   make DESTDIR=$startdir/pkg install
 }
+
 
