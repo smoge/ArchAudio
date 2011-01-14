@@ -16,5 +16,5 @@ md5sums=('7479cef0c3314d12231dafd88b398bc4')
 build() {
   cd $srcdir/creb-$pkgver
   ./configure --prefix=/usr
-  make --prefix=/usr
+  make
 }

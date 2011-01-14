@@ -19,6 +19,7 @@ build() {
   # replace Makefile:
   cd $srcdir/boids-$pkgver
   mv Makefile Makefile.old
+  cp $startdir/Makefile $srcdir/boids~-$pkgver
 
   # buid:
   cp $startdir/Makefile $srcdir/boids-$pkgver

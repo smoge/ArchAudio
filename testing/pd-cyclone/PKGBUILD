@@ -9,13 +9,16 @@ url="http://suita.chopin.edu.pl/~czaja/miXed/externs/cyclone.html"
 depends=('pd')
 license=('GPL2')
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/cyclone/cyclone-0.1-alpha54.tar.gz)
-md5sums=('0c803c8e2f10b4c40637899396ab6d79')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/cyclone/cyclone-0.1-alpha54.tar.gz Makefile)
 
 build() {
-  cd ${srcdir}/cyclone
-  make --prefix=/usr
 
+  # replace Makefile:
+  cd $srcdir/cyclone-$pkgver
+  mv Makefile Makefile.old
+
+  # buid:
+  make
 }
 
 package() {
