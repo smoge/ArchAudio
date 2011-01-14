@@ -1,24 +1,31 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=pd-$_origName
-_origName=ext13
+pdname=ext13
+pkgname=pd-$pdname
 pkgver=0.17.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Externals for PureData"
 arch=('i686' 'x86_64')
 url="http://www.puredata.org/"
 depends=('pd')
 license=('GPL2')
-provides=($_origName)
-conflicts=($_origName)
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/$_origName/$_origName-$pkgver.tar.gz)
-md5sums=('91b7d214a1223ed5a802efcddd88844e')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/$pdname/$pdname-$pkgver.tar.gz Makefile)
 
 build() {
-  cd "${srcdir}/${_origName}"
-  make  --prefix=/usr
+
+  cd "${srcdir}/${pdname}-${pkgver}"
+  mv Makefile Makefile.old
+  cp $startdir/Makefile "${srcdir}/${pdname}-${pkgver}"
+  make
+}
+
+package() {
+  cd "${srcdir}/${pdname}-${pkgver}"
   make DESTDIR=$startdir/pkg install
 }
 
-
+md5sums=('91b7d214a1223ed5a802efcddd88844e'
+         'e6fbe339bd9bc262e26e91b318008f3a')
