@@ -1,25 +1,25 @@
-# Contributor: farid abdelnour <farid at atelier-labs.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-# need work
+# needs work
 
-pkgname=pd-pdp
-_origName=pdp
-pkgver=0.12.6
+pkgname=pd-hid
+_origName=hid
+pkgver=0.7
 pkgrel=1
 pkgdesc="An extension library for Pure Data, providing video and other media processing functionality."
 arch=('i686' 'x86_64')
-url="http://zwizwa.be/pd/$pkgname/"
+url="http://puredata.info"
 depends=('pd' 'libpng' 'libquicktime' 'gsl')
 license=('GPL2')
-provides=('pdp')
-conflicts=('pdp')
+provides=('hid')
+conflicts=('hid')
 groups=('pd-externals')
 source=(http://sourceforge.net/projects/pure-data/files/libraries/$v_origName/$_origName-$pkgver.tar.gz)
-md5sums=('d0e3649bc20d119f2fc0b41ea1aeb8b3')
+#md5sums=('a1b18a29c9574c35c2231def6c0fa5a9') # 0.6
+md5sums=('cc5677b93536dc778caeb34bb9b40f33') # 0.7
 
 build() {
-  cd ${startdir}/src/$_origName-${pkgver}
+  cd $srcdir/$_origName-$pkgver
   make
   make DESTDIR=$startdir/pkg install
 }
