@@ -5,7 +5,7 @@
 pkgname=lv2-ir
 _origName="ir.lv2"
 pkgver=1.0
-pkgrel=1
+pkgrel=3
 pkgdesc="lv2-IR is a zero-latency, realtime, high performance signal convolver especially for creating reverb effects. Supports impulse responses with 1, 2 or 4 channels, in any soundfile format supported by libsndfile."
 arch=('i686' 'x86_64')
 url="http://factorial.hu/plugins/lv2/ir"
@@ -16,7 +16,8 @@ conflicts=('ir-lv2')
 groups=('lv2-plugins')
 makedepends=('lv2core' )
 source=(http://factorial.hu/system/files/$_origName-$pkgver.tar.gz)
-md5sums=('633cbfc0298d0b97cc3d3529801e5994')
+md5sums=('e2fdee1b53084f8eed44dfc121457fba')
+
 
 build() {
   cd "$srcdir/$_origName"
