@@ -1,6 +1,6 @@
 diff -Naur musescore-svn.orig//mscore/CMakeLists.txt musescore-svn.new//mscore/CMakeLists.txt
---- musescore-svn.orig//mscore/CMakeLists.txt	2010-06-16 23:10:50.000000000 +0200
-+++ musescore-svn.new//mscore/CMakeLists.txt	2010-06-16 23:13:58.000000000 +0200
+--- musescore-svn.orig//mscore/CMakeLists.txt   2010-06-16 23:10:50.000000000 +0200
++++ musescore-svn.new//mscore/CMakeLists.txt    2010-06-16 23:13:58.000000000 +0200
 @@ -86,7 +86,7 @@
        SET(Mscore_SHARE_NAME    "mscore.app/")
    endif(MINGW)
@@ -9,10 +9,10 @@ diff -Naur musescore-svn.orig//mscore/CMakeLists.txt musescore-svn.new//mscore/C
 +      SET(Mscore_INSTALL_NAME  "musescore/")
        SET(Mscore_SHARE_NAME    "share/")
  endif (MINGW OR APPLE)
- 
+
 diff -Naur musescore-svn.orig//mscore/manual/CMakeLists.txt musescore-svn.new//mscore/manual/CMakeLists.txt
---- musescore-svn.orig//mscore/manual/CMakeLists.txt	2010-06-16 23:10:36.000000000 +0200
-+++ musescore-svn.new//mscore/manual/CMakeLists.txt	2010-06-16 23:13:06.000000000 +0200
+--- musescore-svn.orig//mscore/manual/CMakeLists.txt    2010-06-16 23:10:36.000000000 +0200
++++ musescore-svn.new//mscore/manual/CMakeLists.txt 2010-06-16 23:13:06.000000000 +0200
 @@ -35,5 +35,5 @@
        MuseScore-ro.pdf
        MuseScore-ru.pdf
@@ -21,12 +21,12 @@ diff -Naur musescore-svn.orig//mscore/manual/CMakeLists.txt musescore-svn.new//m
 +      DESTINATION ${Mscore_SHARE_NAME}doc/musescore-svn
        )
 diff -Naur musescore-svn.orig//mscore/mscore/mscore.cpp musescore-svn.new//mscore/mscore/mscore.cpp
---- musescore-svn.orig//mscore/mscore/mscore.cpp	2010-06-16 23:10:27.000000000 +0200
-+++ musescore-svn.new//mscore/mscore/mscore.cpp	2010-06-16 23:13:59.000000000 +0200
+--- musescore-svn.orig//mscore/mscore/mscore.cpp    2010-06-16 23:10:27.000000000 +0200
++++ musescore-svn.new//mscore/mscore/mscore.cpp 2010-06-16 23:13:59.000000000 +0200
 @@ -897,15 +897,15 @@
        if (debugMode)
              printf("open handbook for language <%s>\n", qPrintable(lang));
- 
+
 -      QFileInfo mscoreHelp(mscoreGlobalShare + QString("man/MuseScore-") + lang + QString(".pdf"));
 +      QFileInfo mscoreHelp(mscoreGlobalShare + QString("../doc/musescore-svn/MuseScore-") + lang + QString(".pdf"));
        if (!mscoreHelp.isReadable()) {
