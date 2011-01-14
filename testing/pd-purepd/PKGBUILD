@@ -1,26 +1,31 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=pd-purepd
+pdname=purepd
+pkgname=pd-$pdname
 pkgver=0.1.1
-pkgrel=1
+pkgrel=2
 pkgdesc="External for PureData"
 arch=('i686' 'x86_64')
 url="http://www.puredata.org/"
 depends=('pd')
 license=('GPL2')
-provides=($_origName)
-conflicts=($_origName)
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/purepd/purepd-$pkgver.tar.gz)
-md5sums=('128eaa8e8c57cef7c49223ad3657142a')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/$pdname/$pdname_pkgver.tar.gz Makefile)
 
 build() {
-  cd $srcdir/purepd-0.1.1
+
+  cd $srcdir/$pdname-$pkgver
+  mv Makefile Makefile.old
+  cp $startdir/Makefile "${srcdir}/${pdname}-${pkgver}"
   make
 }
 
 package() {
-  cd $srcdir/purepd-0.1.1
+  cd "${srcdir}/${pdname}-${pkgver}"
   make DESTDIR=$startdir/pkg install
 }
 
+md5sums=('5e87f971352ce07899ffbb04e98ca300'
+         '5230be9a03fe12dface197f695144ac2')

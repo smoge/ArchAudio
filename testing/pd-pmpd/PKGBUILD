@@ -1,27 +1,32 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=pd-pmpd
-_origName=pmpd
+# need work
+
+pdname=pmpd
+pkgname=pd-$pdname
 pkgver=0.9
-pkgrel=1
-pkgdesc="Physical Modelling for pd."
+pkgrel=2
+pkgdesc="Physical Modelling PureData"
 arch=('i686' 'x86_64')
-url="http://drpichon.free.fr/pmpd/"
+url="http://www.puredata.org/"
 depends=('pd')
 license=('GPL2')
-provides=($_origName)
-conflicts=($_origName)
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/pmpd/pmpd-0.9.tar.gz)
-md5sums=('1fd1768e6f902ce5469712b987aef9ff')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/$pdname/$pdname_pkgver.tar.gz)
 
 build() {
-  cd $srcdir/$_origName-$pkgver
+
+  cd $srcdir/$pdname-$pkgver
+  mv Makefile Makefile.old
+  cp $startdir/Makefile "${srcdir}/${pdname}-${pkgver}"
   make
 }
 
 package() {
-  cd $srcdir/$_origName-$pkgver
+  cd "${srcdir}/${pdname}-${pkgver}"
   make DESTDIR=$startdir/pkg install
 }
 
+md5sums=('bd0ac6036aa1982aa3f6f3796bead46c')
