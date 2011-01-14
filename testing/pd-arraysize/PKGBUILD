@@ -24,6 +24,9 @@ build() {
   mv Makefile Makefile.old
   cp $startdir/Makefile $srcdir/arraysize-0.1
   make
+
+package () {
+  cd $srcdir/arraysize-0.1
   make DESTDIR=$startdir/pkg install
 }
 

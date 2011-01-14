@@ -2,18 +2,22 @@
 
 pkgname=pd-mapping
 pkgver=0.2
-pkgrel=1
+pkgrel=2
 pkgdesc="External for PureData"
 arch=('i686' 'x86_64')
 url="http://www.puredata.org/"
 depends=('pd')
 license=('GPL2')
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/mapping/mapping-$pkgver.tar.gz)
-md5sums=('9f599f8e5025599f3d01f4365cd8807f')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/mapping/mapping-$pkgver.tar.gz Makefile)
+
+md5sums=('9f599f8e5025599f3d01f4365cd8807f'
+         'f307a8975b027c44251cfd2ae4b86bce')
 
 build() {
   cd ${srcdir}/mapping-$pkgver
+  mv Makefile Makefile.old
+  cp $startdir/Makefile $srcdir/mapping-$pkgver
   make
 }
 

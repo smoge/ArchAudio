@@ -10,7 +10,7 @@ pkgdesc="A music score editor written in Qt4"
 arch=('i686' 'x86_64')
 url="http://www.musescore.org/en/"
 license=('GPL')
-depends=('qt>=4.3.0' 'libsndfile' 'tesseract')
+depends=('qt>=4.3.0' 'libsndfile' 'qtscriptgenerator' 'tesseract')
 makedepends=('cmake' 'doxygen' 'subversion')
 optdepends=('portaudio' 'jack')
 conflicts=('musescore' 'mscore')
