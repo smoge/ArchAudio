@@ -1,9 +1,9 @@
 # Contributor: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=gx_head
-pkgver=rc
-pkgrel=2
-pkgdesc="A simple mono amplifier to be used in a 'JACKified' environment. Guitarix branch."
+pkgver=0.12.0
+pkgrel=1
+pkgdesc="A simple guitar mono tube amplifier simulation based on the work we have done in the guitarix project."
 arch=('i686' 'x86_64')
 url="http://sourceforge.net/apps/wordpress/guitarix/"
 license=('GPL')
@@ -11,10 +11,10 @@ depends=('gtkmm' 'jack' 'fftw')
 makedepends=('python2' 'boost')
 install="$pkgname.install"
 source=("http://downloads.sourceforge.net/project/guitarix/$pkgname/$pkgname-$pkgver.tar.bz2")
-md5sums=('a4f31b233b275bf5d3d122fe3779b327')
+md5sums=('f59474edee5b9aa1e0d93b613f958578')
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd $srcdir/gx_head
 
   # Fix pixmaps map to prevent conflicts with guitarix
   sed -i "s|SHAREDIR.*pixmaps|&/$pkgname|" wscript
@@ -24,7 +24,7 @@ build() {
 }
 
 package() {
-  cd "$srcdir/$pkgname-$pkgver"
+  cd $srcdir/gx_head
 
   python2 waf install --destdir="$pkgdir"
 
