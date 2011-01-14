@@ -19,6 +19,6 @@ build() {
 
 package() {
   cd ${srcdir}/plugin~-0.2.1
-  make
+  make DESTDIR=$startdir/pkg install
 }
 

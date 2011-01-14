@@ -1,0 +1,20 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=pd-ggee
+pkgver=0.26
+pkgrel=1
+pkgdesc="Pd externals based on Simon Fraser's implementation of Craig Reynolds' Boids algorithm."
+arch=('i686' 'x86_64')
+url="http://www.puredata.org/"
+depends=('pd')
+license=('GPL')
+groups=('pd-externals')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/ggee/ggee-$pkgver.tar.gz)
+md5sums=('e1e272659c9f4aebaf409888cc6c6c5b')
+
+
+build() {
+  cd $srcdir/ggee-$pkgver
+  make
+  make DESTDIR=$startdir/pkg install
+}
