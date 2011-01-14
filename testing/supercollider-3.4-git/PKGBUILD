@@ -2,14 +2,16 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: hm_b < holger <at> music-nerds.net >
 
-pkgname=supercollider
-pkgver=20110114
+pkgname=supercollider-3.4-git
+pkgver=3.4.2rc2
 pkgrel=1
 pkgdesc="An environment and programming language for real time audio synthesis and algorithmic composition"
 url="http://supercollider.sourceforge.net/"
 license=('GPL')
 depends=('jack' 'avahi' 'fftw')
 arch=('i686' 'x86_64')
+provide=('supercollider')
+conflicts=('supercollider')
 makedepends=('subversion' 'libsndfile>=1.0' 'emacs' 'vim' 'gedit' 'icu' 'gcc>=3.0' 'pkgconfig>=0.14.0' 'scons>=0.96' 'alsa-lib' 'cwiid' 'readline')
 optdepends=(
   'emacs: Emacs Interface'
