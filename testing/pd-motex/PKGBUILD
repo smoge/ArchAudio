@@ -1,0 +1,24 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=pd-$_origName
+_origName=motex
+pkgver=0.1.4
+pkgrel=1
+pkgdesc="External for PureData"
+arch=('i686' 'x86_64')
+url="http://www.puredata.org/"
+depends=('pd')
+license=('GPL2')
+provides=($_origName)
+conflicts=($_origName)
+groups=('pd-externals')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/$_origName/$_origName-$pkgver.tar.gz)
+md5sums=('34ab7d868d44cc331e7180b41b271982')
+
+
+build() {
+  cd "${srcdir}/${_origName}"
+  make
+  make DESTDIR=$startdir/pkg install
+}
+
