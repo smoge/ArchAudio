@@ -2,22 +2,30 @@
 
 pkgname=pd-boids
 pkgver=1.1.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Pd externals based on Simon Fraser's implementation of Craig Reynolds' Boids algorithm."
 arch=('i686' 'x86_64')
 url="http://www.puredata.org/"
 depends=('pd')
 license=('GPL')
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/boids/boids-$pkgver.tar.gz)
-md5sums=('43f36f2f54b308f81e6bdd1d33944b66')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/boids/boids-$pkgver.tar.gz Makefile)
+
+md5sums=('43f36f2f54b308f81e6bdd1d33944b66'
+         '62426373958fff6e0aad36ce8fc98600')
 
 build() {
+
+  # replace Makefile:
   cd $srcdir/boids-$pkgver
-  make --prefix=/usr
+  mv Makefile Makefile.old
+
+  # buid:
+  cp $startdir/Makefile $srcdir/boids-$pkgver
+  make
 }
 
-build() {
+package() {
   cd $srcdir/boids-$pkgver
   make DESTDIR=$startdir/pkg install
 }

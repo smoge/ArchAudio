@@ -1,3 +1,5 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=pd-$_origName
@@ -16,7 +18,6 @@ source=(http://sourceforge.net/projects/pure-data/files/libraries/$_pkgname/$_pk
 
 md5sums=('06034c291571814f138b79c3eff09ee5'
          '6a77d51dcc14748b8eeb3b7da7c8c797')
-
 
 build() {
   cd $srcdir/arraysize-0.1
