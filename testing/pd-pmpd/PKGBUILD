@@ -6,18 +6,22 @@ pkgver=0.9
 pkgrel=1
 pkgdesc="Physical Modelling for pd."
 arch=('i686' 'x86_64')
-url="http://puredata.info"
+url="http://drpichon.free.fr/pmpd/"
 depends=('pd')
 license=('GPL2')
 provides=($_origName)
 conflicts=($_origName)
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/$v_origName/$_origName-$pkgver.tar.gz)
+source=(http://sourceforge.net/projects/pure-data/files/libraries/pmpd/pmpd-0.9.tar.gz)
 md5sums=('1fd1768e6f902ce5469712b987aef9ff')
 
 build() {
   cd $srcdir/$_origName-$pkgver
   make
+}
+
+package() {
+  cd $srcdir/$_origName-$pkgver
   make DESTDIR=$startdir/pkg install
 }
 
