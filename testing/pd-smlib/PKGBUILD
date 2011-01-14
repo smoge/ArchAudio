@@ -1,0 +1,25 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=pd-smlib
+pkgver=0.12.1
+pkgrel=1
+pkgdesc="External for PureData"
+arch=('i686' 'x86_64')
+url="http://www.puredata.org/"
+depends=('pd')
+license=('GPL2')
+groups=('pd-externals')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/smlib/smlib-$pkgver.tar.gz)
+md5sums=('76bfb687aff03f3616baa82e2407ade3')
+
+
+build() {
+  cd ${srcdir}/smlib-$pkgver
+  make
+}
+
+package() {
+  cd ${srcdir}/smlib-$pkgver
+  make DESTDIR=$startdir/pkg install
+}
+
