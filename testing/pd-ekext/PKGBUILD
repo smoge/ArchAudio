@@ -1,0 +1,29 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+# NEEDS WORK
+
+pkgname=pd-ekext
+pkgver=0.1
+pkgrel=1
+pkgdesc="Pd externals"
+arch=('i686' 'x86_64')
+url="http://www.puredata.org/"
+depends=('pd')
+license=('GPL')
+groups=('pd-externals')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/ekext/ekext-$pkgver.tar.gz)
+md5sums=('91dea2e84e34af72da66e6ee727cd50d')
+
+
+build() {
+
+  cd $srcdir/ekext-$pkgver
+  rm *.txt
+
+  for folder in *; do
+    cd $srcdir/ekext-$pkgver/$folder
+    make pd_linux INSTALL_PREFIX=/usr
+#    make DESTDIR=$startdir/pkg install
+  done
+
+}
