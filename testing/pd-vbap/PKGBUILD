@@ -1,7 +1,8 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=pd-sigpack
-pkgver=0.0.4.2
+pkgname=pd-$_origName
+_origName=vbap
+pkgver=1.0.3
 pkgrel=1
 pkgdesc="External for PureData"
 arch=('i686' 'x86_64')
@@ -11,11 +12,11 @@ license=('GPL2')
 provides=($_origName)
 conflicts=($_origName)
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/sigpack/sigpack-$pkgver.tar.gz)
-md5sums=('d4eb81033f4243465ec620ee19337adb')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/$_origName/$_origName-$pkgver.tar.gz)
+md5sums=('829bb3385f3c15a8d945dee8a00770e3')
 
 build() {
-  cd $srcdir/sigpack-0.0.4.2
+  cd "${srcdir}/${_origName}"
   make
   make DESTDIR=$startdir/pkg install
 }

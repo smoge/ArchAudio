@@ -1,9 +1,6 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-# needs work
-
 pkgname=pd-hid
-_origName=hid
 pkgver=0.7
 pkgrel=1
 pkgdesc="An extension library for Pure Data, providing video and other media processing functionality."
@@ -11,16 +8,16 @@ arch=('i686' 'x86_64')
 url="http://puredata.info"
 depends=('pd' 'libpng' 'libquicktime' 'gsl')
 license=('GPL2')
-provides=('hid')
-conflicts=('hid')
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/$v_origName/$_origName-$pkgver.tar.gz)
-#md5sums=('a1b18a29c9574c35c2231def6c0fa5a9') # 0.6
-md5sums=('cc5677b93536dc778caeb34bb9b40f33') # 0.7
+source=(http://sourceforge.net/projects/pure-data/files/libraries/hid/hid-0.7.tar.gz)
+md5sums=('d41d8cd98f00b204e9800998ecf8427e')
 
 build() {
-  cd $srcdir/$_origName-$pkgver
+  cd $srcdir/hid-0.7
   make
-  make DESTDIR=$startdir/pkg install
 }
 
+package() {
+  cd $srcdir/hid-0.7
+  make DESTDIR=$startdir/pkg install
+}

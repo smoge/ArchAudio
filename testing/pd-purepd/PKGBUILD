@@ -1,7 +1,6 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=pd-$_origName
-_origName=purepd
+pkgname=pd-purepd
 pkgver=0.1.1
 pkgrel=1
 pkgdesc="External for PureData"
@@ -12,13 +11,16 @@ license=('GPL2')
 provides=($_origName)
 conflicts=($_origName)
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/$_origName/$_origName-$pkgver.tar.gz)
+source=(http://sourceforge.net/projects/pure-data/files/libraries/purepd/purepd-$pkgver.tar.gz)
 md5sums=('128eaa8e8c57cef7c49223ad3657142a')
 
-
 build() {
-  cd "${srcdir}/${_origName}"
+  cd $srcdir/purepd-0.1.1
   make
+}
+
+package() {
+  cd $srcdir/purepd-0.1.1
   make DESTDIR=$startdir/pkg install
 }
 

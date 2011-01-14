@@ -1,7 +1,7 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=pd-$_origName
-_origName=arraysize
+_pkgname=arraysize
 pkgver=0.1
 pkgrel=1
 pkgdesc="Externals for PureData"
@@ -9,14 +9,14 @@ arch=('i686' 'x86_64')
 url="http://www.puredata.org/"
 depends=('pd')
 license=('GPL2')
-provides=($_origName)
-conflicts=($_origName)
+provides=(arraysize)
+conflicts=(arraysize)
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/$_origName/$_origName-$pkgver.tar.gz)
+source=(http://sourceforge.net/projects/pure-data/files/libraries/$_pkgname/$_pkgname-$pkgver.tar.gz)
 md5sums=('06034c291571814f138b79c3eff09ee5')
 
 build() {
-  cd "${srcdir}/${_origName}"
+  cd $srcdir/arraysize-0.1
   make
   make DESTDIR=$startdir/pkg install
 }

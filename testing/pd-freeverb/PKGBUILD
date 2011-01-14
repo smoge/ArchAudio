@@ -1,7 +1,7 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=pd-$_origName
-_origName=freeverb~
+_pkgname=freeverb~
 pkgver=1.2
 pkgrel=1
 pkgdesc="Externals for PureData"
@@ -12,11 +12,11 @@ license=('GPL2')
 provides=($_origName)
 conflicts=($_origName)
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/$_origName/$_origName-$pkgver.tar.gz)
+source=(https://sourceforge.net/projects/pure-data/files/libraries/freeverb~/freeverb~-1.2.tar.gz)
 md5sums=('3a0aaf59c681682ba733231837e020aa')
 
 build() {
-  cd "${srcdir}/${_origName}"
+  cd ${startdir}/src/freeverb~-1.2
   make
   make DESTDIR=$startdir/pkg install
 }
