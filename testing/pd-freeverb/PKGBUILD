@@ -1,36 +1,31 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=pd-freeverb
+pdname=freeverb~
 pkgver=1.2
-pkgrel=2
+pkgrel=3
 pkgdesc="Externals for PureData"
 arch=('i686' 'x86_64')
 url="http://www.puredata.org/"
 depends=('pd')
 license=('GPL2')
-provides=($_origName)
-conflicts=($_origName)
 groups=('pd-externals')
-source=(https://sourceforge.net/projects/pure-data/files/libraries/freeverb~/freeverb~-1.2.tar.gz Makefile)
-md5sums=('3a0aaf59c681682ba733231837e020aa'
-         'f2b1bb7d4acca16083acd32dfe0e18fc')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/$pdname/$pdname-$pkgver.tar.gz Makefile)
 
 build() {
 
-  # replace Makefile:
-  cd $srcdir/freeverb~-$pkgver
+  cd "${srcdir}/${pdname}-${pkgver}"
   mv Makefile Makefile.old
-  cp $startdir/Makefile $srcdir/freeverb~-$pkgver
-
-  # buid:
-  cd ${startdir}/src/freeverb~-1.2
+  cp $startdir/Makefile "${srcdir}/${pdname}-${pkgver}"
   make
-  make DESTDIR=$startdir/pkg install
 }
 
 package() {
-
-  cd ${startdir}/src/freeverb~-1.2
+  cd "${srcdir}/${pdname}-${pkgver}"
   make DESTDIR=$startdir/pkg install
 }
 
+md5sums=('3a0aaf59c681682ba733231837e020aa'
+         'f2b1bb7d4acca16083acd32dfe0e18fc')

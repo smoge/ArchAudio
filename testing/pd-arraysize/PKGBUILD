@@ -2,8 +2,8 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=pd-$_origName
-_pkgname=arraysize
+pkgname=pd-arraysize
+pdname=arraysize
 pkgver=0.1
 pkgrel=4
 pkgdesc="Externals for PureData"
@@ -11,22 +11,21 @@ arch=('i686' 'x86_64')
 url="http://www.puredata.org/"
 depends=('pd')
 license=('GPL2')
-provides=(arraysize)
-conflicts=(arraysize)
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/$_pkgname/$_pkgname-$pkgver.tar.gz Makefile)
+source=(http://sourceforge.net/projects/pure-data/files/libraries/$pdname/$pdname-$pkgver.tar.gz Makefile)
 
 md5sums=('06034c291571814f138b79c3eff09ee5'
          '6a77d51dcc14748b8eeb3b7da7c8c797')
 
 build() {
-  cd $srcdir/arraysize-0.1
-  mv Makefile Makefile.old
-  cp $startdir/Makefile $srcdir/arraysize-0.1
-  make
 
-package () {
-  cd $srcdir/arraysize-0.1
-  make DESTDIR=$startdir/pkg install
+  cd "${srcdir}/${pdname}-${pkgver}"
+  mv Makefile Makefile.old
+  cp $startdir/Makefile "${srcdir}/${pdname}-${pkgver}"
+  make
 }
 
+package() {
+  cd "${srcdir}/${pdname}-${pkgver}"
+  make DESTDIR=$startdir/pkg install
+}

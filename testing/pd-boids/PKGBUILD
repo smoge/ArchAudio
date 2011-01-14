@@ -1,32 +1,32 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=pd-boids
+pdname=boids
 pkgver=1.1.1
-pkgrel=2
+pkgrel=3
 pkgdesc="Pd externals based on Simon Fraser's implementation of Craig Reynolds' Boids algorithm."
 arch=('i686' 'x86_64')
 url="http://www.puredata.org/"
 depends=('pd')
-license=('GPL')
+license=('GPL2')
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/boids/boids-$pkgver.tar.gz Makefile)
+source=(http://sourceforge.net/projects/pure-data/files/libraries/$pdname/$pdname-$pkgver.tar.gz Makefile)
 
 md5sums=('43f36f2f54b308f81e6bdd1d33944b66'
          '62426373958fff6e0aad36ce8fc98600')
 
+
 build() {
 
-  # replace Makefile:
-  cd $srcdir/boids-$pkgver
+  cd "${srcdir}/${pdname}-${pkgver}"
   mv Makefile Makefile.old
-  cp $startdir/Makefile $srcdir/boids~-$pkgver
-
-  # buid:
-  cp $startdir/Makefile $srcdir/boids-$pkgver
+  cp $startdir/Makefile "${srcdir}/${pdname}-${pkgver}"
   make
 }
 
 package() {
-  cd $srcdir/boids-$pkgver
+  cd "${srcdir}/${pdname}-${pkgver}"
   make DESTDIR=$startdir/pkg install
 }

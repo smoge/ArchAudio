@@ -9,17 +9,19 @@ url="http://www.puredata.org/"
 depends=('pd')
 license=('GPL2')
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/pdogg/pdogg-$pkgver.tar.gz)
-md5sums=('d0da83511829c46235ca378dbd7b23bf')
-
+source=(http://sourceforge.net/projects/pure-data/files/libraries/pdogg/pdogg-$pkgver.tar.gz Makefile)
+md5sums=('d0da83511829c46235ca378dbd7b23bf'
+         '91972bd117c1bdc94e1e34b485994238')
 
 build() {
+
   cd ${srcdir}/pdogg-$pkgver
+  mv Makefile Makefile.old
+  cp $startdir/Makefile $srcdir/pdogg-$pkgver
   make
 }
 
 package() {
-  cd ${srcdir}/pdogg-$pkgver
-  make DESTDIR=$startdir/pkg install
+  cd $srcdir/pdogg-$pkgver
+  make
 }
-
