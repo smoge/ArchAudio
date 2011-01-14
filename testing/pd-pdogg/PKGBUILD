@@ -1,27 +1,31 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=pd-pdogg
+pdname=pdogg
+pkgname=pd-$pdname
 pkgver=0.25
-pkgrel=1
+pkgrel=2
 pkgdesc="External for PureData"
 arch=('i686' 'x86_64')
 url="http://www.puredata.org/"
 depends=('pd')
 license=('GPL2')
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/pdogg/pdogg-$pkgver.tar.gz Makefile)
-md5sums=('d0da83511829c46235ca378dbd7b23bf'
-         '91972bd117c1bdc94e1e34b485994238')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/$pdname/$pdname-$pkgver.tar.gz Makefile)
 
 build() {
 
-  cd ${srcdir}/pdogg-$pkgver
+  cd $srcdir/$pdname-$pkgver
   mv Makefile Makefile.old
-  cp $startdir/Makefile $srcdir/pdogg-$pkgver
+  cp $startdir/Makefile "${srcdir}/${pdname}-${pkgver}"
   make
 }
 
 package() {
-  cd $srcdir/pdogg-$pkgver
-  make
+  cd "${srcdir}/${pdname}-${pkgver}"
+  make DESTDIR=$startdir/pkg install
 }
+
+md5sums=('d0da83511829c46235ca378dbd7b23bf'
+         '91972bd117c1bdc94e1e34b485994238')
