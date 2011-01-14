@@ -4,23 +4,25 @@
 # need work
 
 pkgname=pd-pdp
-_origName=pdp
 pkgver=0.12.6
 pkgrel=1
 pkgdesc="An extension library for Pure Data, providing video and other media processing functionality."
 arch=('i686' 'x86_64')
 url="http://zwizwa.be/pd/$pkgname/"
-depends=('pd' 'libpng' 'libquicktime' 'gsl')
+depends=('pd')
 license=('GPL2')
-provides=('pdp')
-conflicts=('pdp')
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/$v_origName/$_origName-$pkgver.tar.gz)
+source=(http://sourceforge.net/projects/pure-data/files/libraries/pdp/pdp-$pkgver.tar.gz)
 md5sums=('d0e3649bc20d119f2fc0b41ea1aeb8b3')
 
 build() {
-  cd ${startdir}/src/$_origName-${pkgver}
+  cd $srcdir/pdp-0.12.6
+  ./configure --prefix=/usr
   make
+}
+
+package() {
+  cd $srcdir/pdp-0.12.6
   make DESTDIR=$startdir/pkg install
 }
 

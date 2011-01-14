@@ -1,7 +1,6 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=pd-$_origName
-_origName=plugin~
+pkgname=pd-plugin
 pkgver=0.2.1
 pkgrel=1
 pkgdesc="External for PureData"
@@ -9,15 +8,17 @@ arch=('i686' 'x86_64')
 url="http://www.puredata.org/"
 depends=('pd')
 license=('GPL2')
-provides=($_origName)
-conflicts=($_origName)
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/$_origName/$_origName-$pkgver.tar.gz)
-md5sums=('b617efab88369d0d0d7550e8e08c2a81')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/pd-plugin~/pd-plugin~-$pkgver.tar.gz)
+md5sums=('6ab29b23d0d814d0fc24bc3341ba0112')
 
 build() {
-  cd "${srcdir}/${_origName}"
+  cd ${srcdir}/plugin~-0.2.1
   make
-  make DESTDIR=$startdir/pkg install
+}
+
+package() {
+  cd ${srcdir}/plugin~-0.2.1
+  make
 }
 

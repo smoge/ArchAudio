@@ -1,7 +1,7 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=pd-$_origName
-_origName=jmmmp
+pkgname=pd-jmmmp
+
 pkgver=0.1.1
 pkgrel=1
 pkgdesc="External for PureData"ls
@@ -12,12 +12,15 @@ license=('GPL2')
 provides=($_origName)
 conflicts=($_origName)
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/$_origName/$_origName-$pkgver.tar.gz)
-md5sums=('b617efab88369d0d0d7550e8e08c2a81')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/jmmmp/jmmmp-$pkgver.tar.gz)
+md5sums=('5ee412f2dd44fa87da9334a6377c86ce')
 
 build() {
-  cd "${srcdir}/${_origName}"
+  cd $srcdir/jmmmp-0.1.1
   make
-  make DESTDIR=$startdir/pkg install
 }
 
+build() {
+  cd $srcdir/jmmmp-0.1.1
+  make DESTDIR=$startdir/pkg install
+}

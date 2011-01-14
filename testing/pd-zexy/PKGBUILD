@@ -3,22 +3,22 @@
 pkgname=pd-zexy
 _pkgname=zexy
 pkgver=2.2.3
-pkgrel=1
+pkgrel=2
 pkgdesc="The zexy externals for PureData"
 arch=('i686' 'x86_64')
 url="http://wiki.puredata.info/en/zexy"
 depends=('pd')
 license=('GPL')
-source=(http://puredata.info/community/projects/software/$_pkgname/releases/$pkgver/$_pkgname-$pkgver.tar.gz)
+groups=('pd-externals')
+source=(http://puredata.info/community/projects/software/zexy/releases/$pkgver/zexy-$pkgver.tar.gz)
 md5sums=('13176a02449c5e64aa09915199c46961')
 
 build() {
 
-  cd ${startdir}/src/${_pkgname}-${pkgver}/src
+  cd $startdir/src/zexy-$pkgver/src
   autoconf
   ./bootstrap.sh
   ./configure --prefix=/usr
   make
   make DESTDIR=$startdir/pkg install
-
 }

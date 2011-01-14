@@ -17,6 +17,10 @@ md5sums=('d4eb81033f4243465ec620ee19337adb')
 build() {
   cd $srcdir/sigpack-0.0.4.2
   make
+}
+
+package() {
+  cd $srcdir/sigpack-0.0.4.2
   make DESTDIR=$startdir/pkg install
 }
 

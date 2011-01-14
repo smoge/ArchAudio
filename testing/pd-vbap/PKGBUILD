@@ -1,23 +1,23 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=pd-$_origName
-_origName=vbap
-pkgver=1.0.3
+pkgname=pd-vbap
+pkgver=1.0.3.1
 pkgrel=1
-pkgdesc="External for PureData"
+pkgdesc="A Pd port of the VBAP object for Max/MSP"
 arch=('i686' 'x86_64')
 url="http://www.puredata.org/"
 depends=('pd')
 license=('GPL2')
-provides=($_origName)
-conflicts=($_origName)
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/$_origName/$_origName-$pkgver.tar.gz)
-md5sums=('829bb3385f3c15a8d945dee8a00770e3')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/vbap/vbap-$pkgver.tar.gz)
+md5sums=('6dec790e50cbed14c3e64c3acc3a5313')
 
 build() {
-  cd "${srcdir}/${_origName}"
+  cd $srcdir/vbap-1.0.3.1
   make
-  make DESTDIR=$startdir/pkg install
 }
 
+package() {
+  cd $srcdir/vbap-1.0.3.1
+  make DESTDIR=$startdir/pkg install
+}
