@@ -15,7 +15,6 @@ source=(http://sourceforge.net/projects/pure-data/files/libraries/motex/motex-$p
 md5sums=('2953f4842e79fa738728a31dfb9aaec9'
          'e51de9f2bd55cc64f0e6ca1c67608967')
 
-
 build() {
 
   cd $srcdir/motex-$pkgver
