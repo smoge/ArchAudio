@@ -1,0 +1,23 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=pd-list-abs
+pkgver=0.1
+pkgrel=1
+pkgdesc="A collection of list-processing abstractions for Pd."
+arch=('i686' 'x86_64')
+url="http://www.puredata.org/"
+depends=('pd')
+license=('GPL')
+groups=('pd-externals')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/list-abs/list-abs-$pkgver.tar.gz)
+md5sums=('7247bfc96c5f86efa0a82b8eeffb586e')
+
+build() {
+  cd $srcdir/list-abs-0.1
+  make
+}
+
+build() {
+  cd $srcdir/list-abs-0.1
+  make DESTDIR=$startdir/pkg install
+}
