@@ -1,23 +1,31 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=pd-windowing
+pdname=windowing
+pkgname=pd-$pdname
 pkgver=0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Pd Externals. Provides: hammimng~, hanning~, blackman~, cosine~, connes~, bartlett~, welch~, lanczos~, gaussian~, and kaiser~ "
 arch=('i686' 'x86_64')
 url="http://www.puredata.org/"
 depends=('pd')
-license=('GPL')
+license=('GPL2')
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/windowing/windowing-$pkgver.tar.gz)
-md5sums=('fd62d38f26d6b83525d38862e4263233')
+source=(http://sourceforge.net/projects/pure-data/files/libraries/$pdname/$pdname-$pkgver.tar.gz Makefile)
 
 build() {
-  cd $srcdir/windowing-$pkgver
+
+  cd $srcdir/$pdname-$pkgver
+  mv Makefile Makefile.old
+  cp $startdir/Makefile "${srcdir}/${pdname}-${pkgver}"
   make
 }
 
-build() {
-  cd $srcdir/windowing-$pkgver
+package() {
+  cd "${srcdir}/${pdname}-${pkgver}"
   make DESTDIR=$startdir/pkg install
 }
+
+md5sums=('fd62d38f26d6b83525d38862e4263233'
+         '9738d94fac45d35e8c93610c62512891')
