@@ -2,8 +2,8 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=pd-boids
 pdname=boids
+pkgname=pd-$pdname
 pkgver=1.1.1
 pkgrel=3
 pkgdesc="Pd externals based on Simon Fraser's implementation of Craig Reynolds' Boids algorithm."
@@ -13,9 +13,6 @@ depends=('pd')
 license=('GPL2')
 groups=('pd-externals')
 source=(http://sourceforge.net/projects/pure-data/files/libraries/$pdname/$pdname-$pkgver.tar.gz Makefile)
-
-md5sums=('43f36f2f54b308f81e6bdd1d33944b66'
-         '62426373958fff6e0aad36ce8fc98600')
 
 
 build() {
@@ -30,3 +27,6 @@ package() {
   cd "${srcdir}/${pdname}-${pkgver}"
   make DESTDIR=$startdir/pkg install
 }
+
+md5sums=('43f36f2f54b308f81e6bdd1d33944b66'
+         '62426373958fff6e0aad36ce8fc98600')

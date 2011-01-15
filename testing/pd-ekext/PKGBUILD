@@ -22,8 +22,8 @@ build() {
 
   for folder in *; do
     cd $srcdir/ekext-$pkgver/$folder
-    make pd_linux --prefix=/usr #INSTALL_PREFIX=/usr
-#    make DESTDIR=$startdir/pkg install
+    make pd_linux INSTALL_PREFIX=/usr LINUXINCLUDE=-I/usr/include
+   make DESTDIR=$startdir/pkg install
   done
 
 }
