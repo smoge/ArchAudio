@@ -3,7 +3,7 @@
 # Contributor: svoufff <svoufff at gmail dot com>
 # Contributor: Maciej Ciemborowicz <moonkey@op.pl>
 pkgname=liblscp-cvs
-pkgver=20090716
+pkgver=20110115
 pkgrel=1
 pkgdesc="LinuxSampler Control Protocol (LSCP) wrapper library"
 arch=('i686' 'x86_64')
@@ -36,7 +36,7 @@ build() {
   cp -r ../$_cvsmod ../$_cvsmod-build
   cd $srcdir/$_cvsmod-build
 
-  make -f Makefile.cvs
+  make -f Makefile.svn
   ./configure --prefix=/usr
   make DESTDIR=$pkgdir install
 
