@@ -12,7 +12,9 @@ url="http://www.puredata.org/"
 depends=('pd')
 license=('GPL2')
 groups=('pd-externals')
-source=(http://sourceforge.net/projects/pure-data/files/libraries/$pdname/$pdname_pkgver.tar.gz Makefile)
+source=(http://downloads.sourceforge.net/project/pure-data/libraries/$pdname/${pdname}-${pkgver}.tar.gz Makefile)
+md5sums=('128eaa8e8c57cef7c49223ad3657142a'
+         '5230be9a03fe12dface197f695144ac2')
 
 build() {
 
@@ -27,5 +29,3 @@ package() {
   make DESTDIR=$startdir/pkg install
 }
 
-md5sums=('5e87f971352ce07899ffbb04e98ca300'
-         '5230be9a03fe12dface197f695144ac2')
