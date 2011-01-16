@@ -2,7 +2,7 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 # Contributor: Björn Lindig <bjoern.lindig@googlemail.com>
 
-pkgname=supercollider-with-sn-plugins-git
+pkgname=supernova-with-extras
 pkgver=20110107
 pkgver_plugins=453
 pkgrel=1

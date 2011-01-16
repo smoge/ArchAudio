@@ -2,7 +2,7 @@
 # Contributor: Björn Lindig <bjoern.lindig@googlemail.com>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=supercollider-with-plugins-git
+pkgname=supercollider-with-extras-git
 pkgver=20110109
 pkgver_plugins=453
 pkgrel=1
