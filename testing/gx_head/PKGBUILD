@@ -11,7 +11,7 @@ depends=('gtkmm' 'jack' 'fftw')
 makedepends=('python2' 'boost')
 install="$pkgname.install"
 source=("http://downloads.sourceforge.net/project/guitarix/$pkgname/$pkgname-$pkgver.tar.bz2")
-md5sums=('d93ec1623d6e2288b5cde11dd6029e5d')
+md5sums=('2250725f40bae966c68476da08c8f5a4')
 
 build() {
   cd "$srcdir/$pkgname"

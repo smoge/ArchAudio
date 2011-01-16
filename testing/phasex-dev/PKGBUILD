@@ -13,7 +13,7 @@ depends=('lash')
 provides=('phasex')
 conflicts=('phasex' 'phasex-git' 'phasex-dev-git')
 install=$pkgname.install
-source=("http://github.com/downloads/disabled/$pkgname/$pkgname-$pkgver.tar.gz")
+source=("https://github.com/downloads/disabled/$pkgname/$pkgname-$pkgver.tar.gz")
 md5sums=('24a59e992c55f0598891da7c57c55df5')
 
 build() {

@@ -16,9 +16,9 @@ md5sums=('6cd492c77773f09ac4f5ab296abc011f')
 
 build() {
 
-  cd $srcdir/$pkgname/build/linux
+  cd $srcdir/$pkgname/Builds/Linux
 
-  ./runpremake
+  #./runpremake
   make CONFIG=Release
 
   mkdir -p $pkgdir/usr/{include/juce,lib}
