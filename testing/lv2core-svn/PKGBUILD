@@ -1,23 +1,22 @@
-# $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 # Contributor: Ray Rashif <schivmeister@gmail.com>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
 
-pkgname=lv2core-svn
-pkgver=2832
+_pkg=lv2core
+pkgname=$_pkg-svn
+pkgver=98
 pkgrel=1
-pkgdesc="LV2: Successor to the LADSPA audio plug-in standard (development version)"
-arch=('i686' 'x86_64')
+pkgdesc="A standard for plugins and matching host applications, mainly targeted at audio processing and generation."
+arch=('any')
 url="http://lv2plug.in/"
-license=('LGPL')
-makedepends=('subversion' 'python')
-provides=('lv2core')
-conflicts=('lv2core')
-source=()
-md5sums=()
+license=('GPL')
+makedepends=('subversion' 'rdflib')
+provides=("$_pkg")
+conflicts=("$_pkg")
 
-_svntrunk=http://svn.drobilla.net/lad/trunk
-_svnmod=lad
+_svntrunk=http://lv2plug.in/repo/trunk
+_svnmod=$_pkg
 
 build() {
   cd "$srcdir"
@@ -33,9 +32,28 @@ build() {
 
   rm -rf "$srcdir/$_svnmod-build"
   cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
-  cd "$srcdir/$_svnmod-build/lv2/core.lv2"
+  cd "$srcdir/$_svnmod-build"
 
-  python2 waf configure --prefix=/usr
-  python2 waf build $MAKEFLAGS
-  python2 waf install --destdir="$pkgdir"
+  #
+  # BUILD
+  #
+  sed -e "s|\(env python\).*|\12|" \
+      -e "s|'/usr|'$pkgdir/usr|g" \
+      -e "s|link(bundle|&[bundle.index(\"/usr\"):]|" \
+      -i core.lv2/lv2config
+
+  python2 ./waf configure --prefix=/usr
+  python2 waf
+}
+
+package() {
+  cd "$srcdir/$_svnmod-build"
+
+  DESTDIR="$pkgdir" python2 waf install
+
+  # Create header simlinks
+  python2 core.lv2/lv2config
+
+  # Delete generator
+  rm -rf "$pkgdir/usr/bin"
 }

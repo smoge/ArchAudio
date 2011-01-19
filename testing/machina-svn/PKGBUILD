@@ -1,16 +1,14 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-# Contributor: SpepS <dreamspepser at yahoo dot it>
+# Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=machina-svn
-pkgver=2780
+pkgver=2824
 pkgrel=1
 pkgdesc="A polyphonic MIDI sequencer based on Finite State Automata"
-arch=('i686' 'x86_64')
+arch=(i686 x86_64)
 url="http://drobilla.net/software/machina/"
 license=('GPL')
-depends=('flowcanvas' 'jack' 'libglademm' 'libsigc++' 'redlandmm-svn' 'raul')
-makedepends=('subversion' 'eugene-svn')
+depends=('flowcanvas>=0.7.1' 'jack' 'libglademm' 'raul>=0.8.0' 'redland')
+makedepends=('python2' 'subversion' 'eugene-svn' 'redlandmm-svn')
 install="$pkgname.install"
 provides=('machina')
 conflicts=('machina')
@@ -34,11 +32,14 @@ build() {
   cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
   cd "$srcdir/$_svnmod-build"
 
+  #
+  # BUILD
+  #
+
   export PYTHON="python2"
 
   python2 waf configure --prefix=/usr
   python2 waf
-
 }
 
 package() {

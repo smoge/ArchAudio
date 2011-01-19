@@ -1,32 +1,51 @@
-# Contributor: Max Pray a.k.a. Synthead <synthead@gmail.com>
+# Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=eugene-svn
-pkgver=2787
+pkgver=2777
 pkgrel=1
-pkgdesc="Eugene is a basic (fast, parallel) Genetic Algorithm implementation in C++"
-arch=('i686' 'x86_64')
+pkgdesc="A basic (fast, parallel) Genetic Algorithm implementation in C++"
+arch=(i686 x86_64)
 url="http://dev.drobilla.net/browser/trunk/eugene"
-license="GPL"
-depends=('flowcanvas>=0.5.1' 'glibmm>=2.14.0' 'gtkmm>=2.11.12' 'libglademm>=2.6.0' libgnomecanvasmm boost)
-makedepends=(subversion)
-conflicts=()
-provides=(eugene)
+license=('GPL')
+depends=('flowcanvas>=0.7.1' 'libglademm')
+makedepends=('subversion')
+provides=('eugene')
+conflicts=('eugene')
 
-_svnmod="trunk"
-_svntrunk="http://svn.drobilla.net/lad/trunk"
+_svntrunk=http://svn.drobilla.net/lad/trunk/eugene
+_svnmod=eugene
 
 build() {
-  cd $srcdir
- 
-  msg "Connecting to SVN server..."
-  msg "Checking out $_svnmod"
-  svn co $_svntrunk $srcdir
-  msg "SVN checkout done or server timeout"
-  
-  msg "Starting build..."
+  cd "$srcdir"
 
-  cd $srcdir/eugene
-  python2 ./waf configure --prefix=/usr
-  python2 ./waf
-  DESTDIR="$pkgdir" python2 waf install
+  if [ -d $_svnmod/.svn ]; then
+    (cd $_svnmod && svn up -r $pkgver)
+  else
+    svn co $_svntrunk --config-dir ./ -r $pkgver $_svnmod
+  fi
+
+  msg "SVN checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "$srcdir/$_svnmod-build"
+  cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
+  cd "$srcdir/$_svnmod-build"
+
+  #
+  # BUILD
+  #
+
+  # Fix pkgconfig file
+  sed -i "s_/local__" eugene.pc.in
+
+  export PYTHON="python2"
+
+  python2 waf configure --prefix=/usr
+  python2 waf
+}
+
+package() {
+  cd "$srcdir/$_svnmod-build"
+
+  DESTDIR="$pkgdir/" python2 waf install
 }

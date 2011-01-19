@@ -1,41 +1,49 @@
+# Contributor: SpepS <dreamspepser at yahoo dot it>
 # Contributor: Max Pray a.k.a. Synthead <synthead@gmail.com>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=redlandmm-svn
-pkgver=1947
+pkgver=2786
 pkgrel=1
-pkgdesc="An STL-style C++ wrapper for the Redland RDF Toolkit (librdf)"
-arch=('i686' 'x86_64')
-url="http://drobilla.net/blog/redlandmm/"
-license="GPL"
-depends=('glibmm>=2.4' 'raptor>=1.4.18' 'redland>=1.0.8')
-makedepends=(subversion)
-conflicts=(redlandmm)
-provides=(redlandmm)
+pkgdesc="A thin (and nowhere near complete) STL-style C++ wrapper for Redland"
+arch=(i686 x86_64)
+url="http://drobilla.net/software/redlandmm/"
+license=('GPL')
+depends=('redland' 'glibmm' 'libsigc++')
+makedepends=('subversion')
+provides=('redlandmm')
+conflicts=('redlandmm')
 
-_svntrunk="http://svn.drobilla.net/lad/trunk"
-_svnmod="trunk"
+_svntrunk=http://svn.drobilla.net/lad/trunk/redlandmm
+_svnmod=redlandmm
 
 build() {
+  cd "$srcdir"
 
-  cd ${srcdir}
-
-  rm -rf ${_svnmod}-build
-
-  if [ -d $_svnmod ] ; then
-    (cd $_svnmod && svn update)
-    msg "The local files are updated."
+  if [ -d $_svnmod/.svn ]; then
+    (cd $_svnmod && svn up -r $pkgver)
   else
-    svn co ${_svntrunk} ${_svnmod}
+    svn co $_svntrunk --config-dir ./ -r $pkgver $_svnmod
   fi
 
-  cp -rf ${_svnmod} ${_svnmod}-build
+  msg "SVN checkout done or server timeout"
+  msg "Starting make..."
 
-  cd ${_svnmod}-build
+  rm -rf "$srcdir/$_svnmod-build"
+  cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
+  cd "$srcdir/$_svnmod-build"
 
-  msg "Starting build..."
+  #
+  # BUILD
+  #
 
-  python2 waf configure --prefix=/usr
-  python2 waf
-  DESTDIR="$pkgdir" python2 waf install
+  python2 ./waf configure --prefix=/usr
+  python2 ./waf
+}
+
+package() {
+
+  cd "$srcdir/$_svnmod-build"
+
+  DESTDIR="$pkgdir/" python2 ./waf install
 }
