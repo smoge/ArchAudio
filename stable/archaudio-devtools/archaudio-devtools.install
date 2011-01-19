@@ -1,5 +1,6 @@
 post_install() {
-	echo "==> Please edit /etc/archaudio.conf before running any of the tools"
+	echo "==> Please edit /etc/archaudio.conf"
+  echo "==> before running any of the tools"
 }
 
 post_upgrade() {

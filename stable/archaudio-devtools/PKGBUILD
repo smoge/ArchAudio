@@ -1,17 +1,19 @@
 # $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Ray Rashif <schiv@archaudio.org>
 
 pkgname=archaudio-devtools
 pkgver=0.9.0
 pkgrel=1
 pkgdesc="Tools for ArchAudio package maintainers"
 url="http://archaudio.org/"
-license=('GPL3')
+license=('GPL')
 arch=('any')
 backup=(etc/archaudio.conf)
-depends=('subversion' 'devtools')
+depends=('subversion')
+optdepends=('devtools: for chroot building')
 install=$pkgname.install
-source=($pkgname-$pkgver.tar.gz)
+source=(http://archaudio.org/files/$pkgname-$pkgver.tar.gz)
 md5sums=('bf001ac8003c18b1411867c3a9f2f0c5')
 
 package() {
