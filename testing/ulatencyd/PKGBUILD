@@ -1,7 +1,7 @@
-# Maintainer: SpepS <dreamspepser at yahoo dot it>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=ulatencyd
-pkgver=0.3.1
+pkgver=0.3.5
 pkgrel=1
 pkgdesc="Daemon to minimize latency on a linux system using cgroups"
 arch=(i686 x86_64)
@@ -14,7 +14,8 @@ backup=("etc/$pkgname/$pkgname.conf")
 source=("https://github.com/downloads/poelzi/$pkgname/$pkgname-$pkgver.tar.gz"
         "$pkgname.d"
         "$pkgname")
-md5sums=('eb71b5d3acb34141a2667f8102f2ddc3'
+
+md5sums=('f46fee842af7da66283f73175a0c19b6'
          'ad0369cfa0deac8b5fe30dacc5a4e7c2'
          '0694379b7aa5ecb129b1276f49b4bc24')
 
