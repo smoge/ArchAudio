@@ -6,7 +6,7 @@
 # Contributor: David Adler <david dot jo dot adler aet gmail dot com>
 
 pkgname=ams-cvs
-pkgver=20110105
+pkgver=20110120
 pkgrel=1
 pkgdesc="Alsa Modular Synth, a realtime modular synthesizer and effect processor"
 arch=('i686' 'x86_64')

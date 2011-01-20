@@ -5,7 +5,7 @@
 
 pkgname=kmidimon
 pkgver=0.7.3
-pkgrel=1
+pkgrel=2
 pkgdesc="KDE MIDI Metronome using the ALSA Sequencer"
 arch=(i686 x86_64)
 url="http://kmidimon.sourceforge.net/"
@@ -18,7 +18,16 @@ md5sums=('552d84352dc458704bbfc8854d8c598e')
 build() {
   cd "$srcdir/$pkgname-$pkgver"
 
-  cmake . -DCMAKE_INSTALL_PREFIX=/usr
+  # doc build errors prevent success
+  sed -i '/doc/d' CMakeLists.txt
+
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr \
+          -DCMAKE_BUILD_TYPE=Release
   make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
   make DESTDIR="$pkgdir/" install
 }
