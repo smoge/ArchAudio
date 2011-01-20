@@ -2,7 +2,7 @@
 
 pkgname=gx_head
 pkgver=0.12.0
-pkgrel=3
+pkgrel=4
 pkgdesc="A simple mono amplifier to be used in a 'JACKified' environment. Guitarix branch."
 arch=('i686' 'x86_64')
 url="http://sourceforge.net/apps/wordpress/guitarix/"
@@ -11,7 +11,7 @@ depends=('gtkmm' 'jack' 'fftw')
 makedepends=('python2' 'boost')
 install="$pkgname.install"
 source=("http://downloads.sourceforge.net/project/guitarix/$pkgname/$pkgname-$pkgver.tar.bz2")
-md5sums=('2250725f40bae966c68476da08c8f5a4')
+md5sums=('f59474edee5b9aa1e0d93b613f958578')
 
 build() {
   cd "$srcdir/$pkgname"
