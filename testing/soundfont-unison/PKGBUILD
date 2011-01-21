@@ -3,6 +3,7 @@
 # Contributor: Khashayar Naderehvandi <khashayar_naderehvandi@yahoo.co.uk>
 # Contributor: imachine <m.jedrasik@gmail.com>
 # Contributor: Ng Oon-Ee <n g  o o n  e e AT g m a i l DOT c o m>
+
 pkgname=soundfont-unison
 pkgver=1.00
 pkgrel=2
@@ -13,7 +14,10 @@ url="http://www.personalcopy.com"
 groups=('soundfonts')
 md5sums=('6775aad100fd758dc8300c511e4cc09f')
 source=(ftp://ftp.personalcopy.net/pub/Unison.sf2.gz)
+
 build() {
+
   cd $startdir/src
+
   install -D -m644 Unison.sf2 $startdir/pkg/usr/share/soundfonts/Unison.sf2
 }

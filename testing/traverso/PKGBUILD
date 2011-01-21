@@ -16,6 +16,7 @@ source=(http://traverso-daw.org/download/releases/current/${pkgname}-${pkgver}.t
 md5sums=('1acc46e2fa17e9a77f069b00307478a0')
 
 build() {
+
   cd "${srcdir}/${pkgname}-${pkgver}"
 
   cmake . -DCMAKE_INSTALL_PREFIX="/usr" -DWANT_MP3_ENCODE=1 -DCMAKE_BUILD_TYPE=Release -DUSE_SYSTEM_SLV2_LIBRARY=1
@@ -23,6 +24,7 @@ build() {
 }
 
 package(){
+
   cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }

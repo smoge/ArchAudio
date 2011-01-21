@@ -22,7 +22,7 @@ md5sums=('f46fee842af7da66283f73175a0c19b6'
 build() {
   cd "$srcdir/$pkgname-$pkgver"
 
-  cmake . -DCMAKE_INSTALL_PREFIX=/usr
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
   make
 }
 

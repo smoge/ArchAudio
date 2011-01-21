@@ -29,11 +29,19 @@ md5sums=('59eb69ce24d6f8c605f8ba43958d0526'
 
 
 build() {
+
   cd ${srcdir}/ZynAddSubFX-${pkgver}/src
 
   patch -p0 < ${srcdir}/Makefile.inc.patch
-
   make
+
+}
+
+
+package() {
+
+  cd ${srcdir}/ZynAddSubFX-${pkgver}/src
+
   install -v -D -m 0755 zynaddsubfx $pkgdir/usr/bin/zynaddsubfx
 
   cd ${srcdir}/ZynAddSubFX-${pkgver}/ExternalPrograms/Spliter
@@ -53,5 +61,3 @@ build() {
   install -v -D -m 0644 src/zynaddsubfx_icon.svg ${pkgdir}/usr/share/pixmaps/zynaddsubfx.svg
   install -v -D -m 0644 ${srcdir}/zynaddsubfx.desktop ${pkgdir}/usr/share/applications/zynaddsubfx.desktop
 }
-
-# vim:set ts=2 sw=2 et:

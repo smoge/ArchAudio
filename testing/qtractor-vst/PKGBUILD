@@ -17,16 +17,12 @@ source=(http://downloads.sourceforge.net/$_realname/$_realname-$pkgver.tar.gz)
 md5sums=('fef232ad6c3312e5af179cdcd2c395ae')
 
 build() {
-
   cd "$srcdir/$_realname-$pkgver"
   ./configure --prefix=/usr --with-vst=/usr/include/vst
   make
 }
 
 package() {
-
   cd "$srcdir/$_realname-$pkgver"
   make DESTDIR="$pkgdir/" install
 }
-
-# vim:set ts=2 sw=2 et:

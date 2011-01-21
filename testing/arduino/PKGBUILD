@@ -29,16 +29,17 @@ elif [ "$CARCH" == 'x86_64' ]; then
 fi
 
 package() {
+
   cd "$srcdir/arduino-$pkgver"
   mkdir -p "$pkgdir"/usr/{bin,share/{doc,applications}}
-  
+
   # copy the whole SDK to /usr/share/arduino/
   cp -r . "$pkgdir/usr/share/arduino"
-  
+
   # at least support the FHS a little bit:
   install -m755 "$srcdir/arduino" "$pkgdir/usr/bin/arduino"
   ln -s /usr/share/arduino/reference "$pkgdir/usr/share/doc/arduino"
-  
+
   # desktop icon
   install -m644 "$srcdir/arduino.desktop" "$pkgdir/usr/share/applications/"
   install -m644 "$srcdir/arduino.png" "$pkgdir/usr/share/arduino/"

@@ -15,11 +15,17 @@ md5sums=('5c7bd16e2903866f949879b885953a2b')
 sha256sums=('aa683ed57592489e05fdd898368abe3ee245a4d5829385cfe5edb81764590704')
 
 build() {
-  cd ${srcdir}/${pkgname}
 
+  cd ${srcdir}/${pkgname}
   # we have tcl version 8.5
   sed -i -e "s;8.4;8.5;" ${srcdir}/${pkgname}/Makefile
 
   make PREFIX=/usr
+}
+
+
+package() {
+
+  cd ${srcdir}/${pkgname}
   make PREFIX=/usr DESTDIR=${pkgdir} install-all
 }

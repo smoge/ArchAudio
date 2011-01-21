@@ -22,10 +22,11 @@ source=(http://downloads.sourceforge.net/supercollider/3.4.2/SuperCollider-$pkgv
 md5sums=('ce8072fed7e4bbbd58a04f8b9829b5bd')
 
 build() {
+
   cd $srcdir/SuperCollider-Source/common
 
+	# READLINE=yes should work, right..?
   scons PREFIX=/usr DEVELOPMENT=yes X11=yes SCEL=yes SCED=yes LID=yes WII=yes READLINE=no
   scons DESTDIR=$pkgdir/ install
   scons -C ../editors/scvim PREFIX=$pkgdir/usr VIMFILE_DIR=/usr/share/vim/addons install-system
-
 }

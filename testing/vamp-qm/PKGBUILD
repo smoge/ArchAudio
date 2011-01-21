@@ -26,10 +26,9 @@ case $CARCH in
 esac
 
 
-build() {
+package() {
 
   rm $srcdir/$_origname-$pkgver-$_thisArch-linux/*.txt
   install -d $pkgdir/usr/lib/vamp/
   install -p $srcdir/$_origname-$pkgver-$_thisArch-linux/* $pkgdir/usr/lib/vamp/
-
 }

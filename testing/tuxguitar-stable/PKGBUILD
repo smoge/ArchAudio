@@ -23,6 +23,7 @@ esac
 source=(http://sourceforge.net/projects/tuxguitar/files/TuxGuitar/TuxGuitar-$pkgver/tuxguitar-$pkgver-linux-${__arch}.tar.gz)
 
 package() {
+
   cd "$srcdir"/tuxguitar-$pkgver-linux-${__arch}
 
   install -dm755 "$pkgdir/opt/tuxguitar" "$pkgdir/usr/bin"

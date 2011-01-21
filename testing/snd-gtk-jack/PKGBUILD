@@ -23,9 +23,13 @@ build() {
 
   ./configure --prefix=/usr --with-gtk --with-jack
   make
-  make prefix=$pkgdir/usr install
+}
 
+package() {
+
+  cd $srcdir/$_pkgname-$pkgver
+
+  make prefix=$pkgdir/usr install
   rm -f $pkgdir/usr/share/$_pkgname/*.{fs,rb}
   install -D -m 644 COPYING $pkgdir/usr/share/licenses/$pkgname/LICENSE
-
 }

@@ -27,16 +27,16 @@ md5sums=('0dcbfb2ab386419f306e1d947815163a'
 build() {
 
   mkdir -p ${pkgdir}/{etc,usr/bin,usr/lib,usr/share/${pkgname}}
-
   cd "${srcdir}/${pkgname}-${pkgver}/source"
-
-  patch < ${srcdir}/${pkgname}.patch
+	patch < ${srcdir}/${pkgname}.patch
   make DESTDIR=${pkgdir} PREFIX="/usr" LIBDIR=lib
 }
 
 package(){
+
   cd "${srcdir}/${pkgname}-${pkgver}/source"
   make DESTDIR=${pkgdir} PREFIX="/usr" LIBDIR=lib install
+
   cp -r "${srcdir}/stops-0.3.0" "${pkgdir}/usr/share/${pkgname}"
   chmod 644 ${pkgdir}/usr/share/${pkgname}/stops-0.3.0/*.ae0
   chmod 755 ${pkgdir}/usr/share/${pkgname}/{stops-0.3.0,stops-0.3.0/Aeolus*}
