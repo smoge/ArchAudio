@@ -1,6 +1,4 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-# Contributor: David Virgilio <drvirgilio@gmail.com>
+﻿# Contributor: David Virgilio <drvirgilio@gmail.com> 
 
 pkgname=frescobaldi
 pkgver=1.2.0
@@ -11,21 +9,20 @@ url="http://www.frescobaldi.org/"
 license="GPL"
 depends=('kdebase-kwrite' 'lilypond' 'python2>=2.4.0' 'python2-qt' 'kdebindings-python')
 optdepends=('rumor')
-install=
 makedepends=('automoc4' 'cmake' 'docbook-xml')
 source=(http://lilykde.googlecode.com/files/$pkgname-$pkgver.tar.gz)
 md5sums=('e5dbc9425e3aae9890d54649b3d60166')
 
 build() {
 
-  cd $startdir/src/$pkgname-$pkgver
-
-  cmake . -DCMAKE_INSTALL_PREFIX=$(kde4-config --exec-prefix)
-  make
+    cd $startdir/src/$pkgname-$pkgver
+    cmake . -DCMAKE_INSTALL_PREFIX=$(kde4-config --exec-prefix)
+    make
 }
 
-package() {
 
-  cd $startdir/src/$pkgname-$pkgver
-  make install DESTDIR=$pkgdir
+package() {
+    
+    cd $startdir/src/$pkgname-$pkgver
+    make install DESTDIR=$pkgdir
 }
