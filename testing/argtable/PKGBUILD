@@ -1,0 +1,26 @@
+# Contributor: Mark Taylor <skymt0 at gmail dot com>
+
+pkgname=argtable
+pkgver=2.13
+_srcver=2-13
+pkgrel=1
+pkgdesc="ANSI C command line parser"
+arch=('i686' 'x86_64')
+url="http://argtable.sourceforge.net/"
+license=('GPL')
+depends=('glibc')
+source=("http://prdownloads.sourceforge.net/argtable/${pkgname}${_srcver}.tar.gz")
+md5sums=('156773989d0d6406cea36526d3926668')
+
+build() {
+
+  cd ${srcdir}/${pkgname}${_srcver}
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+
+  cd ${srcdir}/${pkgname}${_srcver}
+  make DESTDIR=${pkgdir} install
+}
