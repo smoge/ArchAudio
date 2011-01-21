@@ -7,4 +7,4 @@
 # Example:
 # ULATENCYD_OPTS="-c /etc/ulatencyd/ulatencyd.conf -r /etc/ulatencyd/rules/ -v 3"
 
-ULATENCYD_OPTS=""
+ULATENCYD_OPTS="-d"

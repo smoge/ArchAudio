@@ -1,4 +1,4 @@
-# Contributor: SpepS <dreamspepser at yahoo dot it>
+# Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=ulatencyd
 pkgver=0.3.5
@@ -13,16 +13,20 @@ conflicts=("$pkgname-git")
 backup=("etc/$pkgname/$pkgname.conf")
 source=("https://github.com/downloads/poelzi/$pkgname/$pkgname-$pkgver.tar.gz"
         "$pkgname.d"
-        "$pkgname")
-
+        "$pkgname"
+        "daemonize.patch")
 md5sums=('f46fee842af7da66283f73175a0c19b6'
-         'ad0369cfa0deac8b5fe30dacc5a4e7c2'
-         '0694379b7aa5ecb129b1276f49b4bc24')
+         'ceb27033cb79d2a9ad71e390b0b75d7d'
+         '512bd9215650c95c04717abf8a2d2f40'
+         '185863fab6d1da5a6be8d1c5763fb3d2')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
 
-  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+  # Patch to enable daemon mode
+  patch -p1 -i ../daemonize.patch
+
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr
   make
 }
 
