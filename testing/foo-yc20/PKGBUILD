@@ -1,0 +1,29 @@
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+
+pkgname=foo-yc20
+pkgver=1.2.0
+pkgrel=1
+pkgdesc="A divide-down combo organ designed in the late 60's."
+arch=('i686' 'x86_64')
+url="http://code.google.com/p/foo-yc20/"
+license=('GPL')
+depends=('jack' 'gtk2')
+provides=('foo-yc20')
+conflicts=('foo-yc20')
+makedepends=('faust')
+source=("http://$pkgname.googlecode.com/files/$pkgname-$pkgver.tar.bz2")
+install="$pkgname.install"
+md5sums=('a9b103d4863f47641870e17bfab9d57c')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make PREFIX=/usr
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR=$pkgdir PREFIX=/usr install
+}
+
