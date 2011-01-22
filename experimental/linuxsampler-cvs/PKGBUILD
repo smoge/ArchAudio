@@ -3,7 +3,7 @@
 # Contributor: svoufff <svoufff at gmail dot com>
 
 pkgname=linuxsampler-cvs
-pkgver=20110111
+pkgver=20110122
 pkgrel=1
 pkgdesc="Audio sampler backend"
 arch=('i686' 'x86_64')
