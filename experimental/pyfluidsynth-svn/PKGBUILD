@@ -12,12 +12,12 @@ license=('LGPL')
 depends=('fluidsynth' 'python-numpy')
 provides=('pyfluidsynth')
 conflicts=('pyfluidsynth')
-source=()
 
 _svntrunk=http://pyfluidsynth.googlecode.com/svn/trunk/
 _svnmod=pyfluidsynth
 
 build() {
+
   cd "$srcdir"
 
   if [ -d $_svnmod/.svn ]; then
