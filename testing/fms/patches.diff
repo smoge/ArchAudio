@@ -22,3 +22,14 @@
  FMMixer::FMMixer(FMChannel *parentChannel){
 
 
+--- fms-1.0/fmsbackend.cpp.orig 2011-01-23 21:54:17.803970198 +0100
++++ fms-1.0/fmsbackend.cpp      2011-01-23 21:55:06.593977212 +0100
+@@ -21,6 +21,7 @@
+ #include <iostream>
+ #include <iomanip>
+ #include <cstring>
++#include <cstdio>
+ #include <sys/socket.h>
+ #include <sys/un.h>
+ #include <unistd.h>
+

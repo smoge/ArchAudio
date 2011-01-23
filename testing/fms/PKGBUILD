@@ -14,7 +14,7 @@ makedepends=('cmake')
 source=('http://downloads.sourceforge.net/fmsynth/fms-1.0.tar.gz'
 	'patches.diff')
 md5sums=('3dc0eae280d15ab7bf60d49ddbcca28c'
-        'ffc6d344b765053ff35abf8ead8dc849')
+         '95d853ebbaf42ec9543ab4bcc738f7de')
 build() {
   cd $startdir/src/${pkgname}-${pkgver}
   patch -b -p1 < ${startdir}/patches.diff
