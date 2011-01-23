@@ -10,8 +10,6 @@ license=('GPL')
 groups=('lv2-plugins')
 depends=('lv2core')
 makedepends=('git')
-provides=('lv2-aubio')
-conflicts=('lv2-aubio')
 
 _gitroot="git://github.com/jeremysalwen/Aubio-LV2-Plugins.git"
 _gitname="lv2-aubio"
