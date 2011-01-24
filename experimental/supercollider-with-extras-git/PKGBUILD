@@ -41,6 +41,10 @@ build() {
   msg "GIT checkout done or server timeout"
   msg "Starting make..."
 
+  cd $_gitname
+  git submodule init && git submodule update
+  cd ..
+
   cp -r $_gitname $_gitname-build
   cd $_gitname-build/
 

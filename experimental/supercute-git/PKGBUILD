@@ -2,7 +2,7 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=supercute-git
-pkgver=20110122
+pkgver=20110124
 pkgrel=1
 pkgdesc="Special version of SuperCollider that includes a new cross-platform GUI implementation using Qt framework. It also enables WiiMote support."
 url="http://supercollider.sourceforge.net/"
@@ -13,14 +13,13 @@ makedepends=('git' 'libsndfile>=1.0' 'qt' 'cwiid' 'emacs' 'vim' 'gedit' 'icu' 'g
 conflicts=('supercollider')
 provides=('supercollider')
 
-#_gitroot="git://supercollider.git.sourceforge.net/gitroot/supercollider/supercollider"
 _gitroot="git://github.com/jleben/SuperCute.git"
 _gitname="SuperCute"
 
 build() {
   cd $srcdir
   msg "Connecting to GIT server...."
-  
+
   if [ -d $_gitname ] ; then
     (cd $_gitname && git pull origin && git submodule update)
     msg "The local files are updated."
@@ -36,7 +35,8 @@ build() {
 
   mkdir build
   cd build
-  cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DSC_QT=1 -DWII=1 -DSC_ED=1 -DSC_EL=1 -DSC_VIM=1 -DNOVA_SIMD=1 ..
+
+  cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DSC_QT=1 -DWII=1 -DSC_ED=1 -DSC_EL=1 -DSUPERNOVA=1 -DNOVA_SIMD=1 ..
 
   make
 }
