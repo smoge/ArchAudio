@@ -43,7 +43,7 @@ build() {
 
 package() {
 
-  cd $_gitname-build/
+  cd $_gitname-build/build
 
   make DESTDIR=$pkgdir/ install
   rm -rf $srcdir/$_gitname-build
