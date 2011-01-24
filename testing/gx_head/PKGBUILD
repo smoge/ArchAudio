@@ -8,10 +8,10 @@ arch=('i686' 'x86_64')
 url="http://sourceforge.net/apps/wordpress/guitarix/"
 license=('GPL')
 depends=('gtkmm' 'jack' 'fftw')
-makedepends=('python2' 'boost')
+makedepends=('python2' 'boost' 'wget')
 install="$pkgname.install"
 source=("http://downloads.sourceforge.net/project/guitarix/$pkgname/$pkgname-$pkgver.tar.bz2")
-md5sums=('f59474edee5b9aa1e0d93b613f958578')
+md5sums=(`wget -qO- $source | md5sum | cut -c -32`)
 
 build() {
   cd "$srcdir/$pkgname"
