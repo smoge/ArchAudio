@@ -3,7 +3,7 @@
 # Contributor: Björn Lindig <bjoern.lindig@googlemail.com>
 
 
-pkgname=supercute-with-plugins-git
+pkgname=supercute-with-extras-git
 pkgver=20110124
 pkgver_plugins=453
 pkgrel=1
