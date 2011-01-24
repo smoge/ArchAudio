@@ -12,7 +12,7 @@ arch=('any')
 url="http://lv2plug.in/"
 license=('GPL')
 makedepends=('subversion' 'rdflib')
-provides=("$_pkg")
+provides=("$_pkg" 'lv2')
 conflicts=("$_pkg")
 
 _svntrunk=http://lv2plug.in/repo/trunk
