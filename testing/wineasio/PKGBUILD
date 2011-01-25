@@ -19,7 +19,9 @@ case $CARCH in
   'i686')
     depends=('wine' 'jack') ;;
   'x86_64')
-    depends=('wine' 'lib32-jack') ;;
+    depends=('wine' 'lib32-jack')
+    provides=('wineasio64')
+    conficts=('wineasio64') ;;
 esac
 
 makedepends=('steinberg-asio' 'asio')
