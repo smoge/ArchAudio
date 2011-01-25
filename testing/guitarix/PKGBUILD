@@ -11,7 +11,7 @@ url="http://guitarix.sourceforge.net/"
 license=('GPL')
 depends=('jack' 'gtkmm' 'fftw')
 makedepends=('ladspa' 'python2' 'boost')
-optdepends=('jack_capture' 'zita-convolver' 'zita-resampler' 'faust')
+optdepends=('jack-capture' 'zita-convolver' 'zita-resampler' 'faust')
 source=(http://downloads.sourceforge.net/sourceforge/guitarix/${pkgname}-${pkgver}-nopkg.tar.bz2)
 md5sums=('68bdf7bc7c7aac23d736c02325f21f67')
 
