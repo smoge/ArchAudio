@@ -9,18 +9,26 @@ pkgdesc="A compiled language for real-time audio signal processing."
 arch=('i686' 'x86_64')
 url="http://faust.grame.fr/"
 license=('GPL')
-conflicts=('faust-cvs')
+conflicts=('faust-cvs' 'faust-git')
+optdepends=('supercollider: supercollider support'
+            'pd: pd support'
+            'csound: csound support'
+            'jack: jack application support'
+            'lv2core: lv2 plugin support'
+            'ladspa: ladspa plugin support'
+            'qt4: jackqt application support'
+            'gtk2: jackgtk application support')
 source=("http://downloads.sourceforge.net/project/faudiostream/$pkgname-$pkgver.tar.gz")
 md5sums=('aee067c8f2183949a6f5ea2556f1934a')
 
 build() {
-  cd "$srcdir/$pkgname-$pkgver"
 
+  cd "$srcdir/$pkgname-$pkgver"
   make PREFIX=/usr
 }
 
 package() {
-  cd "$srcdir/$pkgname-$pkgver"
 
+  cd "$srcdir/$pkgname-$pkgver"
   make PREFIX=/usr DESTDIR="$pkgdir/" install
 }
