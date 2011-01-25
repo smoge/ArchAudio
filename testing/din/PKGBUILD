@@ -1,7 +1,7 @@
 # Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=din
-pkgver=1.4
+pkgver=1.4.1
 pkgrel=1
 pkgdesc="A software musical instrument and audio synthesizer that let you use multiple Bezier curves to draw and sculpt waveforms"
 arch=(i686 x86_64)
@@ -9,7 +9,7 @@ url="http://dinisnoise.org/"
 license=('GPL')
 depends=('liblo' 'libgl' 'libircclient' 'tcl' 'jack' 'sdl' 'fftw')
 source=("http://din.googlecode.com/files/$pkgname-$pkgver.tar.gz")
-md5sums=('83636e7290c5c050c2bef82d5124e02d')
+md5sums=('6f4603f42e270227096ba0e668953843')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
