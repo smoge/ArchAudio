@@ -15,8 +15,6 @@ license=('GPL')
 makedepends=('git')
 depends=('aubio' 'portaudio' 'lilypond' 'gtk2' 'libxml2' 'guile' 'jack' 'gtksourceview2' 'fluidsynth' 'cairo')
 options=('!libtool')
-source=()
-md5sums=()
 
 _gitroot="git://git.savannah.gnu.org/denemo.git"
 _gitname="denemo"
