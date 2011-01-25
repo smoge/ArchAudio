@@ -16,6 +16,7 @@ optdepends=(
   'vim: Vim Interface'
   'gedit: GEdit Interface'
   'subversion: Quarks support'
+  'swingosc: swing cross-platform GUI'
   'supercollider-with-extras: replace supercollider by this package for all the extra goodies'
 )
 

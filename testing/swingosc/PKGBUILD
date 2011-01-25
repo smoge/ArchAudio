@@ -14,6 +14,7 @@ license=('GPL' 'LGPL' 'Apache')
 depends=('jre')
 source=(http://downloads.sourceforge.net/swingosc/$_pkgname-$_pkgver.zip)
 md5sums=('6c284f505525dff8462267958479ed1a' )
+optdepends=('supercollider' 'pd')
 
 build() {
   cd $startdir/pkg/
