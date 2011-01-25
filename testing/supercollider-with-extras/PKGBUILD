@@ -12,7 +12,7 @@ provides=('supercollider')
 conflicts=('supercollider' 'supercollider-git')
 depends=('jack' 'avahi' 'fftw')
 arch=('i686' 'x86_64')
-makedepends=('subversion' 'libsndfile>=1.0' 'emacs' 'vim' 'gedit' 'icu' 'gcc>=3.0' 'pkgconfig>=0.14.0' 'scons>=0.96' 'alsa-lib' 'readline')
+makedepends=('subversion' 'jack' 'libsndfile>=1.0' 'emacs' 'vim' 'gedit' 'icu' 'gcc>=3.0' 'pkgconfig>=0.14.0' 'scons>=0.96' 'alsa-lib' 'readline')
 optdepends=('cwiid: Wii Controller Support'
   'emacs: Emacs Interface'
   'vim: Vim Interface'
