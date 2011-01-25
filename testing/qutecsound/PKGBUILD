@@ -7,7 +7,7 @@ pkgdesc="QuteCsound is a cross platform editor and front-end for Csound with syn
 arch=('i686' 'x86_64')
 url="http://qutecsound.sourceforge.net/"
 license=('GPL')
-depends=('csound' 'qt')
+depends=('csound' 'qt' 'python2')
 source=("http://downloads.sourceforge.net/project/$pkgname/QuteCsound/0.6.0/$pkgname-$pkgver-src.tar.gz")
 md5sums=('73a87ef1b293819ec0975973143ac4aa')
 
