@@ -10,7 +10,7 @@ pkgdesc="lv2-IR is a zero-latency, realtime, high performance signal convolver e
 arch=('i686' 'x86_64')
 url="http://factorial.hu/plugins/lv2/ir"
 license=('GPL')
-depends=('zita-convolver' 'libsndfile' 'libsamplerate' 'gtk2' 'lv2core')
+depends=('zita-convolver' 'libsndfile' 'libsamplerate' 'gtk2>=2.16')
 provides=('ir-lv2')
 conflicts=('ir-lv2')
 groups=('lv2-plugins')
