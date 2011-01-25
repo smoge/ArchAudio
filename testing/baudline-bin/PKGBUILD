@@ -20,7 +20,7 @@
 
 pkgname=baudline-bin
 pkgver=1.08
-pkgrel=2
+pkgrel=3
 pkgdesc="Time-frequency browser designed for scientific visualization of the spectral domain."
 arch=('i686' 'x86_64')
 url="http://www.baudline.com/"
@@ -34,29 +34,29 @@ source=("http://www.baudline.com/${pkgname/-bin/}_${pkgver}_linux_${CARCH}.tar.g
 	"${pkgname/-bin/}.desktop"
 	"${pkgname/-bin/}_jack.desktop")
 
-md5sums=('a400669fe11e5189e5d9d9db18dae70d'
-         'd334c058230811a402104f75afcfaeed'
-         '2c1ff5a60782815167bb43e735305e0e')
 
-[ "${CARCH}" == "x86_64" ] && \
-md5sums=('8ca7a48c17d4826f2a634ffe5137811e'
-         'd334c058230811a402104f75afcfaeed'
-         '2c1ff5a60782815167bb43e735305e0e')
+case $CARCH in
+  'i686')
+    md5sums=( 'a400669fe11e5189e5d9d9db18dae70d'
+              'd334c058230811a402104f75afcfaeed'
+              '2c1ff5a60782815167bb43e735305e0e')
+    _arch=x86;;
+  'x86_64')
+    md5sums=( '8ca7a48c17d4826f2a634ffe5137811e'
+              'd334c058230811a402104f75afcfaeed'
+              '2c1ff5a60782815167bb43e735305e0e')
+    _arch=${CARCH} ;;
+esac
+
+  _verpkg=${pkgver} # why this??
 
 build() {
-
-  _verpkg=${pkgver}
-  _arch=${CARCH}
-
-  if [ "${_arch}" == "i686" ]; then
-    _arch=x86
-  fi
 
   cd ${srcdir}/${pkgname/-bin/}_${_verpkg}_linux_${_arch}
 
   # Intallation
   mkdir -p ${pkgdir}/usr/share/baudline
-  cp -a ./* ${pkgdir}/usr/share/baudline/ || return 1
+  cp -a ./* ${pkgdir}/usr/share/baudline/ 
 
   # Scripts for running it
   mkdir -p ${pkgdir}/usr/bin/
@@ -73,20 +73,20 @@ cd /usr/share/${pkgname/-bin/}
 EOF
 
   # Fixing permissions
-  chmod 755 ${pkgdir}/usr/bin/* || return 1
+  chmod 755 ${pkgdir}/usr/bin/* 
 
   # .desktop file and icon
   mkdir -p ${pkgdir}/usr/share/pixmaps
-  /usr/bin/convert ${srcdir}/${pkgname/-bin/}_${_verpkg}_linux_${_arch}/icons/spectro.gif ${srcdir}/${pkgname/-bin/}_${_verpkg}_linux_${_arch}/icons/baudline.png || return 1
-  /usr/bin/convert ${srcdir}/${pkgname/-bin/}_${_verpkg}_linux_${_arch}/icons/piano_keys.gif ${srcdir}/${pkgname/-bin/}_${_verpkg}_linux_${_arch}/icons/baudline_jack.png || return 1
-  install -m 644 ${srcdir}/${pkgname/-bin/}_${_verpkg}_linux_${_arch}/icons/baudline.png ${pkgdir}/usr/share/pixmaps/ || return 1
-  install -m 644 ${srcdir}/${pkgname/-bin/}_${_verpkg}_linux_${_arch}/icons/baudline_jack.png ${pkgdir}/usr/share/pixmaps/baudline_jack.png || return 1
+  /usr/bin/convert ${srcdir}/${pkgname/-bin/}_${_verpkg}_linux_${_arch}/icons/spectro.gif ${srcdir}/${pkgname/-bin/}_${_verpkg}_linux_${_arch}/icons/baudline.png
+  /usr/bin/convert ${srcdir}/${pkgname/-bin/}_${_verpkg}_linux_${_arch}/icons/piano_keys.gif ${srcdir}/${pkgname/-bin/}_${_verpkg}_linux_${_arch}/icons/baudline_jack.png
+  install -m 644 ${srcdir}/${pkgname/-bin/}_${_verpkg}_linux_${_arch}/icons/baudline.png ${pkgdir}/usr/share/pixmaps/
+  install -m 644 ${srcdir}/${pkgname/-bin/}_${_verpkg}_linux_${_arch}/icons/baudline_jack.png ${pkgdir}/usr/share/pixmaps/baudline_jack.png 
   mkdir -p ${pkgdir}/usr/share/applications
-  install -m 644 ${srcdir}/${pkgname/-bin/}.desktop ${pkgdir}/usr/share/applications || return 1
-  install -m 644 ${srcdir}/${pkgname/-bin/}_jack.desktop ${pkgdir}/usr/share/applications || return 1
+  install -m 644 ${srcdir}/${pkgname/-bin/}.desktop ${pkgdir}/usr/share/applications
+  install -m 644 ${srcdir}/${pkgname/-bin/}_jack.desktop ${pkgdir}/usr/share/applications 
 
   # License
   mkdir -p ${pkgdir}/usr/share/licenses/${pkgname}/
-  install -m 644 ${pkgdir}/usr/share/baudline/README_unix.txt ${pkgdir}/usr/share/licenses/${pkgname}/ || return 1
+  install -m 644 ${pkgdir}/usr/share/baudline/README_unix.txt ${pkgdir}/usr/share/licenses/${pkgname}/ 
 }
 

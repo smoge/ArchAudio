@@ -11,21 +11,17 @@ license=('GPL')
 
 case $CARCH in
   'i686')
-    depends=('wine' 'jack' 'liblo')
-    _thisArch=i686 ;;
+    depends=('wine' 'jack' 'liblo') ;;
   'x86_64')
-    depends=('wine' 'jack' 'liblo' 'gcc-multilib')
-    _thisArch=amd64 ;;
+    depends=('wine' 'jack' 'liblo' 'gcc-multilib') ;;
 esac
 
 makedepends=('dssi' 'ladspa')
 source=(http://code.breakfastquay.com/attachments/download/10/$pkgname-$pkgver.tar.bz2
 	winexec.patch)
 
-
 md5sums=('5c569200571de76dac18be4eb6fbd9c8'
          '7578313fb2861165ed349cef1d02f829')
-
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
