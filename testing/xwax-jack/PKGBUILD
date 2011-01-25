@@ -28,8 +28,15 @@ md5sums=('e015363e96412d0e6702596cfa6a3485')
 
 
 build() {
+
   cd $startdir/src/$_ownedpkgname-$pkgver
   ./configure '--enable-alsa' '--enable-jack' '--prefix /usr'
   make PREFIX=$pkgdir/usr EXECDIR=$pkgdir/usr/share/${pkgname}
+}
+
+package() {
+
+  cd $startdir/src/$_ownedpkgname-$pkgver
+
   make EXECDIR=$pkgdir/usr/share/${pkgname} PREFIX=$pkgdir/usr install
 }

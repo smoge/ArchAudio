@@ -14,11 +14,18 @@ source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar
 md5sums=('b41db22c93d9510c396b99e3301df394')
 
 build() {
+
   cd "${srcdir}/${pkgname}"
 
   sed -i "s|/usr/bin/install|/bin/install|" Makefile
   mkdir -p "${pkgdir}/usr/bin"
 
   make
+}
+
+package() {
+
+  cd "${srcdir}/${pkgname}"
+
   make PREFIX="${pkgdir}/usr" install
 }

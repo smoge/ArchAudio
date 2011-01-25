@@ -16,14 +16,19 @@ source=(http://www.smbolton.com/whysynth/$pkgname-$pkgver.tar.bz2 whysynth)
 md5sums=('931944999b7def5140c2397c228a4983'
          '5ab0d97abe67bcbf6a5cb4c5678c9fce')
 
-# Maintainer: you have to look here to find the lastest release:
-# http://www.smbolton.com/whysynth/
-# Then just change the "pkgver" and "md5sums" (the first element)
-
 build() {
+
   cd "$srcdir/$pkgname-$pkgver"
+
   ./configure --prefix=/usr
   make
+}
+
+package() {
+
+  cd "$srcdir/$pkgname-$pkgver"
+
   make DESTDIR=$pkgdir install
   install -D -m755 $srcdir/whysynth $pkgdir/usr/bin/whysynth
+
 }

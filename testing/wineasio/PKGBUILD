@@ -35,6 +35,11 @@ build() {
   cd "$srcdir/$pkgname"
   ln -s /usr/include/steinberg-asio/asio.h
   make 
+}
+
+package() {
+
+  cd "$srcdir/$pkgname"
 
   case $CARCH in
     'i686')
@@ -42,5 +47,4 @@ build() {
     'x86_64')
       install -Dm755 wineasio.dll.so "$pkgdir/usr/lib32/wine/wineasio.dll.so" ;;
   esac
-
 }

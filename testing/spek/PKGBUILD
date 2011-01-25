@@ -16,6 +16,7 @@ source=("http://$pkgname.googlecode.com/files/$pkgname-$pkgver.tar.bz2")
 md5sums=('6be33caf38ba364ec996e9f5616ff239')
 
 build() {
+
   cd "$srcdir/$pkgname-$pkgver"
   
   ./configure --prefix=/usr
@@ -23,6 +24,7 @@ build() {
 }
 
 package() {
+
   cd "$srcdir/$pkgname-$pkgver"
 
   make DESTDIR="$pkgdir" install

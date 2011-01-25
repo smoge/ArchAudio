@@ -15,6 +15,7 @@ source=(http://www.teuton.org/~gabriel/$pkgname/$pkgname-$pkgver.tar.bz2)
 md5sums=('33baf4c8677665fae88f23e292660f95')
 
 build() {
+
   cd "$srcdir/$pkgname-$pkgver"
 
   cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
@@ -25,5 +26,6 @@ build() {
 package() {
 
   cd "$srcdir/$pkgname-$pkgver"
+
   make DESTDIR="$pkgdir" install
 }

@@ -20,6 +20,7 @@ build() {
   automake --add-missing
   autoconf
   ./configure --prefix=/usr
+
   make
 }
 
@@ -31,6 +32,7 @@ package() {
   make DESTDIR="$pkgdir/" install
 
   cd doc
+
 	for file in *
 		do install -D -m644 $file $pkgdir/usr/share/doc/${pkgname}/$file
   done

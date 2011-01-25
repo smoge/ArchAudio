@@ -12,19 +12,24 @@ url="http://dssi.sourceforge.net/download.html#Xsynth-DSSI"
 license=('GPL')
 depends=('gtk2' 'liblo>=0.22')
 makedepends=('dssi')
+groups=('dssi-plugins')
 options=('!libtool')
-source=(http://downloads.sourceforge.net/project/dssi/${pkgname}/${pkgver}/${pkgname}-${pkgver}.tar.gz
-        xsynth-dssi)
+source=(http://downloads.sourceforge.net/project/dssi/${pkgname}/${pkgver}/${pkgname}-${pkgver}.tar.gz xsynth-dssi)
 md5sums=('3432ecdac06407a992f80eb1c1ecf7cd'
          'c346e6a944f202fccb2278b77a5e184b')
+
 build() {
+
   cd "${srcdir}/${pkgname}-${pkgver}"
+
   ./configure --prefix=/usr
   make
 }
 
 package() {
+
   cd "${srcdir}/${pkgname}-${pkgver}"
+
   make DESTDIR=${pkgdir} install
   install -D -m755 "${startdir}/xsynth-dssi" "${pkgdir}/usr/bin/xsynth-dssi"
 }
