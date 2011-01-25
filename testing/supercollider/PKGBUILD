@@ -10,11 +10,12 @@ url="http://supercollider.sourceforge.net/"
 license=('GPL')
 depends=('jack' 'avahi' 'fftw')
 arch=('i686' 'x86_64')
-makedepends=('subversion' 'libsndfile>=1.0' 'emacs' 'vim' 'gedit' 'icu' 'gcc>=3.0' 'pkgconfig>=0.14.0' 'scons>=0.96' 'alsa-lib' 'cwiid' 'readline')
+makedepends=('libsndfile>=1.0' 'jack' 'emacs' 'vim' 'gedit' 'icu' 'gcc>=3.0' 'pkgconfig>=0.14.0' 'scons>=0.96' 'alsa-lib' 'cwiid' 'readline')
 optdepends=(
   'emacs: Emacs Interface'
   'vim: Vim Interface'
   'gedit: GEdit Interface'
+  'subversion: Quarks support'
   'supercollider-with-extras: replace supercollider by this package for all the extra goodies'
 )
 

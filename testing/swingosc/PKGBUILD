@@ -12,7 +12,6 @@ arch=('any')
 url="http://www.sciss.de/swingOSC/"
 license=('GPL' 'LGPL' 'Apache')
 depends=('jre')
-makedepends=()
 source=(http://downloads.sourceforge.net/swingosc/$_pkgname-$_pkgver.zip)
 md5sums=('6c284f505525dff8462267958479ed1a' )
 
