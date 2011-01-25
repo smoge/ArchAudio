@@ -8,25 +8,37 @@
 # if you want to build this.
 
 pkgname=wineasio
-pkgver=0.7.5
+pkgver=0.8.0
 pkgrel=1
 pkgdesc="Steinberg's Windows ASIO driver for Wine"
-arch=(i686)
+arch=('i686' 'x86_64')
 url="http://sourceforge.net/projects/wineasio/"
 license=('LGPL')
-depends=('wine' 'jack')
-makedepends=('steinberg-asio')
+
+case $CARCH in
+  'i686')
+    depends=('wine' 'jack') ;;
+  'x86_64')
+    depends=('wine' 'lib32-jack') ;;
+esac
+
+makedepends=('steinberg-asio' 'asio')
 install=$pkgname.install
 source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.bz2)
+md5sums=('d2602531754bedb7c39f6386db588402')
 
 build() {
   cd "$srcdir/$pkgname"
 
   ln -s /usr/include/steinberg-asio/asio.h
 
-  make || return 1
+  make 
 
-  install -Dm755 wineasio.dll.so \
-    "$pkgdir/usr/lib/wine/wineasio.dll.so"
+  case $CARCH in
+    'i686')
+      install -Dm755 wineasio.dll.so "$pkgdir/usr/lib/wine/wineasio.dll.so" ;;
+    'x86_64')
+      install -Dm755 wineasio.dll.so "$pkgdir/usr/lib32/wine/wineasio.dll.so" ;;
+  esac
+
 }
-md5sums=('d2602531754bedb7c39f6386db588402')
