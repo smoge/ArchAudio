@@ -2,7 +2,6 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Tom < reztho at archlinux dot us >
 
-
 # ATTENTION!!!!
 # The license of this program must be accepted before downloading the original baudline .tar.gz,
 # so be sure to accept it before doing anything if you really want to install this
@@ -16,7 +15,7 @@
 # distribution of the binary Archlinux package made with this PKGBUILD is prohibited, so it
 # isn't possible to upload it to the binary Archlinux repositories or use it as part of Archlinux
 # installation or any of its derivatives.
-#
+
 
 pkgname=baudline-bin
 pkgver=1.08
@@ -40,7 +39,7 @@ case $CARCH in
     md5sums=( 'a400669fe11e5189e5d9d9db18dae70d'
               'd334c058230811a402104f75afcfaeed'
               '2c1ff5a60782815167bb43e735305e0e')
-    _arch=x86;;
+    _arch=x86 ;;
   'x86_64')
     md5sums=( '8ca7a48c17d4826f2a634ffe5137811e'
               'd334c058230811a402104f75afcfaeed'

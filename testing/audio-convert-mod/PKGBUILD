@@ -14,7 +14,7 @@ url="http://www.diffingo.com/content/view/13/47/lang,en/"
 license=('GPL2')
 depends=('gawk' 'file>=4.16')
 optdepends=('mac' 'libid3tag' 'vorbis-tools' 'musepack-tools' 'faad2' 'a52dec' 'ffmpeg' 'lame' 'flac' 'faac' 'wavpack' 'mplayer')
-makedepends=('automake' 'intltool' 'python>=2.4' 'mutagen')
+makedepends=('automake' 'intltool' 'python2>=2.4' 'mutagen')
 source=(http://www.diffingo.com/downloads/audio-convert-mod/${pkgname}-${pkgver}.tar.bz2)
 md5sums=('ee500c8cdee8923df6cc15d2ea5e137c')
 

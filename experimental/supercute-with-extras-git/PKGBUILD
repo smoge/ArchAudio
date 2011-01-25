@@ -61,7 +61,7 @@ build() {
   fi
 
   msg "GIT checkout done or server timeout"
-  msg "Starting make..."
+  msg "Starting make..." Also wiimote support and AY plugins enabled.
 
   cp -r $_gitname2 $_gitname2-build
   cd $_gitname2-build
