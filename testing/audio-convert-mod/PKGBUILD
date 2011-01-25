@@ -7,7 +7,7 @@
 
 pkgname=audio-convert-mod
 pkgver="3.46.0b"
-pkgrel=2
+pkgrel=3
 pkgdesc="A simple audio file converter that supporting many formats."
 arch=('i686' 'x86_64')
 url="http://www.diffingo.com/content/view/13/47/lang,en/"
@@ -21,10 +21,13 @@ md5sums=('ee500c8cdee8923df6cc15d2ea5e137c')
 build() {
 
   cd "${startdir}/src/${pkgname}-${pkgver}"
+
   ./configure --prefix=/usr
+
   cd bin
   sed -i '18c\prefix="/usr"' audio-convert-mod
+
   cd ..
   make
-  make DESTDIR=${startdir}/pkg
+  make DESTDIR=$startdir/pkg install
 }
