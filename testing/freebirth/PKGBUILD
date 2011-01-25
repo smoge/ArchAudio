@@ -2,7 +2,7 @@
 
 pkgname=freebirth
 pkgver=0.3.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Free software bass synthesizer step sequencer"
 arch=('i686' 'x86_64')
 url="http://downloads.sourceforge.net/freebirth/"

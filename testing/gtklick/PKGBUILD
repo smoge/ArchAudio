@@ -8,7 +8,7 @@ pkgdesc="A graphical frontend for the klick metronome application."
 arch=('any')
 url="http://das.nasophon.de/gtklick/"
 license=('GPL')
-depends=('klick>=0.12' 'pyliblo>=0.7' 'pygtk')
+depends=('klick>=0.12' 'python2-liblo>=0.7' 'pygtk')
 source=(http://das.nasophon.de/download/${pkgname}-${pkgver}.tar.gz)
 md5sums=('47596c45e3b691cc78fa410bf320085f')
 
