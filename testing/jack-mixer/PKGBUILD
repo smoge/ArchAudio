@@ -12,7 +12,7 @@ provides=('jack_mixer')
 conflicts=('jack_mixer')
 depends=('python2' 'python-fpconst' 'pygtk' 'jack' 'hicolor-icon-theme')
 optdepends=('lash: session support'
-            'python-gconf: gconf support')
+            'python2-gconf: gconf support')
 options=('!libtool')
 install="$pkgname.install"
 source=("http://download.gna.org/jackmixer/jack_mixer-$pkgver.tar.gz")
