@@ -27,13 +27,13 @@ esac
 makedepends=('steinberg-asio' 'asio')
 install=$pkgname.install
 source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.bz2)
-md5sums=('d2602531754bedb7c39f6386db588402')
+md5sums=('5729f181e876cba5102c393017bf3a42')
+
 
 build() {
+
   cd "$srcdir/$pkgname"
-
   ln -s /usr/include/steinberg-asio/asio.h
-
   make 
 
   case $CARCH in
