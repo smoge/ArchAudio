@@ -3,7 +3,7 @@
 # Contributor:  Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=scate-git
-pkgver=20110108
+pkgver=20110125
 pkgrel=1
 pkgdesc="Scate: Kate SuperCollider plugin"
 arch=(i686 x86_64)

@@ -14,6 +14,11 @@ license=('GPL2')
 groups=('pd-externals')
 source=(http://sourceforge.net/projects/pure-data/files/libraries/$pdname/$pdname-$pkgver.tar.gz Makefile SConstruct)
 
+
+md5sums=('b617efab88369d0d0d7550e8e08c2a81'
+         '1340b2d40201598b7ff76867e018aba2'
+         'b0fb01c3735c0eeaca14e461d4866c99')
+
 build() {
 
   cd $srcdir/$pdname-$pkgver
@@ -31,6 +36,3 @@ package() {
   make DESTDIR=$startdir/pkg install
 }
 
-md5sums=('b617efab88369d0d0d7550e8e08c2a81'
-         '1340b2d40201598b7ff76867e018aba2'
-         'b0fb01c3735c0eeaca14e461d4866c99')
