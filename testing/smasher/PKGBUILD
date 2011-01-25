@@ -9,7 +9,7 @@ pkgdesc="A beat slicer running on GNU/Linux platform using the wxGTK"
 arch=('i686' 'x86_64')
 url="http://smasher.sourceforge.net/"
 license=('LGPL')
-depends=('wxgtk' 'libsndfile' 'csound5')
+depends=('wxgtk' 'libsndfile' 'csound')
 makedepends=('gcc' 'patch')
 source=(http://downloads.sourceforge.net/${pkgname}/${pkgname}-${pkgver}-source.tar.gz
 	smasher.patch)

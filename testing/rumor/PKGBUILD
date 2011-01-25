@@ -9,17 +9,9 @@ pkgdesc="A realtime monophonic (with chords) MIDI keyboard to Lilypond converter
 arch=('i686' 'x86_64')
 url="https://launchpad.net/rumor"
 license=('GPL')
-groups=()
 depends=('alsa-lib' 'guile')
 optdepends=('alsa-oss:  for OSS compatibility')
-makedepends=()
-provides=()
-conflicts=()
-replaces=()
-backup=()
-install=
 source=(http://launchpad.net/$pkgname/trunk/$pkgver/+download/$pkgname-$pkgver.tar.bz2)
-noextract=()
 md5sums=('b4b531829e6901c958dad805cf1ab8ae')
 
 build() {
