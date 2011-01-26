@@ -1,8 +1,10 @@
 post_install() {
-
-  echo -e "\n==> Before running Csound, make sure that the following" 
-  echo -e "==> environment variables are set:\n"
-  echo -e "  OPCODEDIR=/usr/lib/csound/plugins\n  CSSTRNGS=/usr/share/locale\n"
+cat << EOF
+==> Before running Csound, make sure that the following environment variables are set:
+==>
+==> OPCODEDIR=/usr/lib/csound/plugins
+==> CSSTRNGS=/usr/share/locale
+EOF
 }
 
 post_upgrade() {
