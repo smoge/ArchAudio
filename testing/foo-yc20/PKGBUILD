@@ -1,19 +1,17 @@
-# Contributor: SpepS <dreamspepser at yahoo dot it>
+# Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=foo-yc20
-pkgver=1.2.0
+pkgver=1.2.1
 pkgrel=1
 pkgdesc="A divide-down combo organ designed in the late 60's."
 arch=('i686' 'x86_64')
 url="http://code.google.com/p/foo-yc20/"
 license=('GPL')
 depends=('jack' 'gtk2')
-provides=('foo-yc20')
-conflicts=('foo-yc20')
 makedepends=('faust')
 source=("http://$pkgname.googlecode.com/files/$pkgname-$pkgver.tar.bz2")
 install="$pkgname.install"
-md5sums=('a9b103d4863f47641870e17bfab9d57c')
+md5sums=('d78682735f3f1fe0e5f49dbe13a3b86e')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
