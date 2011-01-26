@@ -2,8 +2,8 @@
 # Contributor: Jon Kristian Nilsen <jokr.nilsen@gmail.com>
 
 pkgname=ffado-svn
-pkgver=1948
-pkgrel=2
+pkgver=1949
+pkgrel=1
 pkgdesc="Driver for FireWire audio devices (development version)"
 arch=('i686' 'x86_64')
 url="http://www.ffado.org/"
