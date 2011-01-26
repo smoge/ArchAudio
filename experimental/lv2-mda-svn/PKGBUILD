@@ -4,7 +4,7 @@
 
 pkgname=lv2-mda-svn
 pkgver=2677
-pkgrel=2
+pkgrel=3
 pkgdesc="A lv2 port by Dave Robillard of the mda VST plugins by Paul Kellett"
 arch=('i686' 'x86_64')
 url="http://svn.drobilla.net/lad/trunk/mda-lv2/"
@@ -14,7 +14,6 @@ makedepends=('subversion' 'lv2core')
 provides=('lv2-mda')
 conflicts=('lv2-mda' 'mda-lv2' 'mda-lv2-svn')
 groups=('lv2-plugins-experimental')
-
 
 _svntrunk=http://svn.drobilla.net/lad/trunk/mda-lv2/
 _svnmod=mda-lv2
@@ -36,5 +35,10 @@ build() {
   cd "${srcdir}/${_svnmod}-build"
 
   make
+}
+
+package() {
+
+  cd "${srcdir}/${_svnmod}-build"
   make install INSTALL_DIR="${pkgdir}/usr/lib/lv2"
 }

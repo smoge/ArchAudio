@@ -13,6 +13,7 @@ license=('LGPL')
 depends=('libglade' 'lash')
 makedepends=('pkg-config' 'ladspa' 'dssi' 'lv2core')
 source=(http://downloads.sf.net/$pkgname/$pkgname-$pkgver.tar.gz)
+groups=('lv2-plugins' 'ladspa-plugins' 'dssi-plugins')
 md5sums=('780854561dad1cb873041d7a0b98cbcd')
 sha1sums=('304585f5c99135914995efefc585fe7befee0985')
 
