@@ -1,0 +1,56 @@
+# Maintainer: SpepS <dreamspepser at yahoo dot it>
+# Contributor: Eric Le Bras <eric.lebras@gmail.com>
+
+pkgname=mma
+pkgver=1.7
+pkgrel=3
+pkgdesc="Musical MIDI Accompaniment (MMA) is an accompaniment generator"
+arch=('any')
+url="http://www.mellowood.ca/mma/"
+license=('GPL')
+depends=('python2' 'timidity++')
+optdepends=('lemma: graphical interface')
+install="mma.install"
+backup=("etc/mmarc")
+source=("$url$pkgname-bin-$pkgver.tar.gz"
+	"mmarc")
+md5sums=('80350ec704e21bce8e75b5f30efc454e'
+         '7cdddd5de515539cf66f0d8d9613dcdc')
+
+build() {
+  cd "$srcdir/$pkgname-bin-$pkgver"
+
+  # Python2 fix
+  sed -i "s_\(env python\).*_\12_" `grep -rl "env python" .`
+
+  # Install script fix
+  sed -i "7,11d;138,144d;s_\(/usr\)/local_$pkgdir\1_g" cp-install
+
+  # mmatabs fix
+  sed -i "s_/local__" util/mmatabs.py
+}
+
+package() {
+  cd "$srcdir/$pkgname-bin-$pkgver"
+
+  # Install Man and doc files before install script
+  mkdir -p "$pkgdir"/usr/share/{doc/$pkgname,man/{man1,man8}}
+  mv docs/html "$pkgdir"/usr/share/doc/$pkgname
+  install -Dm644 util/README* "$pkgdir/usr/share/doc/$pkgname"
+  install -Dm644 docs/man/*.1 "$pkgdir/usr/share/man/man1"
+  install -Dm644 docs/man/*.8 "$pkgdir/usr/share/man/man8"
+
+  # Executing install script
+  python2 cp-install
+
+  # Install utils
+  for _util in `cd util && ls *.py`
+    do install -Dm755 util/$_util "$pkgdir/usr/bin/${_util/.py}"
+  done
+
+  # Install examples
+  cp -a egs "$pkgdir/usr/share/$pkgname"
+
+  # Install rc file
+  install -Dm644 ../mmarc "$pkgdir/etc/mmarc"
+}
