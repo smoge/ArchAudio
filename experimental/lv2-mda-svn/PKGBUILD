@@ -13,10 +13,8 @@ depends=('gcc-libs')
 makedepends=('subversion' 'lv2core')
 provides=('lv2-mda')
 conflicts=('lv2-mda' 'mda-lv2' 'mda-lv2-svn')
-groups=('lv2-plugins')
+groups=('lv2-plugins-experimental')
 
-source=()
-md5sums=()
 
 _svntrunk=http://svn.drobilla.net/lad/trunk/mda-lv2/
 _svnmod=mda-lv2

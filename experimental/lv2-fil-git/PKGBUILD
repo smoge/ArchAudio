@@ -13,7 +13,7 @@ depends=('pygtk' 'pycairo')
 makedepends=('lv2core')
 provides=('lv2fil')
 conflicts=('lv2fil-git' 'lv2fil' 'lv2-fil-git')
-groups=('lv2-plugins')
+groups=('lv2-plugins-experimental')
 
 md5sums=()
 

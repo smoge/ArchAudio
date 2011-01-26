@@ -13,7 +13,7 @@ depends=('glibc')
 makedepends=('git')
 provides=('njl-plugins')
 conflicts=('njl-plugins' 'njl-plugins-git')
-groups=('ladspa-plugins')
+groups=('ladspa-plugins-experimental')
 
 _gitroot="git://github.com/tialaramex/njl-plugins.git"
 _gitname="njl-plugins"
