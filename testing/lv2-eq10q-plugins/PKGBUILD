@@ -2,17 +2,17 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: SpepS <dreamspepser at yahoo dot it>
 
-pkgname=lv2-eq10q
+pkgname=lv2-eq10q-plugins
 pkgver=1.0
-pkgrel=2
+pkgrel=1
 pkgdesc="EQ10Q is an audio plugin over the LV2 standard (http://lv2plug.in) implementing a powerfull and flexible parametric equalizer."
 arch=('i686' 'x86_64')
 url="http://eq10q.sourceforge.net/"
 license=('GPL')
 depends=('lv2core' 'gtkmm' 'lv2-c++-tools' 'pstreams' 'plotmm')
 makedepends=('pkg-config')
-provides=('eq10q')
-conflicts=('eq10q')
+provides=('eq10q' 'lv2-eq10q')
+conflicts=('eq10q' 'lv2-eq10q')
 groups=('lv2-plugins')
 
 source=(http://download.sourceforge.net/project/eq10q/EQ10Q-LV2Plugin-source-1.0.tar.gz)
