@@ -2,7 +2,7 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 
-pkgname=ladspa-autotalent
+pkgname=ladspa-autotalent-plugins
 pkgver=0.2
 pkgrel=2
 pkgdesc="An autotune-ish LADSPA effect."
@@ -10,8 +10,8 @@ arch=('i686' 'x86_64')
 url="http://web.mit.edu/tbaran/www/autotalent.html"
 license=('GPL')
 depends=('glibc' 'ladspa')
-provides=('autotalent')
-conflicts=('autotalent')
+provides=('autotalent' 'ladspa-autotalent')
+conflicts=('autotalent' 'ladspa-autotalent')
 groups=('ladspa-plugins')
 makedepends=('ladspa')
 source=(http://web.mit.edu/tbaran/www/autotalent-${pkgver}.tar.gz destdir.patch)

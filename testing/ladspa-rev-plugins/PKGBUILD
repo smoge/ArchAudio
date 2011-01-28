@@ -4,17 +4,17 @@
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 # Contributor: Andrew Antle <andrew dot antle at gmail dot com>
 
-pkgname=ladspa-rev
+pkgname=ladspa-rev-plugins
 _pkgname=REV-plugins
 pkgver=0.3.1
-pkgrel=5
+pkgrel=1
 pkgdesc="LADSPA stereo reverb plugin based on the well-known greverb."
 arch=('i686' 'x86_64')
 url="http://kokkinizita.net/linuxaudio/ladspa/"
 license=('GPL')
-depends=('gcc-libs')
-provides=('rev-plugins')
-conflicts=('rev-plugins')
+depends=('gcc-libs' 'ladspa')
+provides=('rev-plugins' 'ladspa-rev')
+conflicts=('rev-plugins' 'ladspa-rev')
 source=(http://www.kokkinizita.net/linuxaudio/downloads/$_pkgname-$pkgver.tar.bz2)
 md5sums=('bca920c2cbf5e33989e7cafab6fbaee4')
 

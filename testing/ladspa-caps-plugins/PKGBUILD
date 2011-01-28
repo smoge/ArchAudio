@@ -3,19 +3,19 @@
 # Constibutor: Sean Corbett <seanbutnotheard [near] gmail.com>
 # Contributor: DonVla <donvla@users.sourceforge.net>
 
-pkgname=ladspa-caps
+pkgname=ladspa-caps-plugins
 _pkgname=caps
 pkgver=0.4.4
-pkgrel=2
+pkgrel=1
 pkgdesc="The C* Audio Plugin Suite"
 arch=('i686' 'x86_64')
 url="http://quitte.de/dsp/caps.html"
 license=('GPL')
 options=(docs)
-provides=('caps')
-conflicts=('caps')
+provides=('caps' 'ladspa-caps')
+conflicts=('caps' 'ladspa-caps')
 groups=('ladspa-plugins')
-depends=('gcc-libs')
+depends=('ladspa' 'gcc-libs')
 optdepends=('python2: optional CFLAGS check')
 source=(http://quitte.de/dsp/${_pkgname}_${pkgver}.tar.gz)
 md5sums=('1f4a8d50257b6cbdaefecc78e3010d27')

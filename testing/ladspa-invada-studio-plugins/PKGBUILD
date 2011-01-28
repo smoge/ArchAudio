@@ -2,17 +2,17 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 
-pkgname=ladspa-invada
+pkgname=ladspa-invada-studio-plugins
 _srcdirname=invada-studio-plugins
 pkgver=0.3.1
-pkgrel=3
+pkgrel=4
 pkgdesc="A set of LADSPA audio effect plugins, ported from VST."
 arch=('i686' 'x86_64')
 url="http://www.invadarecords.com/Downloads.php?ID=00000263"
 license=('GPL2')
 depends=('glibc' 'ladspa')
-provides=('invada-studio-plugins')
-conflicts=('invada-studio-plugins')
+provides=('invada-studio-plugins' 'ladspa-invada' 'ladspa-invada-plugins')
+conflicts=('invada-studio-plugins' 'ladspa-invada ' 'ladspa-invada-plugins')
 groups=('ladspa-plugins')
 makedepends=('ladspa')
 source=(http://www.invadarecords.com/downloads/invada-studio-plugins_0.3.1-1.tar.gz)

@@ -3,16 +3,16 @@
 # Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 
-pkgname=ladspa-blop
+pkgname=ladspa-blop-plugins
 pkgver=0.2.8
-pkgrel=3
+pkgrel=1
 pkgdesc="Bandlimited LADSPA Oscillator Plugins"
 arch=('i686' 'x86_64')
 url="http://blop.sourceforge.net/index.html"
 license=('GPL')
 depends=('glibc')
-provides=('blop')
-conflicts=('blop')
+provides=('blop' 'ladspa-blop')
+conflicts=('blop' 'ladspa-blop')
 groups=('ladspa-plugins')
 makedepends=('ladspa')
 source=(http://downloads.sourceforge.net/sourceforge/blop/blop-${pkgver}.tar.gz)
