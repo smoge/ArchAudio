@@ -15,9 +15,6 @@ url="http://jackaudio.org"
 license=('GPL')
 depends=('libsamplerate')
 makedepends=('python2' 'doxygen' 'libffado' 'celt-0.7' 'dbus-core')
-optdepends=('libffado: FireWire support'
-            'celt-0.7: NetJACK2 driver'
-            'python2: jack_control')
 provides=('jack=0.118.0' 'jack-audio-connection-kit=0.118.0' 'jackdbus'
           'jack-audio-connection-kit-mp' 'jackmp' 'jackdmp' 'jack')
 conflicts=('jack' 'jack-svn' 'jack2-svn')

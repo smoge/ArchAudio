@@ -10,7 +10,7 @@ arch=('i686' 'x86_64')
 url="http://djcj.org/jackeq/"
 license=('GPL')
 depends=('gtk2' 'jack')
-makedepends=('libxml2>=2.5' 'swh-plugins>=0.4.3' 'ladspa')
+makedepends=('libxml2>=2.5' 'ladspa-swh-plugins>=0.4.3')
 source=(http://djcj.org/jackeq/code/${_pkgname}-${pkgver}.tar.bz2)
 md5sums=('3417a59b0483232da8fff7d798919615')
 
