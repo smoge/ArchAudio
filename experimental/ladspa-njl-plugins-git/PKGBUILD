@@ -2,17 +2,17 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 
-pkgname=ladspa-njl-git
+pkgname=ladspa-njl-plugins-git
 pkgver=20110126
 pkgrel=1
 pkgdesc="LADSPA plugins for noise and experimental effects."
 arch=('i686' 'x86_64')
 url="http://github.com/tialaramex/njl-plugins"
 license=('GPL')
-depends=('glibc')
+depends=('glibc' 'ladspa')
 makedepends=('git')
-provides=('njl-plugins')
-conflicts=('njl-plugins' 'njl-plugins-git')
+provides=('njl-plugins' 'ladspa-njl-git' 'ladspa-njl-plugins')
+conflicts=('njl-plugins' 'njl-plugins-git' 'ladspa-njl-git' 'ladspa-njl-plugins')
 groups=('ladspa-plugins-experimental')
 
 _gitroot="git://github.com/tialaramex/njl-plugins.git"

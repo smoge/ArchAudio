@@ -2,7 +2,7 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 
-pkgname=lv2-fil-git
+pkgname=lv2-fil-plugins-git
 pkgver=20110126
 pkgrel=1
 pkgdesc="Four-band parametric equalisers with visualisation."
@@ -11,8 +11,8 @@ url="http://nedko.arnaudov.name/soft/lv2fil/"
 license=('GPL')
 depends=('pygtk' 'pycairo')
 makedepends=('lv2core')
-provides=('lv2fil')
-conflicts=('lv2fil-git' 'lv2fil' 'lv2-fil-git')
+provides=('lv2fil' 'lv2-fil-git' 'lv2-fil-plugins')
+conflicts=('lv2fil-git' 'lv2fil' 'lv2-fil-git'  'lv2-fil-plugins')
 groups=('lv2-plugins-experimental')
 
 _gitroot="http://nedko.arnaudov.name/git/lv2fil.git"
