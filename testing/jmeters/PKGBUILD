@@ -10,7 +10,7 @@ but with correct ballistics for the VU and the PPM."
 url="http://www.kokkinizita.net/linuxaudio/"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('clthreads>=2.2.1' 'clxclient>=3.3.2' 'jack-audio-connection-kit' 'libpng')
+depends=('clthreads>=2.2.1' 'clxclient>=3.3.2' 'jack' 'libpng')
 source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
 md5sums=('cd69c517698762c8139bd8a789098f7e')
 
