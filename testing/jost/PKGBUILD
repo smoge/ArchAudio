@@ -26,22 +26,22 @@ build() {
   export LDFLAGS="${LDFLAGS//-Wl,--as-needed}"
 
   # fix building with gcc 4.3
-  patch -Np1 -i ../gcc44.patch || return 1
+  patch -Np1 -i ../gcc44.patch
 
   # we already have vst on our system
   sed -i 's:source/common:vst:g' \
-    wrapper/formats/VST/juce_VstWrapper.cpp || return 1
+    wrapper/formats/VST/juce_VstWrapper.cpp
 
   # fix unexpected exit returns
   sed -i -e 's:Release &:Release:g' -e 's:Debug &:Debug:g' \
-    -e 's:$mode &:$mode:g' shared/compile_jost || return 1
+    -e 's:$mode &:$mode:g' shared/compile_jost 
 
   # build!
   cd shared
 
   ./configure
-  ./compile_libs Release || return 1
-  ./compile_jost Release || return 1
+  ./compile_libs Release 
+  ./compile_jost Release 
 
   # install
   install -Dm755 ../bin/jost "$pkgdir/usr/bin/$pkgname"
