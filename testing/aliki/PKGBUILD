@@ -1,24 +1,28 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-# Contributor: Bernardo Barros <bernardobarros@gmail.com>
 # Contributor: Bjoern Lindig <bjoern.lindig at googlemail dot com>
 
 pkgname=aliki
-pkgver=0.0.3
+pkgver=0.1.0
 pkgrel=1
 pkgdesc="An integrated system for Impulse Response measurements."
 arch=('i686' 'x86_64')
 url="http://www.kokkinizita.net/linuxaudio/downloads/index.html"
 license=('GPL')
-depends=('clalsadrv>=1.2.2' 'clthreads>=2.2.1' 'clxclient>=3.3.2' 'jack' 'libx11' 'fftw')
+depends=('jack' 'gcc-libs-multilib' 'fftw' 'clalsadrv' 'clxclient')
 
-source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2 ${pkgname}.patch)
-
-md5sums=('1c127b5d87dbc0ca9b14f052c622ce3b'
-         '844ca0a716f7f80933626c941f28a65a')
+source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
+md5sums=('820cde2a5095e6d12e311562cb788b58')
 
 build() {
-  cd "$srcdir/$pkgname"
-  patch < ${srcdir}/${pkgname}.patch
-  make PREFIX="/usr" DESTDIR=${pkgdir} install
+
+  cd "$srcdir/${pkgname}/source"
+
+  make PREFIX="/usr"
+}
+
+package() {
+
+  cd "$srcdir/${pkgname}/source"
+
+  mkdir -p "${pkgdir}/usr/bin"
+  make PREFIX="/usr" DESTDIR=${pkgdir} install 
 }
