@@ -1,7 +1,7 @@
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
 
 pkgname=jnoise  
-pkgver=0.4.0
+pkgver=0.6.0
 pkgrel=1 
 pkgdesc="A command line JACK app generating white and pink gaussian noise. "
 url="http://www.kokkinizita.net/linuxaudio/"
@@ -9,17 +9,15 @@ arch=('i686' 'x86_64')
 license=('GPL')
 depends=('gcc-libs' 'jack')
 source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
-md5sums=('fdbeea2c3e887aee947c38d49447e019')
+md5sums=('9f864ea423c66a6efb92e57665431a11')
 
 build() {
+  cd "${srcdir}/${pkgname}-${pkgver}/source"
 
-  cd "$srcdir/${pkgname}"
-  
-  mkdir -p "${pkgdir}/usr/bin" 
-
-  sed -i "s|PREFIX = /usr/local|PREFIX = /usr|" Makefile 
-  sed -i "s|/usr/bin/install|/bin/install|" Makefile 
-  
   make 
-  make PREFIX="${pkgdir}/usr" install 
+}
+
+package(){
+  cd "${srcdir}/${pkgname}-${pkgver}/source"
+  make DESTDIR=${pkgdir} PREFIX=/usr LIBDIR=lib install
 }
