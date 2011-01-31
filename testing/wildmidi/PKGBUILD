@@ -1,0 +1,25 @@
+
+pkgname=wildmidi
+pkgver=0.2.3.4
+pkgrel=1
+pkgdesc='Open Source MIDI Synthesizer'
+arch=('i686' 'x86_64')
+url='http://wildmidi.sourceforge.net/'
+license=('GPL')
+depends=('alsa-lib')
+source=("http://downloads.sourceforge.net/project/wildmidi/wildmidi/wildmidi-0.2.3.4.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fwildmidi%2Ffiles%2Fwildmidi%2Fwildmidi-0.2.3.4.tar.gz%2Fdownload&ts=1296505445&use_mirror=mesh")
+md5sums=('437e3dddf15ef9fb1b76625d0727a2e6')
+
+build() {
+
+  cd "$srcdir/wildmidi-${pkgver}"
+  ./configure --prefix=/usr
+  make 
+
+}
+
+package() {
+
+  cd "$srcdir/wildmidi-${pkgver}"
+  make DESTDIR=$pkgdir install 
+}

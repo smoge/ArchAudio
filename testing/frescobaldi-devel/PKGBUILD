@@ -14,7 +14,7 @@ depends=('kdebase-kwrite' 'lilypond' 'python>=2.4.0' 'python2-qt' 'kdebindings-p
 conflicts=('frescobaldi')
 provides=('frescobaldi')
 optdepends=('rumor')
-makedepends=('automoc4' 'cmake' 'docbook-xml')
+makedepends=('automoc4' 'cmake' 'docbook-xml' 'docbook-xsl')
 source=(http://lilykde.googlecode.com/files/frescobaldi-$pkgver.tar.gz)
 md5sums=('e5dbc9425e3aae9890d54649b3d60166')
 
