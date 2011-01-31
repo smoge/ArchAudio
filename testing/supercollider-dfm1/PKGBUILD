@@ -1,6 +1,6 @@
 # Maintainer: Bernardo Barros <bernardobarros@gmail.com>
 
-pkgname=supercollider-dfm1ugen
+pkgname=supercollider-dfm1
 pkgver=1
 pkgrel=1
 pkgdesc="Filter UGen for SuperCollider. It is a port for SuperCollider of Tony Hardie-Bick's DFM1 digital filter module. It is an accurate model of an analog filter and provides low-pass and high-pass filtering. The filter can be overdriven and will self-oscillate at high resonances."
