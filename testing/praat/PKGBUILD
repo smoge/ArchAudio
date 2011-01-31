@@ -1,21 +1,17 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-# Contributor: jpate <j.k.pate@sms.ed.ac.uk>
-
+# Maintainer: jpate <j.k.pate@sms.ed.ac.uk>
 pkgname=praat
-pkgver=5.2.09
+pkgver=5.2.12
 pkgrel=1
 pkgdesc="A tool for 'Doing Phonetics by computer'"
 arch=('x86_64' 'i686')
 url="http://www.fon.hum.uva.nl/praat/"
 license=('GPL')
 depends=( 'alsa-lib' 'gtk2' )
-source=("http://www.fon.hum.uva.nl/praat/praat5209_sources.tar.gz")
-md5sums=('d343cb3431a17a0a9fdf5b9f29e261a9')
-
+source=("http://www.fon.hum.uva.nl/praat/praat5212_sources.tar.gz")
+md5sums=('21dfd129d2bdc3c78427738ef194a11e')
 
 build() {
-  cd "$srcdir/sources_5209/"
+  cd "$srcdir/sources_5212/"
 
   cp makefiles/makefile.defs.linux.gtk makefile.defs
 
@@ -27,3 +23,4 @@ build() {
 
   install -Dm755  praat "$pkgdir/usr/bin/praat"
 }
+
