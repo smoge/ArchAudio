@@ -1,0 +1,18 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=pymplayer
+pkgver=0.5.0
+pkgrel=1
+pkgdesc="Thin, out-of-source wrapper and client/server for MPlayer written in pure Python"
+arch=('i686' 'x86_64')
+url="http://pypi.python.org/pypi/PyMPlayer/"
+license=('GPL' 'LGPL')
+depends=('mplayer' 'python2')
+source=(http://pypi.python.org/packages/source/P/PyMPlayer/PyMPlayer-$pkgver.tar.gz)
+md5sums=('115cd2296d20347f6bc461f6e70a901e')
+
+build() {
+
+  cd "$srcdir/PyMPlayer-$pkgver"
+  python2 setup.py install --root=$pkgdir/ --optimize=1
+}
