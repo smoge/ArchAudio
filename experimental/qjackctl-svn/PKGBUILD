@@ -1,20 +1,20 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor:  M0Rf30
+# Contributor:  Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=qjackctl-svn
-pkgver=673
-pkgrel=2
-pkgdesc="A qt based frontend to the jack server (jack-audio-connection-kit)"
+pkgver=674
+pkgrel=1
+pkgdesc="A Qt front-end for the JACK low-latency audio server"
 arch=('i686' 'x86_64')
 license=('GPL' 'openssl')
-depends=('jack' 'qt' 'subversion')
+depends=('jack' 'qt')
+makedepends=('subversion')
 options=('!libtool')
 url="http://qjackctl.sourceforge.net/"
 makedepends=('subversion')
 provides=(qjackctl)
-conflicts=(qjackctl-cvs)
-source=(patch)
-md5sums=('4ebdc1315469c6d6d8152c1de4b0cd6f')
+conflicts=(qjackctl qjackctl-cvs)
 _svntrunk=https://qjackctl.svn.sourceforge.net/svnroot/qjackctl/trunk
 _svnmod=qjackctl-svn
 
@@ -44,7 +44,12 @@ build() {
   autoconf
   date > stamp-h.in 
   ./configure --prefix=/usr
-   patch -p1 -i ../patch
   make
+}
+
+package() {
+
+  cd $srcdir/build
+
   make DESTDIR=${pkgdir} install
 }
