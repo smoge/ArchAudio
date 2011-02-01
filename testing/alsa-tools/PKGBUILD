@@ -1,6 +1,6 @@
 # Contributor: Jochen Immend�rfer <jochen dot immendoerfer at gmail dot com>
 pkgname=alsa-tools
-pkgver=1.0.23
+pkgver=1.0.24.1
 pkgrel=1
 pkgdesc="ALSA tools package"
 arch=('i686' 'x86_64')
@@ -8,11 +8,14 @@ url="http://alsa-project.org/"
 license=('GPL')
 depends=('fltk' 'alsa-lib' 'gtk2' 'qt3')
 source=(ftp://ftp.alsa-project.org/pub/tools/$pkgname-$pkgver.tar.bz2)
-md5sums=('f286616cf781c81b1636899a104129d1')
+md5sums=('08fe93a12006093e590d7ecc02b119dd')
 
 build() {
+
   cd $startdir/src/$pkgname-$pkgver
+
   rm Makefile gitcompile
+
   for file in `ls -1`; do
     if [ $file = "seq" ]; then
       cd $file/sbiload;
