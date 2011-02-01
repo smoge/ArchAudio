@@ -3,7 +3,7 @@
 
 pkgname=alsa-lib-git
 pkgver=20110131
-pkgrel=1
+pkgrel=2
 pkgdesc="An alternative implementation of Linux sound support - GIT version"
 arch=('i686' 'x86_64')
 url="http://www.alsa-project.org"
@@ -13,7 +13,7 @@ optdepends=('python2')
 license=('GPL')
 options=(!libtool)
 conflicts=('alsa-lib')
-provides=('alsa-lib')
+provides=('alsa-lib=1.0.23')
 
 _gitroot="git://git.alsa-project.org/alsa-lib.git"
 _gitname="alsa-lib"
