@@ -1,0 +1,32 @@
+
+pkgname=oscpack
+pkgver=1.0.2
+pkgrel=1
+arch=('i686' 'x86_64')
+pkgdesc="Oscpack is simply a set of C++ classes for packing and unpacking OSC packets."
+url="http://www.audiomulch.com/~rossb/code/oscpack/"
+license="GPL"
+depends=()
+makedepends=('addinclude')
+source=(http://www.audiomulch.com/~rossb/code/oscpack/${pkgname}_1_0_2.zip Makefile) 
+md5sums=('7cc36dab6fbb199ed3ee5ce6b8c877d7'
+         '5b65c869f2e871fd63669dcdbd25dfd6')
+
+build() {
+
+  for i in $srcdir/$pkgname/{tests,osc}/*.h ; do
+#     addinclude $i string
+#     addinclude $i stdlib
+     addinclude $i '#include <string.h>'
+     addinclude $i '#include <stdlib.h>'
+  done
+
+   cd $srcdir/$pkgname
+   mv Makefile Makefile.old
+   cp $srcdir/Makefile $srcdir/$pkgname
+
+  cd $srcdir/$pkgname
+
+  make
+  make PREFIX=$startdir/pkg/usr install
+}

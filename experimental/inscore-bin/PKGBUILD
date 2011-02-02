@@ -2,7 +2,9 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-# I didn't manage to make inscore (not bin) to work
+# (not ready)
+
+# I didn't manage to make inscore to work
 # We need: 
 #   - oscpack
 #   - libguido
@@ -22,7 +24,7 @@ pkgdesc="Environment for the design of Interactive Augmented Music Scores, provi
 arch=('i686' 'x86_64')
 url="http://sourceforge.net/projects/inscore/"
 license=('GPL')
-depends=()
+depends=('libguido')
 optdepends=()
 provides=('inscore')
 conflicts=('inscore')
