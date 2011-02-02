@@ -3,7 +3,7 @@
 pkgname=jack_oscrolloscope
 pkgver=0.7
 pkgrel=1
-pkgdesc="jack_oscrolloscope is a simple waveform viewer for JACK. The waveform is displayed in realtime, so you can always see the signal the instant it comes through JACK's input port."
+pkgdesc="A simple waveform viewer for JACK. The waveform is displayed in realtime, so you can always see the signal the instant it comes through JACK's input port."
 arch=('i686' 'x86_64')
 url="http://das.nasophon.de/jack_oscrolloscope/"
 license=('GPL')
@@ -14,12 +14,16 @@ md5sums=('610beeb5044c5017537e43d50bbb803b')
 build() {
 
   cd $srcdir/$pkgname-$pkgver
-
   make PREFIX="$pkgdir/usr"
 }
 
 package() {
 
   mkdir -p "$pkgdir"/usr/bin               
-  install -m755 $srcdir/$pkgname-$pkgver/jack_oscrolloscope $pkgdir/usr/bin                                                                                                                                                                                                            
+  install -m755 $srcdir/$pkgname-$pkgver/$pkgname $pkgdir/usr/bin   
+
+  # Docs
+  mkdir -p "$pkgdir"/usr/share/doc/$pkgname
+  install -m644 $srcdir/$pkgname-$pkgver/README "$pkgdir"/usr/share/doc/$pkgname
+                                                                                                                                                                                                      
 }
