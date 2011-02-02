@@ -1,0 +1,11 @@
+--- oscpack/Makefile.orig	2006-12-11 14:58:52.000000000 +0100
++++ oscpack/Makefile	2007-01-31 19:09:50.000000000 +0100
+@@ -8,7 +8,7 @@
+ INCLUDES = -I./
+ COPTS  = -Wall -O3
+ CDEBUG = -Wall -g 
+-CXXFLAGS = $(COPTS) $(INCLUDES) -D$(ENDIANESS)
++CXXFLAGS = -fPIC -DPIC $(COPTS) $(INCLUDES) -D$(ENDIANESS)
+ 
+ PREFIX = /usr/local
+ INSTALL = /usr/bin/install -c
