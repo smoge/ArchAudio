@@ -1,7 +1,7 @@
 # Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=ulatencyd
-pkgver=0.3.5
+pkgver=0.4.0
 pkgrel=1
 pkgdesc="Daemon to minimize latency on a linux system using cgroups"
 arch=(i686 x86_64)
@@ -13,18 +13,13 @@ conflicts=("$pkgname-git")
 backup=("etc/$pkgname/$pkgname.conf")
 source=("https://github.com/downloads/poelzi/$pkgname/$pkgname-$pkgver.tar.gz"
         "$pkgname.d"
-        "$pkgname"
-        "daemonize.patch")
-md5sums=('f46fee842af7da66283f73175a0c19b6'
+        "$pkgname")
+md5sums=('714151c7b1d635cb7036e2b18f6590ca'
          'ceb27033cb79d2a9ad71e390b0b75d7d'
-         '512bd9215650c95c04717abf8a2d2f40'
-         '185863fab6d1da5a6be8d1c5763fb3d2')
+         '512bd9215650c95c04717abf8a2d2f40')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-
-  # Patch to enable daemon mode
-  patch -p1 -i ../daemonize.patch
 
   cmake . -DCMAKE_INSTALL_PREFIX=/usr
   make
