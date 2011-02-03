@@ -2,8 +2,8 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
-pdname=pd-pdp
-pkgname=pd-$pdname
+pkgname=pd-pdp
+pdname=pdp
 pkgver=0.12.6
 pkgrel=3
 pkgdesc="An extension library for Pure Data, providing video and other media processing functionality."

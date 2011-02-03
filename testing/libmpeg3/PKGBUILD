@@ -22,11 +22,13 @@ build() {
 
 package() {
 
-  mkdir -p $pkgdir/usr/{bin,lib}
+  mkdir -p $pkgdir/usr/bin
 
   cd $srcdir/$pkgname-$pkgver
 
-  make DESTDIR=$pkgdir install
+  #  make DESTDIR=$pkgdir install
+  # not working. Quick Hack:  
+  cp $CARCH/mpeg3dump $CARCH/mpeg3peek $CARCH/mpeg3toc  $CARCH/mpeg3cat $pkgdir/usr/bin
 
 }
 
