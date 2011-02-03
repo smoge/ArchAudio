@@ -1,0 +1,34 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+# Start jackd with -Xseq (or set the Midi Driver option to 'seq' in QJackCtl settings).
+# $ jpmidi <midi file>
+
+pkgname=jpmidi
+pkgver=0.2
+pkgrel=1
+pkgdesc="A Midi-file player that uses Jack-Midi and synchronises to Jack-Transport."
+arch=('i686' 'x86_64')
+url="http://juliencoder.de/jpmidi/"
+license=('GPL')
+depends=('jack' 'glib2')
+source=(http://juliencoder.de/$pkgname/$pkgname-$pkgver.tar.gz)
+md5sums=('d9ce048a26b879a2eb0c6074c0124be0')
+
+build() {
+
+  cd "$srcdir/$pkgname" 
+
+  ./configure --prefix="$pkgdir/usr"
+  make  
+}
+
+package() {
+
+  cd "$srcdir/$pkgname" 
+
+  make install 	
+
+  # docs:
+  mkdir -p $pkgdir/usr/share/doc/$pkgname
+  install -m644 $srcdir/$pkgname/README $pkgdir/usr/share/doc/$pkgname
+}

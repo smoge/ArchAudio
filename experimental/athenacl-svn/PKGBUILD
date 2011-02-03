@@ -15,11 +15,7 @@ makedepends=()
 conflicts=('athenacl')
 provides=('athenacl')
 replaces=('athenacl')
-backup=()
 options=(!emptydirs)
-install=
-source=()
-md5sums=()
 
 _svntrunk=http://athenacl.googlecode.com/svn/trunk/
 _svnmod=${_realname}

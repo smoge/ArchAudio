@@ -6,7 +6,7 @@
 # Contributor: Gnud <ach.gnud@gmail.com>
 
 pkgname=denemo-git
-pkgver=20110105
+pkgver=20110203
 pkgrel=1
 pkgdesc="The music notation editor"
 arch=('i686' 'x86_64')
