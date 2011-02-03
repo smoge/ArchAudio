@@ -2,15 +2,13 @@
 # Contributor: Bernardo Barros <bernardobarros AT-NOsPAM gmail.com>
 # Contributor: farid abdelnour <farid at atelier-labs.org>
 
-# NOTE: change pkgname to pd-gridflow ?
-
-pkgname=gridflow
+pkgname=pd-gridflow
 pkgver=9.12
-pkgrel=2
+pkgrel=3
 pkgdesc="A Multidimensional dataflow processing library for PureData, designed for interactive multimedia."
 arch=('i686' 'x86_64')
 url="http://gridflow.ca/"
-depends=('pd' 'ruby' 'libdc1394' 'fftw' 'sdl' 'aalib' 'libpng' 'libjpeg' 'netpbm' 'libquicktime' 'fftw' 'xf86-video-v4l') # 'libmpeg3')
+depends=('pd' 'ruby' 'libdc1394' 'fftw' 'sdl' 'aalib' 'libpng' 'libjpeg' 'netpbm' 'libquicktime' 'fftw' 'xf86-video-v4l' 'libmpeg3')
 groups=('pd-externals')
 license=('GPL2')
 source=(http://gridflow.ca/download/gridflow-$pkgver.tar.gz)
