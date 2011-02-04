@@ -1,8 +1,9 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=csound-cecilia
 pkgver=5.12.1
-pkgrel=3
+pkgrel=5
 pkgdesc="A programming language designed and optimized for sound rendering and signal processing. Using Cecilia4 build configuration."
 url="http://csound.sourceforge.net/"
 arch=('i686' 'x86_64')
@@ -10,19 +11,60 @@ license=('LGPL' 'GPL')
 depends=('python2' 'fltk' 'portaudio' 'java-environment')
 makedepends=('scons' 'swig')
 provides=('csound5' 'csound')
-conflicts=('csound')
+conflicts=('csound' 'csound5' 'csound-cvs')
 source=("http://downloads.sourceforge.net/csound/Csound$pkgver.tar.gz" SConstruct.patch)
-
+    
 md5sums=('70b0c4a159c4960a09719674657949c9'
          'f18a7fb19c2d46575cc6f830786da383')
 
-_csOptions="usePortAudio=1 usePortMIDI=0 buildCsound5GUI=0 useOSC=1 buildPythonOpcodes=1 buildInterfaces=1 buildVirtual=1 dynamicCsoundLibrary=1 useDouble=1 useCoreAudio=0 buildPythonWrapper=1 prefix=/usr tclversion=8.5"
+_csOptions="prefix=/usr instdir=$pkgdir useDouble=0 pythonVersion=2.7 usePortAudio=1 usePortMIDI=1 buildCsound5GUI=0 useOSC=1 buildPythonOpcodes=1 buildInterfaces=0 buildVirtual=1 dynamicCsoundLibrary=1 useCoreAudio=0 tclversion=8.5 useGettext=1 buildPythonWrapper=1 buildJavaWrapper=0 buildLuaWrapper=0  noDebug=1 gcc3opt=0 gcc4opt=native useLrint=0 useGprof=0 Word64=1 buildCsoundVST=0 buildCsoundAC=0 buildRelease=1 Lib64=0 dynamicCsoundLibrary=1 buildStkOpcodes=1 install=0 useAltivec=0 buildDSSI=1 buildOSXGUI=0 buildCSEditor=1 withICL=0 withMSVC=0 withSunStudio=0 buildNewParser=1 useOpenMP=0 buildOLPC=0 tclversion=8.5 includeMP3=0 includeWii=0 includeP5Glove=0 buildBeats=0"
+
+# _csOptions="useDouble=1 usePortAudio=1 usePortMIDI=1 useALSA=1 useJack=1 useFLTK=1
+#          useFLTKThreads=1 pythonVersion=2.7 buildCsoundVST=0 buildCsoundAC=1
+#          buildCsound5GUI=1 buildLoris=0 useOSC=1 bufferoverflowu=0 useUDP=1
+#          buildPythonOpcodes=1 prefix=/usr instdir=$pkgdir buildRelease=1
+#          noDebug=1 gcc3opt=0 gcc4opt=native useLrint=0 useGprof=0 Word64=1
+#          Lib64=0 dynamicCsoundLibrary=1 buildStkOpcodes=1 install=0
+#          buildPDClass=1 useCoreAudio=0 useAltivec=0 buildDSSI=1 buildUtilities=1
+#          buildTclcsound=1 buildWinsound=0 buildVirtual=1 buildInterfaces=1
+#          buildLuaWrapper=1 buildPythonWrapper=1 buildJavaWrapper=1 buildOSXGUI=0
+#          buildCSEditor=1 withICL=0 withMSVC=0 withSunStudio=0 buildNewParser=1
+#          NewParserDebug=0 buildvst4cs=0 useGettext=1 buildImageOpcodes=1
+#          useOpenMP=0 buildOLPC=0 tclversion=8.5 includeMP3=0 includeWii=0
+#          includeP5Glove=0 buildBeats=0"
+
 
 build() {
 
   cd $srcdir/Csound$pkgver
 
   patch -Nup0 < $srcdir/SConstruct.patch
+
+  # Prevent installing unneeded stuff, fix pd install path
+  sed -i "s|/usr/local/lib|$pkgdir/usr/lib|;483,484d;421,456d" install.py
+
+  # Fix fltk stk include path
+  sed -i "s_/fltk-1.1__" custom.py
+
+  # Python2 fixes
+  sed "s_\(env python\).*_\12_;s_\(bin/python\).*_\12_" \
+    -i `grep -rlE "(env python|bin/python)" .`
+
   scons $_csOptions
-  python2 install.py --prefix=$pkgdir/usr
+
+}
+
+package() {
+  cd "$srcdir/Csound$pkgver"
+
+  python2 install.py --instdir="$pkgdir" \
+					 --prefix="/usr"
+
+  # Link libraries
+  ln -s /usr/lib/libcsound64.so "$pkgdir/usr/lib/libcsound.so"
+  ln -s /usr/lib/libcsound64.so "$pkgdir/usr/lib/libcsound.so.5.2"
+
+  # Install examples
+  install -d "$pkgdir/usr/share/$pkgname"
+  cp -a examples "$pkgdir/usr/share/$pkgname"
 }
