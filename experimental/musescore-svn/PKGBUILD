@@ -4,7 +4,7 @@
 # Contributor: Stefan Husmann <stefan-husmann@t-online.de>
 
 pkgname=musescore-svn
-pkgver=3885
+pkgver=3992
 pkgrel=1
 pkgdesc="A music score editor written in Qt4"
 arch=('i686' 'x86_64')

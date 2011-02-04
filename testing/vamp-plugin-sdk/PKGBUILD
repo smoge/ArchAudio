@@ -1,0 +1,35 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=vamp-plugin-sdk
+pkgver=2.2
+pkgrel=1
+pkgdesc="Vamp is an audio processing plugin system for plugins that extract descriptive information from audio data."
+arch=('i686' 'x86_64')
+url="http://sourceforge.net/projects/vamp/"
+license=('GPL')
+groups=('audio-plugins-sdk')
+
+source=("http://downloads.sourceforge.net/project/vamp/vamp-plugin-sdk/2.2/vamp-plugin-sdk-2.2.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fvamp%2Ffiles%2Fvamp-plugin-sdk%2F2.2%2Fvamp-plugin-sdk-2.2.tar.gz%2Fdownload&ts=1296782945&use_mirror=iweb")
+#source=("http://sourceforge.net/projects/vamp/files/$pkgname/$pkgver/$pkgname-$pkgver.tar.gz")
+
+md5sums=('037cdb83f20a331ff1fa07d54550c773')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+
+  # doc
+  mkdir -p $pkgdir/usr/share/doc/$pkgname
+  install -Dm644 $srcdir/$pkgname-$pkgver/README $pkgdir/usr/share/doc/$pkgname
+
+}
+
+# vim:set ts=2 sw=2 et:
