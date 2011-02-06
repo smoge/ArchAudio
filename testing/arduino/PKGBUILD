@@ -10,13 +10,14 @@ license=('GPL')
 depends=('avr-libc' 'libusb-compat' 'java-runtime' 'xdg-utils')
 source=("http://arduino.googlecode.com/files/arduino-$pkgver.tgz"
         # "http://files.arduino.cc/downloads/arduino-$pkgver-2.tgz"
-        http://pyropeter.mooo.com/arduino-64/arduino-$pkgver-64.tgz
+        "http://pyropeter.mooo.com/arduino-64/arduino-$pkgver-64.tgz"
         'arduino'
         'arduino.install'
         'arduino.png'
         'arduino.desktop')
 
-md5sums=('a11b760ea306b89e349f9aac01bf4940'
+md5sums=('2429c118381a4a761d7f5717183ac387'
+	 'a11b760ea306b89e349f9aac01bf4940'
          'e2c80b367bfbd96e56e656c198516288'
          'bec2d12f581b2a8904abad00e7653492'
          '9e36d33891d5e68d38ec55d1494499a5'
