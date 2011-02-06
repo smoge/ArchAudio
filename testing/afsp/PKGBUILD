@@ -1,0 +1,32 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=afsp
+pkgver=v8r2 #v9r0
+pkgrel=1
+pkgdesc="provides audio file utility programs and a library of routines for reading and writing audio files."
+arch=('i686' 'x86_64')
+url="http://www-mmsp.ece.mcgill.ca/Documents/Software/Packages/AFsp/AFsp.html"
+license=('custom')
+source=("http://www-mmsp.ece.mcgill.ca/Documents/Downloads/AFsp/AFsp-$pkgver.tar.gz")
+# md5sums=('1542de2ad2bcfa694d42f5e74f36cb59') #v9r0
+md5sums=('84fbe07c718e076ba61f17c04823dcf5') #v8r2
+
+build() {
+  cd $srcdir/AFsp-$pkgver
+
+  make
+}
+
+package() {
+  cd $srcdir/AFsp-$pkgver
+
+  mkdir -p $pkgdir/usr/bin
+  install -Dm755 $srcdir/AFsp-$pkgver/bin/* $pkgdir/usr/bin
+
+  mkdir -p $pkgdir/usr/include
+  install -Dm644 $srcdir/AFsp-$pkgver/include/*/* $pkgdir/usr/include
+
+  mkdir -p $pkgdir/usr/lib
+  install -Dm755 $srcdir/AFsp-$pkgver/lib/* $pkgdir/usr/lib
+  
+}
