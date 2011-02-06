@@ -4,14 +4,14 @@
 # Contributor: btartsa <btartsa@gmail.com>
 
 pkgname=non-daw
-pkgver=20110106
+pkgver=20110206
 pkgrel=1
 pkgdesc="Non DAW is  a powerful, reliable and fast modular Digital Audio Workstation"
 url="http://non-daw.tuxfamily.org/"
 license=('GPL')
 arch=('i686' 'x86_64')
 depends=('fltk' 'jack' 'liblrdf')
-makedepends=('git')
+makedepends=('git' 'imake')
 conflicts=()
 
 source=()
