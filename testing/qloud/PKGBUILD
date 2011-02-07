@@ -12,7 +12,6 @@ source=(http://gaydenko.com/qloud/download/$pkgname-$pkgver.tar.bz2)
 md5sums=('ec80019fdb265f444e8cabee867dfdc9')
 
 build() {
-
   cd "$srcdir/$pkgname-$pkgver"
 
   sed -i -e 's/usr\/include\/qwt-qt4/usr\/include\/qwt/' \
@@ -22,8 +21,8 @@ build() {
 }
 
 package() {
-
   cd "$srcdir/$pkgname-$pkgver"
+  
   install -Dm755 bin/qloud $pkgdir/usr/bin/qloud
   install -Dm755 README $pkgdir/usr/share/$pkgname/README
 }

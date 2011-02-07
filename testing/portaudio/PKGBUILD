@@ -9,8 +9,6 @@ url="http://www.portaudio.com"
 license="custom"
 depends=('jack')
 makedepends=('subversion')
-conflicts=('portaudio')
-provides=('portaudio')
 source=(http://www.portaudio.com/archives/pa_stable_v19_20071207.tar.gz)
 md5sums=('d2943e4469834b25afe62cc51adc025f')
 

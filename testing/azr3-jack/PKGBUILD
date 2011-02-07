@@ -13,12 +13,14 @@ md5sums=('aa71715e5873aea724713be5970ebfbc')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
+  
   ./configure --prefix=/usr
   make
 }
 
 package(){
   cd "$srcdir/$pkgname-$pkgver"
+  
   make DESTDIR="$pkgdir" install
 }
 
