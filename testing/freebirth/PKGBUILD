@@ -2,24 +2,29 @@
 
 pkgname=freebirth
 pkgver=0.3.2
-pkgrel=2
+pkgrel=3
 pkgdesc="Free software bass synthesizer step sequencer"
 arch=('i686' 'x86_64')
-url="http://downloads.sourceforge.net/freebirth/"
+url="http://www.bitmechanic.com/projects/freebirth"
 license=('GPL')
-depends=('gtk')
+depends=('gtk2' 'glib2')
 source=(http://downloads.sourceforge.net/freebirth/${pkgname}-${pkgver}.tar.gz)
 md5sums=('672fc239f583a76b5519ac03a76d25d7')
 
 build() {
 
-  cd ${startdir}/src/${pkgname}-${pkgver}
+  cd $srcdir/freebirth-$pkgver
   sed -i -e 's|^#define FB_SAMPLES\(.*\)|#define FB_SAMPLES "/usr/share/freebirth"|' raw_wave.h
-  make
+  make freebirth
+}
 
-  mkdir -p ${startdir}/pkg/usr/bin
-  install -m755 {freebirth,wav_to_raw} ${startdir}/pkg/usr/bin/
-  mkdir -p ${startdir}/pkg/usr/share/freebirth/raw
-  install -m644 raw/*.raw ${startdir}/pkg/usr/share/freebirth/raw/
+package() {
 
+  mkdir -p $pkgdir/usr/bin
+  mkdir -p $pkgdir/usr/share/freebirth/{raw,xpm}
+  
+#   install -Dm755 $scrdir/freebirth-$pkgver/{freebirth,fusebirth,wav_to_raw} $pkgdir/usr/bin/
+  install -Dm755 $scrdir/freebirth-$pkgver/{freebirth,wav_to_raw} $pkgdir/usr/bin/
+  install -Dm644 raw/*.raw $pkgdir/usr/share/freebirth/raw
+  install -Dm644 raw/*.xpm $pkgdir/usr/share/freebirth/xpm
 }
