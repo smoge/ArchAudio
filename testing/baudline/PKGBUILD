@@ -1,0 +1,83 @@
+# Contributor: Tom < reztho at archlinux dot us >
+
+pkgname=baudline
+pkgver=1.08
+pkgrel=3
+pkgdesc="Time-frequency browser designed for scientific visualization of the spectral domain."
+arch=('i686' 'x86_64')
+url="http://www.baudline.com/"
+license=('custom')
+depends=('libxp' 'jack' 'libxmu' 'libxxf86vm' 'xorg-fonts-75dpi' 'xorg-fonts-100dpi')
+makedepends=('imagemagick')
+optdepends=('gzip' 'bzip2' 'flac' 'sox' 'mpg123' 'vorbis-tools')
+provides=('baudline-bin')
+conflicts=('baudline-bin')
+install=baudline.install
+source=("http://www.baudline.com/${pkgname}_${pkgver}_linux_${CARCH}.tar.gz"
+    "$pkgname.desktop"
+    "${pkgname}_jack.desktop")
+
+
+case $CARCH in
+  'i686')
+    md5sums=( 'a400669fe11e5189e5d9d9db18dae70d'
+              'd334c058230811a402104f75afcfaeed'
+              '2c1ff5a60782815167bb43e735305e0e')
+    _arch=x86 ;;
+  'x86_64')
+    md5sums=( '8ca7a48c17d4826f2a634ffe5137811e'
+              'd334c058230811a402104f75afcfaeed'
+              '2c1ff5a60782815167bb43e735305e0e')
+    _arch=${CARCH} ;;
+esac
+
+
+build() {
+  true
+}
+
+package() {
+
+  cd $srcdir/baudline_${pkgver}_linux_${_arch}
+
+  # Intallation
+  mkdir -p $pkgdir/usr/share/baudline
+  cp -a ./* $pkgdir/usr/share/baudline/
+  rm -f $pkgdir/usr/share/baudline/baudline*
+
+  # Scripts for running it
+  mkdir -p ${pkgdir}/usr/bin/
+  cat << EOF > ${pkgdir}/usr/bin/${pkgname}
+#!/bin/bash
+cd /usr/share/${pkgname}
+./${pkgname} \$@
+EOF
+
+  cat << EOF > ${pkgdir}/usr/bin/${pkgname}_jack
+#!/bin/bash
+cd /usr/share/${pkgname}
+./${pkgname}_jack \$@
+EOF
+
+  chmod 755 ${pkgdir}/usr/bin/* 
+
+  # .desktop file and icon
+  mkdir -p "$pkgdir/usr/share/pixmaps"
+  mkdir -p "$pkgdir/usr/share/applications"
+  mkdir -p "$pkgdir/usr/share/licenses/baudline"
+
+  # Convert images to PNG:
+  convert "$srcdir/baudline_${pkgver}_linux_${_arch}/icons/spectro.gif" "$srcdir/baudline_${pkgver}_linux_${_arch}/icons/baudline.png"
+  
+  convert "$srcdir/baudline_${pkgver}_linux_${_arch}/icons/piano_keys.gif" "$srcdir/baudline_${pkgver}_linux_${_arch}/icons/baudline_jack.png"
+
+
+  install -Dm644 "${srcdir}/baudline_${pkgver}_linux_${_arch}/icons/baudline.png" "${pkgdir}/usr/share/pixmaps"
+  install -Dm644 "$srcdir/baudline_${pkgver}_linux_${_arch}/icons/baudline_jack.png" "${pkgdir}/usr/share/pixmaps/baudline_jack.png"
+  install -Dm644 "$srcdir/baudline.desktop" "$pkgdir/usr/share/applications/baudline.desktop"
+  install -Dm644 "${srcdir}/baudline_jack.desktop" "${pkgdir}/usr/share/applications"
+  
+  # License:
+  install -Dm644 "${pkgdir}/usr/share/baudline/README_unix.txt" "${pkgdir}/usr/share/licenses/baudline/"
+}
+

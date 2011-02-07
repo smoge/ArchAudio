@@ -1,4 +1,3 @@
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor:  David Scholl <djscholl at gmail dot com>
 
 pkgname=audiotools
@@ -11,13 +10,17 @@ license=('GPL')
 depends=('python2' 'python-urwid' 'libcdio' 'flac' 'wavpack' 'lame' \
 'twolame' 'vorbis-tools' 'speex' 'faad2' 'faac' 'musepack-tools' 'pygtk')
 backup=('etc/audiotools.cfg')
-install=audiotools.install
 source=(http://downloads.sourceforge.net/$pkgname/$pkgname.$pkgver.tar.gz)
 md5sums=('c8673011bc09a593148296c48bcd4262')
 
 build() {
-
   cd "$srcdir/$pkgname-$pkgver"
+  
   python2 setup.py build
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
   python2 setup.py install --root=$pkgdir
 }
