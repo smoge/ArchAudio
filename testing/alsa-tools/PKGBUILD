@@ -6,7 +6,7 @@ pkgdesc="ALSA tools package"
 arch=('i686' 'x86_64')
 url="http://alsa-project.org/"
 license=('GPL')
-depends=('fltk' 'alsa-lib' 'gtk2' 'qt3')
+depends=('fltk' 'alsa-lib' 'gtk2' 'qt3' 'xorg-fonts-misc')
 source=(ftp://ftp.alsa-project.org/pub/tools/$pkgname-$pkgver.tar.bz2)
 md5sums=('08fe93a12006093e590d7ecc02b119dd')
 
