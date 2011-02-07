@@ -1,0 +1,45 @@
+# Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
+
+pkgname=freebirth-svn
+pkgver=32
+pkgrel=1
+pkgdesc="Free software bass synthesizer step sequencer"
+arch=('i686' 'x86_64')
+url="http://downloads.sourceforge.net/freebirth/"
+license=('GPL')
+depends=('gtk')
+
+_svntrunk="https://freebirth.svn.sourceforge.net/svnroot/freebirth/freebirth/trunk"
+_svnmod="freebirth"
+
+
+build() {
+  cd ${srcdir}
+
+  rm -rf "${_svnmod}-build"
+
+  if [ -d $_svnmod ] ; then
+    (cd $_svnmod && svn update)
+    msg "The local files are updated."
+  else
+    svn co ${_svntrunk} ${_svnmod}
+  fi
+
+  msg "Download complete or server timeout"
+  msg "Starting build process..."
+
+  cp -rf ${_svnmod} ${_svnmod}-build
+  cd ${_svnmod}-build
+
+  aclocal
+  autoheader
+  automake --add-missing
+  autoconf
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd ${srcdir}/${_svnmod}-build
+  make DESTDIR=${pkgdir} install
+}
