@@ -1,9 +1,7 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Vamp898 <vamp898@web.de>
 
 pkgname=rakarrack
-pkgver=0.4.2
+pkgver=0.6.1
 pkgrel=1
 pkgdesc="Versatile guitar multi-effects processor"
 arch=('i686' 'x86_64')
@@ -11,12 +9,17 @@ license=('GPL')
 url="http://rakarrack.sourceforge.net"
 depends=('alsa-utils' 'jack' 'fltk' 'libxpm')
 source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$pkgver.tar.bz2)
-md5sums=('094221f96b4812bf975e15d5044eaccc')
+md5sums=('56b1e04779ae3d56cc8a3ad3c4e25152')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
 
   ./configure --prefix=/usr
   make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  
   make DESTDIR="$pkgdir" install
 }
