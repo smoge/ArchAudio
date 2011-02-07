@@ -9,10 +9,5 @@ EOM
 }
 
 post_upgrade() {
-cat << EOM
-==> If you did not do yet, add this line in your /etc/timidity++/timidity.cfg file to enable this soundfont:
-
-      soundfont /usr/share/soundfonts/fluidr3.sf2
-
-EOM 
+    post_install
 }

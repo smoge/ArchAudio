@@ -1,8 +1,7 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 # Contributor: svoufff <svoufff at gmail dot com>
 # Contributor: Sean Bolton <smbolton at jps dot net>
+
 pkgname=whysynth
 pkgver=20100922
 pkgrel=1
@@ -17,7 +16,6 @@ md5sums=('931944999b7def5140c2397c228a4983'
          '5ab0d97abe67bcbf6a5cb4c5678c9fce')
 
 build() {
-
   cd "$srcdir/$pkgname-$pkgver"
 
   ./configure --prefix=/usr
@@ -25,10 +23,8 @@ build() {
 }
 
 package() {
-
   cd "$srcdir/$pkgname-$pkgver"
 
   make DESTDIR=$pkgdir install
   install -D -m755 $srcdir/whysynth $pkgdir/usr/bin/whysynth
-
 }
