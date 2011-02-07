@@ -1,21 +1,27 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
 # Contributor: Florian Léger <florian dot leger at insa dash rouen dot fr>
 
 pkgname=soundfont-personalcopy
 pkgver=5.1f
-pkgrel=1
+pkgrel=2
 pkgdesc="A large free SoundFont."
-arch=(any)
+arch=('any')
 license=("custom")
 url="http://www.personalcopy.com"
+install=personalcopy.install
 groups=('soundfonts')
+source=(ftp://ftp.personalcopy.net/pub/PC51f.sf2.gz)
 md5sums=('4dea28956700d4da74f0b8d3e76779e8')
-source=(ftp://ftp.personalcopy.net/pub/PC${pkgver/./}.sf2.gz)
 
 build() {
+  msg "There is nothing to build."
+}
 
-  cd $startdir/src
-  install -D -m644 PC${pkgver/./}.sf2 $startdir/pkg/usr/share/soundfonts/PC${pkgver/./}.sf2
+package() {
+
+  mkdir -p $pkgdir/usr/share/soundfonts/
+
+  # Let's try to keep consistency using the same name as the package without "soundfont-":
+  install -Dm644 $srcdir/PC51f.sf2 $pkgdir/usr/share/soundfonts/personalcopy.sf2
 }
 
