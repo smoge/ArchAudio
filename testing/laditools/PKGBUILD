@@ -13,14 +13,12 @@ depends=(python2 pygtk python-yaml glade)
 makedepends=(git)
 optdepends=(g15composer g15daemon wmdocklib)
 provides=(laditray ladilog ladiconf g15ladi wmladi)
-source=()
-md5sums=()
 
 _gitname="laditools"
 _gitrev=f4d4a23d60a0dd2c146b282d355ac6e03e96b187
 
 build() {
-  cd "$srcdir"
+  cd $srcdir
 
   if [ ! -d $_gitname ] ; then
     git clone git://git.marcochapeau.org/laditools.git $_gitname
@@ -28,6 +26,10 @@ build() {
 
   cd $_gitname
   git checkout $_gitrev
+}
 
+package() {
+  cd $srcdir/$_gitname
+  
   python2 setup.py install --prefix=/usr --root="$pkgdir"
 }

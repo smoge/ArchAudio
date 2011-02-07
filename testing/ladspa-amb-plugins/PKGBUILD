@@ -24,8 +24,13 @@ md5sums=('496d8d2bf6036611b6b4aa7f56325a52')
 
 build() {
 
-  cd "$srcdir/$_pkgname-$pkgver"
+  cd $srcdir/${_pkgname}-$pkgver
   make
+}
+
+package() {
+
+  cd $srcdir/${_pkgname}-$pkgver
   install -d "$pkgdir/usr/lib/ladspa/"
   install -m 755 *.so "$pkgdir/usr/lib/ladspa/"
 }
