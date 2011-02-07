@@ -5,7 +5,7 @@ pkgname=qarecord
 pkgver=0.5.0
 pkgrel=2
 pkgdesc="A simple multithreaded stereo recording tool"
-arch=(i686 x86_64)
+arch=('i686' 'x86_64')
 url="http://alsamodular.sourceforge.net/"
 license=('GPL')
 depends=('qt' 'jack')
@@ -13,7 +13,6 @@ source=(http://downloads.sourceforge.net/sourceforge/alsamodular/${pkgname}-${pk
 md5sums=('4e07ec70584ee9d3cf46221afcc6f19c')
 
 build() {
-  
   cd ${startdir}/src/${pkgname}-${pkgver}
   
   ./configure --prefix=/usr
@@ -21,7 +20,7 @@ build() {
 }
 
 package() {
-
-  cd ${startdir}/src/${pkgname}-${pkgver}(http://downloads.sourceforge.net/sourceforge/alsamodular
+  cd ${startdir}/src/${pkgname}-${pkgver}
+  
   make prefix="$pkgdir/usr" install
 }
