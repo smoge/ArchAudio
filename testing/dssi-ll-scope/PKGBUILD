@@ -24,6 +24,6 @@ build() {
   cd "${srcdir}"
   patch -p0 -i ../ll-scope.patch
   cd "${srcdir}/ll-scope-${pkgver}"
-  make
+  make CFLAGS="${CFLAGS} -fPIC"
   make PREFIX="${pkgdir}" install
 }
