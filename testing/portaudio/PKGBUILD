@@ -15,9 +15,14 @@ source=(http://www.portaudio.com/archives/pa_stable_v19_20071207.tar.gz)
 md5sums=('d2943e4469834b25afe62cc51adc025f')
 
 build() {
-  cd $startdir/src/$pkgname
+  cd $srcdir/$pkgname
 
   ./configure --prefix=/usr --with-alsa --with-jack
   make
+}
+
+package() {
+  cd $srcdir/$pkgname
+
   make DESTDIR=$startdir/pkg install
 }

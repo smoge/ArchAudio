@@ -1,6 +1,5 @@
-# $Id$
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+
 pkgname=phasex
 pkgver=0.12.0
 pkgrel=3
@@ -21,5 +20,10 @@ build() {
   autoheader
   ./configure --prefix="/usr"
   make
+}
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+
   make DESTDIR="${pkgdir}" install
 }

@@ -1,4 +1,3 @@
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor farid <farid at archlinux-br.org>
 
 pkgname=libfishsound
@@ -14,9 +13,17 @@ source=(http://downloads.xiph.org/releases/libfishsound/$pkgname-$pkgver.tar.gz)
 md5sums=('02c5c7b361a35c9da3cf311d68800dab')
 
 build() {
-	cd $srcdir/$pkgname-$pkgver/
-	./configure --prefix=/usr
-	make || return 1
-	make DESTDIR=$startdir/pkg docdir=./docs install
-	install -D COPYING $startdir/pkg/usr/share/licenses/$pkgname/COPYING
+  cd $srcdir/$pkgname-$pkgver/
+
+./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd $srcdir/$pkgname-$pkgver/
+
+  make DESTDIR=$startdir/pkg docdir=./docs install
+
+  # LICENSE:
+  install -Dm644 COPYING $startdir/pkg/usr/share/licenses/$pkgname/COPYING
 } 
