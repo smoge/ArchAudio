@@ -9,7 +9,6 @@ url="http://sourceforge.net/projects/aj-snapshot/"
 license=('GPL')
 makedepends=('jack' 'mxml' 'alsa-lib')
 source=(http://sourceforge.net/projects/aj-snapshot/files/$pkgname-$pkgver.tar.bz2)
-noextract=()
 md5sums=('324681252fd761cf4b1593a9ef41929e')
 
 build() {

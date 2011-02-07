@@ -17,31 +17,30 @@ md5sums=('2fcedab831c93ba24a2cc3f4b8806000'
 
 build() {
 
-  cd $srcdir/AlgoScore/
+  cd "$srcdir/AlgoScore"
 
   rm -rf build
   mkdir build
   cd build
 
-  cmake -DCMAKE_PREFIX_PATH=/usr -DCMAKE_BUILD_TYPE=Release ${srcdir}/AlgoScore/src
+  cmake -DCMAKE_PREFIX_PATH=/usr -DCMAKE_BUILD_TYPE=Release "$srcdir/AlgoScore/src"
 }
 
 package() {
   
-  cd $srcdir/AlgoScore/build
+  cd "$srcdir/AlgoScore/build"
 
   make
-
-  cd $srcdir/AlgoScore/
 
   mkdir -p $pkgdir/usr/lib/$pkgname/
   mkdir -p $pkgdir/usr/share/pixmaps/$pkgname/
   mkdir -p $pkgdir/usr/share/applications/
 
-  cp -r lib/* $pkgdir/usr/lib/$pkgname/
-
+  cd $srcdir/AlgoScore
+  
+  cp -r $srcdir/AlgoScore/lib/* $pkgdir/usr/lib/$pkgname/
+  
   install -Dm755 algoscore $pkgdir/usr/bin/algoscore
-
   install as_icon.png $pkgdir/usr/share/pixmaps/$pkgname/algoscore.png
   install $srcdir/algoscore.desktop $pkgdir/usr/share/applications/
 }
