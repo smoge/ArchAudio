@@ -1,23 +1,25 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Khashayar Naderehvandi <khashayar_naderehvandi@yahoo.co.uk>
 # Contributor: imachine <m.jedrasik@gmail.com>
 # Contributor: Ng Oon-Ee <n g  o o n  e e AT g m a i l DOT c o m>
 
 pkgname=soundfont-unison
 pkgver=1.00
-pkgrel=2
-pkgdesc="A lean and clean GM/GS soundbank"
+pkgrel=3
+pkgdesc="A lean and clean SoundFont"
 arch=('any')
 license="custom"
 url="http://www.personalcopy.com"
 groups=('soundfonts')
+install="unison.install"
 md5sums=('6775aad100fd758dc8300c511e4cc09f')
 source=(ftp://ftp.personalcopy.net/pub/Unison.sf2.gz)
 
 build() {
+  msg "There is nothing to build."
+}
 
-  cd $startdir/src
+package() {
 
-  install -D -m644 Unison.sf2 $startdir/pkg/usr/share/soundfonts/Unison.sf2
+  mkdir -p $pkgdir/usr/share/soundfonts
+  install -D -m644 $srcdir/Unison.sf2 $pkgdir/usr/share/soundfonts/unison.sf2
 }
