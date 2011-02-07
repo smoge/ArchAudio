@@ -1,26 +1,28 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Corrado Primier <bardo@aur.archlinux.org>
 # Contributor: ice-man <icemanf@gmail.com>
 
 pkgname=audio-combine
 pkgver=1.00
-pkgrel=1
+pkgrel=2
 pkgdesc="Simple utility for combining multiple audio files together into larger multi-channel files."
 arch=('i686' 'x86_64')
 url="http://freshmeat.net/projects/audio_combine"
-license=('LGPL')
+license=('GPL')
 depends=('libsndfile')
-makedepends=('unzip' 'gcc' 'make')
-source=("https://public.msli.com/lcs/jaf/audio_combine1.00.zip")
+source=("https://public.msli.com/lcs/jaf/audio_combine$pkgver.zip")
 md5sums=('a479afc3ab269e0fcba2015cb818b2e9')
 
 build() {
+  cd "$srcdir/audio_combine"
+  
+  make
+}
 
-  cd "${srcdir}/audio_combine"
-  make VERBOSE=1
-  mkdir -p "${pkgdir}/usr/bin"
-  cp "${srcdir}/audio_combine/audio_combine" "${pkgdir}/usr/bin"
-  cp "${srcdir}/audio_combine/audio_split" "${pkgdir}/usr/bin"
+package() {
+  cd "$srcdir/audio_combine"
+
+  mkdir -p "$pkgdir/usr/bin"
+  cp "$srcdir/audio_combine/audio_combine" "$pkgdir/usr/bin"
+  cp "$srcdir/audio_combine/audio_split" "$pkgdir/usr/bin"
 }
 
