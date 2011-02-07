@@ -20,7 +20,7 @@ md5sums=('acf366e7161c46d0422805109c2b8151' 'f73c7a86201ed5932baca12e1a435a04')
 
 build() {
 
-  mkdir -p /$startdir/pkg/usr/share/{soundfonts,licenses, doc}/fluidr3
+  mkdir -p /$startdir/pkg/usr/share/{soundfonts,licenses,doc}/fluidr3
   cd /$startdir/src
   sfarkxtc "FluidR3 GM.sfArk"
   mv "FluidR3 GM.SF2" FluidR3GM.SF2
