@@ -1,10 +1,9 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
 # Contributor: Lone_Wolf <lonewolf@xs4all.nl>
 
 pkgname=soundfont-fluidr3
 pkgver=122501
-pkgrel=7
+pkgrel=8
 pkgdesc="Large MIDI soundfont for timidity++ and other midi players"
 arch=('i686' 'x86_64')
 url="http://www.hammersound.net"
@@ -14,18 +13,25 @@ makedepends=('sfarkxtc' 'unzip')
 provides=('fluidr3')
 conflicts=('fluidr3')
 install=fluidr3.install
-source=(http://sunsite.univie.ac.at/musicres/thammer/HammerSound/localfiles/soundfonts/FluidR3$pkgver.zip
+source=("http://sunsite.univie.ac.at/musicres/thammer/HammerSound/localfiles/soundfonts/FluidR3${pkgver}.zip"
 license)
-md5sums=('acf366e7161c46d0422805109c2b8151' 'f73c7a86201ed5932baca12e1a435a04')
+md5sums=('acf366e7161c46d0422805109c2b8151'
+         'f73c7a86201ed5932baca12e1a435a04')
 
 build() {
+  cd $srcdir
 
-  mkdir -p /$startdir/pkg/usr/share/{soundfonts,licenses,doc}/fluidr3
-  cd /$startdir/src
   sfarkxtc "FluidR3 GM.sfArk"
-  mv "FluidR3 GM.SF2" FluidR3GM.SF2
+  mv "FluidR3 GM.SF2" fluidr3.sf2
   mv "Fluid R3- Readme.doc" FluidR3-Readme.doc
-  install -D -m644 FluidR3GM.SF2 $startdir/pkg/usr/share/soundfonts/fluidr3/
-  install -D -m644 $startdir/src/license $startdir/pkg/usr/share/licenses/fluidr3/
-  install -D -m644 FluidR3-Readme.doc $startdir/pkg/usr/share/doc/fluidr3/
+}
+
+package() {
+
+  mkdir -p $pkgdir/usr/share/soundfonts
+  mkdir -p $pkgdir/usr/share/{licenses,doc}/fluidr3
+ 
+  install -D -m644 $srcdir/fluidr3.sf2 $pkgdir/usr/share/soundfonts/fluidr3.sf2
+  install -D -m644 $srcdir/license $pkgdir/usr/share/licenses/fluidr3/
+  install -D -m644 $srcdir/FluidR3-Readme.doc $pkgdir/usr/share/doc/fluidr3/
 }
