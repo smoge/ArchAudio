@@ -20,6 +20,11 @@ build() {
   cd "$srcdir/libsigc++-$pkgver"
   ./configure --prefix=/usr
   make
+}
+
+package() {
+  cd "$srcdir/libsigc++-$pkgver"
+
   make DESTDIR="$pkgdir/" install
   find "$pkgdir" -name "*.la" -exec rm {} +
   install -Dm644 COPYING $pkgdir/usr/share/licenses/$pkgname/COPYING
