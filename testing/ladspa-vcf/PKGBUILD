@@ -1,9 +1,8 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
+
 pkgname=ladspa-vcf
 pkgver=0.0.5
-pkgrel=2
+pkgrel=3
 pkgdesc="LADSPA audio EQ biquad filters based on the cookbook formulae by Robert Bristow-Johnson"
 arch=('i686' 'x86_64')
 url="http://www.suse.de/~mana/ladspa.html"
@@ -12,14 +11,25 @@ depends=('glibc')
 provides=('vcf')
 conflicts=('vcf')
 groups=('ladspa-plugins')
-
-source=(http://www.suse.de/~mana/vcf-${pkgver}.tar.bz2)
-md5sums=('7dfbdd040926f925187290c5d12caeae')
+source=("http://www.suse.de/~mana/vcf-${pkgver}.tar.bz2" "http://www.musicdsp.org/files/Audio-EQ-Cookbook.txt" "http://www.suse.de/~mana/ladspa.html")
+md5sums=('7dfbdd040926f925187290c5d12caeae'
+         '25292af5915a3c44b60be7d137e242c4'
+         '0f32d7fbd677080f5aca628845f5dcb2')
 
 build() {
 
   cd "${srcdir}/vcf-${pkgver}"
   make
+}
+
+package() {
+
+cd "${srcdir}/vcf-${pkgver}"
+  
   mkdir -p "${pkgdir}/usr/lib/ladspa/"
   install -m755 *.so "${pkgdir}/usr/lib/ladspa/"
+
+  mkdir -p "${pkgdir}/usr/share/doc/${pkgname}"
+  install -m644 "${srcdir}/Audio-EQ-Cookbook.txt" "${pkgdir}/usr/share/doc/${pkgname}"
+  install -m644 "${srcdir}/ladspa.html" "${pkgdir}/usr/share/doc/${pkgname}/${pkgname}.html"
 }
