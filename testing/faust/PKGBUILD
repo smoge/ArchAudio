@@ -1,10 +1,8 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=faust
 pkgver=0.9.30
-pkgrel=1
+pkgrel=2
 pkgdesc="A compiled language for real-time audio signal processing."
 arch=('i686' 'x86_64')
 url="http://faust.grame.fr/"
@@ -14,10 +12,15 @@ optdepends=('supercollider: supercollider support'
             'pd: pd support'
             'csound: csound support'
             'jack: jack application support'
+            'jack2: jack application support'
             'lv2core: lv2 plugin support'
             'ladspa: ladspa plugin support'
             'qt4: jackqt application support'
-            'gtk2: jackgtk application support')
+            'gtk2: jackgtk application support'
+            'kate-faust-plugin: kate syntax-highlighting'
+            'gedit-faust-plugin: gedit syntax-highlighting'
+            'vim-faust-plugin: vim syntax-highlighting')
+            
 source=("http://downloads.sourceforge.net/project/faudiostream/$pkgname-$pkgver.tar.gz")
 md5sums=('aee067c8f2183949a6f5ea2556f1934a')
 
@@ -31,4 +34,12 @@ package() {
 
   cd "$srcdir/$pkgname-$pkgver"
   make PREFIX=/usr DESTDIR="$pkgdir/" install
+  
+  rm -rf ${srcdir}/${pkgname}-${pkgver}/documentation/faust-quick-reference-src
+
+  #docs:
+  mkdir -p ${pkgdir}/usr/share/doc/${pkgname}/examples/rewriting
+  mkdir -p ${pkgdir}/usr/share/doc/${pkgname}/documentation
+  cp -rf ${srcdir}/${pkgname}-${pkgver}/documentation/* ${pkgdir}/usr/share/doc/${pkgname}/documentation
+  cp -rf ${srcdir}/${pkgname}-${pkgver}/examples/* ${pkgdir}/usr/share/doc/${pkgname}/examples
 }
