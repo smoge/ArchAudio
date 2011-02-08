@@ -1,12 +1,10 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=cm-grace-bin
 pkgver=3.7.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Graphical Realtime Algorithmic Composition Environment is a cross-platform GUI app for algorithmic music composition with Comon Music 3."
-arch=(i686 x86_64)
+arch=('i686' 'x86_64')
 url="http://commonmusic.sourceforge.net/"
 license=('GPL')
 [[ $CARCH == "i686" ]] && depends=('alsa-lib' 'freetype2' 'libxinerama' 'mesa')
@@ -17,14 +15,16 @@ conflicts=('cm')
 install="$pkgname.install"
 source=("http://downloads.sourceforge.net/project/commonmusic/cm/$pkgver/Grace-$pkgver-ubuntu.zip"
         "http://commonmusic.sourceforge.net/index_files/cmlogobb.png"
-        "$pkgname.desktop")
+        "$pkgname.desktop"
+		"http://commonmusic.sourceforge.net/cm/res/doc/cm.html")
+
 md5sums=('dc4c6aa2fd36f2f4c6197630234e31cf'
          '94071a8ecb77bc895cd0abe642d1bed7'
-         '98b16cd7c87fb524e882fa1679b7dfb5')
+         '98b16cd7c87fb524e882fa1679b7dfb5'
+         'b965efa35de041aa6ac9ea46459cb4ce')
 
 build() {
-  cd "$srcdir"
-  # Nothing to do here
+  msg "There is nothing to build"
 }
 
 package() {
@@ -35,4 +35,8 @@ package() {
   install -Dm755 Grace "$pkgdir/usr/bin/cm-grace"
   install -Dm644 cmlogobb.png "$pkgdir/usr/share/pixmaps/cm-grace.png"
   install -Dm644 $pkgname.desktop "$pkgdir/usr/share/applications/cm-grace.desktop"
+
+  #docs:
+  mkdir -p "$pkgdir/usr/share/doc/common-music"
+  install -Dm644 "$srcdir/cm.html" "$pkgdir/usr/share/doc/common-music"
 }

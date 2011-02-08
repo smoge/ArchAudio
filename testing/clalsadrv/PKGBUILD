@@ -20,7 +20,7 @@ build() {
   make DESTDIR=${pkgdir} PREFIX=/usr LIBDIR=lib
 }
 
-package(){
+package() {
   cd "${pkgname}-${pkgver}/libs"
   make DESTDIR=${pkgdir} PREFIX=/usr LIBDIR=lib install
 }
