@@ -1,5 +1,3 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=mcontrol
@@ -16,10 +14,18 @@ md5sums=('af8d5e5fc069ca2c6b1ef8265121e792')
 
 
 build() {
-
   cd "${srcdir}/${pkgname}-${pkgver}"
+  
   ./configure --prefix=/usr
   make
-  make DESTDIR="$pkgdir" PREFIX="/usr" install
 }
 
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  
+  make DESTDIR="$pkgdir" PREFIX="/usr" install
+
+  # docs:
+  make -p "$pkgdir/usr/share/doc/$pkgname"
+  install -Dm644 "${srcdir}/${pkgname}-${pkgver}/README" "$pkgdir/usr/share/doc/$pkgname"
+}
