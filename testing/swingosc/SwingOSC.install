@@ -1,4 +1,3 @@
-# arg 1:  the new package version
 post_install() {
    cat << EOF
 
@@ -11,19 +10,8 @@ post_install() {
 EOF
 }
 
-# arg 1:  the new package version
-# arg 2:  the old package version
 post_upgrade() {
-
-  cat << EOF
-
-==>   For use with SuperCollider, add these lines to your .sclang.sc
-       GUI.swing;
-       SwingOSC.java = "/opt/java/jre/bin/java";
-       SwingOSC.program = ("/usr/bin/SwingOSC.jar").standardizePath;
-       SwingOSC.default.boot;
-
-EOF
+  post_install
 }
 
 op=$1
