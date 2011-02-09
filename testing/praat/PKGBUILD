@@ -3,7 +3,7 @@
 pkgname=praat
 pkgver=5.2.14
 pkgrel=1
-pkgdesc="A tool for 'Doing Phonetics by computer'"
+pkgdesc="a program for sound analysis and synthesis"
 arch=('x86_64' 'i686')
 url="http://www.fon.hum.uva.nl/praat/"
 license=('GPL')
@@ -12,7 +12,7 @@ source=("http://www.fon.hum.uva.nl/praat/praat5214_sources.tar.gz")
 md5sums=('fc821d26c05548ab94d951bf3294ae7f')
 
 build() {
-  cd "$srcdir/sources_5212/"
+  cd "$srcdir/sources_5214/"
 
   cp makefiles/makefile.defs.linux.gtk makefile.defs
 
@@ -24,7 +24,7 @@ build() {
 }
 
 package() {
-  cd "$srcdir/sources_5212/"
+  cd "$srcdir/sources_5214/"
 
   install -Dm755  praat "$pkgdir/usr/bin/praat"
 }
