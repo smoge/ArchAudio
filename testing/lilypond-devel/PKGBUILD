@@ -1,0 +1,44 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+# Contributor: Patrick McCarty <pnorcks at gmail dot com>
+# Contributor: Sergej Pupykin <pupykin.s+arch@gmail.com>
+# Contributor: Geoffroy Carrier <geoffroy@archlinux.org>
+# Contributor: Andrea `BaSh` Scarpino <bash.lnx@gmail.com>
+# Contributor: William Rea <sillywilly@gmail.com>
+# Contributor: Robert Emil Berge <filoktetes@linuxophic.org>
+
+pkgname=lilypond-devel
+pkgver=2.13.48
+pkgrel=1
+pkgdesc="An automated music engraving system (delevopment branch)."
+arch=('i686' 'x86_64')
+url="http://lilypond.org"
+license=('GPL')
+depends=('guile' 'python2' 'texlive-core' 'ghostscript' 'pango' 'fontconfig' 'texi2html' 'dblatex')
+makedepends=('flex' 'bison' 'gettext' 'mftrace' 'texinfo' 'fontforge' 't1utils' 'gsfonts')
+options=('emptydirs')
+conflicts=('lilypond' 'lilypond-git')
+provides=('lilypond')
+source=("http://download.linuxaudio.org/lilypond/sources/v2.13/lilypond-$pkgver.tar.gz" "python2.patch")
+
+md5sums=('cc1af703c62b45a9e444fcaafd322b94'
+         '5ed7c132b75140bc7e2d208a5799079a')
+build() {
+  cd "$srcdir/lilypond-$pkgver"
+
+  # python2 fix
+  for file in $(find . -name '*.py' -print); do
+    sed -i 's_^#!.*/usr/bin/python_#!/usr/bin/python2_' $file
+    sed -i 's_^#!.*/usr/bin/env.*python_#!/usr/bin/env python2_' $file
+  done
+
+  patch -p1 -i $srcdir/python2.patch
+
+  PYTHON="python2" ./autogen.sh --prefix=/usr
+  make all
+}
+
+package() {
+  cd "$srcdir/lilypond-$pkgver"
+  
+  make DESTDIR="$pkgdir" install
+}
