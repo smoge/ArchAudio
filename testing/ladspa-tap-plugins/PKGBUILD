@@ -7,11 +7,12 @@
 pkgname=ladspa-tap-plugins
 _pkgname=tap-plugins
 pkgver=0.7.1
-pkgrel=2
+pkgrel=3
 pkgdesc="Tom's LADSPA Plugins"
 url="http://tap-plugins.sourceforge.net/index.html"
 license="GPL"
 arch=('i686' 'x86_64')
+groups=('ladspa-plugins')
 provides=('tap-plugins')
 conflicts=('tap-plugins')
 source=(http://downloads.sourceforge.net/project/${_pkgname}/${_pkgname}/${pkgver}/${_pkgname}-${pkgver}.tar.gz)
