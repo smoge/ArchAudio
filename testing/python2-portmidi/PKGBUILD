@@ -1,5 +1,6 @@
 # Contributor: Calimero <calimeroteknik@free.fr>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=python2-portmidi
 pkgver=0.0.7
@@ -15,6 +16,13 @@ source=(http://bitbucket.org/aalex/pyportmidi/downloads/python-portmidi-${pkgver
 md5sums=('f505d7e0c4abee7f7efcb3183c925ee9')
 
 build() {
-  cd "$srcdir"/python-portmidi-"$pkgver"
-  python2 setup.py install --prefix=/usr --root="${pkgdir}"
+  cd "$srcdir/$pkgname-$pkgver"
+
+  python2 setup.py build
 }
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  python2 setup.py install --root="$pkgdir"
+}  
