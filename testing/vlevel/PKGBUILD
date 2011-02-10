@@ -1,0 +1,27 @@
+# Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
+
+pkgname=vlevel
+pkgver=0.5
+pkgrel=3
+pkgdesc="A tool to amplify the soft parts of music"
+arch=('i686' 'x86_64')
+url="http://vlevel.sourceforge.net/about/"
+license=('GPL')
+source=(http://downloads.sourceforge.net/sourceforge/${pkgname}/${pkgname}-${pkgver}.tar.gz)
+md5sums=('8602cf64822e03e7eec1fc43d2d69eda')
+
+build() {
+  cd ${srcdir}/${pkgname}-${pkgver}
+
+  make
+}
+
+package() {
+  cd ${srcdir}/${pkgname}-${pkgver}
+
+  install -D -m755 vlevel-bin ${pkgdir}/usr/bin/vlevel-bin
+  install -D -m755 vlevel-ladspa.so ${pkgdir}/usr/lib/ladspa/vlevel-ladspa.so
+  
+  mkdir -p ${pkgdir}/usr/share/vlevel
+  cp -r {README,docs,utils} ${pkgdir}/usr/share/vlevel
+}
