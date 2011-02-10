@@ -1,0 +1,19 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=ir-true-m7
+pkgver=20110210
+pkgrel=1
+pkgdesc="228 True Stereo impulse files capturing the Ambience, Chamber, Hall, Plate, Room & Space registers from Bricasti Design M7 Stereo Reverb Processor."
+arch=('any')
+url="http://rhythminmind.net/1313/?cat=182"
+license=('none')
+groups=('impulse-responses')
+source=("http://popsoundengineering.com/Samples/True%20M7.zip")
+md5sums=('44676acffb5645d0bc325389d876eb0f')
+
+package() {
+  mkdir -p $pkgdir/usr/share/ir/true-m7/{Ambience,Chamber,Halls,Plates,Rooms,Spaces}
+  mv $srcdir/"True M7" $srcdir/true-m7
+  rm $srcdir/true-m7/desktop.ini
+  cp -rf $srcdir/true-m7 $pkgdir/usr/share/ir
+}
