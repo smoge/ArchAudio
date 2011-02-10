@@ -1,0 +1,29 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Sergej Pupykin <ps@lx-ltd.ru>
+# Contributor: Ng Oon-Ee <n g  o o n  e e AT  g m a i l dot c o m>
+# Contributor: Sean Corbett <seanbutnotheard [near] gmail.com>
+
+pkgname=ladspa-tap-plugins
+_pkgname=tap-plugins
+pkgver=0.7.1
+pkgrel=2
+pkgdesc="Tom's LADSPA Plugins"
+url="http://tap-plugins.sourceforge.net/index.html"
+license="GPL"
+arch=('i686' 'x86_64')
+provides=('tap-plugins')
+conflicts=('tap-plugins')
+source=(http://downloads.sourceforge.net/project/${_pkgname}/${_pkgname}/${pkgver}/${_pkgname}-${pkgver}.tar.gz)
+md5sums=('87a7d378c4186ad83d98518e003c68a1')
+
+build() {
+  cd $startdir/src/$_pkgname-$pkgver
+  sed 's|/usr/local/|$(DESTDIR)/usr/|' -i Makefile
+  make 
+}
+
+package() {
+  cd $startdir/src/$_pkgname-$pkgver
+  make DESTDIR=$startdir/pkg install
+}
