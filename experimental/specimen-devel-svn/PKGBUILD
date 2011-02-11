@@ -1,8 +1,8 @@
 # Contributor: Robert Schwarz <mail@rschwarz.net>
 
-pkgname=specimen-svn
-pkgver=89
-pkgrel=1
+pkgname=specimen-devel-svn
+pkgver=88
+pkgrel=3
 pkgdesc="an open source, MIDI controllable audio sampler"
 arch=('i686' 'x86_64')
 url="http://zhevny.com/specimen/"
@@ -11,7 +11,7 @@ depends=('gtk2' 'libxml2' 'libsndfile' 'libsamplerate' 'alsa-lib>=0.9.0' 'jack' 
 conflicts=('specimen')
 provides=('specimen')
 
-_svntrunk="http://zhevny.com/svn/specimen/trunk"
+_svntrunk="http://zhevny.com/svn/specimen/branches/devel"
 _svnmod="specimen"
 
 build() {
