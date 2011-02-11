@@ -1,0 +1,29 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=qasmixer
+pkgver=0.7.1
+pkgrel=1
+pkgdesc="QT frontend to alsamixer"
+arch=('i686' 'x86_64')
+url="http://sourceforge.net/projects/alsamixer-qt4/"
+license=('GPL')
+depends=('qt' 'alsa-lib')
+makedepends=('cmake')
+source=("http://downloads.sourceforge.net/project/qasmixer/0.7.1/qasmixer-0.7.1.tar.bz2?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fqasmixer%2Ffiles%2F0.7.1%2Fqasmixer-0.7.1.tar.bz2%2Fdownload&ts=1297455310&use_mirror=iweb")
+
+md5sums=('644116df5a8947ab0a0f269bc752ea15')
+
+build() {
+  cd $srcdir/$pkgname-$pkgver
+
+  cmake . -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
+  make
+}
+
+package() { 
+  cd $srcdir/$pkgname-$pkgver
+
+  make DESTDIR="$pkgdir" install
+}
+
+
