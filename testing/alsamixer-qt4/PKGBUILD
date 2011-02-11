@@ -7,7 +7,7 @@ pkgdesc="QT frontend to alsamixer"
 arch=('i686' 'x86_64')
 url="http://sourceforge.net/projects/alsamixer-qt4/"
 license=('GPL')
-depends=('qt')
+depends=('qt' 'alsa-lib')
 makedepends=('cmake')
 source=(http://sourceforge.net/projects/$pkgname/files/$pkgver/$pkgname-$pkgver.tar.gz/download)
 md5sums=('a858979396f43db8c384cd17fa6f2c26')
@@ -15,14 +15,14 @@ md5sums=('a858979396f43db8c384cd17fa6f2c26')
 build() {
   cd $srcdir/$pkgname-$pkgver
 
-  cmake .
+  cmake . -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr
   make
 }
 
 package() { 
+  cd $srcdir/$pkgname-$pkgver
 
-  mkdir $pkgdir/usr/bin
-  install -Dm755 src/alsamixer-qt4 $pkgdir/usr/bin/alsamixer-qt4
+  make DESTDIR="$pkgdir" install
 }
 
 
