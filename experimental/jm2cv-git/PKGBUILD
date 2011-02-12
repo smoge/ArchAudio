@@ -2,8 +2,8 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=jm2cv-git
-pkgver=20110101
-pkgrel=2
+pkgver=20110211
+pkgrel=1
 pkgdesc="converts between JACK MIDI and control voltage"
 arch=('i686' 'x86_64')
 url="http://git.fuzzle.org/cgit/jm2cv.git/"

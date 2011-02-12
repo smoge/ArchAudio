@@ -4,7 +4,7 @@
 # Contributor: svoufff <svoufff at gmail dot com>
 
 pkgname=guitarix-svn
-pkgver=957
+pkgver=989
 pkgrel=1
 pkgdesc="Simple mono guitar amplifier for jack."
 arch=('i686' 'x86_64')

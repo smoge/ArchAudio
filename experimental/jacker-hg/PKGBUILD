@@ -1,7 +1,7 @@
 # Contributor: Philipp Überbacher <murks@lavabit.com>
 
 pkgname=jacker-hg
-pkgver=199
+pkgver=203
 pkgrel=1
 pkgdesc="A pattern based, tracker-like jack midi sequencer."
 arch=('i686' 'x86_64')

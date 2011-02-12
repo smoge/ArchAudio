@@ -3,7 +3,7 @@
 # Contributor: Martin Peres <martin.peres@ensi-bourges.fr>
 
 pkgname=arduide-git
-pkgver=20110105
+pkgver=20110211
 pkgrel=1
 pkgdesc="ArduIDE is a Qt-based IDE for the open-source Arduino electronics prototyping platform."
 arch=('i686' 'x86_64')

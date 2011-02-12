@@ -3,7 +3,7 @@
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
 
 pkgname=galan-git
-pkgver=20110105
+pkgver=20110211
 pkgrel=1
 pkgdesc="Graphical Audio Language"
 arch=('i686' 'x86_64')
