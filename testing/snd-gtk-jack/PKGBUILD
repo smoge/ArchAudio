@@ -3,7 +3,7 @@
 
 pkgname=snd-gtk-jack
 _pkgname=snd
-pkgver=11.12
+pkgver=11.13
 pkgrel=1
 pkgdesc="A sound editor, with JACK and GTK+ enabled"
 arch=('i686' 'x86_64')
@@ -14,7 +14,8 @@ makedepends=('ladspa')
 provides=('snd-ls' 'snd')
 conflicts=('snd-ls' 'snd')
 source=(ftp://ccrma-ftp.stanford.edu/pub/Lisp/$_pkgname-$pkgver.tar.gz)
-md5sums=('5f78cf7d204aeb716987a512955445eb')
+md5sums=('5d8d1958861a3762c992daf0d7190fae')
+
 
 
 build() {
