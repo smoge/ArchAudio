@@ -3,11 +3,11 @@
 pkgname=realtimeconfigquickscan
 pkgver=20110211
 pkgrel=1
-pkgdesc="Inspect a linux system' configuration and make suggestions for improving realtime performance."
+pkgdesc="Inspect a linux system configuration and make suggestions for improving realtime performance."
 arch=('any')
 url="http://code.google.com/p/realtimeconfigquickscan/"
 license=('GPL')
-depends=('jack')
+depends=('jack' 'perl' 'perl-tk') 
 makedepends=('mercurial')
 #install="$pkgname.install"
 
