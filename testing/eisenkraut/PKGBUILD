@@ -9,16 +9,26 @@ url="http://www.sciss.de/eisenkraut/"
 license=('GPL')
 depends=('jre')
 makedepends=('apache-ant')
-source=(http://sourceforge.net/projects/eisenkraut/files/eisenkraut/${pkgver}Eisenkraut-src-${pkgver}.zip)
+source=(http://sourceforge.net/projects/eisenkraut/files/eisenkraut/${pkgver}/Eisenkraut-src-${pkgver}.zip)
 md5sums=('19f6af865bfc302f12a4c47f2968281d')
 
 build() {
   cd $srcdir/Eisenkraut
-  ant clean jar
+  ant dist
+  cd dist
+  tar -xvzopf Eisenkraut-linux-${pkgver}.tar.gz
+  mv Eisenkraut ${pkgname}
 }
 
 package() {
-  cd $srcdir/Eisenkraut
-  install -d ${pkgdir}/usr/share/java/
-  cp $srcdir/Eisenkraut/Eisenkraut.jar ${pkgdir}/usr/share/java/$pkgname.jar
+  install -d "$pkgdir/usr/bin/"
+
+  cat << EOF >> "$pkgdir/usr/bin/${pkgname}"
+#!/bin/bash
+cd /usr/share/$pkgname && java -jar Eisenkraut.jar
+EOF
+
+  chmod 755 "$pkgdir/usr/bin/${pkgname}"
+  install -d ${pkgdir}/usr/share/eisenkraut
+  cp -rf $srcdir/Eisenkraut/dist/${pkgname} ${pkgdir}/usr/share/
 }
