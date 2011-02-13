@@ -1,5 +1,3 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Tim Yang <tdy@gmx.com>
 # Contributor: Shinlun Hsieh <yngwiexx@yahoo.com.tw>
 # Contributor: Andrea Scarpino <bash.lnx@gmail.com>
@@ -13,6 +11,34 @@ arch=('i686' 'x86_64')
 url="http://crca.ucsd.edu/~msp/software.html"
 license=('BSD' 'GPL')
 depends=('jack' 'tk')
+optdepends=('pd-arraysize:'
+			'pd-boids:'
+			'pd-bsaylor:'
+			'pd-creb:'
+			'pd-cyclone:'
+			'pd-ekext:'
+			'pd-ext13:'
+			'pd-freeverb:'
+			'pd-gem:'
+			'pd-ggee:'
+			'pd-gridflow:'
+			'pd-hid:'
+			'pd-jmmmp:'
+			'pd-ladspa:'
+			'pd-list-abs:'
+			'pd-mapping:'
+			'pd-motex:'
+			'pd-pdogg:'
+			'pd-pdp:'
+			'pd-plugin:'
+			'pd-pmpd:'
+			'pd-purepd:'
+			'pd-sigpack:'
+			'pd-smlib:'
+			'pd-vbap:'
+			'pd-windowing:'
+			'pd-zexy:')
+
 source=(http://crca.ucsd.edu/~msp/Software/pd-${pkgver/_/-}.src.tar.gz)
 md5sums=('27f98731613c7b08208fd2c5fdbc8e3c')
 
@@ -21,6 +47,10 @@ build() {
   cd "$srcdir/pd-${pkgver/_/-}/src"
   ./configure --prefix=/usr --mandir=/usr/share/man --enable-alsa --enable-jack
   make
+}
+
+package() {
+  cd "$srcdir/pd-${pkgver/_/-}/src"
   make DESTDIR="$pkgdir" install
   install -Dm644 ../LICENSE.txt "$pkgdir/usr/share/licenses/pd/LICENSE"
 }
