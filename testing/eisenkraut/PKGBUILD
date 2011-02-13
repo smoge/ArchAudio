@@ -1,0 +1,27 @@
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=eisenkraut
+pkgver=0.74
+pkgrel=1
+pkgdesc="a standalone, cross-platform audio file editor using the SuperCollider 3 server application."
+arch=('any')
+url="http://www.sciss.de/eisenkraut/"
+license=('GPL')
+depends=('jre')
+makedepends=('apache-ant')
+source=(http://sourceforge.net/projects/eisenkraut/files/eisenkraut/0.74/Eisenkraut-src-0.74.zip)
+md5sums=('19f6af865bfc302f12a4c47f2968281d')
+
+build() {
+#   install -d ${pkgdir}/usr/{,bin,share/SuperCollider/Extensions/SwingOSC/Help}
+  cd $srcdir/Eisenkraut
+
+  ant clean jar
+}
+
+package() {
+  cd $srcdir/Eisenkraut
+  install -d ${pkgdir}/usr/share/java/
+  cp $srcdir/Eisenkraut/Eisenkraut.jar ${pkgdir}/usr/share/java/$pkgname.jar
+
+}
