@@ -9,13 +9,11 @@ url="http://www.sciss.de/eisenkraut/"
 license=('GPL')
 depends=('jre')
 makedepends=('apache-ant')
-source=(http://sourceforge.net/projects/eisenkraut/files/eisenkraut/0.74/Eisenkraut-src-0.74.zip)
+source=(http://sourceforge.net/projects/eisenkraut/files/eisenkraut/${pkgver}Eisenkraut-src-${pkgver}.zip)
 md5sums=('19f6af865bfc302f12a4c47f2968281d')
 
 build() {
-#   install -d ${pkgdir}/usr/{,bin,share/SuperCollider/Extensions/SwingOSC/Help}
   cd $srcdir/Eisenkraut
-
   ant clean jar
 }
 
@@ -23,5 +21,4 @@ package() {
   cd $srcdir/Eisenkraut
   install -d ${pkgdir}/usr/share/java/
   cp $srcdir/Eisenkraut/Eisenkraut.jar ${pkgdir}/usr/share/java/$pkgname.jar
-
 }
