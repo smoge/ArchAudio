@@ -1,0 +1,25 @@
+#Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=midish
+pkgver=1.0.6
+pkgrel=1
+pkgdesc="an open-source MIDI sequencer and filter implemented as a simple command-line interpreter (like a shell) it's intended to be lightweight, fast and reliable for real-time performance."
+arch=('i686' 'x86_64')
+url="http://caoua.org/midish/"
+license=('BSD')
+depends=('alsa-lib')
+source=("http://caoua.org/midish/midish-${pkgver}.tar.gz")
+md5sums=('e8d770a0c5f68089b4632f1874a6538f')
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  
+  ./configure --prefix=/usr --mandir=/usr/share/man
+  make
+}
+
+package(){
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  
+  make DESTDIR="${pkgdir}" install
+}
