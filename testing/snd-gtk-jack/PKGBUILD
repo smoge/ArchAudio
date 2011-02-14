@@ -1,29 +1,41 @@
 # Contributor: Andrew Antle <andrew dot antle at gmail dot com>
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=snd-gtk-jack
 _pkgname=snd
 pkgver=11.13
-pkgrel=1
+pkgrel=2
 pkgdesc="A sound editor, with JACK and GTK+ enabled"
 arch=('i686' 'x86_64')
 url="http://ccrma.stanford.edu/software/snd/"
 license=('custom')
-depends=('fam' 'fftw' 'gsl' 'gtk2' 'jack')
+depends=('fam' 'fftw' 'gsl' 'gtk2' 'jack' 'ruby')
 makedepends=('ladspa')
-provides=('snd-ls' 'snd')
-conflicts=('snd-ls' 'snd')
+provides=('snd-ls' 'snd' 'snd-gtk')
+conflicts=('snd-ls' 'snd' 'snd-gtk')
 source=(ftp://ccrma-ftp.stanford.edu/pub/Lisp/$_pkgname-$pkgver.tar.gz)
 md5sums=('5d8d1958861a3762c992daf0d7190fae')
-
-
 
 build() {
 
   cd $srcdir/$_pkgname-$pkgver
 
-  ./configure --prefix=/usr --with-gtk --with-jack
+  ./configure --prefix=/usr \
+			  --with-x \
+			  --with-gtk \
+			  --without-oss \
+			  --without-pulseaudio \
+			  --without-portaudio \
+			  --with-jack \
+			  --with-ruby \
+			  --with-ruby-prefix=/usr/bin/ruby \
+			  --with-fftw \
+			  --with-doubles \
+			  --with-ladspa
+			  
   make
+
 }
 
 package() {
