@@ -10,7 +10,7 @@
 ###############################################################
 
 pkgname=audacity-cvs
-pkgver=20110211
+pkgver=20110213
 pkgrel=1
 pkgdesc="A program that lets you manipulate digital audio waveforms (development snapshot)"
 arch=('i686' 'x86_64')

@@ -4,7 +4,7 @@
 # Conotributor: Philipp Überbacher <murks at lavabit dot com>
 
 pkgname=traverso-git
-pkgver=20110108
+pkgver=20110213
 pkgrel=1
 pkgdesc="DAW with an innovative and fast Graphical User Interface"
 arch=('i686' 'x86_64')
