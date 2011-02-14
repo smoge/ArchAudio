@@ -1,22 +1,25 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Viaken <viaken@gmail.com>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com># Contributor: Viaken <viaken@gmail.com>
+
 
 pkgname=paulstretch
 pkgver=2.1
-pkgrel=1
+pkgrel=2
 pkgdesc='A program made for extreme sound stretching of the audio (like 50x) and for applying special effects by "spectral smoothing" the sounds'
 arch=('i686' 'x86_64')
 url="http://hypermammut.sourceforge.net/paulstretch/"
 license=('GPL')
-depends=('fltk' 'fftw' 'portaudio')
-source=(http://downloads.sourceforge.net/hypermammut/$pkgname-$pkgver.tar.bz2)
+depends=('fltk' 'fftw' 'jack')
+source=("http://sourceforge.net/projects/hypermammut/files/paulstretch/${pkgver}/paulstretch-${pkgver}.tar.bz2")
 md5sums=('1f3955c03e8ed1e9cbaaa8b1d6b3efc2')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
 
-  ./compile_linux_fftw.sh
+  # ./compile_linux_fftw.sh	
+  # Come on, no portaudio, please.		
+  # With JACK support:
+  ./compile_linux_fftw_jack.sh
 }
 
 package() {
