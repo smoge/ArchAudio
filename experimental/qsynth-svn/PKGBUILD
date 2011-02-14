@@ -25,15 +25,17 @@ build() {
   else
     svn co ${_svntrunk} ${_svnmod}
   fi
-  msg "Download complete or server timeout"
+  msg "Download complete or server timeout" 
   msg "Starting build process..."
 
   cp -rf ${_svnmod} ${_svnmod}-build
   cd ${_svnmod}-build
 
-  autoconf
-  autoheader
-  ./configure --prefix=/usr
+#   autoconf
+#   autoheader
+#   ./configure --prefix=/usr
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DCONFIG_GRADIENT=1 -DCONFIG_SYSTEM_TRAY=1
+
   make
 }
 
