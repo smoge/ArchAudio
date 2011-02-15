@@ -1,7 +1,7 @@
 # Maintainer: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=ladspa-esrever
-pkgver=20110212
+pkgver=20110215
 pkgrel=1
 pkgdesc="LADSPA plug-in for a random reversal effect."
 arch=('i686' 'x86_64')

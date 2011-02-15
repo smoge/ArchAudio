@@ -1,7 +1,7 @@
 # Maintainer: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=lv2-aubio-git
-pkgver=20110125
+pkgver=20110215
 pkgrel=1
 pkgdesc="provides LV2 plugin wrappers for some Aubio functions"
 arch=('i686' 'x86_64')

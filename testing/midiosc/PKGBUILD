@@ -1,7 +1,7 @@
 # Maintainer:  Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=midiosc  
-pkgver=20110131
+pkgver=20110215
 pkgrel=1 
 pkgdesc="MidiOSC is a small program to bridge the worlds of MIDI and OSC by providing bidirectional conversion of MIDI to OSC."
 url="https://github.com/jstutters/MidiOSC"

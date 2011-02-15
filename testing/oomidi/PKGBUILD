@@ -1,7 +1,7 @@
 # Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=oomidi
-pkgver=20110212
+pkgver=20110215
 pkgrel=1
 pkgdesc="Open Octave Midi, the open source MIDI/Audio sequencer."
 arch=(i686 x86_64)

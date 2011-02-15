@@ -1,7 +1,7 @@
 # Maintainer: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=realtimeconfigquickscan
-pkgver=20110211
+pkgver=18
 pkgrel=1
 pkgdesc="Inspect a linux system configuration and make suggestions for improving realtime performance."
 arch=('any')

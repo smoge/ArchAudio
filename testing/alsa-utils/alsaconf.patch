@@ -1,32 +1,29 @@
-diff -Naur alsa-utils-1.0.9a-orig/alsaconf/alsaconf.in alsa-utils-1.0.9a/alsaconf/alsaconf.in
---- alsa-utils-1.0.9a-orig/alsaconf/alsaconf.in	2005-03-24 00:24:52.000000000 -0800
-+++ alsa-utils-1.0.9a/alsaconf/alsaconf.in	2005-07-18 09:25:02.000000000 -0700
-@@ -58,6 +58,8 @@
-   distribution="redhat"
- elif test -f /etc/fedora-release && grep -q "Fedora" /etc/fedora-release; then
-   distribution="fedora"
+--- alsaconf.old	2011-02-15 14:03:32.756666991 -0200
++++ alsaconf	2011-02-15 14:07:10.410000330 -0200
+@@ -55,6 +55,8 @@
+   suse_version=$(grep 'VERSION = ' /etc/SuSE-release | sed -e s/'VERSION = '//)
+ elif [ -f /etc/UnitedLinux-release ]; then
+   distribution="suse"
 +elif test -f /etc/arch-release && grep -q "Arch" /etc/arch-release; then
 +  distribution="arch"
- elif [ -f /etc/slackware-version -o -f /etc/slamd64-version ]; then
-   distribution="slackware"
- else
-@@ -382,6 +384,8 @@
-     rcalsasound=/etc/rc.d/init.d/alsasound
- elif [ -x /etc/init.d/alsa ]; then
+ elif [ -f /etc/gentoo-release ]; then
+   distribution="gentoo"
+ elif [ -f /etc/debian_version ]; then
+@@ -291,7 +293,7 @@
+ 
+ # cfgfile = base config file to remove/update the sound setting
+ # cfgout = new config file to write the sound setting (if different from $cfgfile)
+-cfgout=""
++cfgout="/etc/modprobe.d/sound.conf"
+ cfgoldout=""
+ if [ -n "$cfgfile" ]; then
+   if [ ! -r "$cfgfile" ]; then
+@@ -508,6 +510,8 @@
      rcalsasound=/etc/init.d/alsa
+ elif [ -x /etc/rc.d/rc.alsa ]; then
+     rcalsasound=/etc/rc.d/rc.alsa
 +elif [ -x /etc/rc.d/alsa ]; then
-+    rcalsasound=/etc/rc.d/alsa
- else
-     rcalsasound=rcalsasound
- fi
---- alsa-utils-1.0.9a-orig/alsaconf/alsaconf.in	2010-01-03 19:44:08.000000000 +0100
-+++ alsa-utils-1.0.9a-orig/alsaconf/alsaconf.in	2010-01-03 19:44:08.000000000 +0100
-@@ -315,7 +315,7 @@
- 	3.[789]*)
- 	  ;;
- 	*)
--	  cfgout="/etc/modprobe.d/sound"
-+	  cfgout="/etc/modprobe.d/sound.conf"
- 	  cfgoldout=""
- 	  ;;
- 	esac
++	rcalsasound=/etc/rc.d/alsa
+ elif [ -x /etc/init.d/alsasound ]; then
+     rcalsasound=/etc/init.d/alsasound
+ elif [ -x /usr/sbin/rcalsasound ]; then

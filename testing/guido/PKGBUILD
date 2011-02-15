@@ -3,7 +3,7 @@
 
 pkgname=guido
 pkgver=1.40
-pkgrel=1
+pkgrel=3
 pkgdesc="A formal language for score level music representation and a Qt editing suite."
 arch=('i686' 'x86_64')
 url="http://sourceforge.net/projects/guidolib"
