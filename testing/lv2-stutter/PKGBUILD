@@ -3,7 +3,7 @@
 pkgname=lv2-stutter
 pkgver=20110216
 pkgrel=1
-pkgdesc="An LV2 "stuttering" effect."
+pkgdesc="An LV2 stuttering effect."
 arch=('i686' 'x86_64')
 url="https://github.com/jeremysalwen/Stutter-LV2"
 license=('GPL')
