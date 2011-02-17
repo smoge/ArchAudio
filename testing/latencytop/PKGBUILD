@@ -12,13 +12,12 @@ license=('GPL')
 source=(http://www.latencytop.org/download/latencytop-${pkgver}.tar.gz)
 md5sums=('73bb3371c6ee0b0e68e25289027e865c')
 
-build()
-{
+build() {
   cd ${srcdir}/latencytop-${pkgver}
   make
 }
 
-package(){
+package() {
   cd ${srcdir}/latencytop-${pkgver}
   mkdir -p ${pkgdir}/usr/bin   
   install -m755 latencytop ${pkgdir}/usr/bin 
