@@ -1,0 +1,31 @@
+# Maintainer: Daniel Stumpner <bigstumpi@gmx.de>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+
+pkgname=llcon
+pkgver=3.1.2
+pkgrel=1
+pkgdesc="Low-Latency (Internet) Connection tool for real-time jam sessions"
+arch=(i686 x86_64)
+url="http://sourceforge.net/projects/llcon/"
+license=('GPL2')
+depends=('qt' 'jack')
+source=("http://downloads.sourceforge.net/project/$pkgname/$pkgname/$pkgver/$pkgname-$pkgver.tar.gz")
+md5sums=('953f1936daa02942556aa551739d09c9')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  # Save configuration file in home
+  sed -e "s|\(file ( \)\(sCur\)|\1QDir::homePath() + \"/.config/\" + \2|" \
+      -i src/settings.cpp
+  sed -i "30a#include <qdir.h>" src/settings.h
+
+  ./configure  --prefix /usr
+  make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+}
