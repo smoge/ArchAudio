@@ -1,8 +1,9 @@
 # Contributor: jpate <j.k.pate@sms.ed.ac.uk>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=praat
-pkgver=5.2.15
-filever=5215
+pkgver=5.2.16
+filever=5216
 pkgrel=1
 pkgdesc="a program for sound analysis and synthesis"
 arch=('x86_64' 'i686')
@@ -29,4 +30,4 @@ package() {
   install -Dm755  praat "$pkgdir/usr/bin/praat"
 }
 
-md5sums=('e66194ba9cf0c5ec5e6a29fdc3d6bb99')
+md5sums=('15bb2cfd1f60933a55e475da90f70edd')
