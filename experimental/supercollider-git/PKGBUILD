@@ -22,6 +22,11 @@ _gitroot="git://supercollider.git.sourceforge.net/gitroot/supercollider/supercol
 _gitname="supercollider"
 
 build() {
+
+#  this will be needed with -DSC_QT=1
+#  thanks speeps!
+#  export LDFLAGS="${LDFLAGS//-Wl,--as-needed}"
+
   cd $srcdir
   msg "Connecting to GIT server...."
 
@@ -46,7 +51,7 @@ build() {
   mkdir build
   cd build
 
-  cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DNOVA_SIMD=1 -DSC_WII=1 -DSUPERNOVA=1 -DSC_QT=0 # -DNATIVE=1 -DSSE42=1
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DNOVA_SIMD=1 -DSC_WII=1 -DSUPERNOVA=1 -DSC_QT=1 # -DNATIVE=1 -DSSE42=1
 
   make
   make DESTDIR=$pkgdir/ install
