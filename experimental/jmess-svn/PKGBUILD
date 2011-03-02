@@ -8,8 +8,7 @@ arch=('i686' 'x86_64')
 url="http://code.google.com/p/jmess-jack/"
 license=('GPL')
 depends=('jack')
-makedepends=()
-optdepends=()
+makedepends=('qt')
 provides=('jmess')
 conflicts=('jmess')
 
