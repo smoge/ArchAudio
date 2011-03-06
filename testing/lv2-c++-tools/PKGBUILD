@@ -1,22 +1,28 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Maintainer : SpepS <dreamspepser at yahoo dot it>
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
+
 pkgname=lv2-c++-tools
-pkgver=1.0.3
-pkgrel=4
-pkgdesc="Utilities needed for ll-plugins"
+pkgver=1.0.4
+pkgrel=1
+pkgdesc="Tools and libraries that may come in handy when writing LV2 plugins."
 arch=('i686' 'x86_64')
 url="http://ll-plugins.nongnu.org/hacking.html"
 license=('GPL3')
 depends=('gcc-libs' 'bash')
-source=(http://download.savannah.nongnu.org/releases-noredirect/ll-plugins/lv2-c++-tools-${pkgver}.tar.bz2)
-md5sums=('8db2c4124af6ef932002bba9d99ba09f')
+makedepends=('boost')
+source=("http://download.savannah.nongnu.org/releases-noredirect/ll-plugins/$pkgname-$pkgver.tar.bz2")
+md5sums=('2468f8750bae1d57300853479846e5ed')
 
 build() {
+  cd "$srcdir/$pkgname-$pkgver"
 
-  cd "${srcdir}/${pkgname}-${pkgver}"
-  ./configure --prefix="/usr"
+  ./configure --prefix=/usr
   make
-  make DESTDIR="${pkgdir}" install
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
 }
 
