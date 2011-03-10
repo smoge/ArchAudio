@@ -1,6 +1,4 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-# Contributor: Philipp Überbacher <murks at lavabit dot com>
+# Maintainer: Philipp Überbacher <murks at lavabit dot com>
 # Contributor: Nate Slottow (m00tp01nt) <nslottow AT gmail DOT com>
 # Contributor: SpepS <dreamspepser at yahoo dot it>
 
@@ -31,5 +29,6 @@ build() {
 package() {
 
   cd "${srcdir}/${pkgname}-${pkgver}"
+
   make DESTDIR="${pkgdir}" install
 }
