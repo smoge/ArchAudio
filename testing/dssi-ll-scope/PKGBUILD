@@ -1,29 +1,48 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Maintainer : SpepS <dreamspepser at yahoo dot it>
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
 
-pkgname=dssi-ll-scope
+_pkg=ll-scope
+pkgname=dssi-$_pkg
 pkgver=0.2.1
-pkgrel=1
+pkgrel=2
 pkgdesc="DSSI oscilloscope plugin."
 url="http://www.student.nada.kth.se/~d00-llu/music_dssi.php?lang=en"
 arch=('i686' 'x86_64')
 license=('GPL')
-depends=('liblo' 'libglademm')
-makedepends=('dssi')
-provides=('ll-scope')
-conflicts=('ll-scope')
-source=(http://www.student.nada.kth.se/~d00-llu/plugins/ll-scope/ll-scope-${pkgver}.tar.bz2 \
-ll-scope.patch)
-
-md5sums=('2f3350423df5349528bcf6e1ef503ec0'
-         'e7e932d5a62064aaf754c876a9736417')
-
+depends=('liblo' 'libglademm' 'dssi')
+provides=("$_pkg")
+conflicts=("$_pkg")
+source=("${url/music*/}plugins/$_pkg/$_pkg-$pkgver.tar.bz2")
+md5sums=('2f3350423df5349528bcf6e1ef503ec0')
 
 build() {
-  cd "${srcdir}"
-  patch -p0 -i ../ll-scope.patch
-  cd "${srcdir}/ll-scope-${pkgver}"
-  make CFLAGS="${CFLAGS} -fPIC"
-  make PREFIX="${pkgdir}" install
+  cd "$srcdir/$_pkg-$pkgver"
+
+  # adding -fPIC for x86_64
+  export CFLAGS="-fPIC"
+
+  # add DESTDIR and remove local referencies to Makefile
+  sed -i "s| \(\$(INS\)| \$(DESTDIR)/\1|g;s|/local||" Makefile
+
+  # fix sigc
+  sed -i "s| \(signal<void\)| sigc::\1|g" *.hpp
+
+  make
+}
+
+package() {
+  cd "$srcdir/$_pkg-$pkgver"
+
+  make DESTDIR="$pkgdir/" install
+
+  # install ll-scope executable script
+  install -d "$pkgdir/usr/bin"
+  cat << EOF >> "$pkgdir/usr/bin/$_pkg"
+#!/bin/bash
+
+export DSSI_PATH=/usr/lib/dssi
+exec jack-dssi-host $_pkg.so
+EOF
+
+  chmod +x "$pkgdir/usr/bin/$_pkg"
 }
