@@ -28,6 +28,9 @@ _gitname2="sc3-plugins"
 
 
 build() {
+
+  export LDFLAGS="${LDFLAGS//-Wl,--as-needed}"
+
   cd $srcdir
   msg "Connecting to GIT server...."
 
@@ -48,7 +51,7 @@ build() {
   cp -r $_gitname $_gitname-build
   cd $_gitname-build/
 
-  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DNOVA_SIMD=1 -DNATIVE=1 -DSSE42=1 -DSC_WII=1 -DSUPERNOVA=0
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DNOVA_SIMD=1 -DNATIVE=1 -DSSE42=1 -DSC_WII=1 -DSUPERNOVA=1 -DSC_QT=1
 
   make
   make DESTDIR=$pkgdir/ install
@@ -74,7 +77,7 @@ build() {
   cp -r $_gitname2 $_gitname2-build
   cd $_gitname2-build
 
-  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DSC_PATH=$srcdir/supercollider-build -DAY=1
+  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DSC_PATH=$srcdir/supercollider-build -DAY=1 -DSUPERNOVA=1
   make
   make DESTDIR=$pkgdir/ install
 
