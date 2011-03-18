@@ -5,12 +5,12 @@
 pkgname=snd-gtk-jack
 _pkgname=snd
 pkgver=12
-pkgrel=1
+pkgrel=2
 pkgdesc="A sound editor, with JACK and GTK+ enabled"
 arch=('i686' 'x86_64')
 url="http://ccrma.stanford.edu/software/snd/"
 license=('custom')
-depends=('fam' 'fftw' 'gsl' 'gtk2' 'jack')
+depends=('fam' 'fftw' 'gsl' 'gtk2' 'jack' 'ruby')
 makedepends=('ladspa')
 provides=('snd-ls' 'snd')
 conflicts=('snd-ls' 'snd')
