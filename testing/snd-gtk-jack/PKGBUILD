@@ -5,7 +5,7 @@
 pkgname=snd-gtk-jack
 _pkgname=snd
 pkgver=12
-pkgrel=2
+pkgrel=3
 pkgdesc="A sound editor, with JACK and GTK+ enabled"
 arch=('i686' 'x86_64')
 url="http://ccrma.stanford.edu/software/snd/"
@@ -19,7 +19,18 @@ source=(ftp://ccrma-ftp.stanford.edu/pub/Lisp/$_pkgname-$pkgver.tar.gz)
 build() {
   cd $srcdir/$_pkgname-$pkgver
 
-  ./configure --prefix=/usr --with-gtk --with-jack
+  ./configure --prefix=/usr \
+              --with-x \
+              --with-gtk \
+			  --without-oss \
+  			  --without-pulseaudio \
+  			  --without-portaudio \
+  			  --with-jack \
+  			  --with-ruby \
+  			  --with-ruby-prefix=/usr/bin/ruby \
+  			  --with-fftw \
+  			  --with-doubles \
+  			  --with-ladspa
   make
 }
 
