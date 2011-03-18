@@ -4,45 +4,31 @@
 
 pkgname=snd-gtk-jack
 _pkgname=snd
-pkgver=11.13
-pkgrel=2
+pkgver=12
+pkgrel=1
 pkgdesc="A sound editor, with JACK and GTK+ enabled"
 arch=('i686' 'x86_64')
 url="http://ccrma.stanford.edu/software/snd/"
 license=('custom')
-depends=('fam' 'fftw' 'gsl' 'gtk2' 'jack' 'ruby')
+depends=('fam' 'fftw' 'gsl' 'gtk2' 'jack')
 makedepends=('ladspa')
-provides=('snd-ls' 'snd' 'snd-gtk')
-conflicts=('snd-ls' 'snd' 'snd-gtk')
+provides=('snd-ls' 'snd')
+conflicts=('snd-ls' 'snd')
 source=(ftp://ccrma-ftp.stanford.edu/pub/Lisp/$_pkgname-$pkgver.tar.gz)
-md5sums=('5d8d1958861a3762c992daf0d7190fae')
 
 build() {
-
   cd $srcdir/$_pkgname-$pkgver
 
-  ./configure --prefix=/usr \
-			  --with-x \
-			  --with-gtk \
-			  --without-oss \
-			  --without-pulseaudio \
-			  --without-portaudio \
-			  --with-jack \
-			  --with-ruby \
-			  --with-ruby-prefix=/usr/bin/ruby \
-			  --with-fftw \
-			  --with-doubles \
-			  --with-ladspa
-			  
+  ./configure --prefix=/usr --with-gtk --with-jack
   make
-
 }
 
 package() {
-
   cd $srcdir/$_pkgname-$pkgver
-
+ 
   make prefix=$pkgdir/usr install
   rm -f $pkgdir/usr/share/$_pkgname/*.{fs,rb}
   install -D -m 644 COPYING $pkgdir/usr/share/licenses/$pkgname/LICENSE
 }
+
+md5sums=('605aed1a0135e2e62c597d9000095f7e')
