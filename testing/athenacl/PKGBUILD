@@ -4,7 +4,7 @@
 _realname=athenaCL
 pkgname=athenacl
 pkgver=2.0.0a15
-pkgrel=2
+pkgrel=3
 pkgdesc="The athenaCL system is an open-source, object-oriented musical composition tool written in Python."
 arch=(any)
 url="http://code.google.com/p/athenacl/"
@@ -32,8 +32,15 @@ package() {
 
   cat << EOF >> "$pkgdir/usr/bin/$pkgname"
 #!/bin/bash
-python2 /usr/lib/python2.7/site-packages/athenaCL/athenacl.py
+python2 /usr/lib/python2.7/site-packages/athenaCL/athenacl.py $@
 EOF
 
   chmod +x "$pkgdir/usr/bin/$pkgname"
+  
+  cat << EOF >> "$pkgdir/usr/bin/${pkgname}-idle"
+#!/bin/bash
+python2 /usr/lib/python2.7/site-packages/athenaCL/athenacl.py -s idle
+EOF
+
+  chmod +x "$pkgdir/usr/bin/${pkgname}-idle"
 }

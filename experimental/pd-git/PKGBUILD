@@ -4,8 +4,8 @@
 
 
 pkgname=pd-git
-pkgver=20110112
-pkgrel=2
+pkgver=20110321
+pkgrel=1
 pkgdesc="The Pure Data real-time music and multimedia environment"
 arch=('i686' 'x86_64')
 url="http://crca.ucsd.edu/~msp/software.html"
@@ -13,8 +13,6 @@ license=('BSD' 'GPL')
 depends=('jack' 'tk')
 provides=('pd')
 conflicts=('pd')
-source=()
-md5sums=()
 
 _gitroot="git://pure-data.git.sourceforge.net/gitroot/pure-data/pure-data"
 _gitname="pure-data"
@@ -40,5 +38,10 @@ build() {
   ./autogen.sh
   ./configure --prefix=/usr --enable-alsa --enable-jack
   make
+}
+
+package() {
+  cd "${srcdir}/${_gitname}-build"
+
   make DESTDIR="$pkgdir" install
 }
