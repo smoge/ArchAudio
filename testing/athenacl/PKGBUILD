@@ -1,23 +1,39 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-# Contributor:  Bernardo Barros <bernardobarros@gmail.com>
+# Maintainer : Bernardo Barros <bernardobarros@gmail.com>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
 
-pkgname=athenacl
 _realname=athenaCL
+pkgname=athenacl
 pkgver=2.0.0a15
-pkgrel=1
+pkgrel=2
 pkgdesc="The athenaCL system is an open-source, object-oriented musical composition tool written in Python."
-url="http://code.google.com/p/athenacl/"
 arch=(any)
+url="http://code.google.com/p/athenacl/"
 license=('GPL')
 depends=('python2')
-conflicts=('athenacl-svn')
-options=(!emptydirs)
+options=('!emptydirs')
 source=("http://athenacl.googlecode.com/files/$_realname-$pkgver.tar.gz")
 md5sums=('74845ad12917fb36b76bce8b7b12d3ac')
 
 build() {
-
   cd "$srcdir/$_realname-$pkgver"
-  python2 setup.py install --root=$pkgdir/ --optimize=1
+
+  # python2 fixes
+  sed -i "s|\(^\#\!.*bin/python\).*|\12|g;s|local/||g" \
+         `grep -Erl "bin/python" .`
+}
+
+package() {
+  cd "$srcdir/$_realname-$pkgver"
+
+  python2 setup.py install --root="$pkgdir/" --optimize=1
+
+  # executable
+  mkdir "$pkgdir/usr/bin"
+
+  cat << EOF >> "$pkgdir/usr/bin/$pkgname"
+#!/bin/bash
+python2 /usr/lib/python2.7/site-packages/athenaCL/athenacl.py
+EOF
+
+  chmod +x "$pkgdir/usr/bin/$pkgname"
 }
