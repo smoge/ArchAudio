@@ -46,9 +46,24 @@ build() {
 
   sed -i '/-O3/d' SConstruct
 
-  scons $MAKEFLAGS ARCH="$CFLAGS" PREFIX="/usr" FREESOUND=1 WIIMOTE=1 LIBLO=1 LV2=1 PROGRAM_NAME="Ardour2" AUBIO=1 NLS=1 SURFACES=1 DESTDIR="$pkgdir"
+  scons $MAKEFLAGS \
+  		ARCH="$CFLAGS" \
+  		PREFIX="/usr" \
+  		DIST_LIBDIR="lib" \
+  		SYSLIBS=1 \
+  		FPU_OPTIMIZATION=1 \
+  		FFT_ANALYSIS=1 \
+		FREESOUND=1 \
+		WIIMOTE=1 \
+		LIBLO=1 \
+		LV2=1 \
+		PROGRAM_NAME="Ardour2" \
+		AUBIO=1 \
+		NLS=1 \
+		SURFACES=1 \
+		DESTDIR="$pkgdir"
 
-  scons PREFIX="/usr" FREESOUND=1 WIIMOTE=1 DESTDIR="$pkgdir" install
+  scons PREFIX="/usr" DESTDIR="$pkgdir" install
 
   # freedesktop.org compatibility
   install -Dm644 ${srcdir}/ardour2.desktop $pkgdir/usr/share/applications/$pkgname.desktop
