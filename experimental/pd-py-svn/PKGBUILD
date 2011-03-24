@@ -8,7 +8,7 @@ pkgdesc="Pure Data python library."
 url="http://puredata.info/Members/thomas/py"
 arch=('i686' 'x86_64' 'ppc')
 license=('GPL')
-depends=('pd' 'pd-flext' 'python2')
+depends=('pd' 'pd-flext' 'python2' 'python2-numpy')
 makedepends=('subversion' 'automake')
 conflicts=('pd-extended-svn')
 provides=('pd-py')
@@ -67,34 +67,11 @@ build() {
  
   make
 }
-#  install -d $pkgdir/$_pd_libdir/extra/$_pd_libname
-#  $srcdir/generate-libdir-metafile.sh $pkgdir/$_pd_libdir/extra $_pd_libname \
-#                --author "Thomas Grill <gr@grrrr.org>" \
-#                --license "GNU GPL" \
-#                --description "VASP modular - vector assembling signal processor"
-
-
-#  install -p $_FLEXT_OUTPATH/release-multi/*.pd_linux \
-#                $pkgdir/$_pd_libdir/extra/$_pd_libname \
-#          || echo 'vasp_install: WARNING: no externals to install!'
-
-
-#  install -d $pkgdir/$_pd_libdir/extra/$_pd_libname/help
-
-#  install -p pd-help/*.pd \
-#                $pkgdir/$_pd_libdir/extra/$_pd_libname/help \
-#          || echo 'vasp_install: WARNING: no help to install!'
-
-#  install -d $pkgdir/$_pd_libdir/extra/$_pd_libname/examples
-
-#  install -p pd/*.pd pd/*.aif pd-ex/*.pd \
-#                $pkgdir/$_pd_libdir/extra/$_pd_libname/examples \
-#          || echo 'vasp_install: WARNING: no examples to install!'
-#
-
-#  rm -rf $srcdir/$_svnmod-build
-
 package() {
   cd "$srcdir/$_svnmod-build"
   make DESTDIR="$pkgdir" install
+  $srcdir/generate-libdir-metafile.sh $pkgdir/$_pd_libdir/extra $_pd_libname \
+                --author "Thomas Grill <gr@grrrr.org>" \
+                --license "GNU GPL" \
+                --description "Py/ext python scipting objects"  
 }
