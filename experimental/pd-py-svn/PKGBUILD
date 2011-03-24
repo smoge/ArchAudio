@@ -1,0 +1,98 @@
+# $Id: pkgbuild-mode.el,v 1.23 2007/10/20 16:02:14 juergen Exp $
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: dmotd <inaudible@simplesuperlativ.es>
+pkgname=pd-py-svn
+pkgver=3745
+pkgrel=1
+pkgdesc="Pure Data python library."
+url="http://puredata.info/Members/thomas/py"
+arch=('i686' 'x86_64' 'ppc')
+license=('GPL')
+depends=('pd' 'pd-flext')
+makedepends=('subversion' 'automake')
+conflicts=('pd-extended-svn')
+provides=('pd-py')
+replaces=()
+backup=()
+options=('!makeflags')
+source=('generate-libdir-metafile.sh')
+md5sums=('607a306d6ddcb4a0b772ec95f5f8c51a')
+install=('pd-py.install')
+
+# MAIN SVN TRUNK
+_svntrunk=https://svn.grrrr.org/ext/trunk/py
+_svnmod=pd-py
+_pd_libdir=/usr/lib/pd
+_pd_include=/usr/include/pd
+_pd_libname=py
+
+build() {
+ 
+  msg "Begin SVN checkout"
+  cd $srcdir
+#  if [ -d $_svnmod/.svn ]; then
+#    (cd $_svnmod && svn up)
+#  else
+#    (svn co $_svntrunk --config-dir ./ -r $pkgver $_svnmod )
+#  fi
+
+  msg "SVN checkout done or server timeout"
+
+  msg "Starting make..."
+
+
+  if [ -d $srcdir/$_svnmod-build ]; then
+    (echo "Remove old build dir" && rm -rf $srcdir/$_svnmod-build)
+  fi
+
+  cd $srcdir  
+  cp -r $_svnmod $_svnmod-build 
+  cd $srcdir/$_svnmod-build   
+
+  export PYTHON=python2
+
+  ./bootstrap.sh
+
+  ./configure --prefix=/usr \
+    --enable-flext-host=pd \
+    --with-pd-headers=/usr/include/pd \
+    --with-flext-headers=/usr/include/flext \
+    --with-flext-libs=/usr/lib \
+    --with-pd-libdir=/usr/lib/pd/extra \
+    --enable-gil \
+    --enable-inofficial \
+    --with-pic
+ 
+  make
+}
+#  install -d $pkgdir/$_pd_libdir/extra/$_pd_libname
+#  $srcdir/generate-libdir-metafile.sh $pkgdir/$_pd_libdir/extra $_pd_libname \
+#                --author "Thomas Grill <gr@grrrr.org>" \
+#                --license "GNU GPL" \
+#                --description "VASP modular - vector assembling signal processor"
+
+
+#  install -p $_FLEXT_OUTPATH/release-multi/*.pd_linux \
+#                $pkgdir/$_pd_libdir/extra/$_pd_libname \
+#          || echo 'vasp_install: WARNING: no externals to install!'
+
+
+#  install -d $pkgdir/$_pd_libdir/extra/$_pd_libname/help
+
+#  install -p pd-help/*.pd \
+#                $pkgdir/$_pd_libdir/extra/$_pd_libname/help \
+#          || echo 'vasp_install: WARNING: no help to install!'
+
+#  install -d $pkgdir/$_pd_libdir/extra/$_pd_libname/examples
+
+#  install -p pd/*.pd pd/*.aif pd-ex/*.pd \
+#                $pkgdir/$_pd_libdir/extra/$_pd_libname/examples \
+#          || echo 'vasp_install: WARNING: no examples to install!'
+#
+
+#  rm -rf $srcdir/$_svnmod-build
+
+package() {
+  cd "$srcdir/$_svnmod-build"
+  make DESTDIR="$pkgdir" install
+}

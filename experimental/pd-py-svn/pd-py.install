@@ -1,0 +1,9 @@
+post_install()
+{
+echo "NOTICE: Remember to add '/usr/lib/pd/extra/py' to your Path settings and 'py' to your Starup settings within pd to activate this library"
+}
+
+post_upgrade()
+{
+echo "NOTICE: Remember to add '/usr/lib/pd/extra/py' to your Path settings and 'py' to your Starup settings within pd to activate this library"
+}

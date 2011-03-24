@@ -1,0 +1,490 @@
+Index: bootstrap.sh
+===================================================================
+--- bootstrap.sh	(revision 0)
++++ bootstrap.sh	(revision 0)
+@@ -0,0 +1,20 @@
++#! /bin/sh
++
++(
++    (
++        (
++            test -x "$(which libtoolize)" && libtoolize --force
++        ) ||
++        (
++            # MacOS has no libtoolize... use glibtoolize instead
++            test -x "$(which glibtoolize)" && glibtoolize --force
++        )
++    ) &&
++    aclocal &&
++    automake --foreign --add-missing &&
++    autoconf
++) ||
++(
++    echo Bootstrapping failed
++    false
++)
+
+Property changes on: bootstrap.sh
+___________________________________________________________________
+Added: svn:executable
+   + *
+
+Index: source/Makefile.am
+===================================================================
+--- source/Makefile.am	(revision 0)
++++ source/Makefile.am	(revision 0)
+@@ -0,0 +1,32 @@
++#
++# automake template
++#
++
++# shared library to be built
++if HAS_PD
++pdlibdir = @pd_libdir@/@PACKAGE_NAME@
++pdlib_LTLIBRARIES = @PACKAGE_NAME@.la
++else
++maxlibdir = @max-libdir@/@PACKAGE_NAME@
++maxlib_LTLIBRARIES = @PACKAGE_NAME@.la
++endif
++
++# sort out libtool cruft
++install-data-hook: 
++	@echo Above 'libtool --finish' warning can safely be ignored...
++	@echo Removing libtool .la archive...
++if HAS_PD
++	rm -f $(DESTDIR)$(pdlibdir)/@PACKAGE_NAME@.la
++else
++	rm -f $(DESTDIR)$(maxlibdir)/@PACKAGE_NAME@.la
++endif
++
++@PACKAGE_NAME@_la_SOURCES = bound.cpp clmeth.cpp main.cpp main.h modmeth.cpp pyargs.cpp pyatom.cpp pyatom.h pybase.cpp pybase.h pybuffer.cpp pybuffer.h pybundle.cpp pybundle.h py.cpp pydsp.cpp pyext.cpp pyext.h pymeth.cpp pyprefix.h pysymbol.cpp pysymbol.h register.cpp 
++
++@PACKAGE_NAME@_la_CXXFLAGS = @EXT_CFLAGS@ $(patsubst %,-I%,@INCLUDEDIRS@) 
++
++# -module allows to avoid lib prefix for libraries
++# -shrext sets shared library extension as given by @EXTENSION@
++# -avoid-version avoids the creation of symlinks to versions of a shared library
++@PACKAGE_NAME@_la_LDFLAGS = @EXT_LDFLAGS@ -no-undefined -module -shrext @EXTENSION@ -avoid-version $(patsubst %,-L%,@LIBDIRS@) $(patsubst %,-l%,@libs@) $(patsubst %,-framework %,@FRAMEWORKS@) 
++#@PACKAGE_NAME@_la_LIBADD = @libs@ 
+
+Property changes on: source/Makefile.am
+___________________________________________________________________
+Added: svn:executable
+   + *
+
+Index: configure.ac
+===================================================================
+--- configure.ac	(revision 0)
++++ configure.ac	(revision 0)
+@@ -0,0 +1,381 @@
++AC_INIT([py],[0.2.1],[gr@grrrr.org])
++
++###########################################################
++
++AM_INIT_AUTOMAKE
++AC_SUBST(FLEXTHOST)
++AC_SUBST(INCLUDEDIRS)
++AC_SUBST(LIBDIRS)
++AC_SUBST(libs)
++AC_SUBST(FRAMEWORKS)
++AC_SUBST(EXT_CFLAGS)
++AC_SUBST(EXT_LDFLAGS)
++AC_SUBST(EXTENSION)
++AC_SUBST(pd_libdir)
++AC_SUBST(max_initdir)
++AC_SUBST(max_helpdir)
++AC_SUBST(max_libdir)
++
++# libtool
++LT_INIT([disable-static win32-dll])
++#AC_PROG_LIBTOOL #deprecated, using LT_INIT as replacement
++# needed to build win32 dlls
++#AC_LIBTOOL_WIN32_DLL #deprecated using win32_dll in LT_INIT
++
++
++
++# configure options
++AC_PRESERVE_HELP_ORDER
++AC_ARG_ENABLE(flext-host,
++	AC_HELP_STRING(--enable-flext-host,[host environment for flext [default=pd]]),
++    [FLEXTHOST=$enableval],
++	[FLEXTHOST=pd]
++)
++
++if test $FLEXTHOST == pd; then
++	AC_ARG_WITH(pd-headers,
++    AC_HELP_STRING(--with-pd-headers,[path to pd headers]),
++      [pd_headers=$withval],
++		AC_MSG_ERROR([path to pd headers is required])
++	)
++	AC_ARG_WITH(pd-libdir,
++    AC_HELP_STRING(--with-pd-libdir,[pd external install search path [typically PDPATH/extra]]),
++      [pd_libdir=$withval],
++		AC_MSG_ERROR([pd external install path is required])
++	)
++
++elif test $FLEXTHOST == max; then
++	AC_ARG_WITH(max-headers,
++    AC_HELP_STRING(--with-max-headers,[path to max SDK headers]),
++      [max_headers=$withval],
++		AC_MSG_ERROR([path to max headers is required])
++	)
++	AC_ARG_WITH(max-initdir,
++    AC_HELP_STRING(--with-max-initdir,[install path for max init files]),
++      [max_initdir=$withval],
++		AC_MSG_ERROR([install path for max init is required])
++	)
++	AC_ARG_WITH(max-helpdir,
++    AC_HELP_STRING(--with-max-helpdir,[install path for max help files]),
++      [max_helpdir=$withval],
++		AC_MSG_ERROR([install path for max help is required])
++	)
++	AC_ARG_WITH(max-libdir,
++    AC_HELP_STRING(--with-max-libdir,[install path for max objects and libraries]),
++      [max_libdir=$withval],
++		AC_MSG_ERROR([install path for max ibraries is required])
++	)
++fi
++
++AC_ARG_WITH(flext-headers,
++	AC_HELP_STRING(--with-flext-headers,[path to the flext headers [default=PREFIX/include/flext]]),
++    [flext_headers=$withval],
++	[flext_headers="$PREFIX/include/flext"]
++)
++
++AC_ARG_WITH(flext-libs,
++	AC_HELP_STRING(--with-flext-libs,[path to the flext libraries [default=PREFIX/lib]]),
++    [flext_libs=$withval],
++	[flext_libs="$PREFIX/lib"]
++)
++
++AC_ARG_WITH(numarray-headers,
++	AC_HELP_STRING(--with-numarray-headers,[path to the numarray headers]),
++    [numarray_headers=$withval],
++	[numarray_headers=""]
++)
++
++AC_ARG_WITH(numeric-headers,
++	AC_HELP_STRING(--with-numeric-headers,[path to the numeric headers]),
++    [numeric_headers=$withval],
++	[numeric_headers=""]
++)
++AC_ARG_WITH(numpy-headers,
++	AC_HELP_STRING(--with-numpy-headers,[path to the numpy headers]),
++    [numpy_headers=$withval],
++	[numpy_headers=""]
++)
++
++AC_ARG_ENABLE(gil,
++	AC_HELP_STRING(--enable-gil,[use thread-safe GIL functionality [for >= python2.3] [default=no]]),
++	[gil=$enableval],
++	[gil=no]
++)
++
++AC_ARG_ENABLE(inofficial,
++	AC_HELP_STRING(--enable-inofficial,[use inofficial pure data functionality [default=no]]),
++	[inofficial=$enableval],
++	[inofficial=no]
++)
++
++AC_ARG_ENABLE(dynamic,
++	AC_HELP_STRING(--enable-dynamic,[link dynamically to flext [default=no]]),
++	[dynamic=$enableval],
++	[dynamic=no]
++)
++
++AC_ARG_ENABLE(debug, 
++	AC_HELP_STRING(--enable-debug,[enables debug build [default=no]]),
++    [debug=$enableval],
++    [debug=no]
++)
++threads_default=no
++
++AC_ARG_ENABLE(threads, 
++	AC_HELP_STRING(--enable-threads,[enables threaded build [default=no]]),
++    [threads=$enableval],
++    [threads=$threads_default],
++)
++
++AC_ARG_ENABLE(optimize,
++ 	AC_HELP_STRING(--enable-optimize,[enables optimized builds for: pentium4, pentium3, G4, G5, etc.]),
++    [optimize=$enableval]
++)
++
++# if CFLAGS aren't set by the user, set them to an empty string
++# otherwise AC_PROG_CC sets them to "-O2 -g" 
++test ".$CFLAGS" = "." && CFLAGS=" "
++test ".$CXXFLAGS" = "." && CXXFLAGS=" "
++
++
++
++# Checks for programs.
++AC_PROG_CC
++AC_PROG_CXX
++AC_PROG_INSTALL
++AC_PROG_MAKE_SET
++AC_PROG_AWK
++
++# Language use for checks
++AC_LANG(C++)
++AM_PATH_PYTHON(,, [:])
++AM_CONDITIONAL([HAVE_PYTHON], [test "$PYTHON" != :])
++
++dnl @synopsis AC_PYTHON_MODULE(modname[, fatal])
++dnl
++dnl Checks for Python module.
++dnl
++dnl If fatal is non-empty then absence of a module will trigger an
++dnl error.
++dnl
++dnl @category InstalledPackages
++dnl @author Andrew Collier <colliera@nu.ac.za>.
++dnl @version 2004-07-14
++dnl @license AllPermissive
++AC_DEFUN([AC_PYTHON_MODULE],[
++        AC_MSG_CHECKING(python module: $1)
++        $PYTHON -c "import $1" 2>/dev/null
++        if test $? -eq 0;
++        then
++                AC_MSG_RESULT(yes)
++                ac_python_module_$1=yes
++        else
++                AC_MSG_RESULT(no)
++                ac_python_module_$1=no
++                #
++                if test -n "$2"
++                then
++                        AC_MSG_ERROR(failed to find required module $1)
++                        exit 1
++                fi
++        fi
++])
++if test "$PYTHON" != : ; then
++	INCLUDEDIRS="$INCLUDEDIRS /usr/include/python$PYTHON_VERSION"
++	libs="$libs python$PYTHON_VERSION"
++	AC_DEFINE(PY_EXPORTS)
++	AC_PYTHON_MODULE(numpy)
++	AC_PYTHON_MODULE(Numeric)
++	AC_PYTHON_MODULE(numarray)
++	if test ".$ac_python_module_numpy" == ".yes"; then
++		if test ".$numpy_headers" == "."; then
++			AC_MSG_NOTICE(numpy headers not defined... asking python...)
++			py_numpy_inc=`$PYTHON -c "import sys, numpy as np;sys.stdout.write(np.get_include())"`
++		else
++			py_numpy_inc="$numarray_headers"
++		fi
++		AC_CHECK_FILE("$py_numpy_inc/numpy/arrayobject.h",
++			AC_MSG_NOTICE(numpy headers found... compiling buffer support...)
++			INCLUDEDIRS="$INCLUDEDIRS $py_numpy_inc"
++			AC_DEFINE(PY_NUMPY),
++			AC_MSG_ERROR(numpy module found but headers not located. please specify using --with-numpy-headers)
++		)
++	elif test ".$ac_python_module_Numeric" == ".yes"; then
++		AC_MSG_WARN(numeric support seems to be broken at present... disabled)
++		#AC_DEFINE(PY_NUMERIC)
++	elif test ".$ac_python_module_numarray" == ".yes"; then
++		if test $(uname -s) == Darwin; then
++			numarray_include="Python/numarray/arrayobject.h"
++		else
++			numarray_include="numarray/arrayobject.h"
++		fi
++		if test ".$numarray_headers" == "."; then
++			AC_MSG_NOTICE(numarray headers not defined... guessing...)
++			py_numarray_inc="/usr/include/python$PYTHON_VERSION"
++		else
++			py_numarray_inc="$numarray_headers"
++		fi
++		AC_CHECK_FILE("$py_numarray_inc/$numarray_include",
++			AC_MSG_NOTICE(numarray headers found... compiling buffer support...)
++			INCLUDEDIRS="$INCLUDEDIRS $py_numarray_inc"
++			AC_DEFINE(PY_NUMARRAY),
++			AC_MSG_ERROR(path to $numarray_include not found... specify --with-numarray-headers)
++		)
++	else
++		AC_MSG_WARN(no buffer support found... install numpy/numarray/numeric if needed)
++	fi
++fi
++
++
++# Checks for typedefs, structures, and compiler characteristics.
++AC_C_CONST
++AC_C_INLINE
++AC_TYPE_SIZE_T
++AC_STRUCT_TM
++
++# Checks for libraries.
++
++INCLUDEDIRS="$INCLUDEDIRS $flext_headers"
++LIBDIRS="$LIBDIRS $flext_libs"
++
++if test $FLEXTHOST == pd; then
++
++	AC_DEFINE(FLEXT_SYS,2)
++# check for g_canvas.h in pd folder
++	AC_CHECK_FILE([$pd_headers/g_canvas.h],,AC_MSG_ERROR([Cannot find $pd_headers/g_canvas.h]))
++	INCLUDEDIRS="$INCLUDEDIRS $pd_headers"
++	#libs="$libs pd"
++	
++	if test $(uname -s) == Linux; then
++		EXTENSION=.pd_linux
++	elif test $(uname -s) == Darwin; then
++		EXT_LDFLAGS="-flat_namespace -undefined suppress"
++		EXTENSION=.pd_darwin
++    elif ( test $(uname -s) == CYGWIN_NT-5.0 ) || ( test $(uname -s) == CYGWIN_NT-5.1 ) || ( test $(uname -s) == MINGW32_NT-5.1 ) ; then
++		EXTENSION=.dll
++		AC_DEFINE(NT)
++	fi
++	
++elif test $FLEXTHOST == max; then
++	AC_DEFINE(FLEXT_SYS,1)
++# check for MaxAPI.h in pd folder
++	AC_CHECK_FILE([$max_headers/max-includes/MaxAPI.h],,AC_MSG_ERROR([Cannot find $flexthostdir/max-includes/MaxAPI.h]))
++	AC_CHECK_FILE([$max_headers/max-includes/MaxAudioAPI.h],,AC_MSG_ERROR([Cannot find $flexthostdir/max-includes/MaxAudioAPI.h]))
++	INCLUDEDIRS="$INCLUDEDIRS $max_headers/max-includes $max_headers/msp-includes"
++
++else
++	AC_MSG_ERROR([system must be pd or max])
++fi
++
++# for separate doc install procedures in automake
++AM_CONDITIONAL(HAS_PD, test x$FLEXTHOST = xpd)
++
++
++if test ".$dynamic" == ".yes"; then
++	AC_DEFINE(FLEXT_SHARED)
++	LIBNAME=flext-${FLEXTHOST}
++	if test ".$debug" == ".yes"; then
++		LIBNAME=${LIBNAME}_d
++	fi
++else
++	LIBNAME=flext-${FLEXTHOST}_
++	if test ".$threaded" == ".yes"; then
++		AC_DEFINE(FLEXT_THREADS)
++		LIBNAME=${LIBNAME}t
++	else
++		LIBNAME=${LIBNAME}s
++	fi
++	if test ".$debug" == ".yes"; then
++		LIBNAME=${LIBNAME}d
++	fi
++fi
++
++libs="$libs $LIBNAME"
++
++
++# Checks are complicated because flext references symbols from pd or Max
++#AC_CHECK_LIB([$LIBNAME],
++#	buf_class, # check for variable "buf_class""
++#	true,
++#	AC_MSG_ERROR([cannot find flext library $flext_libs/$LIBNAME])
++#)
++# test for existence of library file
++AC_MSG_CHECKING([for $flext_libs/lib$LIBNAME.*])
++if test ".$(ls $flext_libs/lib$LIBNAME.*)" == "."; then
++	AC_MSG_ERROR([cannot find flext library $flext_libs/$LIBNAME])
++else
++	AC_MSG_RESULT(yes)
++fi
++
++# we ought to check flext header files:
++#AC_CHECK_HEADERS([$flext_headers/flext.h],
++# but we rather check for pure existence since we are dependent on the pd/Max/pthreads etc. headers
++AC_CHECK_FILE([$flext_headers/flext.h],
++	,
++	AC_MSG_ERROR([cannot find $flext_headers/flext.h])
++)
++
++
++if test $(uname -s) == Linux; then
++	true
++elif test $(uname -s) == Darwin; then
++	FRAMEWORKS="$FRAMEWORKS ApplicationServices vecLib"
++elif ( test $(uname -s) == CYGWIN_NT-5.0 ) || ( test $(uname -s) == CYGWIN_NT-5.1 ) || ( test $(uname -s) == MINGW32_NT-5.1 ) ; then
++	EXT_CFLAGS="$EXT_CFLAGS -mms-bitfields -mno-cygwin"
++	EXT_LDFLAGS="$EXT_LDFLAGS -mno-cygwin"
++fi
++
++if test ".$inofficial" == ".yes"; then
++	if test $FLEXTHOST == pd; then
++		AC_MSG_NOTICE(inofficial pure data in use...)
++		AC_DEFINE(PY_USE_INOFFICIAL)
++	fi
++fi
++
++if test ".$gil" == ".yes"; then
++	if test `echo "$PYTHON_VERSION 2.3" | $AWK '{if ($1 >= $2) print "true"}'` == true ; then
++		AC_DEFINE(PY_USE_GIL)
++		AC_MSG_NOTICE(python thread-safe gil support enabled...)
++	else
++		AC_MSG_WARN(thread-safe gil support needs python >= 2.3)
++	fi
++else
++	if test `echo "$PYTHON_VERSION 2.3" | $AWK '{if ($1 >= $2) print "true"}'` == true ; then
++		AC_MSG_WARN(are you sure you do not want thread-safe gil support?)
++	fi
++fi
++
++# set compilation flags
++if test ".$debug" == ".yes"; then
++	AC_DEFINE(FLEXT_DEBUG)
++	EXT_CFLAGS="$EXT_CFLAGS -g"
++else
++	EXT_CFLAGS="$EXT_CFLAGS -O2"
++fi
++
++
++
++if test ".$optimize" == ".yes"; then
++	OPT_FLAGS="$OPT_FLAGS -mtune=$optimize"
++	case $optimize in
++		pentium | pentium2 | athlon | pentium-mmx)
++			EXT_CFLAGS="$EXT_CFLAGS -march=$optimize";;
++		pentium3 | pentium3m | pentium4 | pentium4m | pentium-m | prescott | nocona | athlon-xp | athlon-mp | athlon64 | opteron) 
++			EXT_CFLAGS="$EXT_CFLAGS -march=$optimize -mfpmath=sse";
++			AC_DEFINE(FLEXT_USE_SIMD);;
++		G3)
++			EXT_CFLAGS="$EXT_CFLAGS -mcpu=$optimize";;
++		G5 | G4)
++			EXT_CFLAGS="$EXT_CFLAGS -mcpu=$optimize -faltivec";
++			AC_DEFINE(FLEXT_USE_SIMD);;
++		*)
++			;;
++	esac
++fi
++
++###########################################################
++
++AC_OUTPUT([
++			Makefile
++			source/Makefile
++])
+
+Property changes on: configure.ac
+___________________________________________________________________
+Added: svn:executable
+   + *
+
+Index: Makefile.am
+===================================================================
+--- Makefile.am	(revision 0)
++++ Makefile.am	(revision 0)
+@@ -0,0 +1,19 @@
++#
++# automake template
++#
++
++SUBDIRS = source
++
++pyscript_DATA = scripts/buffer.py scripts/sig.py scripts/simple.py scripts/threads.py scripts/tcltk.py scripts/pak.py scripts/sendrecv.py scripts/script.py
++if HAS_PD
++pdexamples_DATA = pd/sig-2.pd pd/builtins-1.pd pd/sendrecv-2.pd pd/simple-3.pd pd/methods-2.pd pd/methods-1.pd pd/sendrecv-1.pd pd/simple-1.pd pd/pak.pd pd/sig-1.pd pd/script-1.pd pd/tcltk.pd pd/sendrecv-3.pd pd/simple-2.pd pd/buffer-2.pd pd/buffer-1.pd pd/attr-1.pd pd/thread-1.pd
++pdexamplesdir = @pd_libdir@/@PACKAGE_NAME@/examples
++pyscriptdir = @pd_libdir@/@PACKAGE_NAME@
++else
++maxinit_DATA = maxmsp/py-objectmappings.txt 
++maxinitdir = @max-initdir@
++maxhelp_DATA = maxmsp/thread-1.mxb
++maxhelpdir = @max-helpdir@
++pyscriptdir = @max-libdir@/@PACKAGE_NAME@
++endif
++
