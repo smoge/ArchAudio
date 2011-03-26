@@ -2,11 +2,12 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Constibutor: Sean Corbett <seanbutnotheard [near] gmail.com>
 # Contributor: DonVla <donvla@users.sourceforge.net>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=ladspa-caps-plugins
 _pkgname=caps
-pkgver=0.4.4
-pkgrel=2
+pkgver=0.4.5
+pkgrel=1
 pkgdesc="The C* Audio Plugin Suite"
 arch=('i686' 'x86_64')
 url="http://quitte.de/dsp/caps.html"
@@ -18,8 +19,7 @@ groups=('ladspa-plugins')
 depends=('ladspa' 'gcc-libs')
 optdepends=('python2: optional CFLAGS check')
 source=(http://quitte.de/dsp/caps_${pkgver}.tar.gz)
-md5sums=('1f4a8d50257b6cbdaefecc78e3010d27')
-sha256sums=('18f0339ce129cfbb506072687390928fea23f2b11673e43c7ccb1747709a1c8e')
+# http://quitte.de/dsp/caps-0.4.5.pdf
 
 build() {
   cd "${srcdir}/caps-${pkgver}"
@@ -35,3 +35,5 @@ package() {
   install -v -m 0644 -D caps.rdf ${pkgdir}/usr/share/ladspa/rdf/caps.rdf
   install -v -m 0644 -D caps.html ${pkgdir}/usr/share/doc/$pkgname/caps.html
 }
+
+md5sums=('f3fda0eec716202b658cc6075daa35d0')
