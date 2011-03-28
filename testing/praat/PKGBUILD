@@ -2,8 +2,8 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=praat
-pkgver=5.2.17
-filever=5217
+pkgver=5.2.20
+filever=5220
 pkgrel=1
 pkgdesc="a program for sound analysis and synthesis"
 arch=('x86_64' 'i686')
@@ -13,21 +13,22 @@ depends=( 'alsa-lib' 'gtk2' )
 source=("http://www.fon.hum.uva.nl/praat/praat${filever}_sources.tar.gz")
 
 build() {
-  cd "$srcdir/sources_${filever}"
-
-  cp makefiles/makefile.defs.linux.gtk makefile.defs
-
-  sed -i 's|-I|-I/usr/include/gdk-pixbuf-2.0 -I|' makefile.defs
-  sed -i 's|/usr/local/lib|/usr/lib|g' makefile.defs
-  sed -i 's|/usr/local/include|/usr/include|g' makefile.defs
-
-  make
+	cd "$srcdir/sources_5220/"
+	
+	cp makefiles/makefile.defs.linux makefile.defs
+	
+	sed -i 's|-I|-I/usr/include/gdk-pixbuf-2.0 -I|' makefile.defs
+	sed -i 's|/usr/local/lib|/usr/lib|g' makefile.defs
+	sed -i 's|/usr/local/include|/usr/include|g' makefile.defs
+	
+	make
 }
 
 package() {
-  cd "$srcdir/sources_${filever}"
-
-  install -Dm755  praat "$pkgdir/usr/bin/praat"
+	cd "$srcdir/sources_5220/"
+	
+	install -Dm755  praat "$pkgdir/usr/bin/praat"
 }
 
-md5sums=('8a2b9ebdd3b423c38988f6f7731e1be7')
+
+md5sums=('2deb066d40f2ed0d1726bd4dd531ec62')
