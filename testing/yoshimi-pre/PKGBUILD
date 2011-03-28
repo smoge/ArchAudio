@@ -1,0 +1,34 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: svoufff <svoufff at gmail dot com>
+# Contributor: David Adler <david dot jo dot adler at gmail dot com>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+
+pkgname=yoshimi
+pkgver=0.062-pre8
+pkgrel=1
+pkgdesc="Experimental ZynAddSubFX with improved JACK audio & MIDI IO"
+arch=('i686' 'x86_64')
+url="http://www.graggrag.com/?q=node/19"
+license=('GPL')
+depends=('jack' 'fltk' 'fftw-threads')
+makedepends=('cmake' 'boost' 'mxml')
+source=("http://sourceforge.net/projects/${pkgname}/files/experimentals/${pkgname}-${pkgver}.tar.bz2")
+
+build() {
+
+  cd "$srcdir/$pkgname-$pkgver/src"
+  [[ $CARCH == 'i686' ]] && _ARCH_OPT="OFF" || _ARCH_OPT="ON"
+
+  cmake -DCMAKE_INSTALL_PREFIX="$pkgdir/usr" -DBuildForAMD_X86_64=$_ARCH_OPT .
+  make
+}
+
+package() {
+
+  cd "$srcdir/$pkgname-$pkgver/src"
+  make install
+}
+
+md5sums=('ee6860962f0e516c6f689b52a4cbe539')
