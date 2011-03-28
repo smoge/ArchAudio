@@ -3,7 +3,7 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=qtractor-vst-svn
-pkgver=svn
+pkgver=1911
 pkgrel=1
 pkgdesc="Audio/MIDI multitrack sequencer"
 arch=('i686' 'x86_64')
@@ -23,6 +23,6 @@ build() {
 
   make -f Makefile.svn
   ./configure --prefix=/usr --with-vst=/usr/include/vst
-  make || return 1
+  make
   make DESTDIR="$pkgdir" install
 }
