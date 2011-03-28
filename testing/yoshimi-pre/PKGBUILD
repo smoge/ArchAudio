@@ -6,19 +6,22 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=yoshimi
-pkgver=0.062-pre8
+pkgver=0.062_pre8
+_pkgver=0.062-pre8
 pkgrel=1
 pkgdesc="Experimental ZynAddSubFX with improved JACK audio & MIDI IO"
 arch=('i686' 'x86_64')
 url="http://www.graggrag.com/?q=node/19"
 license=('GPL')
+provides=('yoshimi')
+conflicts=('yoshimi')
 depends=('jack' 'fltk' 'fftw-threads')
 makedepends=('cmake' 'boost' 'mxml')
-source=("http://sourceforge.net/projects/${pkgname}/files/experimentals/${pkgname}-${pkgver}.tar.bz2")
+source=(http://sourceforge.net/projects/${pkgname}/files/experimentals/${pkgname}-${_pkgver}.tar.bz2)
 
 build() {
 
-  cd "$srcdir/$pkgname-$pkgver/src"
+  cd "$srcdir/${pkgname}-${_pkgver}/src"
   [[ $CARCH == 'i686' ]] && _ARCH_OPT="OFF" || _ARCH_OPT="ON"
 
   cmake -DCMAKE_INSTALL_PREFIX="$pkgdir/usr" -DBuildForAMD_X86_64=$_ARCH_OPT .
@@ -27,7 +30,7 @@ build() {
 
 package() {
 
-  cd "$srcdir/$pkgname-$pkgver/src"
+	cd "$srcdir/${pkgname}-${_pkgver}/src"
   make install
 }
 
