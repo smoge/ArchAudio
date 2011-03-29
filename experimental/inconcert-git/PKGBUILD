@@ -1,6 +1,6 @@
 # Maintainer: David Adler <david dot jo dot adler at gmail dot com>
 pkgname=inconcert-git
-pkgver=20110211
+pkgver=20110329
 pkgrel=1
 pkgdesc="Live tempo adjustment for the Jack Audio Connection Kit"
 arch=('i686' 'x86_64')

@@ -4,7 +4,7 @@
 
 
 pkgname=pd-git
-pkgver=20110321
+pkgver=20110329
 pkgrel=1
 pkgdesc="The Pure Data real-time music and multimedia environment"
 arch=('i686' 'x86_64')

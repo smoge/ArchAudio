@@ -7,7 +7,7 @@
 # and it has (as the time of writing) just bugfixes in comparison to 0.02
 
 pkgname=python2-pyo-svn
-pkgver=541
+pkgver=569
 pkgrel=1
 pkgdesc="A Python module written in C to help digital signal processing script creation"
 arch=('i686' 'x86_64')

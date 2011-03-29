@@ -1,5 +1,5 @@
 pkgname=lyd-git
-pkgver=20110212
+pkgver=20110329
 pkgrel=1
 pkgdesc="A compact self-contained realtime audio-synthesis engine"
 arch=('i686' 'x86_64')

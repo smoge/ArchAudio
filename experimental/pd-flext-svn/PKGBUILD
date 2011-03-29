@@ -1,7 +1,7 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=pd-flext-svn
-pkgver=3735
+pkgver=3748
 pkgrel=1
 pkgdesc="C++ development layer for Pure Data and Max/MSP"
 arch=('i686' 'x86_64')

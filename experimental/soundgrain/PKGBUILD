@@ -1,7 +1,7 @@
 # Maintainer: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=soundgrain
-pkgver=VERSION
+pkgver=294
 pkgrel=1
 pkgdesc="a graphical interface where users can draw and edit trajectories to control granular sound synthesis modules"
 arch=('any')

@@ -3,7 +3,7 @@
 #Contributor:Andrea Tarocchi <valdar@email.it>
 
 pkgname=cwiid-git
-pkgver=20110213
+pkgver=20110329
 pkgrel=1
 pkgdesc="Cwiid-git is the bleeding edge version of a wiimote's driver and utility tools"
 arch=(i686 x86_64)

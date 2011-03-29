@@ -4,7 +4,7 @@
 # Contributor: christhemonkey <christhemonkey at gmail dot com>
 
 pkgname=raul-svn
-pkgver=2911
+pkgver=3133
 pkgrel=1
 pkgdesc="C++ utility library primarily aimed at audio/music applications"
 url="http://drobilla.net/software/raul/"

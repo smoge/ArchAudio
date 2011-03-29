@@ -1,7 +1,7 @@
 # Maintainer: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=qsynth-svn
-pkgver=361
+pkgver=369
 pkgrel=1
 pkgdesc="a fluidsynth GUI front-end application (C++/Qt4). Eventually it may evolve into a softsynth management application allowing the user to control and manage a variety of command line softsynths."
 arch=('i686' 'x86_64')

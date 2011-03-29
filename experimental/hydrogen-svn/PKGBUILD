@@ -3,7 +3,7 @@
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 
 pkgname=hydrogen-svn
-pkgver=2159
+pkgver=2180
 pkgrel=1
 pkgdesc="Drum Machine and Pattern-based Sequencer"
 arch=('i686' 'x86_64')

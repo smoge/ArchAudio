@@ -2,7 +2,7 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 pkgname=phasex-git
-pkgver=20110106
+pkgver=20110329
 pkgrel=1
 pkgdesc="Synthesizer using phase offset modulation."
 arch=('i686' 'x86_64')

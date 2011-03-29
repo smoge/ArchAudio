@@ -2,7 +2,7 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: svoufff <svoufff at gmail dot com>
 pkgname=gigedit-cvs
-pkgver=20110213
+pkgver=20110329
 pkgrel=1
 pkgdesc="An instrument editor for gigasampler files"
 arch=('i686' 'x86_64')

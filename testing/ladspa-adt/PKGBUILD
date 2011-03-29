@@ -1,7 +1,7 @@
 # Maintainer: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=ladspa-adt
-pkgver=20110216
+pkgver=20110329
 pkgrel=1
 pkgdesc="LADSPA plug-in for emulating the Artificial Double Tracking recording technique "
 arch=('i686' 'x86_64')

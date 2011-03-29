@@ -2,7 +2,7 @@
 # Contributor: Philipp Überbacher <hollunder at gmx dot at>
 
 pkgname=lash-git
-pkgver=20110211
+pkgver=20110329
 pkgrel=1
 pkgdesc="A session management system for Linux audio applications"
 arch=('i686' 'x86_64')

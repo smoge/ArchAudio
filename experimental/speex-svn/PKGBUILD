@@ -1,7 +1,7 @@
 # Contributor: Philipp Gildein <rmbl@openspeak-project.org>
 
 pkgname=speex-svn
-pkgver=17787
+pkgver=17914
 pkgrel=1
 pkgdesc="A free codec for free speech"
 arch=('i686' 'x86_64')

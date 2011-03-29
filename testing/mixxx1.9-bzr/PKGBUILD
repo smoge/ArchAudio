@@ -1,7 +1,7 @@
 # Contributor: Gimmeapill <gimmeapill at gmail dot com>
 
 pkgname=mixxx1.9-bzr
-pkgver=2717
+pkgver=2803
 pkgrel=1
 pkgdesc="Digital DJ mixing software. Branch 1.9 (beta) from bzr with cpu optimization enabled"
 arch=('i686' 'x86_64')

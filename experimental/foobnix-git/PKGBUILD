@@ -1,7 +1,7 @@
 # Maintainer: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=foobnix-git
-pkgver=20110224
+pkgver=20110329
 pkgrel=1
 pkgdesc="Simple and good Music Player written in Python. Works well with JACK."
 arch=('i686' 'x86_64')

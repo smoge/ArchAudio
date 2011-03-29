@@ -4,7 +4,7 @@
 
 pkgname=abjad-svn
 _realname=abjad
-pkgver=4151
+pkgver=4222
 pkgrel=1
 pkgdesc="Abjad: a Python API for Formalized Score Control"
 url="http://code.google.com/p/abjad/"

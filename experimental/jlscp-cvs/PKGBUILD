@@ -2,7 +2,7 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: svoufff <svoufff at gmail dot com>
 pkgname=jlscp-cvs
-pkgver=20110211
+pkgver=20110329
 pkgrel=1
 pkgdesc="A java LinuxSampler control protocol API."
 arch=('i686' 'x86_64')

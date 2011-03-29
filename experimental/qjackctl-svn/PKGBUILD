@@ -3,7 +3,7 @@
 # Contributor:  Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=qjackctl-svn
-pkgver=674
+pkgver=683
 pkgrel=1
 pkgdesc="A Qt front-end for the JACK low-latency audio server"
 arch=('i686' 'x86_64')

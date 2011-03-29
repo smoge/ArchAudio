@@ -3,7 +3,7 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=supercollider-git
-pkgver=20110228
+pkgver=20110329
 pkgrel=1
 pkgdesc="An environment and programming language for real time audio synthesis and algorithmic composition."
 url="http://supercollider.sourceforge.net/"

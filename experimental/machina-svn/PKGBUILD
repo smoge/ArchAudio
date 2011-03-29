@@ -1,7 +1,7 @@
 # Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=machina-svn
-pkgver=2824
+pkgver=3133
 pkgrel=1
 pkgdesc="A polyphonic MIDI sequencer based on Finite State Automata"
 arch=(i686 x86_64)

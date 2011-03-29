@@ -3,7 +3,7 @@
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 
 pkgname=ladspa-njl-plugins-git
-pkgver=20110211
+pkgver=20110329
 pkgrel=1
 pkgdesc="LADSPA plugins for noise and experimental effects."
 arch=('i686' 'x86_64')
