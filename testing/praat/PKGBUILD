@@ -2,8 +2,8 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=praat
-pkgver=5.2.20
-filever=5220
+pkgver=5.2.21
+filever=5221
 pkgrel=1
 pkgdesc="a program for sound analysis and synthesis"
 arch=('x86_64' 'i686')
@@ -13,7 +13,7 @@ depends=( 'alsa-lib' 'gtk2' )
 source=("http://www.fon.hum.uva.nl/praat/praat${filever}_sources.tar.gz")
 
 build() {
-	cd "$srcdir/sources_5220/"
+	cd "$srcdir/sources_5221/"
 	
 	cp makefiles/makefile.defs.linux makefile.defs
 	
@@ -25,10 +25,9 @@ build() {
 }
 
 package() {
-	cd "$srcdir/sources_5220/"
+	cd "$srcdir/sources_5221/"
 	
 	install -Dm755  praat "$pkgdir/usr/bin/praat"
 }
 
-
-md5sums=('2deb066d40f2ed0d1726bd4dd531ec62')
+md5sums=('2a1c369c8d3f1d5c4a4fb986592e4def')
