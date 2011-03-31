@@ -2,8 +2,8 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
+pkgname=pd-purepd
 pdname=purepd
-pkgname=pd-$pdname
 pkgver=0.1.1
 pkgrel=2
 pkgdesc="External for PureData"

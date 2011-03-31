@@ -2,8 +2,8 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
+pkgname=pd-ext13
 pdname=ext13
-pkgname=pd-$pdname
 pkgver=0.17.1
 pkgrel=2
 pkgdesc="Externals for PureData"

@@ -14,11 +14,13 @@ source=(http://puredata.info/community/projects/software/zexy/releases/$pkgver/z
 md5sums=('13176a02449c5e64aa09915199c46961')
 
 build() {
-
-  cd $startdir/src/zexy-$pkgver/src
+  cd $srcdir/zexy-$pkgver/src
   autoconf
   ./bootstrap.sh
   ./configure --prefix=/usr
   make
-  make DESTDIR=$startdir/pkg install
+}
+package () {
+	cd $srcdir/zexy-$pkgver/src
+	make DESTDIR=$startdir/pkg install
 }

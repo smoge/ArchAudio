@@ -16,7 +16,7 @@ build() {
   # replace Makefile:
   cd $srcdir/cyclone-$pkgver
   mv Makefile Makefile.old
-
+  #cp ${srcdir}/Makefile .
   # buid:
   make
 }

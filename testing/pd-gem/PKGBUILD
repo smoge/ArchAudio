@@ -17,11 +17,16 @@ md5sums=('d1dcea1d7adeab824648d0b3e069c064')
 
 build() {
 
-  cd ${startdir}/src/${_pkgname}-${_pkgver}/src
+  cd ${srcdir}/${_pkgname}-${_pkgver}/src
   autoconf
   ./configure --prefix=/usr --without-ffmpeg
   make
+}
+
+package() {
+	cd ${srcdir}/${_pkgname}-${_pkgver}/src
+	
   make DESTDIR=$startdir/pkg install
-  chmod a+x $startdir/pkg/usr/lib/pd/doc/$_pkgname/examples{,/*}
-  chmod a+r -R $startdir/pkg/usr/lib/pd/doc/$_pkgname/examples
+  chmod a+x $pkgdir/usr/lib/pd/doc/$_pkgname/examples{,/*}
+  chmod a+r -R $pkgdir/usr/lib/pd/doc/$_pkgname/examples
 }

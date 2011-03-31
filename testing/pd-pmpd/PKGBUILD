@@ -4,8 +4,8 @@
 
 # need work
 
+pkgname=pd-pmpd
 pdname=pmpd
-pkgname=pd-$pdname
 pkgver=0.9
 pkgrel=3
 pkgdesc="Physical Modelling PureData"

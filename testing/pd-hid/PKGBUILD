@@ -2,8 +2,8 @@
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
+pkgname=pd-hid
 pdname=hid
-pkgname=pd-$pdname
 pkgver=0.7
 pkgrel=2
 pkgdesc="An extension library for Pure Data, providing video and other media processing functionality."
