@@ -1,34 +1,48 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-# Contributor: hm_b < holger <at> music-nerds.net >
+# Maintainer : SpepS <dreamspepser at yahoo dot it>
+# Contributor:  <farid at archlinux-br.org>
 
 pkgname=supercollider
-pkgver=3.4.2rc2
+pkgver=3.4.2
 pkgrel=1
 pkgdesc="An environment and programming language for real time audio synthesis and algorithmic composition"
+arch=('i686' 'x86_64')
 url="http://supercollider.sourceforge.net/"
 license=('GPL')
-depends=('jack' 'avahi' 'fftw')
-arch=('i686' 'x86_64')
-makedepends=('libsndfile>=1.0' 'jack' 'emacs' 'vim' 'gedit' 'icu' 'gcc>=3.0' 'pkgconfig>=0.14.0' 'scons>=0.96' 'alsa-lib' 'cwiid' 'readline')
-optdepends=(
-  'emacs: Emacs Interface'
-  'vim: Vim Interface'
-  'gedit: GEdit Interface'
-  'subversion: Quarks support'
-  'swingosc: swing cross-platform GUI'
-  'supercollider-with-extras: replace supercollider by this package for all the extra goodies'
-)
-
-source=(http://downloads.sourceforge.net/supercollider/3.4.2/SuperCollider-$pkgver-Source-linux.tar.gz)
-md5sums=('ce8072fed7e4bbbd58a04f8b9829b5bd')
+depends=('jack' 'avahi' 'fftw' 'icu')
+makedepends=('scons' 'vim' 'emacs' 'ruby')
+optdepends=('emacs: emacs interface'
+            'gedit: gedit interface'
+            'vim: vim interface'
+            'ruby: vim support'
+            'unhtml: vim support')
+install="$pkgname.install"
+source=("http://downloads.sourceforge.net/project/$pkgname/Source/$pkgver/SuperCollider-$pkgver-Source-linux.tar.gz")
+md5sums=('aa37f3a2d34ed9b4dfffc0c042c00aef')
 
 build() {
+  cd "$srcdir/SuperCollider-Source/common"
 
-  cd $srcdir/SuperCollider-Source/common
+  # Fix sclangpipe_app path in scvimrc
+  sed -i "s|local/||" ../editors/scvim/scvimrc
 
-	# READLINE=yes should work, right..?
-  scons PREFIX=/usr DEVELOPMENT=yes X11=yes SCEL=yes SCED=yes LID=yes WII=yes READLINE=no
-  scons DESTDIR=$pkgdir/ install
-  scons -C ../editors/scvim PREFIX=$pkgdir/usr VIMFILE_DIR=/usr/share/vim/addons install-system
+  # Stripping Debian related code
+  sed -i "34,52d" ../editors/scvim/bin/scvim
+
+  # utf-8 encoding fix for ruby 1.9
+  sed -i "s|ruby|& -Kn|" ../editors/scvim/bin/scvim_make_help
+
+  scons PREFIX=/usr X11=yes SCEL=yes SCED=yes LID=yes READLINE=no
+}
+
+package() {
+  cd "$srcdir/SuperCollider-Source/common"
+
+  scons DESTDIR="$pkgdir" install
+
+  # Installing vim files
+  scons -C ../editors/scvim PREFIX="$pkgdir/usr" VIMFILE_DIR=/usr/share/vim/addons install-system
+
+  install -d "$pkgdir/usr/share/vim/vimfiles"
+  cp -a ../editors/scvim/{extra,ftplugin,indent,syntax} \
+    "$pkgdir/usr/share/vim/vimfiles"
 }
