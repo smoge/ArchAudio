@@ -3,7 +3,7 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=supercollider-git
-pkgver=20110329
+pkgver=20110405
 pkgrel=1
 pkgdesc="An environment and programming language for real time audio synthesis and algorithmic composition."
 url="http://supercollider.sourceforge.net/"
@@ -42,7 +42,7 @@ build() {
   git submodule init && git submodule update
   cd ..
 
-  rm -rf $srcdir/$_gitname2-build
+  rm -rf $_gitname-build
   cp -r $_gitname $_gitname-build
   cd $_gitname-build/
 
