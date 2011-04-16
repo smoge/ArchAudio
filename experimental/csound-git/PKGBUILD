@@ -23,7 +23,7 @@ install=${pkgname}.install
     #_gccOptions="-O2 -march=x86-64 -mtune=generic -pipe" ;;
 #esac
 
-_gccOptions="-O2 -march=native -mtune=native -pipe" ;;
+_gccOptions="-O2 -march=native -mtune=native -pipe"
 
 _gitroot="git://csound.git.sourceforge.net/gitroot/csound/csound5"
 _gitname="csound"
