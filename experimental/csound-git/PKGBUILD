@@ -16,12 +16,14 @@ provides=('csound5' 'csound')
 conflicts=('csound' 'csound5-cvs')
 install=${pkgname}.install
 
-case $CARCH in
-  'i686')
-    _gccOptions="-O2 -march=i686 -mtune=generic -pipe" ;;
-  'x86_64')
-    _gccOptions="-O2 -march=x86-64 -mtune=generic -pipe" ;;
-esac
+#case $CARCH in
+  #'i686')
+    #_gccOptions="-O2 -march=i686 -mtune=generic -pipe" ;;
+  #'x86_64')
+    #_gccOptions="-O2 -march=x86-64 -mtune=generic -pipe" ;;
+#esac
+
+_gccOptions="-O2 -march=native -mtune=native -pipe" ;;
 
 _gitroot="git://csound.git.sourceforge.net/gitroot/csound/csound5"
 _gitname="csound"
