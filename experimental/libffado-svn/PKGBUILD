@@ -12,7 +12,7 @@ depends=('libiec61883' 'libavc1394' 'libxml++' 'dbus' 'alsa-lib' 'libsigc++' 'ja
 makedepends=('scons' 'python2-qt' 'subversion' 'libconfig')
 optdepends=('python2-qt: FFADO Mixer applet'
             'libconfig: ffado-test')
-provides=('ffado')
+provides=('ffado' 'libffado')
 conflicts=('ffado' 'ffado-svn' 'libffado-svn')
 replaces=('libffado-svn')
 
