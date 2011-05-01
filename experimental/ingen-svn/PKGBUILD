@@ -1,7 +1,7 @@
 # Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=ingen-svn
-pkgver=3133
+pkgver=3244
 pkgrel=1
 pkgdesc="A modular audio processing system for GNU/Linux audio systems using the Jack audio server and LV2 or LADSPA plugins."
 arch=(i686 x86_64)

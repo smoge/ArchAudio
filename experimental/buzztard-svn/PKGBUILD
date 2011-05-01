@@ -2,7 +2,7 @@
 
 _pkg=buzztard
 pkgname=$_pkg-svn
-pkgver=3320
+pkgver=3348
 pkgrel=1
 pkgdesc="A modular, free, open source music studio that is conceptually based on Buzz."
 arch=('i686' 'x86_64')

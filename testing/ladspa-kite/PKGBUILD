@@ -1,7 +1,7 @@
 # Maintainer: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=ladspa-kite
-pkgver=20110329
+pkgver=20110430
 pkgrel=1
 pkgdesc="A LADSPA plugin that randomly cuts up the sound, and reorders the pieces--some of them randomly reversed as well."
 arch=('i686' 'x86_64')

@@ -2,7 +2,7 @@
 # Author: Thorben Hohn
 
 pkgname=libflashsupport-jack
-pkgver=20110329
+pkgver=20110430
 pkgrel=1
 pkgdesc="JACK-audio-connection-kit support for Flash"
 arch=('i686' 'x86_64')

@@ -1,6 +1,6 @@
 
 pkgname=jack-stdout-git
-pkgver=20110331
+pkgver=20110430
 pkgrel=1
 pkgdesc="a small tool that writes JACK audio-sample data to buffered standard output. jack-stdin reads raw audio data from standard-input and writes it to a JACK audio port."
 arch=('i686' 'x86_64')

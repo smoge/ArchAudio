@@ -4,7 +4,7 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=fluidsynth-svn
-pkgver=416
+pkgver=419
 pkgrel=1
 pkgdesc="A real-time software synthesizer based on the SoundFont 2 specifications"
 arch=(i686 x86_64)

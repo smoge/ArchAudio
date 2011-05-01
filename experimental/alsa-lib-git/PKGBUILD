@@ -2,7 +2,7 @@
 # based on alsa-lib
 
 pkgname=alsa-lib-git
-pkgver=20110329
+pkgver=20110430
 pkgrel=1
 pkgdesc="An alternative implementation of Linux sound support - GIT version"
 arch=('i686' 'x86_64')

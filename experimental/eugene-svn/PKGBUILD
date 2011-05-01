@@ -1,7 +1,7 @@
 # Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=eugene-svn
-pkgver=3133
+pkgver=3215
 pkgrel=1
 pkgdesc="A basic (fast, parallel) Genetic Algorithm implementation in C++"
 arch=(i686 x86_64)

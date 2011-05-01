@@ -7,7 +7,7 @@
 # Contributor: Robert Emil Berge <filoktetes@linuxophic.org>
 
 pkgname=lilypond-devel
-pkgver=2.13.48
+pkgver=2.13.60
 pkgrel=1
 pkgdesc="An automated music engraving system (delevopment branch)."
 arch=('i686' 'x86_64')
@@ -42,3 +42,5 @@ package() {
   
   make DESTDIR="$pkgdir" install
 }
+md5sums=('e28c10393374c9c2873121d9d85cdc87'
+         '5ed7c132b75140bc7e2d208a5799079a')

@@ -3,7 +3,7 @@
 # Contributor: Philipp Überbacher <murks at lavabit dot com>
 
 pkgname=calf-git
-pkgver=20110329
+pkgver=20110430
 pkgrel=1
 pkgdesc="LV2/DSSI/JACK/LADSPA audio plug-ins for musicians"
 arch=('i686' 'x86_64')

@@ -3,7 +3,7 @@
 # Contributor: svoufff <svoufff at gmail dot com>
 # Contributor: Maciej Ciemborowicz <moonkey@op.pl>
 pkgname=liblscp-cvs
-pkgver=20110329
+pkgver=20110430
 pkgrel=1
 pkgdesc="LinuxSampler Control Protocol (LSCP) wrapper library"
 arch=('i686' 'x86_64')

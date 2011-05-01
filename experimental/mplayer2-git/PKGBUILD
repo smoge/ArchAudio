@@ -5,7 +5,7 @@
 # Contributor: extcake < extcake@gmail.com >
 
 pkgname=mplayer2-git
-pkgver=20110329
+pkgver=20110430
 pkgrel=1
 pkgdesc="A movie player for linux (uses statically linked ffmpeg-mt; git version)"
 arch=('i686' 'x86_64')
