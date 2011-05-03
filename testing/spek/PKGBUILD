@@ -1,8 +1,8 @@
 # Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=spek
-pkgver=0.6
-pkgrel=3
+pkgver=0.7
+pkgrel=1
 pkgdesc="Analyse your audio files by showing their spectrogram."
 arch=('i686' 'x86_64')
 url="http://www.spek-project.org/"
@@ -13,7 +13,6 @@ conflicts=("spek-git")
 replaces=("spek-git")
 install="$pkgname.install"
 source=("http://$pkgname.googlecode.com/files/$pkgname-$pkgver.tar.bz2")
-md5sums=('6be33caf38ba364ec996e9f5616ff239')
 
 build() {
 
@@ -29,3 +28,4 @@ package() {
 
   make DESTDIR="$pkgdir" install
 }
+md5sums=('c60e1e9f9a62c41dbbd61c3bb52af4f8')
