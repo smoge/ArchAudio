@@ -16,7 +16,7 @@ depends=('libsamplerate')
 makedepends=('subversion' 'doxygen' 'libffado' 'celt')
 optdepends=('libffado: FireWire audio device support'
 	    'celt: NetJACK driver')
-provides=("jack=0.118.0" 'jackd-svn')
+provides=("jack=0.118.0" 'jackd-svn' 'jack-audio-connection-kit')
 conflicts=('jack' 'jack2')
 options=('!libtool')
 
@@ -39,12 +39,13 @@ build() {
   cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
   cd "$srcdir/$_svnmod-build"
 
-  #
-  # BUILD
-  #
-
   ./autogen.sh
   ./configure --prefix=/usr --libdir=/usr/lib
-  make || return 1
+  make
+}
+
+package() {
+  cd "$srcdir/$_svnmod-build"
+
   make DESTDIR="$pkgdir/" install
 }

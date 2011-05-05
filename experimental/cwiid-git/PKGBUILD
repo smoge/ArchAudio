@@ -1,9 +1,7 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-#Contributor:Andrea Tarocchi <valdar@email.it>
-
+#Contributor:Andrea Tarocchi <valdar@email.it> 
 pkgname=cwiid-git
-pkgver=20110430
+#pkgver=`date +%Y%m%d`
+pkgver=20110505
 pkgrel=1
 pkgdesc="Cwiid-git is the bleeding edge version of a wiimote's driver and utility tools"
 arch=(i686 x86_64)
@@ -22,7 +20,7 @@ _gitname=cwiid
 _builddir=$srcdir/$_gitname-build
 
 build() {
-
+  export PYTHON=python2
   export LDFLAGS=
 
   cd $srcdir/
@@ -39,7 +37,7 @@ build() {
   git clone $_gitname $_gitname-build
 
   cd $_builddir
-
+  
   aclocal
   autoreconf
   ./configure --prefix=/usr --sysconfdir=/etc --with-python=python`python2 --version 2>&1 | cut -d ' ' -f2` --disable-ldconfig
@@ -49,12 +47,12 @@ build() {
   make
 # OLD MAKE OPTIONS:
 # CPPFLAGS=-I/usr/include/python2.7 || return 1
-  make DESTDIR="${pkgdir}" install
+  make DESTDIR="${pkgdir}" install 
 
 # OLD BUILD WAY:
 #  aclocal
 #  autoreconf
-
+  
 #  ./configure --disable-ldconfig --prefix=/usr --sysconfdir=/etc --with-cwiid-plugins-dir=/lib/cwiid/plugins
 #  make LDFLAGS=-L../libcwiid || return 1
 
