@@ -1,10 +1,10 @@
 # $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: Jon Austin (IRC: slypheed) <jon.i.austin (gmail)>
-# Contributor: Bernardo Barros <bernardobarros@gmail.com>
+# Contributor: Bernardo 'smoge' Barros <bernardobarros@gmail.com>
 
 pkgname=csound-git
-pkgver=20110430
+pkgver=20110507
 pkgrel=1
 pkgdesc="A programming language designed and optimized for sound rendering and signal processing"
 url="http://csound.sourceforge.net/"
@@ -13,25 +13,11 @@ license=('LGPL' 'GPL')
 depends=('python2' 'fltk' 'portaudio' 'jdk')
 makedepends=('scons' 'swig' 'git')
 provides=('csound5' 'csound')
-conflicts=('csound' 'csound5-cvs')
+conflicts=('csound' 'csound5' 'csound5-cvs')
 install=${pkgname}.install
-
-#case $CARCH in
-  #'i686')
-    #_gccOptions="-O2 -march=i686 -mtune=generic -pipe" ;;
-  #'x86_64')
-    #_gccOptions="-O2 -march=x86-64 -mtune=generic -pipe" ;;
-#esac
-
-_gccOptions="-O2 -march=native -mtune=native -pipe"
 
 _gitroot="git://csound.git.sourceforge.net/gitroot/csound/csound5"
 _gitname="csound"
-
-# useDouble is a requirement for using with blue via csound api:
-
-_csOptions="usePortAudio=1 usePortMIDI=0 buildCsound5GUI=1 useOSC=1 buildPythonOpcodes=1 buildInterfaces=1 buildVirtual=1 dynamicCsoundLibrary=1 buildJavaWrapper=1 useDouble=1"
-
 
 build() {
   cd "$srcdir"
@@ -48,10 +34,10 @@ build() {
   msg "Starting make..."
 
   rm -rf "$srcdir/$_gitname-build"
-  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
+  cp -r "$srcdir/$_gitname" "$srcdir/$_gitname-build"
   cd "$srcdir/$_gitname-build"
 
-  scons customCFLAGS="$_gccOptions" $_csOptions
+  scons customCFLAGS="-O2 -march=native -mtune=native" usePortMIDI=0 usePortAudio=1 custom=custom-linux-mkg.py buildLuaWrapper=1 buildPythonWrapper=1 useJack=1 buildvst4cs=0 buildInterfaces=0 buildCsoundAC= buildJavaWrapper=0 useOSC=1 buildPythonOpcodes=1 buildLoris=0 buildStkOpcodes=0 noFLTKThreads=0 useLrint=0 
+  
   python2 install.py --prefix=$pkgdir
-
 }
