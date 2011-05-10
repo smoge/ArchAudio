@@ -1,33 +1,26 @@
 # Contributor: jpate <j.k.pate@sms.ed.ac.uk>
-# Contributor: Bernardo Barros <bernardobarros@gmail.com>
-
 pkgname=praat
-pkgver=5.2.21
-filever=5221
+pkgver=5.2.24
 pkgrel=1
-pkgdesc="a program for sound analysis and synthesis"
+pkgdesc="A tool for 'Doing Phonetics by computer'"
 arch=('x86_64' 'i686')
 url="http://www.fon.hum.uva.nl/praat/"
 license=('GPL')
 depends=( 'alsa-lib' 'gtk2' )
-source=("http://www.fon.hum.uva.nl/praat/praat${filever}_sources.tar.gz")
+source=("http://www.fon.hum.uva.nl/praat/praat5224_sources.tar.gz")
+md5sums=('f75a1e69027e76ab7626a7cddcd52aed')
 
 build() {
-	cd "$srcdir/sources_5221/"
-	
-	cp makefiles/makefile.defs.linux makefile.defs
-	
-	sed -i 's|-I|-I/usr/include/gdk-pixbuf-2.0 -I|' makefile.defs
-	sed -i 's|/usr/local/lib|/usr/lib|g' makefile.defs
-	sed -i 's|/usr/local/include|/usr/include|g' makefile.defs
-	
-	make
+  cd "$srcdir/sources_5224/"
+
+  cp makefiles/makefile.defs.linux makefile.defs
+
+  sed -i 's|-I|-I/usr/include/gdk-pixbuf-2.0 -I|' makefile.defs
+  sed -i 's|/usr/local/lib|/usr/lib|g' makefile.defs
+  sed -i 's|/usr/local/include|/usr/include|g' makefile.defs
+
+  make
+
+  install -Dm755  praat "$pkgdir/usr/bin/praat"
 }
 
-package() {
-	cd "$srcdir/sources_5221/"
-	
-	install -Dm755  praat "$pkgdir/usr/bin/praat"
-}
-
-md5sums=('2a1c369c8d3f1d5c4a4fb986592e4def')
