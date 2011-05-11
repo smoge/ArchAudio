@@ -1,0 +1,11 @@
+--- src/widgetpanel.h	2009-04-01 17:48:07.000000000 +0200
++++ src/widgetpanel.h	2009-05-19 17:16:35.538239751 +0200
+@@ -28,6 +28,7 @@
+ #define QUTECSOUND_MAX_EVENTS 32
+ 
+ #include "qutewidget.h"
++#include "curve.h"
+ 
+ class Curve;
+ class QuteConsole;
+
