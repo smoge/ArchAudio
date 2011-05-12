@@ -16,7 +16,7 @@ depends=('libsamplerate')
 makedepends=('subversion' 'doxygen' 'libffado' 'celt')
 optdepends=('libffado: FireWire audio device support'
 	    'celt: NetJACK driver')
-provides=("jack=0.118.0" 'jackd-svn' 'jack-audio-connection-kit')
+provides=("jack=0.120.0" 'jackd-svn' 'jack-audio-connection-kit')
 conflicts=('jack' 'jack2')
 options=('!libtool')
 
