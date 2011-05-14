@@ -1,0 +1,63 @@
+# Contributor: Asa Marco <marcoasa90 [at] gmail [dot] com>
+# Contributor: Bernardo Barros <bernardobarros@NOSPAM.gmail.com>
+
+pkgname=rosegarden-svn
+pkgver=12284
+pkgrel=1
+pkgdesc="Audio and MIDI sequencer, score editor - development branch, doesn't conflict with the old version"
+arch=('i686' 'x86_64')
+url="http://www.rosegardenmusic.com/"
+license=('GPL')
+depends=('qt' 'jack' 'ladspa' 'dssi' 'liblo' 'liblrdf' 'fftw' 'perl-xml-twig')
+makedepends=('subversion' 'autoconf' 'imake')
+
+_svntrunk=https://rosegarden.svn.sourceforge.net/svnroot/rosegarden/trunk/rosegarden
+_svnmod=rosegarden
+_name=rosegarden-qt4
+
+build() {    
+  cd $srcdir
+
+  msg "Connecting to $_svnmod SVN server...."
+
+  if [ -d $_svnmod/.svn ]; then
+    (cd $_svnmod && svn up -r $pkgver)
+  else
+    svn co $_svntrunk $_svnmod -r $pkgver
+  fi
+
+  msg "SVN checkout done or server timeout"
+  msg "Starting make..."
+
+  cd $srcdir/$_svnmod
+
+  sh bootstrap.sh
+  ./configure --with-qtdir=/usr
+
+  make
+
+}
+
+package() {
+  cd $srcdir/$_svnmod
+
+  sed -i 's/Exec=rosegarden/Exec=rosegarden-qt4/g' data/desktop/rosegarden.desktop
+  sed -i 's/Name=Rosegarden/Name=Rosegarden-qt4/g' data/desktop/rosegarden.desktop
+  sed -i 's/Icon=rosegarden/Icon=rosegarden-qt4/g' data/desktop/rosegarden.desktop
+  
+  mkdir -p $pkgdir/usr/share/{applications,pixmaps}
+  mkdir -p $pkgdir/usr/share/${_name}/{fonts,chords,examples,library,presets,styles}
+
+  cd $srcdir/$_svnmod
+    
+  install -Dm755 rosegarden $pkgdir/usr/bin/$_name
+  install -Dm755 data/desktop/rosegarden.desktop $pkgdir/usr/share/applications/$_name.desktop
+  install -Dm755 data/pixmaps/icons/rg-rwb-rose3-48x48.png /$pkgdir/usr/share/pixmaps/$_name.png
+  install -Dm755 data/presets/presets.xml $pkgdir/usr/share/$_name/presets/presets.xml
+
+  cp -r data/fonts/* $pkgdir/usr/share/$_name/fonts
+  cp -r data/chords/* $pkgdir/usr/share/$_name/chords
+  cp -r data/examples/* $pkgdir/usr/share/$_name/examples
+  cp -r data/library/* $pkgdir/usr/share/$_name/library
+  cp -r data/styles/* $pkgdir/usr/share/$_name/styles
+}
