@@ -24,7 +24,7 @@ _gitroot="git://repo.or.cz/mplayer-build.git"
 _gitname="mplayer2"
 
 build() {
-#   # Custom CFLAGS break the mplayer build
+
 #   unset CFLAGS
 #   unset LDFLAGS
 
@@ -40,7 +40,7 @@ build() {
 --prefix=/usr
 --disable-fribidi
 --disable-libdv
---enable-xvmc
+--disable-xvmc
 --language=all
 --confdir=/etc/mplayer
 " > mplayer_options
