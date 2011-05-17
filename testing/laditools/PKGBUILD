@@ -4,7 +4,7 @@
 pkgname=laditools
 pkgver=1.0_rc2
 _pkgver=1.0-rc2
-pkgrel=2
+pkgrel=3
 pkgdesc="Tools that take advantage of the DBus interfaces recently added to JACK and LASH."
 arch=(any)
 url="http://www.marcochapeau.org/software/laditools"
