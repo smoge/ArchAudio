@@ -3,20 +3,18 @@
 _pkg=midialsa
 pkgname=lua-$_pkg
 pkgver=1.06
-pkgrel=1
+pkgrel=2
 pkgdesc="Lua module for the ALSA library, plus some interface functions."
 arch=(i686 x86_64)
 url="http://www.pjb.com.au/comp/lua/midialsa.html"
 license=('GPL')
 depends=('lua-midi')
+optdepends=('lua-datadumper: test')
 source=("http://www.pjb.com.au/comp/lua/$_pkg-$pkgver.tar.gz")
 md5sums=('585fff3aac9b5b5b1a4eff4be3d68eca')
 
 build() {
   cd "$srcdir/$_pkg-$pkgver"
-
-  # lua test fix
-  sed -i "s|\(require[^D]*\)DataDumper|\1MIDI.dumper|" test/test_al.lua
 
   gcc -c C-$_pkg.c -fPIC
   gcc -shared C-$_pkg.o -o C-$_pkg.so -lasound
