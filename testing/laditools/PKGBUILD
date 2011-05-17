@@ -4,12 +4,12 @@
 pkgname=laditools
 pkgver=1.0_rc2
 _pkgver=1.0-rc2
-pkgrel=3
+pkgrel=4
 pkgdesc="Tools that take advantage of the DBus interfaces recently added to JACK and LASH."
 arch=(any)
 url="http://www.marcochapeau.org/software/laditools"
 license=('GPL3')
-depends=(python2 pygtk python2-yaml glade)
+depends=(python2 pygtk python2-yaml glade dbus-python)
 makedepends=(git)
 optdepends=(g15composer g15daemon wmdocklib)
 provides=(laditray ladilog ladiconf g15ladi wmladi)
