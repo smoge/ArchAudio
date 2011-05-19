@@ -16,9 +16,16 @@ md5sums=(9d7cd60d0e09d75e68a9d4f1fe5af95e)
 
 build() {
 
-  cd "$srcdir/$pkgname-$pkgver"
+  rm -rf "${srcdir}/${pkgname}-${pkgver}-build"
+  cp -r "$srcdir/${pkgname}-${pkgver}" "${pkgname}-${pkgver}-build"
+  cd "${pkgname}-${pkgver}-build"
+
   sed 's@/usr/local@/usr@' -i Makefile
   make
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver-build"
   make DESTDIR="$pkgdir/" install
 }
 
