@@ -10,7 +10,6 @@ license=('GPL')
 depends=('qt' 'alsa-lib')
 makedepends=('cmake')
 source=(http://sourceforge.net/projects/$pkgname/files/$pkgver/$pkgname-$pkgver.tar.gz/download)
-md5sums=('a858979396f43db8c384cd17fa6f2c26')
 
 build() {
   cd $srcdir/$pkgname-$pkgver
@@ -25,4 +24,4 @@ package() {
   make DESTDIR="$pkgdir" install
 }
 
-
+md5sums=('2a982fab184135d20bc4d5d70ce0a30f')
