@@ -10,12 +10,12 @@ pkgver=0.3.1
 pkgrel=1
 pkgdesc="LADSPA stereo reverb plugin based on the well-known greverb."
 arch=('i686' 'x86_64')
-url="http://kokkinizita.net/linuxaudio/ladspa/"
+url="http://kokkinizita.linuxaudio.org/linuxaudio/ladspa/"
 license=('GPL')
 depends=('gcc-libs' 'ladspa')
 provides=('rev-plugins' 'ladspa-rev')
 conflicts=('rev-plugins' 'ladspa-rev')
-source=(http://www.kokkinizita.net/linuxaudio/downloads/$_pkgname-$pkgver.tar.bz2)
+source=(http://kokkinizita.linuxaudio.org/linuxaudio/downloads/$_pkgname-$pkgver.tar.bz2)
 md5sums=('bca920c2cbf5e33989e7cafab6fbaee4')
 
 build() {

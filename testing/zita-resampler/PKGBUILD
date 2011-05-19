@@ -5,11 +5,11 @@ pkgrel=1
 pkgdesc="A C++ library for resampling audio signals. \
 It is designed to be used within a real-time processing context, \
 to be fast and high-quality."
-url="http://www.kokkinizita.net/linuxaudio/"
+url="http://kokkinizita.linuxaudio.org/linuxaudio/"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('gcc-libs')
-source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
+source=(http://kokkinizita.linuxaudio.org/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
 md5sums=('cbf0da8b7ace593082a5f01eed828109')
 
 build() {

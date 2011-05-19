@@ -9,12 +9,12 @@ pkgver=0.3.0
 pkgrel=4
 pkgdesc="LADSPA anti-aliased oscillator plugins"
 arch=('i686' 'x86_64')
-url="http://www.kokkinizita.net/linuxaudio/"
+url="http://kokkinizita.linuxaudio.org/linuxaudio/"
 license=('GPL')
 provides=('vco-plugins' 'ladspa-vco')
 conflicts=('vco-plugins' 'ladspa-vco')
 depends=('gcc-libs' 'ladspa')
-source=(http://www.kokkinizita.net/linuxaudio/downloads/${_pkgname}-${pkgver}.tar.bz2)
+source=(http://kokkinizita.linuxaudio.org/linuxaudio/downloads/${_pkgname}-${pkgver}.tar.bz2)
 md5sums=('6fdf4a7e3c716abbb89721645427cd52')
 
 build() {

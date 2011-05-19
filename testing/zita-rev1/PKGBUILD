@@ -4,10 +4,10 @@ pkgver=0.1.1
 pkgrel=2
 pkgdesc="A reworked jack version of the reverb originally developed for Aeolus."
 arch=('i686' 'x86_64')
-url="http://www.kokkinizita.net/linuxaudio"
+url="http://kokkinizita.linuxaudio.org/linuxaudio"
 license=('GPL')
 depends=('jack' 'cairo' 'clxclient' 'clthreads')
-source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
+source=(http://kokkinizita.linuxaudio.org/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
 md5sums=('54667f487c80e29b5caf453ba0e40ef0')
 
 build() {

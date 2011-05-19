@@ -8,10 +8,10 @@ pkgver=2.0.0
 pkgrel=2
 pkgdesc="Convolution library for aeolus and jconvolver"
 arch=('i686' 'x86_64')
-url="http://www.kokkinizita.net/linuxaudio"
+url="http://kokkinizita.linuxaudio.org/linuxaudio"
 license=('LGPL')
 depends=('gcc-libs' 'fftw')
-source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
+source=(http://kokkinizita.linuxaudio.org/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
 install=$pkgname.install
 md5sums=('7e4e30fb628aed009fa22e4ed46f556a')
 

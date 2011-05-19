@@ -7,11 +7,11 @@ pkgver=0.2.0
 pkgrel=1
 pkgdesc="a Jack multichannel audio level meter app similar to meterbridge \
 but with correct ballistics for the VU and the PPM."
-url="http://www.kokkinizita.net/linuxaudio/"
+url="http://kokkinizita.linuxaudio.org/linuxaudio/"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('clthreads>=2.2.1' 'clxclient>=3.3.2' 'jack' 'libpng')
-source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
+source=(http://kokkinizita.linuxaudio.org/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
 md5sums=('cd69c517698762c8139bd8a789098f7e')
 
 build() {

@@ -6,11 +6,11 @@ pkgname=jkmeter
 pkgver=0.4.0
 pkgrel=2
 pkgdesc="A horizontal or vertical bargraph level meter based on the ideas of mastering guru Bob Katz."
-url="http://www.kokkinizita.net/linuxaudio/"
+url="http://kokkinizita.linuxaudio.org/linuxaudio/"
 arch=('i686' 'x86_64')
 license=('GPL')
 depends=('clthreads>=2.2.1' 'clxclient>=3.6.1' 'jack' 'libpng')
-source=(http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
+source=(http://kokkinizita.linuxaudio.org/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
 md5sums=('b8acbe4e89fc187e51e54c8a9b8227a0')
 
 build() {

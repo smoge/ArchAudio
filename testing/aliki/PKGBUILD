@@ -6,11 +6,11 @@ pkgver=0.1.0
 pkgrel=2
 pkgdesc="An integrated system for Impulse Response measurements."
 arch=('i686' 'x86_64')
-url="http://www.kokkinizita.net/linuxaudio/downloads/index.html"
+url="http://kokkinizita.linuxaudio.org/linuxaudio/downloads/index.html"
 license=('GPL')
 depends=('jack' 'fftw' 'clalsadrv>=2.0.0' 'clthreads>=2.4.0' 'clxclient>=3.6.1')
-source=("http://www.kokkinizita.net/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2"
-    "http://www.kokkinizita.net/linuxaudio/downloads/aliki-manual.pdf")
+source=("http://kokkinizita.linuxaudio.org/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2"
+    "http://kokkinizita.linuxaudio.org/linuxaudio/downloads/aliki-manual.pdf")
 md5sums=('820cde2a5095e6d12e311562cb788b58'
          '9835a66fa568084ff9aa50730ea46cf2')
 

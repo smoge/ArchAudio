@@ -5,7 +5,7 @@ pkgver=0.4.4
 pkgrel=2
 pkgdesc='An Ambisonic decoder for up to 36 speakers using JACK.'
 arch=('i686' 'x86_64')
-url='http://www.kokkinizita.net/linuxaudio/'
+url='http://kokkinizita.linuxaudio.org/linuxaudio/'
 license=('GPL')
 depends=('clxclient>=3.6.1' 'clthreads>=2.4.0' 'jack' 'libpng')
 source=( "http://kokkinizita.linuxaudio.org/linuxaudio/downloads/ambdec-$pkgver.tar.bz2" "http://kokkinizita.linuxaudio.org/linuxaudio/downloads/ambdec-manual.pdf" Makefile)
