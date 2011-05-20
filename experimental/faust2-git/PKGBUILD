@@ -1,26 +1,20 @@
-# Maintainer: bjoern lindig (bjoern _dot_ lindig _at_ google.com)
+# Maintainer : bjoern lindig (bjoern _dot_ lindig _at_ google.com)
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+
+_pkg=faust2
 pkgname=faust2-git
-pkgver=20110515
+pkgver=20110520
 pkgrel=1
-pkgdesc=""
+pkgdesc="Faust AUdio STreams is a functional programming language for realtime audio signal processing."
 arch=('i686' 'x86_64')
 url="http://faust.grame.fr/"
 license=('GPL')
-groups=()
-depends=('coreutils')
+depends=('coreutils' 'libffi')
 makedepends=('git')
-provides=('faust')
-conflicts=('faust-cvs' 'faust-git')
-replaces=()
-backup=()
-options=()
-install=
-source=(Makefile.unix-faust2.diff)
-noextract=()
-md5sums=('6c8fb962545de2f7abc5270dedef64a5')
+provides=('faust2') # do not want to conflict with faust for now
 
 _gitroot="git://faudiostream.git.sourceforge.net/gitroot/faudiostream/faudiostream"
-_gitname="faust2"
+_gitname="$_pkg"
 
 build() {
   cd "$srcdir"
@@ -31,7 +25,7 @@ build() {
     msg "The local files are updated."
   else
     git clone $_gitroot $_gitname
-    cd $_gitname && git checkout -b faust2 origin/faust2
+    cd $_gitname && git checkout -b $_pkg origin/$_pkg
   fi
 
   msg "GIT checkout done or server timeout"
@@ -40,16 +34,38 @@ build() {
   rm -rf "$srcdir/$_gitname-build"
   git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
 
-  cd "${srcdir}/${_gitname}-build/compiler" || return 1
-  patch -uN -i ../../Makefile.unix-faust2.diff || return 1
-
   cd "$srcdir/$_gitname-build"
   #
   # BUILD HERE
   #
 
-  #./autogen.sh || return 1
-  #./configure --prefix=/usr || return 1
-  make PREFIX=/usr/ || return 1
-  make PREFIX=/usr/ DESTDIR="$pkgdir/" install || return 1
+  # libs in /usr/lib/faust2 to prevent conflicts with faust
+  sed -i "s|/lib/faust|&2|g" Makefile
+
+  # fix llvm path
+  sed -i "s|/System/|/Support/|g" compiler/Makefile.unix
+
+  # strip any reference to /usr/local
+  sed -i "s|/local||g" `grep -rl /local .`
+
+  # replace faust with faust2
+  sed -i "s|\(faust\)\([^2]\{1,1\}\)|\12\2|g" tools/faust2appls/faust2*
+
+  make PREFIX=/usr
+}
+
+package() {
+  cd "$srcdir/$_gitname-build"
+
+  make PREFIX=/usr/ DESTDIR="$pkgdir/" install
+
+  # tools
+  cd tools/faust2appls && make PREFIX=/usr DESTDIR="$pkgdir/" install
+
+  # examples
+  install -d "$pkgdir/usr/share/$_pkg"
+  cp -a ../../examples "$pkgdir/usr/share/$_pkg"
+
+  # faust is now faust2
+  mv "$pkgdir/usr/bin/faust" "$pkgdir/usr/bin/$_pkg"
 }
