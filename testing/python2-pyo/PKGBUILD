@@ -4,19 +4,20 @@
 # Contributor: Bernardo Barros <bernardobarros@gmail.com>
 
 pkgname=python2-pyo
-pkgver=0.03
+pkgver=0.4.1
 pkgrel=1
 pkgdesc="A Python module written in C to help digital signal processing script creation"
 arch=('i686' 'x86_64')
 url="http://code.google.com/p/pyo/"
 license=('GPL')
-provides=('python-pyo' 'pyo')
-conflicts=('python-pyo' 'pyo')
+provides=('python-pyo=0.4.1' 'pyo=0.4.1')
+conflicts=('python-pyo=0.4.1' 'pyo=0.4.1')
 depends=('python2>=2.5' 'portmidi' 'portaudio' 'liblo' 'libsndfile')
 source=("http://pyo.googlecode.com/files/pyo_$pkgver-src.tar.bz2"
   "http://pyo.googlecode.com/files/pyo_$pkgver-doc.tar.bz2")
-md5sums=('8713cc383a84e0d7c104a291d1b94c0e'
-         '83930f1d8c517a140b273cac6a00c2d1')
+    
+md5sums=('03fd78d6ee3cda891ca3ebae612dc07b'
+         '44b416dd64596470a8c106acfe554df4')
 
 build() {
 
