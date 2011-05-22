@@ -20,7 +20,7 @@ build() {
   cd "$srcdir/$_pkg-$pkgver"
 
   # x86_64 multilib build configuration
-  if [ $CARCH = 'x86_64' ]; then
+  if [ "$CARCH" = 'x86_64' ]; then
     unset CFLAGS
     _WXCONFIG="/usr/lib32/wx/config/gtk2-unicode-release-2.8"
 
