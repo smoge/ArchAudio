@@ -1,7 +1,7 @@
 # Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 _pkg=miniAudicle
-pkgname=${_pkg/A/a}
+pkgname=miniaudicle
 pkgver=0.2.0
 pkgrel=3
 pkgdesc="A light-weight integrated development environment for the ChucK digital audio programming language."
