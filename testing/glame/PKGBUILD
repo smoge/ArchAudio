@@ -5,7 +5,7 @@ pkgver=2.0.2_rc1
 _pkgver=2.0.2-rc1
 pkgrel=1
 pkgdesc="Supports non destructive multitrack editing, recording and mixing; realtime effects using native or LADSPA plugins; OSS, ALSA or SGI audio and WAV, Mp3 and Ogg file formats."
-arch=('686' 'x86_64')
+arch=('i686' 'x86_64')
 url="http://glame.sourceforge.net"
 license=('GPL')
 depends=('guile' 'libvorbis' 'lame' 'libmad' 'fftw2' 'libgnomeui')
@@ -13,9 +13,14 @@ source=(http://downloads.sourceforge.net/$pkgname/$pkgname-$_pkgver.tar.gz)
 md5sums=(2333d14a93204ab354f74adbe1c75a48)
 
 build() {
-  cd $startdir/src/$pkgname-$_pkgver
+  cd $srcdir/$pkgname-$_pkgver
   ./configure --prefix=/usr
   make
-  make DESTDIR=$startdir/pkg install
+}
+
+package() {
+  cd $srcdir/$pkgname-$_pkgver
+  
+  make DESTDIR=$pkgdir install
 }
 
