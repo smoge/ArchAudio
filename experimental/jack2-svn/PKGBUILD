@@ -4,7 +4,7 @@
 
 pkgbase=jack2-svn
 pkgname=('jack2-svn' 'jack2-dbus-svn')
-pkgver=4364
+pkgver=4394
 pkgrel=1
 pkgdesc="The next-generation JACK with SMP support (development version)"
 arch=('i686' 'x86_64')
@@ -16,7 +16,7 @@ makedepends=('subversion' 'python2' 'doxygen'
 optdepends=('libffado: FireWire support'
             'celt-0.7: NetJACK2 driver'
             'python2: jack_control')
-provides=("jack2=1.9.6" "jack=0.118.0" 'jackmp-svn' 'jackdmp-svn' 'jack')
+provides=("jack2=1.9.7" "jack=0.120.0" 'jackmp-svn' 'jackdmp-svn' 'jack' 'jack-audio-connection-kit')
 conflicts=('jack2' 'jack' 'jack-svn')
 
 _svntrunk=http://subversion.jackaudio.org/jack/jack2/trunk/jackmp
@@ -54,8 +54,8 @@ build() {
                         --alsa \
                         --dbus \
                         --classic \
-                        --firewire \
-                        --doxygen
+                        --firewire #\
+                        #--doxygen
 
   python2 waf build $MAKEFLAGS
 
@@ -66,8 +66,8 @@ build() {
   python2 waf configure --prefix=/usr \
                         --alsa \
                         --dbus \
-                        --firewire \
-                        --doxygen
+                        --firewire #\
+                        #--doxygen
 
   python2 waf build $MAKEFLAGS
 }
