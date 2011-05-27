@@ -13,8 +13,9 @@ makedepends=('scons' 'python2-qt' 'subversion' 'libconfig' 'dbus-c++')
 optdepends=('python2-qt: FFADO Mixer applet'
             'libconfig: ffado-test')
 provides=('ffado' 'libffado')
-conflicts=('ffado' 'ffado-svn' 'libffado-svn')
-replaces=('libffado-svn')
+conflicts=('ffado' 'ffado-svn' 'libffado')
+replaces=('libffado')
+options=('!libtool' '!strip')
 
 _svntrunk=http://subversion.ffado.org/ffado/trunk/libffado
 _svnmod=ffado
@@ -49,7 +50,10 @@ build() {
   sed -i 's:python support/tools:python2 support/tools:' \
     support/tools/SConscript
 
-  scons PREFIX=/usr #ENABLE_OPTIMIZATIONS=yes
+  scons PREFIX=/usr DEBUG=no ENABLE_OPTIMIZATIONS=yes
+
+  # For Debug:
+  # scons PREFIX=/usr DEBUG=yes ENABLE_OPTIMIZATIONS=no
 }
 
 package() {
