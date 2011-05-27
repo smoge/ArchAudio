@@ -1,5 +1,6 @@
 # Contributor: Ray Rashif <schivmeister@gmail.com>
 # Contributor: Jon Kristian Nilsen <jokr.nilsen@gmail.com>
+# Contributor: Bernardo Barros <bernardobarros@NOSPAM.gmail.com>
 
 pkgname=libffado-svn
 pkgver=1985
@@ -19,6 +20,9 @@ options=('!libtool' '!strip')
 
 _svntrunk=http://subversion.ffado.org/ffado/trunk/libffado
 _svnmod=ffado
+
+# Debug: 'yes' or 'no'
+_DEBUG=yes
 
 build() {
   cd "$srcdir"
@@ -50,10 +54,15 @@ build() {
   sed -i 's:python support/tools:python2 support/tools:' \
     support/tools/SConscript
 
-  scons PREFIX=/usr DEBUG=no ENABLE_OPTIMIZATIONS=yes
 
-  # For Debug:
-  # scons PREFIX=/usr DEBUG=yes ENABLE_OPTIMIZATIONS=no
+  if [[ "$_DEBUG" = "no" ]]; then
+    msg "Doing a optimized build"
+    scons PREFIX=/usr DEBUG=no ENABLE_OPTIMIZATIONS=yes
+  elif [[ "$_DEBUG" = "yes" ]]; then
+    msg "Doing a debug build"
+    scons PREFIX=/usr DEBUG=yes ENABLE_OPTIMIZATIONS=no
+    
+  fi
 }
 
 package() {
