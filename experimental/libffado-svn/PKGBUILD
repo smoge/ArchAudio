@@ -2,14 +2,14 @@
 # Contributor: Jon Kristian Nilsen <jokr.nilsen@gmail.com>
 
 pkgname=libffado-svn
-pkgver=1983
+pkgver=1985
 pkgrel=1
 pkgdesc="Driver for FireWire audio devices (development version)"
 arch=('i686' 'x86_64')
 url="http://www.ffado.org/"
 license=('GPL')
 depends=('libiec61883' 'libavc1394' 'libxml++' 'dbus' 'alsa-lib' 'libsigc++' 'jack')
-makedepends=('scons' 'python2-qt' 'subversion' 'libconfig')
+makedepends=('scons' 'python2-qt' 'subversion' 'libconfig' 'dbus-c++')
 optdepends=('python2-qt: FFADO Mixer applet'
             'libconfig: ffado-test')
 provides=('ffado' 'libffado')
@@ -49,7 +49,7 @@ build() {
   sed -i 's:python support/tools:python2 support/tools:' \
     support/tools/SConscript
 
-  scons PREFIX=/usr ENABLE_OPTIMIZATIONS=yes
+  scons PREFIX=/usr #ENABLE_OPTIMIZATIONS=yes
 }
 
 package() {

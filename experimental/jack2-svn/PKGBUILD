@@ -4,7 +4,7 @@
 
 pkgbase=jack2-svn
 pkgname=('jack2-svn' 'jack2-dbus-svn')
-pkgver=4394
+pkgver=4396
 pkgrel=1
 pkgdesc="The next-generation JACK with SMP support (development version)"
 arch=('i686' 'x86_64')
@@ -12,7 +12,7 @@ url="http://jackaudio.org/"
 license=('GPL')
 depends=('libsamplerate')
 makedepends=('subversion' 'python2' 'doxygen'
-             'libffado' 'celt-0.7' 'dbus-core')
+             'libffado' 'celt-0.7' 'dbus-core' 'dbus-c++')
 optdepends=('libffado: FireWire support'
             'celt-0.7: NetJACK2 driver'
             'python2: jack_control')
