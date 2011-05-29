@@ -2,6 +2,9 @@
 # Contributor: Jon Kristian Nilsen <jokr.nilsen@gmail.com>
 # Contributor: Bernardo Barros <bernardobarros@NOSPAM.gmail.com>
 
+# Debug: 'yes' or 'no'
+_DEBUG=yes
+
 pkgname=libffado-svn
 pkgver=1985
 pkgrel=1
@@ -16,13 +19,15 @@ optdepends=('python2-qt: FFADO Mixer applet'
 provides=('ffado' 'libffado')
 conflicts=('ffado' 'ffado-svn' 'libffado')
 replaces=('libffado')
-options=('!libtool' '!strip')
 
+if [[ "$_DEBUG" = "no" ]]; then
+  options=('!libtool' 'strip')
+elif [[ "$_DEBUG" = "yes" ]]; then
+  options=('!libtool' '!strip')
+fi
+  
 _svntrunk=http://subversion.ffado.org/ffado/trunk/libffado
 _svnmod=ffado
-
-# Debug: 'yes' or 'no'
-_DEBUG=yes
 
 build() {
   cd "$srcdir"
@@ -54,14 +59,12 @@ build() {
   sed -i 's:python support/tools:python2 support/tools:' \
     support/tools/SConscript
 
-
   if [[ "$_DEBUG" = "no" ]]; then
     msg "Doing a optimized build"
     scons PREFIX=/usr DEBUG=no ENABLE_OPTIMIZATIONS=yes
   elif [[ "$_DEBUG" = "yes" ]]; then
     msg "Doing a debug build"
     scons PREFIX=/usr DEBUG=yes ENABLE_OPTIMIZATIONS=no
-    
   fi
 }
 
