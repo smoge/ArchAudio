@@ -12,7 +12,7 @@ url="http://www.ffado.org/"
 license=('GPL')
 depends=('libiec61883' 'libavc1394' 'libsigc++'
           'libxml++' 'alsa-lib' 'dbus')
-makedepends=('scons' 'python2-qt')
+makedepends=('scons' 'python2-qt' 'dbus-c++')
 optdepends=('python2-qt: mixer applet')
 provides=('ffado')
 conflicts=('ffado' 'libffado-svn' 'ffado-svn')
