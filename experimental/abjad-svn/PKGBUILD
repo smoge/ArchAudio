@@ -11,6 +11,7 @@ url="http://code.google.com/p/abjad/"
 arch=('any')
 license=('GPL')
 depends=('python2' 'lilypond')
+makedepends=('python2-distribute')
 conflicts=('abjad')
 provides=('abjad')
 options=(!emptydirs)
