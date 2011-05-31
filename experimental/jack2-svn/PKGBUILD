@@ -12,7 +12,7 @@ url="http://jackaudio.org/"
 license=('GPL')
 depends=('libsamplerate')
 makedepends=('subversion' 'python2' 'doxygen'
-             'libffado' 'celt-0.7' 'dbus-core' 'dbus-c++')
+             'libffado' 'dbus-core' 'dbus-c++')
 optdepends=('libffado: FireWire support'
             'celt-0.7: NetJACK2 driver'
             'python2: jack_control')
