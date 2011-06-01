@@ -13,7 +13,7 @@ license=('GPL')
 [[ $CARCH == 'i686' ]] || depends=('jack' 'fftw' 'avahi' 'ruby' 'icu' 'cwiid' 'rsync')
 [[ $CARCH == 'x86_64' ]] || depends=('jack' 'fftw' 'avahi' 'ruby' 'icu' 'gcc-libs-multilib' 'cwiid' 'rsync')
 
-makedepends=('git' 'libsndfile>=1.0' 'emacs' 'vim' 'gedit' 'pkgconfig>=0.14.0' 'cmake' 'alsa-lib')
+makedepends=('git' 'libsndfile>=1.0' 'emacs' 'vim' 'gedit' 'pkgconfig>=0.14.0' 'cmake' 'alsa-lib' 'boost')
 optdepends=('emacs' 'vim' 'ruby' 'gedit')
 conflicts=('supercollider' 'supercute')
 provides=('supercollider')
