@@ -13,12 +13,11 @@ changelog=$pkgname.changelog
 source=(http://ladish.org/download/ladish-$pkgver.tar.bz2 ${pkgname}.patch)
 md5sums=('0ce4b50a6bf9a6973632cd1ef66ebd3a'
          '9253a4a0465db47c39f1a870db872cec')
-options=(!strip)
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
   patch -p1 < "${srcdir}/${pkgname}.patch"
-  python2 waf configure --prefix=/usr --debug
+  python2 waf configure --prefix=/usr
   CPATH=/usr/include/gdk-pixbuf-2.0 python2 waf
 }
 
