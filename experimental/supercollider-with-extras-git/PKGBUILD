@@ -52,9 +52,11 @@ build() {
   rm -rf $_gitname-build
   cp -r $_gitname $_gitname-build
   cd $_gitname-build/
-
+  makedir build
+  cd build
+  
   # if have a processor, which supports it, you can also enable SSE42 with -DSSE42=1 
-  cmake . -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DNOVA_SIMD=1 -DNATIVE=1 -DSC_WII=1 -DSUPERNOVA=1 -DSC_QT=1 -DSSE42=1
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DNOVA_SIMD=1 -DNATIVE=1 -DSC_WII=1 -DSUPERNOVA=1 -DSC_QT=1 -DSSE42=1
 
   make
   make DESTDIR=$pkgdir/ install
