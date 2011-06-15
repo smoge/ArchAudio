@@ -21,7 +21,7 @@ optdepends=('netpbm: building HTML documentation'
 provides=("lilypond=$pkgver")
 conflicts=('lilypond-devel' 'lilypond-git')
 install=$pkgname.install
-source=("http://download.linuxaudio.org/lilypond/sources/v{$_shortver}/lilypond-$pkgver.tar.gz"
+source=("http://download.linuxaudio.org/lilypond/sources/v${_shortver}/lilypond-$pkgver.tar.gz"
         python2.patch
         texlive-workaround.patch)
 md5sums=('262cc7f92c907a7b479b55b3b37a9302'
