@@ -1,0 +1,55 @@
+# $Id$
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Sean Corbett <sean [near] obsoleteaudio [point] org>
+
+pkgname=klaudia-git
+_pkgname=klaudia
+pkgver=20110616
+pkgrel=1
+pkgdesc="A Linux Audio Applications Manager, written in Python+Qt"
+arch=('any')
+url="http://repo.or.cz/w/klaudia.git"
+license=('GPL')
+groups=()
+depends=('cadence')
+makedepends=('git')
+provides=("${_pkgname}")
+conflicts=("${_pkgname}")
+install=("${_pkgname}.install")
+md5sums=('2cb9bcdc3c25fc135853a2554fd4406d')
+
+_gitroot="git://repo.or.cz/klaudia.git"
+_gitname="${_pkgname}"
+
+build() {
+  cd "$srcdir"
+  msg "Connecting to GIT server...."
+
+  if [ -d $_gitname ] ; then
+    cd $_gitname && git pull origin
+    msg "The local files are updated."
+  else
+    git clone $_gitroot $_gitname
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting make..."
+
+  rm -rf "$srcdir/$_gitname-build"
+  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname-build"
+  
+  #
+  # BUILD HERE
+  #
+
+  #python2 fix
+  sed -i "s/exec python /exec python2 /" klaudia
+  
+  make PREFIX=/usr
+}
+
+package() {
+  cd "$srcdir/$_gitname-build"
+  make DESTDIR="$pkgdir/" install
+} 
