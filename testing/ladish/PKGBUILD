@@ -1,8 +1,9 @@
 #Contributor: Daniele Paolella <danielepaolella@email.it>
+#Contributor: Sean Corbett
 
 pkgname=ladish
 pkgver=0.3
-pkgrel=1
+pkgrel=2
 pkgdesc="Session management system for JACK applications"
 arch=('i686' 'x86_64')
 url="http://ladish.org"
@@ -11,6 +12,7 @@ makedepends=(boost)
 depends=(dbus e2fsprogs python2 flowcanvas laditools jackdbus)
 changelog=$pkgname.changelog
 source=(http://ladish.org/download/ladish-$pkgver.tar.bz2 ${pkgname}.patch)
+install=("${pkgname}.install")
 md5sums=('0ce4b50a6bf9a6973632cd1ef66ebd3a'
          '9253a4a0465db47c39f1a870db872cec')
 
