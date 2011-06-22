@@ -1,27 +1,42 @@
-# Contributor: SpepS <dreamspepser at yahoo dot it>
+# Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=freeverb3
-_pkgver=2.5.14
-pkgver=$_pkgver.1
+pkgver=2.5.16
 pkgrel=1
 pkgdesc="A sound processing library which includes sampling rate scaling enabled version of freeverb with a lot of extensions."
-arch=('i686' 'x86_64')
+arch=(i686 x86_64)
 url="http://freeverb3.sourceforge.net/"
 license=('GPL')
-depends=('fftw')
+depends=('fftw' 'jack')
+makedepends=('audacious' 'bmp' 'xmms')
+optdepends=('audacious: audacious plugin'
+            'bmp: beep media player plugin'
+            'xmms: xmms plugin')
 options=('!libtool')
-source=("http://downloads.sourceforge.net/project/$pkgname/$pkgname/$_pkgver/$pkgname-$pkgver.tar.gz")
-md5sums=('6c0401f4f80929365e933996da114ba9')
+source=("http://downloads.sourceforge.net/project/$pkgname/$pkgname/$pkgver/$pkgname-$pkgver.tar.gz")
+md5sums=('3e448633d784a0c0bb5638b9b5ecce62')
 
 build() {
-  cd "$srcdir/$pkgname-$_pkgver"
+  cd "$srcdir/$pkgname-$pkgver"
 
-  ./configure --prefix=/usr
+  # remove unsecure rpath
+  sed -i "s|\${wl}\-rpath \${wl}\$libdir||" configure
+
+  ./configure --prefix=/usr \
+              --enable-release \
+              --enable-double \
+              --enable-sample \
+              --enable-jack \
+              --enable-xmms \
+              --enable-bmp \
+              --enable-plugdouble \
+              --enable-audacious \
+              --disable-rpath
   make
 }
 
 package() {
-  cd "$srcdir/$pkgname-$_pkgver"
+  cd "$srcdir/$pkgname-$pkgver"
 
   make DESTDIR="$pkgdir/" install
 }
