@@ -38,6 +38,9 @@ build() {
   # BUILD
   #
 
+  # fix compatibility with newer bt_sequence_add_track
+  sed -i "s|\(bt_sequence_add_track(sequence,machine\)\()\)|\1,-1\2|" src/song-io-buzz.c
+
   ./autogen.sh
   ./configure --prefix=/usr \
               --enable-static=no
