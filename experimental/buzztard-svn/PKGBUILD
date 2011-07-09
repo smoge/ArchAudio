@@ -3,7 +3,7 @@
 _pkg=buzztard
 pkgname=$_pkg-svn
 pkgver=3463
-pkgrel=1
+pkgrel=2
 pkgdesc="A modular, free, open source music studio that is conceptually based on Buzz."
 arch=('i686' 'x86_64')
 url="http://www.buzztard.org"
@@ -43,7 +43,6 @@ build() {
   ./autogen.sh
   ./configure --prefix=/usr \
               --enable-static=no \
-              --disable-introspection \
               --with-gconf-schema-file-dir=/usr/share/gconf/schemas
 
   make
