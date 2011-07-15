@@ -1,35 +1,47 @@
-# $Id$
 # Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
 # Contributor: hm_b < holger <at> music-nerds.net >
+# Contributor: Wieland Hoffmann <the_mineo@web.de>
 # Contributor: Birger Moellering <bmoellering@googlemail.com>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=cwiid
 pkgver=0.6.00
-pkgrel=7
-pkgdesc="Development version of wiimote's driver and utility tools"
+pkgrel=9
+pkgdesc="Linux Nintendo Wiimote interface"
 arch=(i686 x86_64)
-url="http://abstrakraft.org/cwiid/wiki"
+url="http://abstrakraft.org/cwiid/wiki" 
 depends=('bluez>=4' 'gtk2' 'python2')
 makedepends=('flex' 'bison')
-conflicts=('cwiid-svn')
-provides=('cwiid-svn')
 license=("GPL2")
-install=cwiid.install
-source=( http://abstrakraft.org/cwiid/downloads/$pkgname-$pkgver.tgz
-         http://abstrakraft.org/cwiid/raw-attachment/ticket/70/bluez_4_api_changes.patch)
-
+install="cwiid.install"
+source=("http://abstrakraft.org/cwiid/downloads/$pkgname-$pkgver.tgz"
+	"http://abstrakraft.org/cwiid/raw-attachment/ticket/70/bluez_4_api_changes.patch")
 md5sums=('8d574afdeedc5e5309c87a72d744316a'
          '19b288723d1f2b97a3e5288ab9de3313')
 
 build() {
-  cd $srcdir/$pkgname-$pkgver
-  patch -p1 < ../bluez_4_api_changes.patch libcwiid/bluetooth.c
-  ./configure --prefix=/usr --sysconfdir=/etc --disable-ldconfig --with-python=python2
-  LDFLAGS='-lbluetooth -lrt -pthread'  make
+  cd "$srcdir/$pkgname-$pkgver"
 
+  # bluetooth patch 
+  patch -p1 < ../bluez_4_api_changes.patch libcwiid/bluetooth.c
+
+  ./configure --prefix=/usr \
+              --sysconfdir=/etc \
+              --disable-ldconfig \
+              --with-python=python2
+
+  LDFLAGS='-lbluetooth -lrt -pthread'  make
 }
 
 package() {
-  cd $srcdir/$pkgname-$pkgver
+  cd "$srcdir/$pkgname-$pkgver"
+
   make DESTDIR=$pkgdir install
+
+  # fix static lib permissions
+  chmod 644 "$pkgdir/usr/lib/lib$pkgname.a"
+
+  # wminput README
+  install -Dm644 wminput/README \
+    "$pkgdir/usr/share/doc/$pkgname/wminput/README"
 }
