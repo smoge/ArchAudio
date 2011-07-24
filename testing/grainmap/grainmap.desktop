@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=GrainMap
+GenericName=GrainMap
+Comment=Interactive audio slicer
+Exec=grainmap %f
+Icon=grainmap
+Terminal=false
+Type=Application
+Categories=Application;AudioVideo;Audio;

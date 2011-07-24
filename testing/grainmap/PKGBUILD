@@ -1,0 +1,39 @@
+# Maintainer : Caleb Reach <jtxx000@gmail.com>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
+
+pkgname=grainmap
+pkgver=0.1
+pkgrel=2
+pkgdesc="Interactive audio slicer."
+arch=(x86 x86_64)
+url="http://codphilosophy.com/software"
+license=('GPL3')
+depends=('aubio' 'gtkmm3')
+install="$pkgname.install"
+source=("$url/$pkgname-$pkgver.tar.gz"
+        "$pkgname.png" "$pkgname.desktop")
+md5sums=('e371c661da6e5dfedc32c9d768bc37a8'
+         '007c3674e170c92c267be5248a0facbb'
+         'c42ae61520b1f7ca96aa4d853f600f73')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  ./configure --prefix=/usr
+  make
+}
+
+check() {
+  cd "$srcdir/$pkgname-$pkgver"
+  make -k check
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  make DESTDIR="$pkgdir/" install
+
+  # icon and desktop file
+  install -Dm644 ../$pkgname.desktop \
+    "$pkgdir/usr/share/applications/$pkgname.desktop"
+  install -Dm644 ../$pkgname.png \
+    "$pkgdir/usr/share/pixmaps/$pkgname.png"
+}
