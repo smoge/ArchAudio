@@ -1,54 +1,29 @@
-# Contributor: SpepS <dreamspepser at yahoo dot it>
+# Maintainer: SpepS <dreamspepser at yahoo dot it>
 
 pkgname=faust
-pkgver=0.9.30
-pkgrel=2
+pkgver=0.9.43
+pkgrel=1
 pkgdesc="A compiled language for real-time audio signal processing."
 arch=('i686' 'x86_64')
 url="http://faust.grame.fr/"
 license=('GPL')
-conflicts=('faust-cvs' 'faust-git')
-optdepends=('supercollider: supercollider support'
-  'pd: pd support'
-  'csound: csound support'
-  'jack: jack application support'
-  'jack2: jack application support'
-  'lv2core: lv2 plugin support'
-  'ladspa: ladspa plugin support'
-  'qt4: jackqt application support'
-  'gtk2: jackgtk application support'
-  'kate-faust-plugin: kate syntax-highlighting'
-  'gedit-faust-plugin: gedit syntax-highlighting'
-  'vim-faust-plugin: vim syntax-highlighting')
-            
+depends=('ruby')
+conflicts=('faust-cvs' 'faust-git' 'faust2-git')
 source=("http://downloads.sourceforge.net/project/faudiostream/$pkgname-$pkgver.tar.gz")
-md5sums=('aee067c8f2183949a6f5ea2556f1934a')
+md5sums=('4465e2002fdba0676476b8c2873a4985')
 
 build() {
-
   cd "$srcdir/$pkgname-$pkgver"
+  
   make PREFIX=/usr
 }
 
 package() {
-
   cd "$srcdir/$pkgname-$pkgver"
+
   make PREFIX=/usr DESTDIR="$pkgdir/" install
-  
-  rm -rf ${srcdir}/${pkgname}-${pkgver}/documentation/faust-quick-reference-src
-  
-  #faust2sc
-  cd $srcdir/$pkgname-$pkgver/tools/faust2sc-1.0.0
-  mkdir -p ${pkgdir}/usr/bin
-  install -Dm755 faust2sc ${pkgdir}/usr/bin
-  cd ../scbuilder
-  install -Dm755 scbuilder ${pkgdir}/usr/bin
 
-
-  #docs:
-  cd "$srcdir/$pkgname-$pkgver"
-  mkdir -p ${pkgdir}/usr/share/doc/${pkgname}/examples/rewriting
-  mkdir -p ${pkgdir}/usr/share/doc/${pkgname}/documentation
-  cp -rf ${srcdir}/${pkgname}-${pkgver}/documentation/* ${pkgdir}/usr/share/doc/${pkgname}/documentation
-  cp -rf ${srcdir}/${pkgname}-${pkgver}/examples/* ${pkgdir}/usr/share/doc/${pkgname}/examples
+  # docs
+  install -d "$pkgdir/usr/share/doc/$pkgname"
+  cp -a documentation/*.{pdf,txt} "$pkgdir/usr/share/doc/$pkgname"
 }
