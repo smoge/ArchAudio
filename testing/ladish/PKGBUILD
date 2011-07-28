@@ -3,7 +3,7 @@
 
 pkgname=ladish
 pkgver=0.3
-pkgrel=2
+pkgrel=3
 pkgdesc="Session management system for JACK applications"
 arch=('i686' 'x86_64')
 url="http://ladish.org"
