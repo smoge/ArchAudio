@@ -3,7 +3,7 @@
 # Contributor: Bernardo Barros <bernardobarros@NOSPAM.gmail.com>
 
 # Debug: 'yes' or 'no'
-_DEBUG=yes
+_DEBUG=no
 
 pkgname=libffado-svn
 pkgver=1985
