@@ -7,12 +7,12 @@
 
 pkgname=clxclient
 pkgver=3.6.1
-pkgrel=3
+pkgrel=4
 pkgdesc="X library for aeolus, aliki, jaaa and japa."
 arch=('i686' 'x86_64')
 url="http://kokkinizita.linuxaudio.org/linuxaudio/downloads/index.html"
 license=('LGPL')
-depends=('gcc-libs' 'libxft')
+depends=('libxft' 'clthreads')
 source=(http://kokkinizita.linuxaudio.org/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2)
 md5sums=('bd47f80a855d3203fcf10365e79d85e4')
 
