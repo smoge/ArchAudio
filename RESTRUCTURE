@@ -1,0 +1,4 @@
+stable -> production (verified/tested pkgs)
+testing -> contrib (unverified/untested pkgs)
+nightly *new* (verified devel pkgs)
+experimental (unverified devel pkgs)
