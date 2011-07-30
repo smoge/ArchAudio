@@ -1,7 +1,7 @@
 #Contributor: Bernardo Barros <bernardobarros@NOSPAM.gmail.com>
 
 pkgname=sc3-plugins-git
-pkgver=20110729
+pkgver=20110730
 pkgrel=1
 pkgdesc="Plugins for SuperCollider (Git version)"
 url="http://supercollider.sourceforge.net/"
