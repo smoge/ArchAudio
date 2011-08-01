@@ -1,19 +1,21 @@
-# Maintainer: SpepS <dreamspepser at yahoo dot it>
+# Contributor: Max Pray a.k.a. Synthead <synthead@gmail.com>
+# Contributor: SpepS <dreamspepser at yahoo dot it>
 
-pkgname=eugene-svn
-pkgver=3215
+_pkg=eugene
+pkgname=$_pkg-svn
+pkgver=3430
 pkgrel=1
 pkgdesc="A basic (fast, parallel) Genetic Algorithm implementation in C++"
 arch=(i686 x86_64)
-url="http://dev.drobilla.net/browser/trunk/eugene"
+url="http://drobilla.net/software/$_pkg/"
 license=('GPL')
-depends=('flowcanvas>=0.7.1' 'libglademm')
-makedepends=('subversion')
-provides=('eugene')
-conflicts=('eugene')
+depends=('flowcanvas>=1.0.0')
+makedepends=('subversion' 'python2')
+provides=("$_pkg=0.8.0")
+conflicts=("$_pkg")
 
-_svntrunk=http://svn.drobilla.net/lad/trunk/eugene
-_svnmod=eugene
+_svntrunk=http://svn.drobilla.net/lad/trunk/$_pkg
+_svnmod=$_pkg
 
 build() {
   cd "$srcdir"
@@ -35,10 +37,8 @@ build() {
   # BUILD
   #
 
-  # Fix pkgconfig file
-  sed -i "s_/local__" eugene.pc.in
-
-  export PYTHON="python2"
+  # remove ldconfig
+  sed -i "/ldconfig/d" wscript
 
   python2 waf configure --prefix=/usr
   python2 waf

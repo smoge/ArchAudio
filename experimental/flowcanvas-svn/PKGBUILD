@@ -1,23 +1,20 @@
-# Contributor: Bernardo Barros <bernardobarros@gmail.com>
-# Contributor: Ray Rashif <schiv@archlinux.org>
-# Contributor: Max a.k.a. Synthead <synthead@gmail.com>
-# Contributor: christhemonkey <christhemonkey at gmail dot com>
+# Maintainer : SpepS <dreamspepser at yahoo dot it>
+# Contributor: BenoÃ®t Rouits <brouits[at]free[dot]fr>
 
-pkgname=flowcanvas-svn
-pkgver=3245
+_pkg=flowcanvas
+pkgname=$_pkg-svn
+pkgver=3427
 pkgrel=1
-pkgdesc="interactive Gtkmm widget for boxes and lines environments"
-url="http://drobilla.net/software/flowcanvas/"
-arch=('i686' 'x86_64')
+pkgdesc="Gtkmm/Gnomecanvasmm widget for boxes-and-lines style environments."
+arch=(i686 x86_64)
+url="http://drobilla.net/software/$_pkg/"
 license=('GPL')
 depends=('libgnomecanvasmm' 'graphviz')
-makedepends=('boost' 'python2')
-provides=('flowcanvas=0.7.1')
-conflicts=('flowcanvas')
-install=$pkgname.install
+makedepends=('subversion' 'python2')
+provides=("$_pkg=1.0.0")
 
-_svnmod="flowcanvas"
-_svntrunk="http://svn.drobilla.net/lad/trunk"
+_svntrunk=http://svn.drobilla.net/lad/trunk/$_pkg
+_svnmod=$_pkg
 
 build() {
   cd "$srcdir"
@@ -35,13 +32,19 @@ build() {
   cp -r "$srcdir/$_svnmod" "$srcdir/$_svnmod-build"
   cd "$srcdir/$_svnmod-build"
 
+  #
+  # BUILD
+  #
+
+  # remove ldconfig
+  sed -i "/ldconfig/d" wscript
+
   python2 waf configure --prefix=/usr
-  python2 waf build $MAKEFLAGS
+  python2 waf
 }
 
 package() {
   cd "$srcdir/$_svnmod-build"
-  
-  DESTDIR=${pkgdir} ./waf install
-}
 
+  DESTDIR="$pkgdir/" python2 waf install
+}
