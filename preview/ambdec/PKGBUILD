@@ -9,9 +9,10 @@ url='http://kokkinizita.linuxaudio.org/linuxaudio/'
 license=('GPL')
 depends=('clxclient>=3.6.1' 'clthreads>=2.4.0' 'jack' 'libpng')
 source=( "http://kokkinizita.linuxaudio.org/linuxaudio/downloads/ambdec-$pkgver.tar.bz2" "http://kokkinizita.linuxaudio.org/linuxaudio/downloads/ambdec-manual.pdf" Makefile)
-md5sums=('eebec8c3a54e401cbd5af78e5de9fdba'
-         '09b931f382895cd9ae14524db5bd2a6e'
-         '78e82e9a85265ef57a63aa9287e66e34')
+md5sums=('232930b86fba2c3ed4eda0568cd75ea1'
+         '78e82e9a85265ef57a63aa9287e66e34'
+         '09b931f382895cd9ae14524db5bd2a6e')
+
 
 build() {
 
