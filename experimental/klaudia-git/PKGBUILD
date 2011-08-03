@@ -1,25 +1,22 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-# Contributor: Sean Corbett <sean [near] obsoleteaudio [point] org>
+# Maintainer: SpepS <dreamspepser at yahoo dot it>
 
-pkgname=klaudia-git
-_pkgname=klaudia
-pkgver=20110616
+_p=klaudia
+pkgname=$_p-git
+pkgver=20110803
 pkgrel=1
-pkgdesc="A Linux Audio Applications Manager, written in Python+Qt"
-arch=('any')
-url="http://repo.or.cz/w/klaudia.git"
+pkgdesc="A Linux Audio Applications Manager, writen in Python."
+arch=(any)
+url="http://sourceforge.net/projects/klaudia/"
 license=('GPL')
-groups=()
-depends=('cadence')
+depends=('python2-pyqt' 'dbus-python' 'pyxdg' 'xdg-utils')
 makedepends=('git')
-provides=("${_pkgname}")
-conflicts=("${_pkgname}")
-install=("${_pkgname}.install")
-md5sums=('2cb9bcdc3c25fc135853a2554fd4406d')
+optdepends=('ladish: session support')
+provides=("$_p")
+conflicts=("$_p")
+install="$pkgname.install"
 
-_gitroot="git://repo.or.cz/klaudia.git"
-_gitname="${_pkgname}"
+_gitroot="git://repo.or.cz/$_p.git"
+_gitname="$_p"
 
 build() {
   cd "$srcdir"
@@ -38,18 +35,20 @@ build() {
   rm -rf "$srcdir/$_gitname-build"
   git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
   cd "$srcdir/$_gitname-build"
-  
+
   #
   # BUILD HERE
   #
 
-  #python2 fix
-  sed -i "s/exec python /exec python2 /" klaudia
-  
-  make PREFIX=/usr
+  # python2 fixes
+  sed -i "s|\(env python\).*|\12|" `grep -rl "env python" .`
+  sed -i "s|\(python\)[^ ]*|\12|" $_p
+
+  make
 }
 
 package() {
   cd "$srcdir/$_gitname-build"
+
   make DESTDIR="$pkgdir/" install
 } 

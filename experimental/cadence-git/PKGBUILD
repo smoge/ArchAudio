@@ -1,25 +1,30 @@
-# $Id$
-# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
-# Contributor: Sean Corbett <sean [near] obsoleteaudio [point] org>
+# Maintainer: SpepS <dreamspepser at yahoo dot it>
 
-pkgname=cadence-git
-_pkgname=cadence
-pkgver=20110616
+_p=cadence
+pkgname=$_p-git
+pkgver=20110803
 pkgrel=1
-pkgdesc="A set of tools useful for Audio-related tasks, using Python and Qt"
-arch=('i686' 'x86_64')
-url="http://repo.or.cz/w/cadence.git"
+pkgdesc="A set of tools to handle Jack, useful for audio production."
+arch=(i686 x86_64)
+url="http://sourceforge.net/projects/cadence/"
 license=('GPL')
-groups=()
-depends=('python2-pyqt' 'suil' 'lv2-ui' 'lv2-data-access' 'lv2-instance-access' 'python2-liblo' 'jack' 'ladspa' 'dssi' 'rdflib' 'pyxdg' 'xdg-utils')
+depends=('python2-pyqt' 'dbus-python' 'gtk2' 'liblo' 'jackdbus')
 makedepends=('git')
-provides=("${_pkgname}")
-conflicts=("${_pkgname}")
-install=("${_pkgname}.install")
-md5sums=() #generate with 'makepkg -g'
+optdepends=('pulseaudio: pulseaudio support'
+            'a2jmidid: a2jmidid support'
+            'jack_capture: jack caputure support'
+            'pyliblo: osc support for Carla Control'
+            'rdflib: rdf support for Carla'
+            'ladish: ladish support for Claudia'
+            'pyxdg: xdg support for Claudia'
+            'xdg-utils: xdg support for Claudia')
+provides=("$_p")
+conflicts=("$_p")
+options=('!emptydirs')
+install="$pkgname.install"
 
-_gitroot="git://repo.or.cz/cadence.git"
-_gitname="cadence"
+_gitroot="git://repo.or.cz/$_p.git"
+_gitname="$_p"
 
 build() {
   cd "$srcdir"
@@ -39,21 +44,32 @@ build() {
   git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
   cd "$srcdir/$_gitname-build"
 
-  #python2 fix
-  cd data
-  for bin in claudia cadence carla carla-control catarina catia jack_logs jack_render jack_settings jack_xycontroller; do
-    sed -i "s/exec python /exec python2 /" "$bin";
-  done
-  cd ..
-
   #
   # BUILD HERE
   #
+
+  # python2 fixes
+  sed -i "s|\(env python\).*|\12|" `grep -rl "env python" .`
+
+  # look for carla_backend.so in /usr/lib
+  sed -i "s|cwd.*carla\"|'/usr/lib'|" src/carla_backend.py
 
   make PREFIX=/usr
 }
 
 package() {
   cd "$srcdir/$_gitname-build"
-  make DESTDIR="$pkgdir/" PREFIX=/usr INSTALL_PREFIX='\/usr' install
+
+  make PREFIX=/usr INSTALL_PREFIX="\/usr" DESTDIR="$pkgdir/" install
+
+  # python2 fixes
+  sed -i "s|\(python\)\(\`*\)[^ ]*|\12\2|" "$pkgdir/usr/bin/"*
+
+  # move lib carla backend lib to proper path
+  install -d "$pkgdir/usr/lib"
+  mv "$pkgdir/usr/share/$_p/src/carla/carla_backend.so" \
+     "$pkgdir/usr/lib"
+
+  # strip any local reference
+  sed -i "s|/local||" `grep -rl /local $pkgdir`
 } 
