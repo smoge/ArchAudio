@@ -4,25 +4,17 @@
 # Contributor: Bjoern Lindig <bjoern.lindig at googlemail dot com>
 
 pkgname=faust-git
-pkgver=20110430
+pkgver=20110811
 pkgrel=1
 pkgdesc="A functional programming language for realtime audio signal processing."
 arch=(i686 x86_64)
 url="http://faust.grame.fr/"
 license=('GPL')
-groups=()
 depends=('gcc-libs')
 makedepends=('git')
-provides=()
+provides=('faust')
 conflicts=('faust')
-replaces=()
-backup=()
-options=()
-install=
-source=()
-noextract=()
-md5sums=() #generate with 'makepkg -g'
-
+replaces=('faust')
 
 _gitroot="git://faudiostream.git.sourceforge.net/gitroot/faudiostream/faudiostream "
 _gitname="faudiostream"
