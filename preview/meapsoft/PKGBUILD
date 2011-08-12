@@ -22,5 +22,6 @@ EOF
   chmod 755 "$pkgdir/usr/bin/meapsoft"
 
   install -d ${pkgdir}/usr/share/java/
+  rm $srcdir/MEAPsoft-${pkgver}/bin/.DS_Store
   cp -rf $srcdir/MEAPsoft-${pkgver}/bin ${pkgdir}/usr/share/java/meapsoft
 }
