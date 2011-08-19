@@ -18,8 +18,10 @@ optdepends=('qutecsound: qt frontend'
 provides=('csound5')
 conflicts=('csound5' 'csound5-cvs' 'csound5.12-cvs')
 install="$pkgname.install"
-source=("http://downloads.sourceforge.net/project/${pkgname}/${pkgname}5/${pkgname}5.13/Csound${pkgver}.tar.gz")
-md5sums=('6c123822e3396f136d6eeea0f801a495')
+source=("http://downloads.sourceforge.net/project/${pkgname}/${pkgname}5/${pkgname}5.13/Csound${pkgver}.tar.gz"
+        "http://ccrma.stanford.edu/software/stk/release/stk-4.4.2.tar.gz") # needed by stk opcodes
+md5sums=('6c123822e3396f136d6eeea0f801a495'
+         '0b7bd1f913ca01fb8b2201ebcf853358')
 _csopts="useDouble=1 usePortAudio=1 usePortMIDI=1 useALSA=1 useJack=1 useFLTK=1
          useFLTKThreads=1 pythonVersion=2.7 buildCsoundVST=0 buildCsoundAC=1
          buildCsound5GUI=1 buildLoris=0 useOSC=1 bufferoverflowu=0 useUDP=1
@@ -41,14 +43,17 @@ build() {
   sed -i "s|/usr/local/lib|$pkgdir/usr/lib|;483,484d;421,456d" install.py
 
   # Fix fltk stk include path
-  sed -i "s_/fltk-1.1__" custom.py
+  sed -i "s|/fltk-1.1||" custom.py
+
+  # fix for fltk 1.3
+  sed -i "s|Fl/|FL/|g" InOut/virtual_keyboard/SliderBank.hpp
 
   # Add build optimization and java include path fixes
   sed -e "s_mtune_march_g;s|,.*5.0'||;s|baseDir,|'/opt',|" \
       -i SConstruct
 
-# TODO: let stk opcodes build
-#     -e "s|Opcodes/stk/include|/usr/include/stk|" \
+  # place stk sources for the stk opcodes
+  cp -a "$srcdir"/stk-4.4.2/{include,rawwaves,src} Opcodes/stk
 
   # Python2 fixes
   sed "s_\(env python\).*_\12_;s_\(bin/python\).*_\12_" \
