@@ -10,13 +10,15 @@ pkgdesc='A program made for extreme sound stretching of the audio (like 50x) and
 arch=('i686' 'x86_64')
 url="http://hypermammut.sourceforge.net/paulstretch/"
 license=('GPL')
-depends=('fltk' 'fftw' 'jack')
+depends=('fltk' 'fftw' 'jack' 'mxml' 'libmad' 'libvorbis' 'audiofile')
 source=("http://sourceforge.net/projects/hypermammut/files/paulstretch/${pkgver}/paulstretch-${pkgver}.tar.bz2")
 md5sums=('da39e1ff45dde9634fb54d7818037215')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver"
-
+  
+  sed -i '23i#include <string.h>' Input/MP3InputS.cpp
+  
   ./compile_linux_fftw_jack.sh
 }
 
