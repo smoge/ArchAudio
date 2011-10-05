@@ -4,7 +4,7 @@
 
 pkgname=qtractor-vst
 _realname=qtractor
-pkgver=0.5.1
+pkgver=0.5.0
 pkgrel=1
 pkgdesc="Audio/MIDI multitrack sequencer (with Linux-native VST support)"
 arch=('i686' 'x86_64')
@@ -16,7 +16,10 @@ optdepends=('dssi-vst: win32 VST support')
 provides=('qtractor')
 conflicts=('qtractor')
 source=(http://downloads.sourceforge.net/$_realname/$_realname-$pkgver.tar.gz)
-md5sums=('c54adf974fd363a9f2151a802f170e6d')
+
+#md5sums=('c54adf974fd363a9f2151a802f170e6d')#0.5.1
+md5sums=('6dcc05532f71eaaa1aa0f336bcd265b0')#0.5.0
+
 
 build() {
 
