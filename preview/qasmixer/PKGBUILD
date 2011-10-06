@@ -3,14 +3,14 @@
 pkgname=qasmixer
 pkgver=0.14.0
 pkgrel=1
-pkgdesc="a Qt frontend to alsamixer"
+pkgdesc="A graphical mixer application for ALSA, the linux sound system."
 arch=('i686' 'x86_64')
 url="http://sourceforge.net/projects/qasmixer"
 license=('GPL')
 depends=('qt' 'alsa-lib')
 makedepends=('cmake')
 source=("http://sourceforge.net/projects/${pkgname}/files/${pkgver}/${pkgname}_${pkgver}.tar.gz")
-
+md5sums=('d29b1bfdd5d0773c3728c3c623d0c45f')
 
 build() {
   cd "${srcdir}/${pkgname}_${pkgver}"
