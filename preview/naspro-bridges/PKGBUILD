@@ -9,7 +9,7 @@ url="http://naspro.atheme.org/"
 license=('GPL')
 groups=('naspro')
 depends=("naspro-bridge-it>=0.3.0" 'alsa-lib')
-makedepends=('dssi' 'ladspa' 'lv2-dyn-manifest' 'lv2-event' 'lv2-uri-map')
+makedepends=('dssi' 'ladspa' 'lv2-dynmanifest' 'lv2-event' 'lv2-uri-map')
 optdepends=('ladspa: lapspa bridges'
             'dssi: dssi bridges'
             'lv2-events: dssi bridges'
