@@ -6,7 +6,7 @@
 pkgname=lv2-ll-plugins
 _realname=ll-plugins
 pkgver=0.2.8
-pkgrel=2
+pkgrel=3
 pkgdesc="A lv2 host and a collection of lv2 plugins by Lars Luthman"
 arch=('i686' 'x86_64')
 url="http://ll-plugins.nongnu.org/index.html"
@@ -19,6 +19,7 @@ md5sums=('56e7f4a62fce6b22b4acdb02ba06669c')
 
 build() {
 
+  export LDFLAGS="${LDFLAGS} -ldl"
   cd "${srcdir}/${_realname}-${pkgver}"
 
   ./configure --prefix="/usr"
