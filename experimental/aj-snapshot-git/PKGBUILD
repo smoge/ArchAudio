@@ -1,0 +1,57 @@
+# Maintainer: Arch Linux Pro Audio <dev@archaudio.org>
+# Contributor: Lieven Moors <lievenmoos@gmail.com>
+
+pkgname=aj-snapshot-git
+_pkg="${pkgname%-git}"
+pkgver=20120212
+pkgrel=1
+pkgdesc="A small program that can be used to make snapshots of the connections made between JACK and/or ALSA clients."
+arch=("i686" "x86_64")
+url="http://$_pkg.sourceforge.net/"
+license=("GPL3")
+depends=("jack" "mxml")
+makedepends=("git")
+optdepends=()
+provides=("$_pkg")
+conflicts=("$_pkg")
+options=()
+
+_gitroot="git://gitorious.org/$_pkg/$_pkg.git"
+_gitname="$_pkg"
+
+build() {
+  local _gitdir="${srcdir}/${_gitname}"
+  msg "Connecting to GIT server...."
+
+  if [[ -d "$_gitdir" ]]; then
+    cd "$_gitdir"
+    git clean -dfx
+    git reset --hard HEAD
+    git pull origin
+    msg "The local files are updated."
+  else
+    git clone "$_gitroot" "$_gitdir"
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting build..."
+
+  cd "$_gitdir"
+
+  # Does not build with -Wl,--as-needed
+  export LDFLAGS="${LDFLAGS//,--as-needed}"
+
+  # Build
+  ./autogen.sh
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  local _gitdir="${srcdir}/${_gitname}"
+  cd "$_gitdir"
+
+  make DESTDIR="$pkgdir" install
+}
+
+# vim:set ts=2 sw=2 et:
