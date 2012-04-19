@@ -12,7 +12,7 @@ pkgdesc="A high quality pipe organ emulator using additive synthesis."
 arch=('i686' 'x86_64')
 url="http://kokkinizita.linuxaudio.org/linuxaudio/aeolus/index.html"
 license=('GPL')
-depends=('clalsadrv>=2.0.0' 'readline' 'clxclient>=3.6.1' 'jack')
+depends=('clalsadrv>=2.0.0' 'readline' 'clxclient>=3.6.1' 'clthreads>=2.4.0' 'jack')
 install=('aeolus.install')
 source=(http://kokkinizita.linuxaudio.org/linuxaudio/downloads/${pkgname}-${pkgver}.tar.bz2 \
 http://kokkinizita.linuxaudio.org/linuxaudio/downloads/stops-0.3.0.tar.bz2 \
