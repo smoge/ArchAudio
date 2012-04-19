@@ -72,9 +72,9 @@ package() {
   make DESTDIR="$pkgdir/" install
 
   # external programs
-  install -Dm644 ../ExternalPrograms/Spliter/spliter \
+  install -Dm755 ../ExternalPrograms/Spliter/spliter \
                  "$pkgdir/usr/bin/spliter"
-  install -Dm644 ../ExternalPrograms/Controller/controller \
+  install -Dm755 ../ExternalPrograms/Controller/controller \
                  "$pkgdir/usr/bin/controller"
 
   # spliter doc
